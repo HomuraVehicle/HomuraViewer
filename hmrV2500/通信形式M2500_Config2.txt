@@ -1,0 +1,229 @@
+===通信フォーマット===
+'#',送信先ID[3],データ1ID[1],データ1サイズ[2],データ1[データサイズ1],データ2ID[1],データ2サイズ[2],データ2[データサイズ2],...
+	hmr:送信先ID="hmr"
+	ctr:送信先ID="ctr"
+
+===データ一覧===
+通信ターミネータ 0x01
+	0x01,_CR(0x0d),_LF(0x0a)
+
+
+example::モーター・マニピュレータに指令 
+'#','h','m','r',  'M',10,0x00,0x00,0x80,0x80,0x12,0x00,0x22,0x00,0x13,0x00,  3,0x01,_CR,_LF
+
+
+モーター　 'm'
+	制御
+		ctr
+			'm',  Left[1], leftBreake,  Right[1], RightBreake,
+				leftBreake, rightBreake = ブレーキ(0x01でブレーキ、それ以外はなし)	
+				Left[1]=左推進力 (signed型   -100が全力後進,0で出力なし,100で全力前進）
+				Right[1]=右推進力 (signed型　-100が全力後進,0x80で中央,100で全力前進）
+		hmr
+			なし
+
+マニピュレータ　'M'
+	制御
+		ctr
+			'M', Time1[2], Time2[2], Time3[2]
+			Time[2] = i番目のサーボ角度　lowData,HighData 	
+		hmr
+			なし
+
+
+電池 'b'
+	情報取得
+		ctr
+			'b',0x10,ID1,ID2...
+				ID:電池の識別ID 0～5
+		hmr
+			'b',0x10,ID1,Data1[2],ID2,Data2[2]...
+				ID:電池の識別ID 0～5
+				Data:電池電圧
+
+
+GPS 'G'
+	データ要求
+		ctr
+			'g',0x10
+		hmr
+			'g',0x10,Time[5], Latitude[4], NS[1], Longitude[4], EW[1], isSuccess[1], Altitude[3], GPSID[1]
+				Time[5]=Hour,Minute,Second1,Second2,Second3
+					Time Hour:Minute:Second1+0.01*Second2+0.0001*Second3
+				Latitude[4]=Degree,Minute1,Minute2,Minute3
+					Latitude Degree度 Minute1+0.01*Minute2+0.0001Minute3分
+				NS[1]='N'|'S'
+				Longitude[4]=Degree,Minute1,Minute2,Minute3
+					Longitude Degree度 Minute1+0.01*Minute2+0.0001Minute3分
+				EW[1]='E'|'W'
+				isSuccess[1]=false|true
+				Altitude[3]=Meter1,Meter2,Meter3
+					Altitude 1000*Meter1+10*Meter2+0.1*Meter3
+				GPSID[1]=GPSID
+
+
+CO2 'C'
+	データ取得(100回平均)
+		ctr
+			'C',0x10
+		hmr
+			'C',0x10,LowOrderByte,HighOrderByte
+				Data LowOrderByte+256*HighOrderByte
+	センサー停止
+		ctr
+			'C',0x20
+		hmr
+			'C',0x20
+	センサー始動
+		ctr
+			'C',0x21
+		hmr
+			'C',0x21
+	モータ停止
+		ctr
+			'C',0x30
+		hmr
+			'C',0x30
+	モータ始動
+		ctr
+			'C',0x31
+		hmr
+			'C',0x31
+
+H2S 'S'
+	データ取得(100回平均)
+		ctr
+			'S',0x10
+		hmr
+			'S',0x10,LowOrderByte,HighOrderByte
+				Data LowOrderByte+256*HighOrderByte
+	センサー停止
+		ctr
+			'S',0x20
+		hmr
+			'S',0x20
+	センサー始動
+		ctr
+			'S',0x21
+		hmr
+			'S',0x21
+
+
+Thermo 't'
+	データ取得
+		ctr
+			't',0x10
+		hmr
+			't',0x10,Data[2]
+
+
+InfThermo 'T'
+	データ取得
+		ctr
+			'T',0x10
+		hmr
+			'T',0x10,OutData[2],InData[2]
+				OutData:外部計測温度
+				InData:温度計内部温度
+
+
+Hygro 'h'
+	データ取得
+		ctr
+			'h',0x10
+		hmr
+			'h',0x10,Data[2]
+
+
+Accele 'a'
+	データ取得
+		ctr
+			'a',0x10
+		hmr
+			'a',0x10,DataX[2],DataY[2],DataZ[2]
+
+
+Compass 'c'
+	データ取得
+		ctr
+			'a',0x10
+		hmr
+			'a',0x10,Data[2]
+				Data:0-360度
+
+Gyro 'g'
+	データ取得
+		ctr
+			'a',0x10
+		hmr
+			'a',0x10,DataR[2],DataP[2],DataY[2]
+
+SpriteCmr 'j'
+	Status
+		0x00 : Idle
+		0x10 : 写真サイズセット中
+		0x11 : 写真サイズセット後、コマンドリセット中
+		0x12 : 写真撮影中
+		0x13 : 写真基礎データ取得中
+		0x20 : 撮影データ取得中
+		0x30 : 撮影終了
+		0x40 : コマンドリセット中
+		0xF0 : 電源リセット中
+		0xFF : エラー
+
+	内部情報
+	<< 0xA0,現在のステータス[1],IsErr[1],ErrCode[1]
+		内部情報
+	<> 0xB0
+		内部情報送信開始要求
+	<> 0xB1
+		内部情報送信停止要求
+
+	写真データ
+	>> 0x00,PictureSize[1]
+		PictureSizeの写真を、単発で要求 0:S,1:M,2:L
+	<< 0x00,PictureSize[1],AllDataSize[2]
+		PictureSizeの写真の全データ数AllDataSize
+
+	PCからのコマンドに関係なくデータがなくなるまで送信
+	<< 0x01,DataPos[2],Data[...]
+		先頭アドレスがDataPosの写真データData
+		＜＜変更するかどうかあとで要相談＞＞
+
+	写真送信モード
+	このモードでは、PCからのコマンドに関係なく、写真を撮って、データを送ってを繰り返す。
+
+	<> 0x10,DefaultPictureSize[1]
+		DefaultPictureSizeの写真を、連続要求
+	<> 0x11
+		連続要求の停止
+
+		＜＜連続要求の際の通信形式をどうするか検討必要＞＞
+		どこからがデータ開始でどれだけの量があるかとか。
+	　	0x00, 0x01系を使えば十分かと思うが…
+
+	ライト
+	<> 0x30
+		ライトON
+	<> 0x31
+		ライトOFF
+	<> 0x40
+		自動フラッシュON
+	<> 0x41
+		自動フラッシュOFF
+
+	パケットモード
+	<> 0x50
+		ミニパケットモードON
+	<> 0x51
+		ミニパケットモードOFF
+
+	リセット
+	<> 0x60
+		内部リセット要求
+	<> 0x70
+		強制リセット要求
+	<> 0x80
+		自動リセットON
+	<> 0x81
+		自動リセットOFF
