@@ -29,93 +29,89 @@ v1_03/130713
 
 
 */
-
+#include<hmLibVer.hpp>
 #include<hmLib/config_vc.h>
 #include<hmLib/bufgate.hpp>
 #include<hmLib/any_iterator.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
-#include"dxSignalBut.hpp"
 #include"iologgate.hpp"
 #include"predicate.hpp"
-#include"hmrGateSwitcher.hpp"
-#include"hmrIO.hpp"
-#include"hmrBufGate.hpp"
-#include"hmrCom.hpp"
-#include"hmrComLog.hpp"
-#include"hmrDXCom_v2.hpp"
-#include"hmrOperator.hpp"
-#include"hmrMessage.hpp"
-#include"hmrDxKeyboard.hpp"
-#include"hmrDxPad.hpp"
+#include"GateSwitcher.hpp"
+#include"IO.hpp"
+#include"BufGate.hpp"
+#include"Com.hpp"
+#include"ComLog.hpp"
+#include"DXCom_v2.hpp"
+#include"Operator.hpp"
+#include"Message.hpp"
+#include"DxKeyboard.hpp"
+#include"DxPad.hpp"
+
 //#include"hmrDxIODisplay.hpp"
-#include"hmrDxControlMainDisplay.hpp"
-#include"hmrDxDisplay.hpp"
+#include"DxControlMainDisplay.hpp"
+#include"DxDisplay.hpp"
 
-#include"hmrThermo.hpp"
-#include"hmrDxThermoMUI.hpp"
+#include"Thermo.hpp"
+#include"DxThermoMUI.hpp"
 
-#include"hmrSHT75.hpp"
-#include"hmrDxSHT75MUI.hpp"
+#include"SHT75.hpp"
+#include"DxSHT75MUI.hpp"
 
-#include"hmrSprite.hpp"
-#include"hmrDxSpriteMUI.hpp"
+#include"Sprite.hpp"
+#include"DxSpriteMUI.hpp"
 
-#include"hmrCO2.hpp"
-#include"hmrDxCO2MUI.hpp"
+#include"CO2.hpp"
+#include"DxCO2MUI.hpp"
 
-#include"hmrGPS.hpp"
-#include"hmrDxGPSMUI.hpp"
-#include"hmrDxGPSMap.hpp"
-#include"hmrGPSKashmir.hpp"
+#include"GPS.hpp"
+#include"DxGPSMUI.hpp"
+#include"DxGPSMap.hpp"
+#include"GPSKashmir.hpp"
 
-#include"hmrBattery.hpp"
-#include"hmrDxBatteryMUI.hpp"
+#include"Battery.hpp"
+#include"DxBatteryMUI.hpp"
 
-//include"hmrHumid.hpp"
-//#include"hmrDxHumidMUI.hpp"
+#include"H2S.hpp"
+#include"DxH2SMUI.hpp"
 
-#include"hmrH2S.hpp"
-#include"hmrDxH2SMUI.hpp"
+#include"InfraRed.hpp"
+#include"DxInfraRedMUI.hpp"
 
-#include"hmrInfraRed.hpp"
-#include"hmrDxInfraRedMUI.hpp"
+#include"Motor.hpp"
+#include"DxMotorMUI.hpp"
 
-#include"hmrMotor.hpp"
-#include"hmrDxMotorMUI.hpp"
+#include"Compass.hpp"
+#include"CompassData.hpp"
+#include"DxCompassMUI.hpp"
 
-#include"hmrCompass.hpp"
-#include"hmrCompassData.hpp"
+#include"Accele.hpp"
+#include"AcceleLogger.hpp"
+#include"DxAcceleMUI.hpp"
 
-#include"hmrDxCompassMUI.hpp"
+#include"Gyro.hpp"
+#include"GyroCompass.hpp"
+#include"DxGyroMUI.hpp"
 
-#include"hmrAccele.hpp"
-#include"hmrAcceleLogger.hpp"
-#include"hmrDxAcceleMUI.hpp"
-
-#include"hmrGyro.hpp"
-#include"hmrGyroCompass.hpp"
-#include"hmrDxGyroMUI.hpp"
-
-#include "hmrDeviceManage.hpp"
-#include "hmrDxDeviceManageSUI.hpp"
+#include"DeviceManage.hpp"
+#include"DxDeviceManageSUI.hpp"
 
 
-#include"hmrDxComSUI.hpp"
-#include "hmrDxBufGateSUI.hpp"
-#include "hmrDxGateSwitcherSUI.hpp"
-#include "hmrDxIOLogGateSUI.hpp"
-#include "hmrDxIOSUI.hpp"
-#include "hmrDxIO_v2.hpp"
-#include "hmrDxOperatorSUI.hpp"
-#include "hmrDxVMCSUI.hpp"
-#include "hmrDXFileSUI.hpp"
-#include"hmrDxBUIBoxSideDisp.hpp"
+#include"DxComSUI.hpp"
+#include"DxBufGateSUI.hpp"
+#include"DxGateSwitcherSUI.hpp"
+#include"DxIOLogGateSUI.hpp"
+#include"DxIOSUI.hpp"
+#include"DxIO_v2.hpp"
+#include"DxOperatorSUI.hpp"
+#include"DxVMCSUI.hpp"
+#include"DXFileSUI.hpp"
+#include"DxBUIBoxSideDisp.hpp"
 
 
-#include "hmrDirectoryFile.hpp"
-#include "hmrGPSFile.hpp"
-#include "hmrSpriteFile.hpp"
-#include "hmrCSVFile.hpp"
+#include "DirectoryFile.hpp"
+#include "GPSFile.hpp"
+#include "SpriteFile.hpp"
+#include "CSVFile.hpp"
 /*
 #include "hmrWholeFile.hpp"
 #include "hmrAcceleFile.hpp"
@@ -146,17 +142,17 @@ v1_03/130713
 
 #define HMR_MAIN_INC_END
 
-#include"hmrConnectDx.hpp"
-#include"hmrConnectModule.hpp"
-#include"hmrConnectCore.hpp"
-#include"hmrConnectKeyboard.hpp"
-#include"hmrConnectPad.hpp"
-#include"hmrConnectFile.hpp"
-#include"hmrConnectAutolog.hpp"
+#include"ConnectDx.hpp"
+#include"ConnectModule.hpp"
+#include"ConnectCore.hpp"
+#include"ConnectKeyboard.hpp"
+#include"ConnectPad.hpp"
+#include"ConnectFile.hpp"
+#include"ConnectAutolog.hpp"
 
 
-//#include<hmLib_v3_05/lab/virtual_com/virtual_comgate.hpp>
-//#include<hmLib_v3_05/lab/virtual_com/fdx_virtual_com.hpp>
+//#include<hmLib/lab/virtual_com/virtual_comgate.hpp>
+//#include<hmLib/lab/virtual_com/fdx_virtual_com.hpp>
 //#include"DummyPulg_v1.hpp"
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){

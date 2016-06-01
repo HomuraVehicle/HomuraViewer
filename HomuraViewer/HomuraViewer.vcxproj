@@ -69,9 +69,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;$(LibraryPath)</LibraryPath>
-    <SourcePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;$(SourcePath)</SourcePath>
+    <IncludePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\DxLib_v3_16b;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\DxLib_v3_16b;$(LibraryPath)</LibraryPath>
+    <SourcePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\DxLib_v3_16b;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(LibraryPath)</LibraryPath>
@@ -127,7 +127,87 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Battery.cpp" />
+    <ClCompile Include="CO2.cpp" />
+    <ClCompile Include="Compass.cpp" />
+    <ClCompile Include="DxDeviceManageSUI.cpp" />
+    <ClCompile Include="Gyro.cpp" />
+    <ClCompile Include="H2S.cpp" />
     <ClCompile Include="HomuraViewer.cpp" />
+    <ClCompile Include="InfraRed.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Accele.hpp" />
+    <ClInclude Include="AcceleLogger.hpp" />
+    <ClInclude Include="Battery.hpp" />
+    <ClInclude Include="BufGate.hpp" />
+    <ClInclude Include="CO2.hpp" />
+    <ClInclude Include="Com.hpp" />
+    <ClInclude Include="ComLog.hpp" />
+    <ClInclude Include="Compass.hpp" />
+    <ClInclude Include="CompassData.hpp" />
+    <ClInclude Include="ConnectAutolog.hpp" />
+    <ClInclude Include="ConnectCore.hpp" />
+    <ClInclude Include="ConnectDx.hpp" />
+    <ClInclude Include="ConnectFile.hpp" />
+    <ClInclude Include="ConnectKeyboard.hpp" />
+    <ClInclude Include="ConnectModule.hpp" />
+    <ClInclude Include="ConnectPad.hpp" />
+    <ClInclude Include="CSVFile.hpp" />
+    <ClInclude Include="DeviceManage.hpp" />
+    <ClInclude Include="DirectoryFile.hpp" />
+    <ClInclude Include="DxAcceleMUI.hpp" />
+    <ClInclude Include="DxAutolog.hpp" />
+    <ClInclude Include="DxBatteryMUI.hpp" />
+    <ClInclude Include="DxBufGateSUI.hpp" />
+    <ClInclude Include="DxBUIBoxSideDisp.hpp" />
+    <ClInclude Include="DxCO2MUI.hpp" />
+    <ClInclude Include="DxCompassMUI.hpp" />
+    <ClInclude Include="DxComSUI.hpp" />
+    <ClInclude Include="DxCom_v2.hpp" />
+    <ClInclude Include="DxControlMainDisplay.hpp" />
+    <ClInclude Include="DxDeviceManageSUI.hpp" />
+    <ClInclude Include="DxDisplay.hpp" />
+    <ClInclude Include="DxFileSUI.hpp" />
+    <ClInclude Include="DxGateSwitcherSUI.hpp" />
+    <ClInclude Include="DxGPSMap.hpp" />
+    <ClInclude Include="DxGPSMUI.hpp" />
+    <ClInclude Include="DxGyroMUI.hpp" />
+    <ClInclude Include="DxH2SMUI.hpp" />
+    <ClInclude Include="DxInfraRedMUI.hpp" />
+    <ClInclude Include="DxIOLogGateSUI.hpp" />
+    <ClInclude Include="DxIOSUI.hpp" />
+    <ClInclude Include="DxIO_v2.hpp" />
+    <ClInclude Include="DxKeyboard.hpp" />
+    <ClInclude Include="DxMotorMUI.hpp" />
+    <ClInclude Include="DxOperatorSUI.hpp" />
+    <ClInclude Include="DxPad.hpp" />
+    <ClInclude Include="DxSHT75MUI.hpp" />
+    <ClInclude Include="DxSpriteMUI.hpp" />
+    <ClInclude Include="DxThermoMUI.hpp" />
+    <ClInclude Include="DxVMCSUI.hpp" />
+    <ClInclude Include="GateSwitcher.hpp" />
+    <ClInclude Include="GPS.hpp" />
+    <ClInclude Include="GPSFile.hpp" />
+    <ClInclude Include="GPSKashmir.hpp" />
+    <ClInclude Include="Gyro.hpp" />
+    <ClInclude Include="GyroCompass.hpp" />
+    <ClInclude Include="H2S.hpp" />
+    <ClInclude Include="InfraRed.hpp" />
+    <ClInclude Include="IO.hpp" />
+    <ClInclude Include="iologgate.hpp" />
+    <ClInclude Include="Message.hpp" />
+    <ClInclude Include="Motor.hpp" />
+    <ClInclude Include="Operator.hpp" />
+    <ClInclude Include="predicate.hpp" />
+    <ClInclude Include="SHT75.hpp" />
+    <ClInclude Include="Sprite.hpp" />
+    <ClInclude Include="SpriteFile.hpp" />
+    <ClInclude Include="Thermo.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
