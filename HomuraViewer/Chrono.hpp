@@ -146,7 +146,7 @@ namespace hmr{
 
 				// ‘—M—p‚É•ÏX
 				hmLib_sint32 t_s = static_cast<hmLib_sint32>(TimeSec.count());
-				hmLib_uint16 t_ms = static_cast<hmLib_uint16>(TimeMSec.count());
+				std::uint16_t t_ms = static_cast<std::uint16_t>(TimeMSec.count());
 
 				Str.push_back(static_cast<unsigned char>(0x02));
 				Str.push_back(static_cast<unsigned char>(t_s & 0xFF));
@@ -170,9 +170,9 @@ namespace hmr{
 				if(Str_.size() != 7)return true;
 
 				// Œ»İæ“¾
-				hmLib_sint32 MachineTimeSec = static_cast<hmLib_uint8>(Str_.at(1)) + static_cast<hmLib_uint8>(Str_.at(2)) * 256
-					+ static_cast<hmLib_uint8>(Str_.at(3)) * 256 * 256 + static_cast<hmLib_uint8>(Str_.at(4)) * 256 * 256 * 256;
-				hmLib_uint16 MachineTimeMSec = static_cast<hmLib_uint16>((hmLib_uint8)Str_.at(5)) + static_cast<hmLib_uint16>((hmLib_uint8)Str_.at(6)) * 256;
+				hmLib_sint32 MachineTimeSec = static_cast<std::uint8_t>(Str_.at(1)) + static_cast<std::uint8_t>(Str_.at(2)) * 256
+					+ static_cast<std::uint8_t>(Str_.at(3)) * 256 * 256 + static_cast<std::uint8_t>(Str_.at(4)) * 256 * 256 * 256;
+				std::uint16_t MachineTimeMSec = static_cast<std::uint16_t>((std::uint8_t)Str_.at(5)) + static_cast<std::uint16_t>((std::uint8_t)Str_.at(6)) * 256;
 
 				// time_point ‚É•ÏŠ·
 				clock::time_point MachineTimePoint = std::chrono::system_clock::from_time_t(MachineTimeSec) + std::chrono::milliseconds(MachineTimeMSec);
@@ -192,7 +192,7 @@ namespace hmr{
 				if(Str_.size() != 3)return true;
 
 				// Œ»İæ“¾
-				hmLib_uint16 Interval = static_cast<hmLib_uint16>(static_cast<hmLib_uint8>(Str_.at(1))) + static_cast<hmLib_uint16>(static_cast<hmLib_uint8>(Str_.at(1))) * 256;
+				std::uint16_t Interval = static_cast<std::uint16_t>(static_cast<std::uint8_t>(Str_.at(1))) + static_cast<std::uint16_t>(static_cast<std::uint8_t>(Str_.at(1))) * 256;
 				AutoGetInterval.setm(Interval);
 
 				return false;
@@ -202,9 +202,9 @@ namespace hmr{
 				if(Str_.size() != 7)return true;
 
 				// Œ»İæ“¾
-				hmLib_sint32 t_s = (hmLib_sint32)((hmLib_uint32)(static_cast<hmLib_uint8>(Str_.at(1)) + static_cast<hmLib_uint8>(Str_.at(2)) * 256
-					+ static_cast<hmLib_uint8>(Str_.at(3)) * 256 * 256 + static_cast<hmLib_uint8>(Str_.at(4)) * 256 * 256 * 256));
-				hmLib_uint16 t_ms = static_cast<hmLib_uint16>((hmLib_uint8)Str_.at(5)) + static_cast<hmLib_uint16>((hmLib_uint8)Str_.at(6)) * 256;
+				hmLib_sint32 t_s = (hmLib_sint32)((hmLib_uint32)(static_cast<std::uint8_t>(Str_.at(1)) + static_cast<std::uint8_t>(Str_.at(2)) * 256
+					+ static_cast<std::uint8_t>(Str_.at(3)) * 256 * 256 + static_cast<std::uint8_t>(Str_.at(4)) * 256 * 256 * 256));
+				std::uint16_t t_ms = static_cast<std::uint16_t>((std::uint8_t)Str_.at(5)) + static_cast<std::uint16_t>((std::uint8_t)Str_.at(6)) * 256;
 
 				// millisec time ‚É•ÏŠ·
 				std::chrono::milliseconds time = std::chrono::seconds(t_s) + std::chrono::milliseconds(t_ms);
@@ -224,8 +224,8 @@ namespace hmr{
 				if(Str_.size() != 5)return true;
 
 				// Œ»İæ“¾
-				hmLib_sint32 t_s = (hmLib_sint32)((hmLib_uint32)(static_cast<hmLib_uint8>(Str_.at(1)) + static_cast<hmLib_uint8>(Str_.at(2)) * 256
-					+ static_cast<hmLib_uint8>(Str_.at(3)) * 256 * 256 + static_cast<hmLib_uint8>(Str_.at(4)) * 256 * 256 * 256));
+				hmLib_sint32 t_s = (hmLib_sint32)((hmLib_uint32)(static_cast<std::uint8_t>(Str_.at(1)) + static_cast<std::uint8_t>(Str_.at(2)) * 256
+					+ static_cast<std::uint8_t>(Str_.at(3)) * 256 * 256 + static_cast<std::uint8_t>(Str_.at(4)) * 256 * 256 * 256));
 
 				// time_point ‚É•ÏŠ·
 				clock::time_point tp = std::chrono::system_clock::from_time_t(t_s);

@@ -14,18 +14,18 @@ fomagate:v1_01/130310 hmIto
 #include <string>
 #include <Windows.h>
 #include <hmLib/comgate.hpp>
-#include <hmLib/gate.hpp>
-class fomagate:public hmLib::gate{
+#include "gate.hpp"
+class fomagate:public hmr::gate{
 private:
-	hmLib::gate* pGate;
+	hmr::gate* pGate;
 public:
 	fomagate():pGate(0){}
-	bool open(hmLib::gate& rGate_,const std::string& foma_number){
+	bool open(hmr::gate& rGate_,const std::string& foma_number){
 		if(is_open())return true;
 
 		pGate=&rGate_;
 
-		hmLib::ogatestream gout(*pGate);
+		hmr::ogatestream gout(*pGate);
 
 		/*‘Šè‚Ì“d˜b”Ô†‚Ö”­M*/
 		gout<<"ATD"<<foma_number<<static_cast<unsigned char>(0x0d)<<static_cast<unsigned char>(0x0a);
@@ -35,7 +35,7 @@ public:
 	bool close(){
 		if(!is_open())return true;
 
-		hmLib::gatestream gout(*pGate);
+		hmr::gatestream gout(*pGate);
 
 		Sleep(1000);
 

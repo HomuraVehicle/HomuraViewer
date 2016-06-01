@@ -94,7 +94,7 @@ namespace hmr{
 				case invalid:
 					return pClrSet->InvalidBut;
 				default:
-					hmLib_throw(hmLib::exceptions::invalid_request,"Invalid status.");
+					hmLib_throw(hmLib::io_exceptions::io_exception,"Invalid status.");
 				}
 			case strobj:
 				switch(Sta_){
@@ -107,10 +107,10 @@ namespace hmr{
 				case invalid:
 					return pClrSet->InvalidStr;
 				default:
-					hmLib_throw(hmLib::exceptions::invalid_request,"Invalid status.");
+					hmLib_throw(hmLib::io_exceptions::io_exception,"Invalid status.");
 				}
 			default:
-				hmLib_throw(hmLib::exceptions::invalid_request,"Invalid object.");
+				hmLib_throw(hmLib::io_exceptions::io_exception,"Invalid object.");
 			}
 		}
 		const dxRGB& getTimeStrClr(hmr::clock::time_point Time_)const{
@@ -122,7 +122,7 @@ namespace hmr{
 			case past:
 				return pClrSet->PastStr;
 			default:
-				hmLib_throw(hmLib::exceptions::invalid_request,"Invalid Time Category");
+				hmLib_throw(hmLib::io_exceptions::io_exception,"Invalid Time Category");
 			}
 		}
 		time getTime(hmr::clock::time_point Time_)const{

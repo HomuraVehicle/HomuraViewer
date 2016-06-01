@@ -3,14 +3,13 @@
 #
 
 #include <iostream>
-#include <hmLib/gate.hpp>
+#include <deque>
+#include <vector>
 #include <hmLib/exceptions.hpp>
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
 #include <boost/signals2.hpp>
-#include <deque>
-#include <vector>
-
+#include"gate.hpp"
 /*===hmrBufGate===
 
 バッファにデータをためて、送受信していくクラス
@@ -27,23 +26,23 @@ hmrBufGate:v1_00/130511 hmIto
 //バッファGate
 //using namespace hmLib;
 namespace hmr{
-	class bufgate:public hmLib::gate{
+	class bufgate:public hmr::gate{
 	private:
-		hmLib::gate* pGate;
+		hmr::gate* pGate;
 		std::deque<char> oBuf;
 		std::deque<char> iBuf;
 	public:
 		bufgate():pGate(0){return;}
 		~bufgate(){if(is_open())close();}
-		bool open(hmLib::gate& rGate_){
-			hmLib_assert(!is_open(),hmLib::gate_opened_exception,"bufgate have already been opened.");
+		bool open(hmr::gate& rGate_){
+			hmLib_assert(!is_open(), hmr::gate_opened_exception,"bufgate have already been opened.");
 
 			pGate=&rGate_;
 
 			return false;
 		}
 		bool close(){
-			hmLib_assert(is_open(),hmLib::gate_not_opened_exception,"bufgate have not been opened yet.");
+			hmLib_assert(is_open(), hmr::gate_not_opened_exception,"bufgate have not been opened yet.");
 
 			pGate=0;
 
@@ -51,54 +50,45 @@ namespace hmr{
 		}
 		bool is_open()const{return pGate!=0;}
 		void operator()(void){
-			hmLib_assert(is_open(),hmLib::gate_not_opened_exception,"bufgate have not been opened yet.");
-			try{
-				if(!pGate->empty()){
-					while(!pGate->empty() && pGate->can_get()){
-						hmLib::gate::size_type size=1;
-						char tmp;
-						pGate->get(&tmp,size);
-						iBuf.push_back(tmp);
-					}
+			hmLib_assert(is_open(),hmr::gate_not_opened_exception,"bufgate have not been opened yet.");
+
+			if(!pGate->empty()){
+				while(!pGate->empty() && pGate->can_get()){
+					hmr::gate::size_type size=1;
+					char tmp;
+					pGate->get(&tmp,size);
+					iBuf.push_back(tmp);
 				}
-				if(!oBuf.empty()){
-					while(!oBuf.empty() && pGate->can_put()){
-						hmLib::gate::size_type size=1;
-						pGate->put(&oBuf.front(),size);
-						oBuf.pop_front();
-					}
+			}
+			if(!oBuf.empty()){
+				while(!oBuf.empty() && pGate->can_put()){
+					hmr::gate::size_type size=1;
+					pGate->put(&oBuf.front(),size);
+					oBuf.pop_front();
 				}
-			}catch(const hmLib::gate_not_opened_exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::invalid_status,"gate connected with bufgate is not opened.");
-			}catch(const std::exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::invalid_status,"bufgate fail to get/put work.");
 			}
 		}
 		void operator()(unsigned int GetMaxNum_,unsigned int PutMaxNum_){
-			hmLib_assert(is_open(),hmLib::gate_not_opened_exception,"bufgate have not been opened yet.");
-			try{
-				if(!pGate->empty()){
-					while(!pGate->empty() && pGate->can_get() && GetMaxNum_){
-						hmLib::gate::size_type size=1;
-						char tmp;
-						if(pGate->get(&tmp,size))break;
-						iBuf.push_back(tmp);
-						--GetMaxNum_;
-					}
+			hmLib_assert(is_open(), hmr::gate_not_opened_exception,"bufgate have not been opened yet.");
+
+			if(!pGate->empty()){
+				while(!pGate->empty() && pGate->can_get() && GetMaxNum_){
+					hmr::gate::size_type size=1;
+					char tmp;
+					if(pGate->get(&tmp,size))break;
+					iBuf.push_back(tmp);
+					--GetMaxNum_;
 				}
-				if(!oBuf.empty()){
-					while(!oBuf.empty() && pGate->can_put() && PutMaxNum_){
-						hmLib::gate::size_type size=1;
-						pGate->put(&oBuf.front(),size);
-						oBuf.pop_front();
-						--PutMaxNum_;
-					}
-				}
-			}catch(const hmLib::gate_not_opened_exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::invalid_status,"gate connected with bufgate is not opened.");
-			}catch(const std::exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::invalid_status,"bufgate fail to get/put work.");
 			}
+			if(!oBuf.empty()){
+				while(!oBuf.empty() && pGate->can_put() && PutMaxNum_){
+					hmr::gate::size_type size=1;
+					pGate->put(&oBuf.front(),size);
+					oBuf.pop_front();
+					--PutMaxNum_;
+				}
+			}
+
 		}
 		unsigned int psize()const{return oBuf.size();}
 		unsigned int gsize()const{return iBuf.size();}

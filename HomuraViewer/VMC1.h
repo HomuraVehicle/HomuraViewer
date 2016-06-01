@@ -54,9 +54,8 @@ hmrVMC1_v1_01/120922 hmIto
 hmrVMC1_v1_00/120921 hmIto
 	バージョン管理開始
 */
-#ifndef HMLIB_BYTEBASETYPE_INC
-#	include"hmLib_v3_05/bytebase_type.h"
-#endif
+#include<cstdint>
+
 #ifdef __cplusplus
 extern "C"{
 #endif
@@ -66,8 +65,8 @@ extern "C"{
 #define vmc1_SENDERR_fail_to_iniSendDat 2
 #define vmc1_SENDERR_fail_to_send 3
 
-typedef hmLib_uint16 vmc1_dsize_t;
-typedef hmLib_uint8 vmc1_did_t;
+typedef std::uint16_t vmc1_dsize_t;
+typedef std::uint8_t vmc1_did_t;
 //typedef hmLib_boolian hmLib_boolian;
 typedef void(*vmc1_vFp_v)(void);
 typedef void(*vmc1_vFp_uc)(unsigned char);

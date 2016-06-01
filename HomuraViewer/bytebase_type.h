@@ -1,6 +1,8 @@
-#ifndef HMLIB_BYTEBASETYPE_INC
-#define HMLIB_BYTEBASETYPE_INC 102
+#ifndef HMR_BYTEBASETYPE_INC
+#define HMR_BYTEBASETYPE_INC 102
 #
+#include<cstdint>
+
 #ifndef HMLIB_CONFIG_INC
 #	include "hmLib_config.h"
 #endif
@@ -8,26 +10,26 @@
 #if HMLIB_TYPE_SIZE_CHAR==1
 #	ifndef HMLIB_TYPE_SIZE_8
 #		define HMLIB_TYPE_SIZE_8
-		typedef unsigned char hmLib_uint8;
+		typedef unsigned char std::uint8_t;
 		typedef signed char hmLib_sint8;
 #	endif
 #elif HMLIB_TYPE_SIZE_CHAR==2
 #	ifndef HMLIB_TYPE_SIZE_16
 #		define HMLIB_TYPE_SIZE_16
-		typedef unsigned char hmLib_uint16;
+		typedef unsigned char std::uint16_t;
 		typedef signed char hmLib_sint16;
 #	endif
 #endif
 #if HMLIB_TYPE_SIZE_SHORT==1
 #	ifndef HMLIB_TYPE_SIZE_8
 #		define HMLIB_TYPE_SIZE_8
-		typedef unsigned short hmLib_uint8;
+		typedef unsigned short std::uint8_t;
 		typedef signed short hmLib_sint8;
 #	endif
 #elif HMLIB_TYPE_SIZE_SHORT==2
 #	ifndef HMLIB_TYPE_SIZE_16
 #		define HMLIB_TYPE_SIZE_16
-		typedef unsigned short hmLib_uint16;
+		typedef unsigned short std::uint16_t;
 		typedef signed short hmLib_sint16;
 #	endif
 #elif HMLIB_TYPE_SIZE_SHORT==4
@@ -40,13 +42,13 @@
 #if HMLIB_TYPE_SIZE_INT==1
 #	ifndef HMLIB_TYPE_SIZE_8
 #		define HMLIB_TYPE_SIZE_8
-		typedef unsigned int hmLib_uint8;
+		typedef unsigned int std::uint8_t;
 		typedef signed int hmLib_sint8;
 #	endif
 #elif HMLIB_TYPE_SIZE_INT==2
 #	ifndef HMLIB_TYPE_SIZE_16
 #		define HMLIB_TYPE_SIZE_16
-		typedef unsigned int hmLib_uint16;
+		typedef unsigned int std::uint16_t;
 		typedef signed int hmLib_sint16;
 #	endif
 #elif HMLIB_TYPE_SIZE_INT==4
@@ -65,13 +67,13 @@
 #if HMLIB_TYPE_SIZE_LONG==1
 #	ifndef HMLIB_TYPE_SIZE_8
 #		define HMLIB_TYPE_SIZE_8
-		typedef unsigned long hmLib_uint8;
+		typedef unsigned long std::uint8_t;
 		typedef signed long hmLib_sint8;
 #	endif
 #elif HMLIB_TYPE_SIZE_LONG==2
 #	ifndef HMLIB_TYPE_SIZE_16
 #		define HMLIB_TYPE_SIZE_16
-		typedef unsigned long hmLib_uint16;
+		typedef unsigned long std::uint16_t;
 		typedef signed long hmLib_sint16;
 #	endif
 #elif HMLIB_TYPE_SIZE_LONG==4
@@ -96,13 +98,13 @@
 #if HMLIB_TYPE_SIZE_LONG_LONG==1
 #	ifndef HMLIB_TYPE_SIZE_8
 #		define HMLIB_TYPE_SIZE_8
-		typedef unsigned long long hmLib_uint8;
+		typedef unsigned long long std::uint8_t;
 		typedef signed long long hmLib_sint8;
 #	endif
 #elif HMLIB_TYPE_SIZE_LONG_LONG==2
 #	ifndef HMLIB_TYPE_SIZE_16
 #		define HMLIB_TYPE_SIZE_16
-		typedef unsigned long long hmLib_uint16;
+		typedef unsigned long long std::uint16_t;
 		typedef signed long long hmLib_sint16;
 #	endif
 #elif HMLIB_TYPE_SIZE_LONG_LONG==4
@@ -217,11 +219,11 @@ namespace hmLib{
 		typedef hmLib_boolian boolian;
 		//hmStd Type
 		#ifdef HMLIB_TYPE_SIZE_8
-			typedef hmLib_uint8 uint8;
+			typedef std::uint8_t uint8;
 			typedef hmLib_sint8 sint8;
 		#endif
 		#ifdef HMLIB_TYPE_SIZE_16
-			typedef hmLib_uint16 uint16;
+			typedef std::uint16_t uint16;
 			typedef hmLib_sint16 sint16;
 		#endif
 		#ifdef HMLIB_TYPE_SIZE_32

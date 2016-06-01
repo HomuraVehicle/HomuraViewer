@@ -187,6 +187,7 @@
     <ClInclude Include="DxVMCSUI.hpp" />
     <ClInclude Include="Flagirl.hpp" />
     <ClInclude Include="fomagate.hpp" />
+    <ClInclude Include="gate.hpp" />
     <ClInclude Include="GateSwitcher.hpp" />
     <ClInclude Include="GPS.hpp" />
     <ClInclude Include="GPSFile.hpp" />

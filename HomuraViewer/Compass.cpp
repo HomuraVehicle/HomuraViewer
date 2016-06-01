@@ -4,7 +4,6 @@
 
 #include"Compass.hpp"
 
-const unsigned char hmr::cCompassMsgAgent::CorrectionMeasureNum=10;
 
 #
 #endif
