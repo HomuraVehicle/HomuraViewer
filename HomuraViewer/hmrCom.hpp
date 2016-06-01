@@ -150,7 +150,7 @@ namespace hmr{
 			// なければターミネーた送る
 			static hmLib_boolian existSendDat(void){
 				// 念のためbuffチェック
-				hmLib_assert( !pCom->SendBuf.empty(),hmLib::exceptions::io_end_of_file, " VMCConnection::hmLib_boolian existSendDat -> SendBuf is empty !!" );
+				hmLib_assert( !pCom->SendBuf.empty(),hmLib::io_exceptions::end_of_file, " VMCConnection::hmLib_boolian existSendDat -> SendBuf is empty !!" );
 
 				//これが最後のダミーデータでないかをチェック
 				if(cCom::isEndDatum(pCom->SendBuf.front())){
@@ -331,7 +331,7 @@ namespace hmr{
 		}
 		//受信バッファ内からデータを取得する
 		datum recv()override{
-			hmLib_assert(!empty(),hmLib::exceptions::io_end_of_file,"hmrCom::RecvBuf is empty");
+			hmLib_assert(!empty(),hmLib::io_exceptions::end_of_file,"hmrCom::RecvBuf is empty");
 			
 			//バッファの先頭を取得
 			datum Datum = RecvBuf.front();
@@ -349,7 +349,7 @@ namespace hmr{
 		}
 		//受信ストリームから受信バッファを更新する
 		void sync()override{
-			hmLib_assert(can_sync(),hmLib::exceptions::io_end_of_file,"hmrCom::RecvBuf have already been syncd");
+			hmLib_assert(can_sync(),hmLib::io_exceptions::end_of_file,"hmrCom::RecvBuf have already been syncd");
 
 			//RecvLogをシグナル発信して初期化
 			RecvLog.ErrFlag=RecvBuf.front().ErrFlag;
@@ -374,7 +374,7 @@ namespace hmr{
 		}
 		//送信ストリームに送信バッファを反映する
 		void flush()override{
-			hmLib_assert(can_flush(),hmLib::exceptions::io_end_of_file,"hmrCom::SendBuf cannot flush");
+			hmLib_assert(can_flush(),hmLib::io_exceptions::end_of_file,"hmrCom::SendBuf cannot flush");
 			SendBuf.push_back(getEndDatum());
 
 			//RecvLogをシグナル発信して初期化

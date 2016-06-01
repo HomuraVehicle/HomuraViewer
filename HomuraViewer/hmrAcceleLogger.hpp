@@ -8,7 +8,7 @@ Accele‚Ìƒf[ƒ^‚ğˆê’èŠÔ’~Ï‚µ‘±‚¯‚é
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include"coordinates.hpp"
+#include <hmLib/coordinates.hpp>
 #include"hmrData.hpp"
 namespace hmr{
 	class cAcceleLogger{

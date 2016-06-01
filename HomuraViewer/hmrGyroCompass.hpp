@@ -4,7 +4,7 @@
 #include<boost/signals2/signal.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include"coordinates.hpp"
+#include <hmLib/coordinates.hpp>
 #include"hmrData.hpp"
 namespace hmr{
 	class cGyroCompass{

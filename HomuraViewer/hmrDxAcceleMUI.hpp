@@ -16,7 +16,7 @@ hmrDxAcceleMUI v1_00/130511 hmIto
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include"coordinates.hpp"
+#include <hmLib/coordinates.hpp>
 #include"hmrData.hpp"
 #include"hmrDxBUI.hpp"
 namespace hmr{

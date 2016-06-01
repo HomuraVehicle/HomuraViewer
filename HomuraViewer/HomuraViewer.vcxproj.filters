@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="hmLib">
+      <UniqueIdentifier>{a6084143-c692-46cc-882b-4793c8b4bb30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hmrCO2.cpp">
@@ -54,11 +57,29 @@
     <ClCompile Include="hmrVMC1.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="coordinates.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="hmrBattery.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstring.c">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\comgate.cpp">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\coordinates.cpp">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\debugstream.cpp">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cdeque.c">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cqueue.c">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstack.c">
+      <Filter>hmLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +93,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="any_predicate.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="coordinates.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="date.hpp">
@@ -443,15 +461,5 @@
     <ClInclude Include="vmstatus.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Resource.rc">
-      <Filter>リソース ファイル</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="icon.ico">
-      <Filter>リソース ファイル</Filter>
-    </Image>
   </ItemGroup>
 </Project>

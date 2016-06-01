@@ -18,7 +18,7 @@ GPSŠÈˆÕƒ}ƒbƒv‚ð’ñ‹Ÿ‚·‚é
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
 #include"hmrGPSDataSet.hpp"
-#include"coordinates.hpp"
+#include <hmLib/coordinates.hpp>
 namespace hmr{
 	class dxosGPSMap:public dxReObject,public hmoBox{
 		typedef std::mutex mutex;

@@ -16,7 +16,7 @@ hmrCompass v1_00/130511 iwahori
 #include <hmLib/inquiries.hpp>
 #include "hmrItfMessage.hpp"
 #include "hmrFlagirl.hpp"
-#include "coordinates.hpp"
+#include <hmLib/coordinates.hpp>
 
 namespace hmr{
 	class cCompassMsgAgent:public itfMessageAgent{

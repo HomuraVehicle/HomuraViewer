@@ -100,7 +100,7 @@ namespace hmr{
 		// port open
 		// Open Foma Gate
 		bool open(GateType GateType_){
-			hmLib_assert(!is_open(), hmLib::exceptions::io_not_opened,"Other port is still open, we cannot open a port");
+			hmLib_assert(!is_open(), hmLib::io_exceptions::not_opened,"Other port is still open, we cannot open a port");
 
 			if(GateType_==FomaGateType){
 				SwitchedGate = FomaGateType;
@@ -151,7 +151,7 @@ namespace hmr{
 		}
 		// port close
 		bool close(){
-			hmLib_assert(is_open(), hmLib::exceptions::io_not_opened, "A Port is not open, we cannot close the port");
+			hmLib_assert(is_open(), hmLib::io_exceptions::not_opened, "A Port is not open, we cannot close the port");
 
 			if(SwitchedGate == FomaGateType){
 				if(!fomaGate.close()){
@@ -173,7 +173,7 @@ namespace hmr{
 					return false;
 				}else return true;
 			}else{
-				hmLib_assert(false, hmLib::exceptions::memory_exception, "A kind of a gate is not determined");
+				hmLib_assert(false, hmLib::memory_exceptions::memory_exception, "A kind of a gate is not determined");
 				return true;
 			}
 		}
@@ -191,11 +191,11 @@ namespace hmr{
 		}
 		//複数byte受信　受信文字アドレスと、受信文字数が引数　実際の受信文字数が戻り値
 		size_type gets(char* str_,const size_type& size_) override{
-			hmLib_assert(pGate!=nullptr, hmLib::exceptions::memory_exception,"You try to access a gate which is not defined");
+			hmLib_assert(pGate!=nullptr, hmLib::memory_exceptions::memory_exception,"You try to access a gate which is not defined");
 			return pGate->gets(str_, size_);
 		}
 		char getc()override{
-			hmLib_assert(pGate != nullptr, hmLib::exceptions::memory_exception, "You try to access a gate which is not defined");
+			hmLib_assert(pGate != nullptr, hmLib::memory_exceptions::memory_exception, "You try to access a gate which is not defined");
 			return pGate->getc();
 		}
 
@@ -214,11 +214,11 @@ namespace hmr{
 		}
 		//複数byte送信　送信文字アドレスと、送信文字数が引数　実際の送信文字数が戻り値
 		size_type puts(const char* str_,const size_type& size_) override{
-			hmLib_assert(pGate!=nullptr, hmLib::exceptions::memory_exception,"You try to access a gate which is not defined");
+			hmLib_assert(pGate!=nullptr, hmLib::memory_exceptions::memory_exception,"You try to access a gate which is not defined");
 			return pGate->puts(str_,size_);
 		}
 		void putc(char c)override{ 
-			hmLib_assert(pGate != nullptr, hmLib::exceptions::memory_exception, "You try to access a gate which is not defined");
+			hmLib_assert(pGate != nullptr, hmLib::memory_exceptions::memory_exception, "You try to access a gate which is not defined");
 			return pGate->putc(c); 
 		}
 

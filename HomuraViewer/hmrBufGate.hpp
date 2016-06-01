@@ -67,7 +67,7 @@ namespace hmr{
 					}
 				}
 			}catch(const hmLib::gate_not_opened_exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::io_not_opened,"gate connected with bufgate is not opened.");
+				hmLib_thrownext(Except_,hmLib::io_exceptions::not_opened,"gate connected with bufgate is not opened.");
 			}
 		}
 		void operator()(unsigned int GetMaxNum_,unsigned int PutMaxNum_){
@@ -91,7 +91,7 @@ namespace hmr{
 					}
 				}
 			}catch(const hmLib::gate_not_opened_exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::io_not_opened,"gate connected with bufgate is not opened.");
+				hmLib_thrownext(Except_,hmLib::io_exceptions::not_opened,"gate connected with bufgate is not opened.");
 			}
 		}
 		unsigned int psize()const{return oBuf.size();}

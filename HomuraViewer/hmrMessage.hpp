@@ -53,7 +53,7 @@ namespace hmr{
 					Dat_.ID=itr->first;
 					Dat_.ErrFlag=false;
 					Dat_.Time=Time;
-					Dat_.Size=Dat_.Str.size();
+					Dat_.Size=static_cast<vmc1_dsize_t>(Dat_.Str.size());
 					return false;
 				}
 			}

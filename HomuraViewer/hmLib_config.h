@@ -5,7 +5,7 @@
 #define HMLIB_OUT 3
 
 //ライブラリファイルを使わずにソースファイルをコンパイルしてリンクする場合は、以下を有効にする
-//#define HMLIB_NOLIB
+#define HMLIB_NOLIB
 
 //byte数の指定
 #define HMLIB_TYPE_SIZE_CHAR 1

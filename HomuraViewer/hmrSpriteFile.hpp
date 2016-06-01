@@ -29,7 +29,7 @@ v1_00/130907 amby
 #include <hmLib/signals.hpp>
 #include "hmrItfFile.hpp"
 #include "hmrData.hpp"
-#include "coordinates.hpp"
+#include <hmLib/coordinates.hpp>
 
 namespace hmr{
 	// それぞれのjpegファイルを作ることの責任クラス

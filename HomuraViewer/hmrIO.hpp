@@ -71,8 +71,8 @@ namespace hmr{
 			vmc1_initialize(pVMC.get(),ID,TID);
 		}
 		void work(){
-			hmLib_assert(pGate,hmLib::exceptions::io_not_opened,"pGate have no address");
-			hmLib_assert(pVMC,hmLib::exceptions::io_not_opened,"pVMC have no address");
+			hmLib_assert(pGate,hmLib::io_exceptions::not_opened,"pGate have no address");
+			hmLib_assert(pVMC,hmLib::io_exceptions::not_opened,"pVMC have no address");
 
 			clock::time_point time;
 			time=clock::now();
@@ -96,12 +96,12 @@ namespace hmr{
 			}
 		}
 		void open(hmLib::gate* pGate_){
-			hmLib_assert(!is_open(),hmLib::exceptions::io_opened,"FdxIO have already opened");
+			hmLib_assert(!is_open(),hmLib::io_exceptions::opened,"FdxIO have already opened");
 			pGate=pGate_;
 		}
 		bool is_open(){return pGate!=nullptr;}
 		void close(){
-			hmLib_assert(is_open(),hmLib::exceptions::io_not_opened,"FdxIO have already closed");
+			hmLib_assert(is_open(),hmLib::io_exceptions::not_opened,"FdxIO have already closed");
 			pGate=nullptr;
 		}
 	};
@@ -224,12 +224,12 @@ namespace hmr{
 			}
 		}
 		void open(hmLib::gate* pGate_){
-			hmLib_assert(!is_open(),hmLib::exceptions::io_opened,"FdxIO have already opened");
+			hmLib_assert(!is_open(),hmLib::io_exceptions::opened,"FdxIO have already opened");
 			pGate=pGate_;
 		}
 		bool is_open(){return pGate!=nullptr;}
 		void close(){
-			hmLib_assert(is_open(),hmLib::exceptions::io_not_opened,"FdxIO have already closed");
+			hmLib_assert(is_open(),hmLib::io_exceptions::not_opened,"FdxIO have already closed");
 			pGate=nullptr;
 		}
 

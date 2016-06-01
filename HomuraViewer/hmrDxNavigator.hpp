@@ -12,7 +12,7 @@ v1_00/131112 hmIto
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
-#include"coordinates.hpp"
+#include <hmLib/coordinates.hpp>
 namespace hmr{
 	template<typename gyro_iterator_>
 	class dxosNavigator:public dxReObject,public hmoBox{
