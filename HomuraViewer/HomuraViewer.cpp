@@ -30,11 +30,9 @@ v1_03/130713
 
 */
 
-#include<hmLib_v4_02/hmLib/config_vc.h>
-#include<hmLib_v4_02/hmLib/bufgate.hpp>
-#include<hmLib_v3_06/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
-#include<hmLib_v3_06/bufgate.hpp>
-#include<hmLib_v3_06/any_iterator.hpp>
+#include<hmLib/config_vc.h>
+#include<hmLib/bufgate.hpp>
+#include<hmLib/any_iterator.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
 #include"dxSignalBut.hpp"
 #include"iologgate.hpp"

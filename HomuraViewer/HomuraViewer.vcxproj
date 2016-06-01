@@ -68,7 +68,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;$(LibraryPath)</LibraryPath>
+    <SourcePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(LibraryPath)</LibraryPath>
+    <SourcePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(SourcePath)</SourcePath>
+    <IncludePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -118,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HomuraViewer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
