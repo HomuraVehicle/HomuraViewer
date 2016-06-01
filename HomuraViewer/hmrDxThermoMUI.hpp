@@ -26,6 +26,7 @@ namespace hmr{
 	class dxosThermoMUI:public dxosBUI{
 	private:
 		double temperature;
+		std::uint16_t raw_temperature;
 		clock::time_point time;
 		hmLib::signals::unique_connections SignalConnections;
 	public:
@@ -35,7 +36,7 @@ namespace hmr{
 		dxosBUIWaitableBoolBut IsDataModeMUIBut;
 		dxosBUIWaitableBoolBut IsLogModeMUIBut;
 	public:
-		dxosThermoMUI():dxosBUI("Thermo",30,30), IsDataModeMUIBut(this), IsLogModeMUIBut(this){}
+		dxosThermoMUI() :dxosBUI("Thermo", 55, 55), IsDataModeMUIBut(this), IsLogModeMUIBut(this){ raw_temperature = 0; }
 	public:
 		int normal_draw(dxO& dxo)override{
 			try{
@@ -46,16 +47,16 @@ namespace hmr{
 					dxo.draw(Pint(5,5),dxoStrP(Pint(70,20),"Data",getClr(error,strobj)));
 				}
 
-				dxo.draw(Pint(80,5),dxoBUITimeStr(this,Pint(70,20),(boost::format("%.1fÅé")%temperature).str(),time));
+				dxo.draw(Pint(80, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fÅé") % temperature).str(), time));
+				dxo.draw(Pint(155, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("0x%04x") % raw_temperature).str(), time));
 
 				try{
 					IsLogModeMUIBut.set(Pint(70, 20), "Log");
-					dxo.draw(Pint(155, 5), IsLogModeMUIBut);
+					dxo.draw(Pint(5, 30), IsLogModeMUIBut);
 				}
-				catch (const hmLib::inquiries::unconnected_exception&){
-					dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), "Log", getClr(error, strobj)));
+				catch(const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(5, 30), dxoStrP(Pint(70, 20), "Log", getClr(error, strobj)));
 				}
-
 			}catch(const hmLib::exceptions::exception& Excp){
 				dxo.draw(Pint(0,0),dxoButIO(getSize(),std::string("=ERR=")+Excp.what(),getClr(error,butobj),true,CLR::White,ALI::left));
 			}
@@ -79,12 +80,18 @@ namespace hmr{
 			time = time_;
 			temperature = data_;
 		}
+		void setRawData(clock::time_point time_, double data_){
+			time = time_;
+			raw_temperature = static_cast<std::uint16_t>(data_);
+		}
 	// slot 
 	public:
 		void slot_getData(boost::signals2::signal<void(double, clock::time_point)>& Signal_){
 			SignalConnections(hmLib::signals::connect(Signal_,[&](double data_, clock::time_point time_)->void{this->setData(time_, data_);}));	
 		}
-
+		void slot_getRawData(boost::signals2::signal<void(double, clock::time_point)>& Signal_){
+			SignalConnections(hmLib::signals::connect(Signal_, [&](double data_, clock::time_point time_)->void{this->setRawData(time_, data_); }));
+		}
 	};
 }
 #

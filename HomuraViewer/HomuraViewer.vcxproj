@@ -73,6 +73,11 @@
     <LibraryPath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(LibraryPath)</LibraryPath>
     <SourcePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(SourcePath)</SourcePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(LibraryPath)</LibraryPath>
+    <SourcePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -102,6 +107,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS   /bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

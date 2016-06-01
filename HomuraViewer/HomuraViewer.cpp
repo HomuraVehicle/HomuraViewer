@@ -1,5 +1,9 @@
 /*===========hmrV2500.cpp===========
-
+hmrV2500 v1_06/160601
+	a
+		Git移動後初めてコンパイルに成功
+	b
+		
 hmrV2500 v1_05/130914
 	p
 		表示位置等修正
@@ -150,7 +154,7 @@ hmrV2500 v1_03/130713
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
 	//hmLib_dxモジュールを初期化
-	dx::ini("hmrV2500_v1_06a", 960,720);
+	dx::ini("hmrV2500_v1_06b", 960,720);
 
 
 	try{

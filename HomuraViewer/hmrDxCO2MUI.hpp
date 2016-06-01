@@ -62,10 +62,10 @@ namespace hmr{
 
 				try{
 					IsLogModeMUIBut.set(Pint(70, 20), "Log");
-					dxo.draw(Pint(155, 5), IsLogModeMUIBut);
+					dxo.draw(Pint(5, 30), IsLogModeMUIBut);
 				}
 				catch (const hmLib::inquiries::unconnected_exception&){
-					dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), "LogMode_NoCnct", getClr(error, strobj)));
+					dxo.draw(Pint(5, 30), dxoStrP(Pint(70, 20), "LogMode_NoCnct", getClr(error, strobj)));
 				}
 
 			}catch(const hmLib::exceptions::exception& Excp){
@@ -74,16 +74,16 @@ namespace hmr{
 
 			try{
 				SensorPWMUIBut.set(Pint(70,20),"SensorPW");
-				dxo.draw(Pint(5,30),SensorPWMUIBut);
+				dxo.draw(Pint(80,30),SensorPWMUIBut);
 			}catch(const hmLib::inquiries::unconnected_exception&){
-				dxo.draw(Pint(5,30),dxoStrP(Pint(70,20),"NoCnct",getClr(error,strobj)));
+				dxo.draw(Pint(80,30),dxoStrP(Pint(70,20),"NoCnct",getClr(error,strobj)));
 			}
 
 			try{
 				PumpPWMUIBut.set(Pint(70,20),"PumpPW");
-				dxo.draw(Pint(80,30),PumpPWMUIBut);
+				dxo.draw(Pint(155,30),PumpPWMUIBut);
 			}catch(const hmLib::inquiries::unconnected_exception&){
-				dxo.draw(Pint(80,30),dxoStrP(Pint(70,20),"NoCnct",getClr(error,strobj)));
+				dxo.draw(Pint(155,30),dxoStrP(Pint(70,20),"NoCnct",getClr(error,strobj)));
 			}
 
 			return 0;

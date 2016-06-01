@@ -9,6 +9,7 @@ void connect(dxosThermoMUI& ThermoMUI_, cThermoMsgAgent& Thermo_) {
 	//Thermo_.contact_getTemperature(ThermoMUI_.inquiry_getThermo);
 	//Thermo_.contact_getTime(ThermoMUI_.inquiry_getTime);
 	ThermoMUI_.slot_getData(Thermo_.signal_newData);
+	ThermoMUI_.slot_getRawData(Thermo_.signal_newRawData);
 	ThermoMUI_.slot_getData(Thermo_.signal_newLogData);
 
 	Thermo_.contact_getPicDataMode(ThermoMUI_.IsDataModeMUIBut.Pic);
