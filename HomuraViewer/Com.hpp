@@ -36,9 +36,9 @@ hmrCom v1_00/130223 amby
 #include<hmLib/inquiries/inquiry.hpp>
 #include<hmLib/inquiries/unique_connections.hpp>
 #include<hmLib/exceptions.hpp>
-#include"hmrVMC1.h"
-#include"hmrData.hpp"
-#include"hmrItfCom.hpp"
+#include"VMC1.h"
+#include"Data.hpp"
+#include"ItfCom.hpp"
 
 namespace hmr{
 	class cCom:public itfCom{

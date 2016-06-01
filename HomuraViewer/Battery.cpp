@@ -3,7 +3,7 @@
 #
 
 #ifndef HMR_BATTERY_INC
-#include "hmrBattery.hpp"
+#include "Battery.hpp"
 #endif
 
 //const double hmr::cBatteryMsgAgent::D_ADMaxValue=4096.;

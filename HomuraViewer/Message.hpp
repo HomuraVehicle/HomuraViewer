@@ -11,8 +11,8 @@ hmrMessage:v1_00/130310
 #include<string>
 #include<map>
 #include<utility>
-#include"hmrData.hpp"
-#include"hmrItfMessage.hpp"
+#include"Data.hpp"
+#include"ItfMessage.hpp"
 namespace hmr{
 	class cRecvMessage:public itfRecvMessage{
 	private:

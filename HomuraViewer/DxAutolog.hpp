@@ -8,7 +8,7 @@
 #include<hmLib_v2/dxColorSet.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include<hmrData.hpp>
+#include"Data.hpp"
 namespace hmr {
 	class dxosAutolog_480_360 : public dxReObject, public hmoBox {
 	public:

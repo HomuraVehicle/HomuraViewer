@@ -19,8 +19,8 @@ hmrGPS v1_00/130427 iwahori
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include "hmrItfMessage.hpp"
-#include "hmrFlagirl.hpp"
+#include "ItfMessage.hpp"
+#include "Flagirl.hpp"
 #include "hmrGPSDataSet.hpp"
 
 namespace hmr{

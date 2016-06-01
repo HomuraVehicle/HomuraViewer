@@ -25,7 +25,7 @@ hmrSpriteFile v1_00/130907 amby
 #include <boost/filesystem.hpp>
 #include <hmLib/signals.hpp>
 #include "hmrItfFile.hpp"
-#include "hmrData.hpp"
+#include "Data.hpp"
 #include "coordinates.hpp"
 
 namespace hmr{

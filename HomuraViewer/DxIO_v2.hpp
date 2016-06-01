@@ -20,7 +20,7 @@
 
 #include <hmLib_v2/hmBin_To_hmAsc.hpp>
 #include "dxSignalBut.hpp"
-#include "hmrData.hpp"
+#include "Data.hpp"
 #include "iologgate.hpp"
 
 /* ---- hmrDxIO-----

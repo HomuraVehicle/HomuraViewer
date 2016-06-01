@@ -3,9 +3,9 @@
 #
 #include<vector>
 #include<fstream>
-#include<hmrChrono.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib/signals.hpp>
+#include<hmLib/inquiries.hpp>
+#include"Chrono.hpp"
 #include"AutoLoggerClient.hpp"
 #include<boost/filesystem.hpp>
 namespace hmr {

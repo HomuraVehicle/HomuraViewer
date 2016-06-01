@@ -1,7 +1,7 @@
 #ifndef HMR_AUTOLOGGER_AUTOLOGGERCLIENT_INC
 #define HMR_AUTOLOGGER_AUTOLOGGERCLIENT_INC 100
 #
-#include<hmrChrono.hpp>
+#include"Chrono.hpp"
 namespace hmr {
 	namespace autolog {
 		class itfAutoLoggerClient {

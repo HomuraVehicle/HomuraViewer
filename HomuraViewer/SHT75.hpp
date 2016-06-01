@@ -10,8 +10,8 @@ v1_00/131026 hmIto
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include "hmrItfMessage.hpp"
-#include "hmrFlagirl.hpp"
+#include "ItfMessage.hpp"
+#include "Flagirl.hpp"
 
 namespace hmr{
 	class cSHT75MsgAgent:public itfMessageAgent{

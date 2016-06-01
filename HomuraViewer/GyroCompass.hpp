@@ -5,7 +5,7 @@
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include"coordinates.hpp"
-#include"hmrData.hpp"
+#include"Data.hpp"
 namespace hmr{
 	class cGyroCompass{
 //		typedef hmLib::coordinates3D::polar polar;

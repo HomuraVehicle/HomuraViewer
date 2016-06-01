@@ -11,8 +11,8 @@ hmrGyro v1_00/130511 iwahori
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include "hmrItfMessage.hpp"
-#include "hmrFlagirl.hpp"
+#include "ItfMessage.hpp"
+#include "Flagirl.hpp"
 #include "coordinates.hpp"
 
 namespace hmr{

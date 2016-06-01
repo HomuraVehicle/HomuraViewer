@@ -17,7 +17,7 @@ hmrDxCO2MsgAgentUI v1_00/130414 iwahori
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include"hmrData.hpp"
+#include"Data.hpp"
 #include"hmrDxBUI.hpp"
 #include"hmrDxTools.hpp"
 namespace hmr{

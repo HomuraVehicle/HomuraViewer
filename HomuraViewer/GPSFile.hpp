@@ -21,7 +21,7 @@ GPS ファイル関係のクラス
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
 #include "hmrItfFile.hpp"
-#include "hmrData.hpp"
+#include "Data.hpp"
 #include "hmrGPSDataSet.hpp"
 
 namespace hmr{

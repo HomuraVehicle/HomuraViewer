@@ -10,7 +10,7 @@
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
 #include "hmrItfFile.hpp"
-#include"hmrData.hpp"
+#include"Data.hpp"
 namespace hmr{
 	//CSVŒ`Ž®ƒNƒ‰ƒX
 	class cCSVFileAgent:public itfFileAgent{

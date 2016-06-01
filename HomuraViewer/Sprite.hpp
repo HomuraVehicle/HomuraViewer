@@ -20,8 +20,8 @@ hmrSprite v1_00/130420 iwahori
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include "hmrItfMessage.hpp"
-#include "hmrFlagirl.hpp"
+#include "ItfMessage.hpp"
+#include "Flagirl.hpp"
 
 namespace hmr{
 	class cSpriteMsgAgent:public itfMessageAgent{

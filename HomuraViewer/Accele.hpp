@@ -10,10 +10,12 @@ hmrAccele v1_00/130511 iwahori
 #include "hmLibVer.hpp"
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
-#include <hmLib/inquiries.hpp>
-#include "hmrItfMessage.hpp"
-#include "hmrFlagirl.hpp"
-#include "coordinates.hpp"
+#include<hmLib/inquiries.hpp>
+#include<hmLib/coordinates.hpp>
+//#include "coordinates.hpp"
+#include "ItfMessage.hpp"
+#include "Flagirl.hpp"
+
 
 namespace hmr{
 	class cAcceleMsgAgent:public itfMessageAgent{

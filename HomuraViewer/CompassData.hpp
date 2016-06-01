@@ -11,7 +11,7 @@ hmrCompassData v1_00/130705 amby
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include "coordinates.hpp"
-#include "hmrData.hpp"
+#include "Data.hpp"
 
 namespace hmr{
 	class cCompass{

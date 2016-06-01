@@ -17,7 +17,7 @@ hmrDxAcceleMUI v1_00/130511 hmIto
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include"coordinates.hpp"
-#include"hmrData.hpp"
+#include"Data.hpp"
 #include"hmrDxBUI.hpp"
 namespace hmr{
 	//x240*yNONE

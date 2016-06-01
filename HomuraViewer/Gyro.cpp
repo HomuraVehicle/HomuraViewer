@@ -2,7 +2,7 @@
 #define INC_HMRGYRO_CPP_INC 101
 #
 
-#include"hmrGyro.hpp"
+#include"Gyro.hpp"
 
 //const unsigned char hmr::cGyroMsgAgent::CorrectionMeasureNum=10;
 
