@@ -6,8 +6,8 @@ Accele‚Ìƒf[ƒ^‚ğˆê’èŠÔ’~Ï‚µ‘±‚¯‚é
 */
 #include<deque>
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"coordinates.hpp"
 #include"hmrData.hpp"
 namespace hmr{

@@ -251,7 +251,7 @@ bool hmr::cSpriteMsgAgent::listen(datum::time_point Time_,bool Err_,const std::s
 		if(IsData){
 			//データサイズ
 			DataPos=static_cast<unsigned int>(static_cast<unsigned char>(Str_[1]))+(static_cast<unsigned int>(static_cast<unsigned char>(Str_[2]))<<8);
-
+//			unsigned int DataBegin=DataPos-(Str_.size()-3);
 			unsigned int DataBegin=DataPos;
 
 			//データ書き込み
@@ -261,6 +261,7 @@ bool hmr::cSpriteMsgAgent::listen(datum::time_point Time_,bool Err_,const std::s
 			}
 
 			//全てのデータを受信したとき
+//			if(DataSize<=DataPos){
 			if(DataSize<=DataBegin+Str_.size()-3){
 				DataTime=Time_;
 				signal_setPicture(DataStr,DataTime);
@@ -324,6 +325,81 @@ bool hmr::cSpriteMsgAgent::listen(datum::time_point Time_,bool Err_,const std::s
 		InfoModeFlagirl.set_pic(c == 0xB0);
 		return false;
 	}
+	// log Mode
+	else if (c == 0xC0){
+		if (Str_.size() != 1) return true;
+		LogModeFlagirl.set_pic(true);
+	}
+	else if (c == 0xC1){
+		if (Str_.size() != 1) return true;
+		LogModeFlagirl.set_pic(false);
+	}
+
+	// log Data 受信フェーズ
+	//カメラから撮影開始を確認
+	//  写真サイズとデータサイズを取り出す
+	// 　auto reset とかされてしまうと、カメラの状態が分からないので、とりあえずこのコマンドでカメラの現在状況を必ず撮影状態にしておくことにする
+	if (c == 0xD0){
+		// データが足りない時
+		if (Str_.size()<8){
+			return true;
+		}
+
+		// 写真サイズとデータサイズを取り出す
+		log_IsData = true;
+		log_DataPos = 0;
+		log_DataSize = static_cast<unsigned int>(static_cast<unsigned char>(Str_.at(2))) + (static_cast<unsigned int>(static_cast<unsigned char>(Str_.at(3)) << 8));
+
+		//DataStrをクリア
+		log_DataStr.assign(DataSize, 0x00);
+
+		// 現在時刻取得
+		hmLib_sint32 TimeSec = static_cast<hmLib_sint32>(
+			static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(4))) 
+			+ static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(5))) * 256
+			+ static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(6))) * 256 * 256 
+			+ static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(7))) * 256 * 256 * 256
+		);
+
+		// time_point に変換
+		log_DataTime = std::chrono::system_clock::from_time_t(TimeSec);
+
+		return false;
+
+	}//カメラから撮影中データが得られたとき
+	else if (c == 0xD1){
+		//データが足りない時
+		if (Str_.size()<3)return true;
+
+		//実際にカメラからデータを待っていた時
+		// dataPos が、ここではこれまでにゲットしたデータ数になっているが、ここをどうするか？？
+		if (log_IsData){
+			//データサイズ
+			log_DataPos = static_cast<unsigned int>(static_cast<unsigned char>(Str_[1])) + (static_cast<unsigned int>(static_cast<unsigned char>(Str_[2])) << 8);
+			//			unsigned int DataBegin=DataPos-(Str_.size()-3);
+			unsigned int log_DataBegin = log_DataPos;
+
+			//データ書き込み
+			for (unsigned int i = 0; i<Str_.size() - 3; ++i){
+				if (log_DataSize <= log_DataBegin + i)break;
+				log_DataStr.at(log_DataBegin + i) = Str_.at(i + 3);
+			}
+
+			//全てのデータを受信したとき
+			//			if(DataSize<=DataPos){
+			if (log_DataSize <= log_DataBegin + Str_.size() - 3){
+				signal_setLogPicture(log_DataStr, log_DataTime);
+				log_IsData = false;
+			}
+			return false;
+		}//要求してない時
+		else{
+			return false;
+		}
+	}
+
+
+
 	return true;
 }
 void hmr::cSpriteMsgAgent::setup_talk(void){
@@ -333,6 +409,7 @@ void hmr::cSpriteMsgAgent::setup_talk(void){
 	AutoTakePicFlagirl.setup_talk();
 	MiniPacketModeFlagirl.setup_talk();
 	InfoModeFlagirl.setup_talk();
+	LogModeFlagirl.setup_talk();
 }
 void hmr::cSpriteMsgAgent::setup_listen(void){
 	ErrCode=0x00;
@@ -394,6 +471,12 @@ bool hmr::cSpriteMsgAgent::talk(std::string& Str){
 	else if(InfoModeFlagirl.talk()){
 		if(InfoModeFlagirl.request())Str.push_back(static_cast<unsigned char>(0xB0));
 		else Str.push_back(static_cast<unsigned char>(0xB1));
+		return false;
+	}
+	// log modeの処理
+	else if (LogModeFlagirl.talk()){
+		if (LogModeFlagirl.request()) Str.push_back(static_cast<unsigned char>(0xC0));
+		else Str.push_back(static_cast<unsigned char>(0xC1));
 		return false;
 	}
 	else{

@@ -4,12 +4,12 @@
 #include"hmLibVer.hpp"
 #include<boost/format.hpp>
 #include<boost/signals2.hpp>
-//#include<hmLib_v3_05/dxImage.hpp>
+//#include<hmLib_v3_06/dxImage.hpp>
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmrData.hpp"
 namespace hmr{
 	class dxosSprite:public dxReObject,public hmoBox{

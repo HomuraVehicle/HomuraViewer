@@ -31,9 +31,9 @@ iologgate:v1_00/130310 hmito
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/signals2.hpp>
-#include <hmLib_v3_05/inquiries.hpp>
-#include <hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/gate.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
+#include <hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/gate.hpp>
 
 template<typename iologger,typename _Elem, typename _Traits=std::char_traits<_Elem>>
 class basic_iologgate:public hmLib::basic_gate<_Elem,_Traits>{
@@ -59,54 +59,67 @@ public:
 	}
 	void open(gate_type& rGate_){pGate=&rGate_;}
 	void close(){pGate=nullptr;}
-	bool is_open()const{return pGate!=nullptr;}
+	virtual bool is_open()override{return pGate!=nullptr;}
 public://gate
 	//受信可能状態かの確認
-	virtual bool can_get()override{
+	virtual bool can_getc()override{
 		if(!is_open())return false;
-		return pGate->can_get();
+		return pGate->can_getc();
 	}
-	//受信可能データの有無
-	virtual bool empty()override{
+	//flowing
+	virtual bool flowing()override{
 		hmLib_assert(pGate!=nullptr,hmLib::gate_not_opened_exception,"gate have not been opened");
-		return pGate->empty();
+		return pGate->flowing();
 	}
 	//複数byte受信　受信文字アドレスと、受信文字数が引数　実際の受信文字数が戻り値
-	virtual size_type get(_Elem* str_,const size_type& size_)override{
+	virtual size_type gets(_Elem* str_,const size_type& size_)override{
 		hmLib_assert(pGate!=nullptr,hmLib::gate_not_opened_exception,"gate have not been opened");
-		size_type Size=pGate->get(str_,size_);
+		size_type Size=pGate->gets(str_,size_);
 		for(unsigned int i=0;i<Size;++i)Logger(1,str_[i]);
 		return Size;
 	}
+	virtual _Elem getc(){
+		_Elem tmp = pGate->getc();
+		Logger(1, tmp);
+		return tmp;
+	}
+
+
 	//送信可能状態かの確認
-	virtual bool can_put()override{
+	virtual bool can_putc()override{
 		if(!is_open())return false;
-		return pGate->can_put();
+		return pGate->can_putc();
 	}
 	//送信可能データの有無
-	virtual bool full()override{
+	virtual void flush()override{
 		hmLib_assert(pGate!=nullptr,hmLib::gate_not_opened_exception,"gate have not been opened");
-		return pGate->full();
+		return pGate->flush();
 	}
 	//複数byte送信　送信文字アドレスと、送信文字数が引数　実際の送信文字数が戻り値
-	virtual size_type put(const _Elem* str_,const size_type& size_)override{
+	virtual size_type puts(const _Elem* str_,const size_type& size_)override{
 		hmLib_assert(pGate!=nullptr,hmLib::gate_not_opened_exception,"gate have not been opened");
-		size_type Size=pGate->put(str_,size_);
+		size_type Size=pGate->puts(str_,size_);
 		for(unsigned int i=0;i<Size;++i){
 			Logger(0,str_[i]);
 		}
 		return Size;
 	}
+	// 単数バイト送信
+	virtual void putc(char c){
+		pGate->putc(c);
+		Logger(1, c);
+	}
+
 
 	// Inquire の定義
 	void contact_is_open(hmLib::inquiries::inquiry<bool>& Inq_){
 		hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->is_open();});
 	}
 	void contact_can_put(hmLib::inquiries::inquiry<bool>& Inq_){
-		hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_put();});
+		hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_putc();});
 	}
 	void contact_can_get(hmLib::inquiries::inquiry<bool>& Inq_){
-		hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_get();});
+		hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_getc();});
 	}
 
 };

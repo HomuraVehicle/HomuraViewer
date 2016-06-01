@@ -7,7 +7,7 @@ v1_00/131112 hmIto
 	GyroCompass‚ð’Ç‰Á
 */
 #include<boost/signals2/signal.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>

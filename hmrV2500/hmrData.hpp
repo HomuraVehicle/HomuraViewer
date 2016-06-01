@@ -1,7 +1,7 @@
 #ifndef HMR_DATA_INC
 #define HMR_DATA_INC 102
 #
-#include<hmLib_v3_05/config_vc.h>
+#include<hmLib_v3_06/config_vc.h>
 #include<sstream>
 #include<string>
 #include<ctime>
@@ -34,9 +34,6 @@ namespace hmr{
 		unsigned int mSec;
 	public:
 		date():Year(0),Month(0),Day(0),Hour(0),Min(0),Sec(0),mSec(0){}
-		explicit date(clock::time_point Time_) {
-			from_time(Time_);
-		}
 		date(unsigned int Year_,unsigned int Month_,unsigned int Day_,unsigned int Hour_,unsigned int Min_,unsigned int Sec_,unsigned int mSec_)
 			:Year(Year_),Month(Month_),Day(Day_),Hour(Hour_),Min(Min_),Sec(Sec_),mSec(mSec_){
 		}
@@ -48,10 +45,10 @@ namespace hmr{
 			st.tm_hour=Hour;
 			st.tm_min=Min;
 			st.tm_sec=Sec;
-			return std::chrono::system_clock::from_time_t(std::mktime( &st ))+std::chrono::milliseconds(mSec);
+			return clock::from_time_t(std::mktime( &st ))+std::chrono::milliseconds(mSec);
 		}
 		void from_time(const clock::time_point& Time_){
-			std::time_t time = std::chrono::system_clock::to_time_t(Time_);
+			std::time_t time = clock::to_time_t(Time_);
 			std::tm* st = std::localtime(&time);
 			Year = st->tm_year+1900;
 			Month= st->tm_mon+1;
@@ -69,44 +66,23 @@ namespace hmr{
 
 		std::stringstream sout;
 		if(msno_==0){
-			sout<<boost::format("%02d:%02d:%02d")%Date.Hour%Date.Min%Date.Sec;
+			sout<<boost::format("%02d:%02d;%02d")%Date.Hour%Date.Min%Date.Sec;
 		}else if(msno_==1){
-			sout<<boost::format("%02d:%02d:%02d.%01d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/100);
+			sout<<boost::format("%02d:%02d;%02d.%01d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/100);
 		}else if(msno_==2){
-			sout<<boost::format("%02d:%02d:%02d.%02d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/10);
+			sout<<boost::format("%02d:%02d;%02d.%02d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/10);
 		}else{
-			sout<<boost::format("%02d:%02d:%02d.%03d")%Date.Hour%Date.Min%Date.Sec%Date.mSec;
+			sout<<boost::format("%02d:%02d;%02d.%03d")%Date.Hour%Date.Min%Date.Sec%Date.mSec;
 		}
 		return sout.str();
 	}
-	inline std::string time_to_ymd(const clock::time_point& time_){
+	inline std::string time_to_ymd(const clock::time_point& time_) {
 		// エポックからの経過時間を取得
 		date Date;
 		Date.from_time(time_);
 
 		std::stringstream sout;
-
-		sout<<boost::format("%02d.%02d.%02d")%Date.Year%Date.Month%Date.Day;
-
-		return sout.str();
-	}
-	inline std::string time_to_ymdhms(const clock::time_point& time_,unsigned int msno_=3){
-		// エポックからの経過時間を取得
-		date Date;
-		Date.from_time(time_);
-
-		std::stringstream sout;
-
-		sout<<boost::format("%02d.%02d.%02d ")%Date.Year%Date.Month%Date.Day;
-		if(msno_==0){
-			sout<<boost::format("%02d:%02d:%02d")%Date.Hour%Date.Min%Date.Sec;
-		}else if(msno_==1){
-			sout<<boost::format("%02d:%02d:%02d.%01d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/100);
-		}else if(msno_==2){
-			sout<<boost::format("%02d:%02d:%02d.%02d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/10);
-		}else{
-			sout<<boost::format("%02d:%02d:%02d.%03d")%Date.Hour%Date.Min%Date.Sec%Date.mSec;
-		}
+		sout<<boost::format("%04d/%02d/%02d")%Date.Year%Date.Month%Date.Day;
 
 		return sout.str();
 	}

@@ -60,8 +60,8 @@ hmrDeviceManage v1_00/130928 amby
 
 #include "hmLibVer.hpp"
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
 #include "hmrItfMessage.hpp"
 #include "hmrFlagirl.hpp"
 
@@ -528,9 +528,6 @@ namespace hmr{
 
 		void contact_getSendingNormalCommand(hmLib::inquiries::inquiry<bool>& Inquiry_){
 			InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return SetNormalFlag;}));
-		}
-		void contact_isNormal(hmLib::inquiries::inquiry<bool>& Inquiry_){
-			InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return devMODE==DevMODE::NORMAL;}));
 		}
 		void contact_getSendingKillCommand(hmLib::inquiries::inquiry<bool>& Inquiry_){
 			InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return SetKillFlag;}));

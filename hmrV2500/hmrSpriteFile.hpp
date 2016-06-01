@@ -1,6 +1,6 @@
 
 #ifndef HMR_SPRITEFILE_INC
-#define HMR_SPRITEFILE_INC 100
+#define HMR_SPRITEFILE_INC 101
 #
 
 /*===hmrSpriteFile===
@@ -14,7 +14,10 @@
 	それぞれは　itfFileAgent の形式に従う
 
 
-hmrSpriteFile v1_00/130907 amby
+===hmrSpriteFile===
+v1_01/140320 hmIto
+	名前を付けれるように修正
+v1_00/130907 amby
 	作成開始
 
 */
@@ -23,7 +26,7 @@ hmrSpriteFile v1_00/130907 amby
 #include <fstream>
 #include <boost/signals2.hpp>
 #include <boost/filesystem.hpp>
-#include <hmLib_v3_05/signals.hpp>
+#include <hmLib_v3_06/signals.hpp>
 #include "hmrItfFile.hpp"
 #include "hmrData.hpp"
 #include "coordinates.hpp"
@@ -77,14 +80,14 @@ namespace hmr{
 
 		bool activeFlag;
 		std::string filePath;
-
+		std::string Name;
 		
 		hmLib::signals::unique_connections SignalConnections;
 		cEachSpriteFileAgent eachSpriteFA;
 
 
 	public:
-		cSpriteFileAgent():eachSpriteFA(), activeFlag(false){
+		cSpriteFileAgent(const std::string& Name_) :eachSpriteFA(), activeFlag(false), Name(Name_){
 		}
 
 		bool is_active()const{return activeFlag;}
@@ -120,8 +123,8 @@ namespace hmr{
 		void activate(const std::string& Path_){
 			if(!is_active()){
 				activeFlag = true;
-				filePath = Path_ + "Sprite\\";
-				boost::filesystem::create_directory(boost::filesystem::current_path()/(Path_ + "Sprite") );
+				filePath = Path_ + Name + "\\";
+				boost::filesystem::create_directory(boost::filesystem::current_path()/(Path_ + Name));
 			}
 		}
 		void inactivate(){

@@ -4,7 +4,7 @@
 #include<map>
 
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxBasic.hpp>
 #include"any_predicate.hpp"

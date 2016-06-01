@@ -1,8 +1,8 @@
 #ifndef HMR_DXGPSKASHMIR_INC
 #define HMR_DXGPSKASHMIR_INC
 #
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxPad.hpp>

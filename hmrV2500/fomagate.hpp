@@ -13,8 +13,8 @@ fomagate:v1_01/130310 hmIto
 */
 #include <string>
 #include <Windows.h>
-#include <hmLib_v3_05/comgate.hpp>
-#include <hmLib_v3_05/gate.hpp>
+#include <hmLib_v3_06/comgate.hpp>
+#include <hmLib_v3_06/gate.hpp>
 class fomagate:public hmLib::gate{
 private:
 	hmLib::gate* pGate;
@@ -51,18 +51,24 @@ public:
 	}
 	bool is_open(){return pGate!=0;}
 public:
-	//受信可能状態かの確認
-	virtual bool can_get(){return pGate->can_get();}
-	//受信可能データの有無
-	virtual bool empty(){return pGate->empty();}
+	//受信が続いているかどうかの確認
+	virtual bool flowing()override{ return pGate->flowing(); }
+	//受信可能かの確認
+	virtual bool can_getc()override{return pGate->can_getc();}
 	//複数byte受信　受信文字アドレスと、受信文字数が引数　実際の受信文字数が戻り値
-	virtual size_type get(char* str_,const size_type& size_){return pGate->get(str_,size_);}
+	virtual size_type gets(char* str_,const size_type& size_)override{return pGate->gets(str_,size_);}
+	// 単数バイト受信
+	virtual char getc()override{ return pGate->getc(); }
+
 	//送信可能状態かの確認
-	virtual bool can_put(){return pGate->can_put();}
-	//送信可能データの有無
-	virtual bool full(){return pGate->full();}
+	virtual bool can_putc()override{return pGate->can_putc();}
+	//無理やり送る
+	virtual void flush()override{return pGate->flush();}
 	//複数byte送信　送信文字アドレスと、送信文字数が引数　実際の送信文字数が戻り値
-	virtual size_type put(const char* str_,const size_type& size_){return pGate->put(str_,size_);}
+	virtual size_type puts(const char* str_,const size_type& size_)override{return pGate->puts(str_,size_);}
+	// 単バイト送信
+	virtual void putc(char c)override{ return pGate->putc(c); }
+
 };
 class fomacom_gate:public hmLib::gate{
 private:
@@ -92,18 +98,24 @@ public:
 	}
 	bool is_open(){return FomaGate.is_open();}
 public:
-	//受信可能状態かの確認
-	virtual bool can_get(){return FomaGate.can_get();}
 	//受信可能データの有無
-	virtual bool empty(){return FomaGate.empty();}
+	virtual bool can_getc()override{return FomaGate.can_getc();}
+	//受信が続いているか否か
+	virtual bool flowing()override{return FomaGate.flowing();}
 	//複数byte受信　受信文字アドレスと、受信文字数が引数　実際の受信文字数が戻り値
-	virtual size_type get(char* str_,const size_type& size_){return FomaGate.get(str_,size_);}
-	//送信可能状態かの確認
-	virtual bool can_put(){return FomaGate.can_put();}
-	//送信可能データの有無
-	virtual bool full(){return FomaGate.full();}
+	virtual size_type gets(char* str_,const size_type& size_)override{return FomaGate.gets(str_,size_);}
+	// 単バイト受信
+	virtual char getc()override{ return FomaGate.getc(); }
+
+	//送信可能データがあるかの確認
+	virtual bool can_putc()override{return FomaGate.can_putc();}
+	// 無理やり送る
+	virtual void flush()override{return FomaGate.flush();}
 	//複数byte送信　送信文字アドレスと、送信文字数が引数　実際の送信文字数が戻り値
-	virtual size_type put(const char* str_,const size_type& size_){return FomaGate.put(str_,size_);}
+	virtual size_type puts(const char* str_,const size_type& size_)override{return FomaGate.puts(str_,size_);}
+	// 単バイト送信
+	virtual void putc(char c)override{ return FomaGate.putc(c); }
+
 };
 #
 #endif

@@ -4,11 +4,11 @@
 #include"hmLibVer.hpp"
 #include<boost/format.hpp>
 #include<boost/signals2.hpp>
-//#include<hmLib_v3_05/dxImage.hpp>
+//#include<hmLib_v3_06/dxImage.hpp>
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmrData.hpp"
 #include"hmrDxTools.hpp"
 #include"hmrDxBUI.hpp"
@@ -24,6 +24,7 @@ namespace hmr{
 		dxosBUIWaitableBoolBut AutoLightMUIBut;
 		dxosBUIWaitableBoolBut LightMUIBut;
 		dxosBUIWaitableBoolBut MiniPacketModeMUIBut;
+		dxosBUIWaitableBoolBut LogModeMUIBut;
 
 		boost::signals2::signal<void(unsigned char)> signal_setPictureSize;
 		hmLib::inquiries::inquiry<unsigned char> inquiry_getPictureSize;
@@ -47,7 +48,8 @@ namespace hmr{
 			,AutoPowerResetMUIBut(this)
 			,AutoLightMUIBut(this)
 			,LightMUIBut(this)
-			,MiniPacketModeMUIBut(this){
+			,MiniPacketModeMUIBut(this)
+			,LogModeMUIBut(this){
 		}
 	public:
 		int normal_draw(dxO& dxo)override{
@@ -64,80 +66,8 @@ namespace hmr{
 					clock::time_point StatusTime=inquiry_getStatusTime();
 					std::string StatusStr;
 					status Sta;
-					bool isPowerReset=Status&0x80;
-					unsigned char SpriteCommandID=Status&0x1F;
-					bool IsErr=inquiry_getIsErr();
 					
-					if(IsErr){
-						StatusStr="ÉGÉâÅ[";
-
-						try{
-							if(inquiry_getIsErr()){
-								StatusStr+=":"+(boost::format("%02x")%static_cast<unsigned int>(inquiry_getErrCode())).str();
-							}else{
-								StatusStr+=":------";
-							}
-						}catch(const hmLib::inquiries::unconnected_exception&){
-							StatusStr+=":NoCnct";
-						}
-						Sta=error;
-						dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));
-					}else{
-						if(isPowerReset){
-							StatusStr="çƒãNìÆ";
-							Sta=error;
-							dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));
-						}else{
-							if(SpriteCommandID==0x00){
-								StatusStr="ë“ã@";
-								Sta=normal;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));
-							}else if(SpriteCommandID==0x01){
-								StatusStr="ÉäÉZÉbÉg";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}else if(SpriteCommandID==0x02){
-								StatusStr="éBâe";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}else if(SpriteCommandID==0x03){
-								StatusStr="DataéÊìæ";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}else if(SpriteCommandID==0x04){
-								StatusStr="éBâeèIóπ";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}else if(SpriteCommandID==0x05){
-								StatusStr="SavePower";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}else if(SpriteCommandID==0x06){
-								StatusStr="StopSavePower";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}else if(SpriteCommandID==0x07){
-								auto Range=inquiry_getDataPosSize();
-
-								dxo.draw(Pint(80,5),dxoProgress(Pint(145,20),Range.first,Range.second,getClr(normal,butobj)));
-								dxo.draw(Pint(80,5),dxoStrP(Pint(145,20),(boost::format("%d/%d")%Range.first%Range.second).str(),CLR::White));
-							}else if(SpriteCommandID==0x08){
-								StatusStr="à≥èkó¶ê›íË";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}else if(SpriteCommandID==0x09){
-								StatusStr="SizeïœçX";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}else if(SpriteCommandID==0x0A){
-								StatusStr="Baudrateê›íË";
-								Sta=active;
-								dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));							
-							}
-						}
-					}
-
-/*					if(Status==0x20||Status==0x30){
+					if(Status==0x20||Status==0x30){
 						auto Range=inquiry_getDataPosSize();
 
 						dxo.draw(Pint(80,5),dxoProgress(Pint(145,20),Range.first,Range.second,getClr(normal,butobj)));
@@ -180,7 +110,7 @@ namespace hmr{
 							Sta=error;
 						}
 						dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));
-					}*/
+					}
 				}catch(const hmLib::inquiries::unconnected_exception&){
 					dxo.draw(Pint(80,5),dxoStrP(Pint(145,20),"NoCnct",getClr(error,strobj)));
 				}
@@ -274,6 +204,13 @@ namespace hmr{
 				}
 			}catch(const hmLib::inquiries::unconnected_exception&){
 				dxo.draw(Pint(80,105),dxoStrP(Pint(70,20),"NoCnct",getClr(error,strobj)));
+			}
+
+			try {
+				LogModeMUIBut.set(Pint(70, 20), "Log");
+				dxo.draw(Pint(155, 105), LogModeMUIBut);
+			} catch(const hmLib::inquiries::unconnected_exception&) {
+				dxo.draw(Pint(155, 105), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
 			}
 
 			return 0;

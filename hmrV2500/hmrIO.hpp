@@ -43,10 +43,10 @@ hmrIO_v1_00/130223 amby
 #include <fstream>
 #include <memory>
 #include <boost/signals2.hpp>
-#include <hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/exceptions.hpp>
-#include <hmLib_v3_05/inquiries/inquiry.hpp>
-#include <hmLib_v3_05/gate.hpp>
+#include <hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/exceptions.hpp>
+#include <hmLib_v3_06/inquiries/inquiry.hpp>
+#include <hmLib_v3_06/gate.hpp>
 #include "hmrData.hpp"
 #include "hmrVMC1.h"
 
@@ -77,9 +77,9 @@ namespace hmr{
 			clock::time_point time;
 			time=clock::now();
 			// 受信処理
-			while(vmc1_can_recv(pVMC.get()) && (!pGate->empty())){
+			while(vmc1_can_recv(pVMC.get()) && (pGate->can_getc())){
 				char c;
-				pGate->get(&c,1);
+				pGate->gets(&c,1);
 				vmc1_recv(pVMC.get(),c);
 
 				if(clock::now() - time>std::chrono::milliseconds(500))break;
@@ -87,10 +87,10 @@ namespace hmr{
 		
 			time=clock::now();
 			// 送信処理
-			while(vmc1_can_send(pVMC.get()) && (!pGate->full())){
+			while(vmc1_can_send(pVMC.get()) && (pGate->can_putc())){
 				char c;
 				c=vmc1_send(pVMC.get());
-				pGate->put(&c,1);
+				pGate->puts(&c,1);
 
 				if(clock::now() - time>std::chrono::milliseconds(500))break;
 			}
@@ -141,7 +141,7 @@ namespace hmr{
 			int size = str_.size();
 			//char chars[256];
 			//strcpy( chars, str_.c_str() );
-			pGate->put(str_.c_str(), size);
+			pGate->puts(str_.c_str(), size);
 		}
 
 		// VMC の送信強制リセット関数
@@ -209,17 +209,17 @@ namespace hmr{
 		void work(){
 			if(is_open()){
 				// 受信処理
-				while(vmc1_can_recv(pVMC.get()) && (pGate->can_get()) && (!pGate->empty())){
+				while(vmc1_can_recv(pVMC.get()) && (pGate->can_getc()) ){
 					char c;
-					if(pGate->get(&c,1)==0)break;
+					if(pGate->gets(&c,1)==0)break;
 					vmc1_recv(pVMC.get(),c);
 				}
 		
 				// 送信処理
-				while(vmc1_can_send(pVMC.get()) && (pGate->can_put()) && (!pGate->full())){
+				while(vmc1_can_send(pVMC.get()) && (pGate->can_putc()) ){
 					char c;
 					c=vmc1_send(pVMC.get());
-					pGate->put(&c,1);
+					pGate->puts(&c,1);
 				}
 			}
 		}
@@ -239,10 +239,10 @@ namespace hmr{
 			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->is_open();});
 		}
 		void contact_can_put(hmLib::inquiries::inquiry<bool>& Inq_){
-			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->pGate->can_put();});
+			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->pGate->can_putc();});
 		}
 		void contact_can_get(hmLib::inquiries::inquiry<bool>& Inq_){
-			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->pGate->can_get();});
+			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->pGate->can_getc();});
 		}
 	};
 }

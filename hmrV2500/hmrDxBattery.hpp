@@ -1,7 +1,7 @@
 #ifndef USE_HMRDXBATTERY_INC
 #define USE_HMRDXBATTERY_INC 100
 #
-#include<hmLib_v3_05/signals.hpp>
+#include<hmLib_v3_06/signals.hpp>
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib_v2/dxObject.hpp>

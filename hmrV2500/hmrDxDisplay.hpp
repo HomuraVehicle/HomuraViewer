@@ -10,7 +10,7 @@ hmrDxMainSide:v1_00/130525 hmIto
 	dxosMainSide‚ð’Ç‰Á
 */
 #include<vector>
-#include<hmLib_v3_05/signals.hpp>
+#include<hmLib_v3_06/signals.hpp>
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxObject.hpp>
 

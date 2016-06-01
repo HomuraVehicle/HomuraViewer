@@ -7,7 +7,7 @@
 #include <hmLib_v2/hmBasic.hpp>
 #include <hmLib_v2/dxObject.hpp>
 #include <hmLib_v2/dxArea.hpp>
-#include <hmLib_v3_05/signals.hpp>
+#include <hmLib_v3_06/signals.hpp>
 #include <boost/signals2.hpp>
 #include "hmrDxBUI.hpp"
 //#include "hmrBaseDX.hpp"

@@ -2,8 +2,8 @@
 #define HMR_DXCOMSUI_INC
 #
 #include<boost/format.hpp>
-#include<hmLib_v3_05/exceptions.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/exceptions.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmrDxBUI.hpp"
 namespace hmr{
 	class dxosComSUI:public dxosBUI{

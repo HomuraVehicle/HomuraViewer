@@ -18,8 +18,8 @@ hmrSprite v1_00/130420 iwahori
 */
 #include "hmLibVer.hpp"
 #include <boost/signals2.hpp>
-#include <hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/inquiries.hpp>
+#include <hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
 #include "hmrItfMessage.hpp"
 #include "hmrFlagirl.hpp"
 
@@ -32,6 +32,13 @@ namespace hmr{
 		unsigned int DataPos;		//データ位置
 		unsigned int DataSize;		//データサイズ
 		clock::time_point DataTime;		//データ時間
+
+		//log データ関連
+		bool log_IsData;				//データ取得中か？
+		std::string log_DataStr;		//データ自体
+		unsigned int log_DataPos;		//データ位置
+		unsigned int log_DataSize;		//データサイズ
+		clock::time_point log_DataTime;		//データ時間
 
 		//状況
 		unsigned char Status;		//カメラステータス
@@ -61,6 +68,9 @@ namespace hmr{
 		flagirl MiniPacketModeFlagirl;
 		//情報取得モード
 		flagirl InfoModeFlagirl;
+		//ログモード
+		flagirl LogModeFlagirl;
+
 	public:
 		cSpriteMsgAgent()
 			:DataStr()
@@ -75,9 +85,11 @@ namespace hmr{
 			,DoSetTakePicture(false)
 			,AutoTakePicFlagirl()
 			,MiniPacketModeFlagirl()
+			, LogModeFlagirl()
 			,Status(0x00)
 			,IsErr(false)
-			,ErrCode(0x00){
+			,ErrCode(0x00)
+			,log_DataStr(), log_DataPos(0), log_DataSize(0){
 		}
 		bool listen(datum::time_point Time_,bool Err_,const std::string& Str_)override;
 		bool talk(std::string& Str)override;
@@ -126,7 +138,11 @@ namespace hmr{
 		bool getPicMiniPacketMode()const{return MiniPacketModeFlagirl.pic();}
 		bool getRequestMiniPacketMode()const{return MiniPacketModeFlagirl.request();}
 
-		void setPictureSize(unsigned char Size_){
+		void setLogMode(bool Val_) { LogModeFlagirl.set_request(Val_); }
+		bool getPicLogMode()const { return LogModeFlagirl.pic(); }
+		bool getRequestLogMode()const { return LogModeFlagirl.request(); }
+
+		void setPictureSize(unsigned char Size_) {
 			if(Size_>2)return;
 			PictureSize=Size_;
 		}
@@ -144,6 +160,7 @@ namespace hmr{
 		clock::time_point getStatusTime()const{return StatusTime;}
 	public:
 		boost::signals2::signal<void(const std::string&,clock::time_point)> signal_setPicture;
+		boost::signals2::signal<void(const std::string&, clock::time_point)> signal_setLogPicture;
 
 		void slot_setTakePicture(boost::signals2::signal<void(void)>& Signal_){
 			SignalConnections(hmLib::signals::connect(Signal_,[&](void)->void{this->setTakePicture();}));
@@ -235,6 +252,16 @@ namespace hmr{
 			InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return this->getRequestMiniPacketMode();}));
 		}
 
+		void slot_setLogMode(boost::signals2::signal<void(bool)>& Signal_) {
+			SignalConnections(hmLib::signals::connect(Signal_, [&](bool b)->void {this->setLogMode(b); }));
+		}
+		void contact_getPicLogMode(hmLib::inquiries::inquiry<bool>& Inquiry_) {
+			InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool {return this->getPicLogMode(); }));
+		}
+		void contact_getRequestLogMode(hmLib::inquiries::inquiry<bool>& Inquiry_) {
+			InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool {return this->getRequestLogMode(); }));
+		}
+
 		void slot_setPictureSize(boost::signals2::signal<void(unsigned char)>& Signal_){
 			SignalConnections(hmLib::signals::connect(Signal_,[&](unsigned char c)->void{this->setPictureSize(c);}));
 		}
@@ -267,6 +294,14 @@ namespace hmr{
 		void contact_getStatusTime(hmLib::inquiries::inquiry<clock::time_point>& Inquiry_){
 			InquiryConnections(hmLib::inquiries::connect(Inquiry_,StatusTime));
 		}
+
+		void contact_getLogDataTime(hmLib::inquiries::inquiry<clock::time_point>& Inquiry_){
+			InquiryConnections(hmLib::inquiries::connect(Inquiry_, log_DataTime));
+		}
+		void contact_getLogData(hmLib::inquiries::inquiry<std::string>& Inquiry_){
+			InquiryConnections(hmLib::inquiries::connect(Inquiry_, log_DataStr));
+		}
+
 	};
 }
 

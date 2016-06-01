@@ -7,7 +7,7 @@
 #include <hmLib_v2/hmBasic.hpp>
 #include <hmLib_v2/dxObject.hpp>
 #include <hmLib_v2/dxArea.hpp>
-#include <hmLib_v3_05/signals.hpp>
+#include <hmLib_v3_06/signals.hpp>
 #include <boost/signals2.hpp>
 #include "hmrDxBUI.hpp"
 #include "hmrDeviceManage.hpp"
@@ -27,7 +27,7 @@ v1_00/130928 amby
 	DxDeviceManageSUIの製作開始
 	実装
 */
-#define HMR_DEVMNGSUI_TIMEBUF_SIZE 10
+#define HMR_DEVMNGSUI_TIMEBUF_SIZE 15
 
 namespace hmr{
 	// 描画クラス static
@@ -310,7 +310,7 @@ namespace hmr{
 					ans=dxo.draw(Pint(155,80), dxoButLRIO(Pint(70, 20), hmstd::fStr("R:%.1f", TimeBuf[RemLength]/60.), getClr(normal, butobj), true));
 					if(ans==1){
 						++RemLength;
-						RemLength=std::min(RemLength,HMR_DEVMNGSUI_TIMEBUF_SIZE-3);
+						RemLength=std::min(RemLength,HMR_DEVMNGSUI_TIMEBUF_SIZE-1);
 					}
 					else if(ans==10){
 						--RemLength;
@@ -318,8 +318,8 @@ namespace hmr{
 					}
 
 				}else{
-					dxo.draw(Pint(80,80), dxoButLRIO(Pint(70, 20), hmstd::fStr("I:%.1f",  TimeBuf[RemLength]/60.), getClr(normal, butobj), false));
-					dxo.draw(Pint(155,80), dxoButLRIO(Pint(70, 20), hmstd::fStr("R:%.1f", TimeBuf[SleepLength]/60.), getClr(normal, butobj), false));
+					dxo.draw(Pint(80, 80), dxoButLRIO(Pint(70, 20), hmstd::fStr("I:%.1f", TimeBuf[SleepLength]/60.), getClr(normal, butobj), false));
+					dxo.draw(Pint(155, 80), dxoButLRIO(Pint(70, 20), hmstd::fStr("R:%.1f", TimeBuf[RemLength]/60.), getClr(normal, butobj), false));
 				}
 			}catch(const hmLib::inquiries::unconnected_exception& ){				
 				// Inquire にアクセスできなかった！！　でも、そんなのメイン関数には関係ないからもみ消す

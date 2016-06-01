@@ -15,7 +15,7 @@ hmrThermoFile v1_00/130720 amby
 #include <string>
 #include <fstream>
 #include <boost/signals2.hpp>
-#include <hmLib_v3_05/signals.hpp>
+#include <hmLib_v3_06/signals.hpp>
 #include "hmrItfFile.hpp"
 #include"hmrData.hpp"
 
@@ -25,6 +25,7 @@ namespace hmr{
 	private:
 		std::ofstream ofs;
 		hmLib::signals::unique_connections SignalConnections;
+		std::string name;
 
 		// log and write ä÷êî
 		void log_writeData(clock::time_point time_, double data_){
@@ -34,10 +35,13 @@ namespace hmr{
 		}
 
 	public:
-		cThermoFileAgent(){}
+		cThermoFileAgent(const std::string& Name_){
+			name = Name_;
+		}
+
 		void activate(const std::string& Path_){
 			if(!is_active()){
-				ofs.open(Path_ + "Thermo.txt");
+				ofs.open(Path_ + "Thermo_" + name + ".txt");
 				ofs << FILE_COMMENTOUT_CHARS << " This is the Thermo data log file" << std::endl;
 				ofs << FILE_COMMENTOUT_CHARS << " Time" << FILE_DEVIDE_CHARS << "Data," << std::endl;
 			}

@@ -15,8 +15,8 @@ hmrBattery v1_00/130427 iwahori
 #include<array>
 #include<iterator>
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
 #include "hmrItfMessage.hpp"
 #include "hmrFlagirl.hpp"
 #include "hmrADC.h"
@@ -24,7 +24,7 @@ hmrBattery v1_00/130427 iwahori
 //#include "hmr.h"
 
 //#include "hmrAnalog.hpp"
-//#include <hmLib_v3_05/dxArea.hpp>
+//#include <hmLib_v3_06/dxArea.hpp>
 
 //#define D_ADMaxValue 4096
 
@@ -40,8 +40,7 @@ namespace hmr{
 		flagirl DataModeFlagirl;
 		static double toVoltage(unsigned char LowByte,unsigned char HighByte){
 			unsigned int tmp=static_cast<unsigned int>(LowByte+HighByte*256);
-			//return (static_cast<double>(tmp)/D_ADMaxValue)*10.7;
-			return (static_cast<double>(tmp)/D_ADMaxValue)*22.47;
+			return (static_cast<double>(tmp)/D_ADMaxValue)*10.7;
 		}
 	public:
 		bool listen(datum::time_point Time_, bool Err_,const std::string& Str_)override{

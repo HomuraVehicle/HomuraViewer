@@ -6,7 +6,7 @@ hmrCSVFileTool v0_00/131026 iwahori
 	•Ö—˜ƒNƒ‰ƒXŒQ
 */
 #include "hmLibVer.hpp"
-#include <hmLib_v3_05/inquiries.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
 #include "date.hpp"
 #include "hmrCSVFile.hpp"
 #include <boost/lexical_cast.hpp>

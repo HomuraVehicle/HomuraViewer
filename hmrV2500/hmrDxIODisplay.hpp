@@ -2,7 +2,7 @@
 #define HMR_DXIODISPLAY_INC 100
 #
 
-#include <hmLib_v3_05/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
+#include <hmLib_v3_06/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
 
 #include <iostream>
 #include <string>

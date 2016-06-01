@@ -14,7 +14,7 @@ hmrDxCom v1_00/130410 hmIto
 	dxoPacketList‚ð’Ç‰Á
 */
 #include"hmLibVer.hpp"
-#include<hmLib_v3_05/config_vc.h>
+#include<hmLib_v3_06/config_vc.h>
 #include<mutex>
 #include<vector>
 #include<chrono>
@@ -22,9 +22,9 @@ hmrDxCom v1_00/130410 hmIto
 #include<sstream>
 #include<boost/format.hpp>
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
-#include<hmLib_v3_05/any_iterator.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
+#include<hmLib_v3_06/any_iterator.hpp>
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib_v2/dxColorSet.hpp>

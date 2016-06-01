@@ -19,7 +19,7 @@ dxosControlMainDisplay
 #include"hmrGyroLogger.hpp"
 #include"hmrDxNavigator.hpp"
 #include"hmrDxInfomation.hpp"
-#include"DxAutolog.hpp" 
+#include"hmrDxGPSMap.hpp" 
 
 namespace hmr{
 	class dxosControlMainDisplay:public dxReObject,public hmoBox{
@@ -27,7 +27,7 @@ namespace hmr{
 		dxosNavigator<hmr::cGyroLogger::iterator> Navigator;
 		dxosSprite Sprite;
 		dxosInformation Infomation;
-		dxosAutolog_480_360 Autolog;
+		dxosGPSMap GPSMap;
 
 	private:
 		class fnControlMain:public dxFn{
@@ -40,7 +40,7 @@ namespace hmr{
 				dxo.draw(Pint(0,360),My.Infomation);
 				dxo.draw(Pint(240,0),My.Sprite);
 				dxo.draw(Pint(0,0),My.Navigator);
-				dxo.draw(Pint(240, 360), My.Autolog);
+				dxo.draw(Pint(240, 360), My.GPSMap);
 				return 0;
 			}
 		};
@@ -51,7 +51,7 @@ namespace hmr{
 			,Sprite(Pint(480,360))
 			,Navigator()
 			,Infomation(Pint(240,360))
-			,Autolog()
+			,GPSMap(Pint(480,360))
 		{
 			Navigator.ini();
 		}

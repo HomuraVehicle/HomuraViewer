@@ -90,8 +90,12 @@ namespace hmr{
 #endif
 
 #if defined(HMR_SPRITEFILE_INC) && defined(HMR_SPRITE_INC)
-	void connect(cSpriteFileAgent& fAgent_, cSpriteMsgAgent& mAgent_){
-		fAgent_.slot_log_writeData(mAgent_.signal_setPicture);
+	void connect(cSpriteFileAgent& fAgent_, cSpriteMsgAgent& mAgent_,bool IsLog_){
+		if(IsLog_) {
+			fAgent_.slot_log_writeData(mAgent_.signal_setLogPicture);
+		} else {
+			fAgent_.slot_log_writeData(mAgent_.signal_setPicture);
+		}
 	}
 
 

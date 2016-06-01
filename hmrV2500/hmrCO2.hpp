@@ -10,13 +10,13 @@ hmrCO2 v1_00/130427 iwahori
 
 #include "hmLibVer.hpp"
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
 #include "hmrItfMessage.hpp"
 #include "hmrFlagirl.hpp"
 
-//#include <hmLib_v3_05/hmTime.hpp>
-//#include <hmLib_v3_05/dxArea.hpp>
+//#include <hmLib_v3_06/hmTime.hpp>
+//#include <hmLib_v3_06/dxArea.hpp>
 //#include <cmath>
 //#include "hmr.h"
 //#include "hmrCom.h"
@@ -32,9 +32,14 @@ namespace hmr{
 	private:
 		double Value;
 		clock::time_point Time;
+
+		double LogValue;
+		clock::time_point LogTime;
+
 		flagirl DataModeFlagirl;
 		flagirl PumpPWFlagirl;
 		flagirl SensorPWFlagirl;
+		flagirl LogModeFlagirl;
 		static const double D_ADMaxValue;
 	public:
 		static double toCO2(unsigned char LowByte,unsigned char HighByte);
@@ -51,6 +56,7 @@ namespace hmr{
 		double getValue(void)const;
 	public:
 		boost::signals2::signal<void(double data, clock::time_point time)> signal_newData;
+		boost::signals2::signal<void(double data, clock::time_point time)> signal_newLogData;
 
 		void slot_setDataMode(boost::signals2::signal<void(bool)>& Signal_);
 		void slot_setDataMode(boost::signals2::signal<void(void)>& Signal_);
@@ -61,23 +67,33 @@ namespace hmr{
 		void slot_setPumpPW(boost::signals2::signal<void(bool)>& Signal_);
 		void slot_setPumpPW(boost::signals2::signal<void(void)>& Signal_);
 
+		void slot_setLogMode(boost::signals2::signal<void(bool)>& Signal_);
+
 		void contact_getValue(hmLib::inquiries::inquiry<double>& Inquiry_);
 		void contact_getTime(hmLib::inquiries::inquiry<clock::time_point>& Inquiry_);
+		void contact_getLogValue(hmLib::inquiries::inquiry<double>& Inquiry_);
+		void contact_getLogTime(hmLib::inquiries::inquiry<clock::time_point>& Inquiry_);
 
 		void contact_getPicDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_);
 		void contact_getPicPumpPW(hmLib::inquiries::inquiry<bool>& Inquiry_);
 		void contact_getPicSensorPW(hmLib::inquiries::inquiry<bool>& Inquiry_);
+		void contact_getPicLogMode(hmLib::inquiries::inquiry<bool>& Inquiry_);
+
 		void contact_getRequestDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_);
 		void contact_getRequestPumpPW(hmLib::inquiries::inquiry<bool>& Inquiry_);
 		void contact_getRequestSensorPW(hmLib::inquiries::inquiry<bool>& Inquiry_);
+		void contact_getRequestLogMode(hmLib::inquiries::inquiry<bool>& Inquiry_);
+
 
 	public:
 		cCO2MsgAgent():
-			Value(0.),
-			Time(),
+			Value(0.), LogValue(0.),
+			Time(), LogTime(),
 			DataModeFlagirl(),
 			PumpPWFlagirl(),
-			SensorPWFlagirl(){
+			SensorPWFlagirl(),
+			LogModeFlagirl()
+		{
 		}
 	};
 }

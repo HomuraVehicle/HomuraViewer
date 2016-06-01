@@ -15,8 +15,8 @@ hmrCompass v1_00/130511 iwahori
 #include<fstream>
 #include "hmLibVer.hpp"
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
 #include "hmrItfMessage.hpp"
 #include "hmrFlagirl.hpp"
 #include "coordinates.hpp"

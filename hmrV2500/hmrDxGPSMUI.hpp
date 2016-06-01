@@ -15,8 +15,8 @@ hmrDxGPSMsgAgentUI v1_00/130414 iwahori
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmrData.hpp"
 #include"hmrDxBUI.hpp"
 #include"hmrDxTools.hpp"
@@ -36,10 +36,9 @@ namespace hmr{
 
 
 		dxosBUIWaitableBoolBut IsDataModeMUIBut;
-		dxosBUIWaitableBoolBut IsPowerMUIBut;
 		dxoBut SetGPSNumBut;
 	public:
-		dxosGPSMUI():dxosBUI("GPS",30,105),IsDataModeMUIBut(this),IsPowerMUIBut(this){}
+		dxosGPSMUI():dxosBUI("GPS",30,105),IsDataModeMUIBut(this){}
 	public:
 		int normal_draw(dxO& dxo)override{
 			try{
@@ -85,14 +84,6 @@ namespace hmr{
 		}
 		int extend_draw(dxO& dxo)override{
 			normal_draw(dxo);
-
-			try{
-				IsPowerMUIBut.set(Pint(70,20),"Power");
-				dxo.draw(Pint(5,30),IsPowerMUIBut);
-			}catch(const hmLib::inquiries::unconnected_exception&){
-				dxo.draw(Pint(5,30),dxoStrP(Pint(70,20),"Power",getClr(error,strobj)));
-			}
-				
 			try{
 				auto Data=GPSData;//inquiry_getGPSData();
 				auto Time=Data.getTime();

@@ -10,9 +10,9 @@ GPSŠÈˆÕƒ}ƒbƒv‚ð’ñ‹Ÿ‚·‚é
 #include<string>
 #include<fstream>
 #include<boost/format.hpp>
-#include<hmLib_v3_05/position.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/position.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib_v2/dxObject.hpp>

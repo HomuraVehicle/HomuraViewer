@@ -30,12 +30,12 @@ hmrCom v1_00/130223 amby
 	VMC関連関数の受信まわりを製作。
 */
 
-#include<hmLib_v3_05/config_vc.h>
+#include<hmLib_v3_06/config_vc.h>
 #include<deque>
 #include<boost/signals2/signal.hpp>
-#include<hmLib_v3_05/inquiries/inquiry.hpp>
-#include<hmLib_v3_05/inquiries/unique_connections.hpp>
-#include<hmLib_v3_05/exceptions.hpp>
+#include<hmLib_v3_06/inquiries/inquiry.hpp>
+#include<hmLib_v3_06/inquiries/unique_connections.hpp>
+#include<hmLib_v3_06/exceptions.hpp>
 #include"hmrVMC1.h"
 #include"hmrData.hpp"
 #include"hmrItfCom.hpp"
@@ -150,7 +150,7 @@ namespace hmr{
 			// なければターミネーた送る
 			static hmLib_boolian existSendDat(void){
 				// 念のためbuffチェック
-				hmLib_assert( !pCom->SendBuf.empty(),hmLib::exceptions::invalid_request, " VMCConnection::hmLib_boolian existSendDat -> SendBuf is empty !!" );
+				hmLib_assert( !pCom->SendBuf.empty(),hmLib::exceptions::io_end_of_file, " VMCConnection::hmLib_boolian existSendDat -> SendBuf is empty !!" );
 
 				//これが最後のダミーデータでないかをチェック
 				if(cCom::isEndDatum(pCom->SendBuf.front())){
@@ -331,7 +331,7 @@ namespace hmr{
 		}
 		//受信バッファ内からデータを取得する
 		datum recv()override{
-			hmLib_assert(!empty(),hmLib::exceptions::invalid_request,"hmrCom::RecvBuf is empty");
+			hmLib_assert(!empty(),hmLib::exceptions::io_end_of_file,"hmrCom::RecvBuf is empty");
 			
 			//バッファの先頭を取得
 			datum Datum = RecvBuf.front();
@@ -349,7 +349,7 @@ namespace hmr{
 		}
 		//受信ストリームから受信バッファを更新する
 		void sync()override{
-			hmLib_assert(can_sync(),hmLib::exceptions::invalid_request,"hmrCom::RecvBuf have already been syncd");
+			hmLib_assert(can_sync(),hmLib::exceptions::io_end_of_file,"hmrCom::RecvBuf have already been syncd");
 
 			//RecvLogをシグナル発信して初期化
 			RecvLog.ErrFlag=RecvBuf.front().ErrFlag;
@@ -374,7 +374,7 @@ namespace hmr{
 		}
 		//送信ストリームに送信バッファを反映する
 		void flush()override{
-			hmLib_assert(can_flush(),hmLib::exceptions::invalid_request,"hmrCom::SendBuf cannot flush");
+			hmLib_assert(can_flush(),hmLib::exceptions::io_end_of_file,"hmrCom::SendBuf cannot flush");
 			SendBuf.push_back(getEndDatum());
 
 			//RecvLogをシグナル発信して初期化

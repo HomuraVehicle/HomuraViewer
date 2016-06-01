@@ -10,7 +10,7 @@ hmrGPS v1_01/130907 amby
 
 
 #include<boost/format.hpp>
-#include<hmLib_v3_05/position.hpp>
+#include<hmLib_v3_06/position.hpp>
 #include"hmrData.hpp"
 #include"date.hpp"
 

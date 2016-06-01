@@ -1,9 +1,9 @@
 #ifndef HMR_GPSKASHMIR_INC
 #define HMR_GPSKASHMIR_INC
 #
-#include<hmLib_v3_05/comgate.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/comgate.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmrData.hpp"
 #include"hmrGPSDataSet.hpp"
 namespace hmr{
@@ -15,7 +15,7 @@ namespace hmr{
 		void sendGPGGA(const GPSDataSet& Data_){
 			if(!is_connect())return;
 			std::string GPGGA=Data_.strGPGGA();
-			RSGate.put(GPGGA.c_str(),GPGGA.size());
+			RSGate.puts(GPGGA.c_str(),GPGGA.size());
 		}
 	public:
 		void connect(){
@@ -26,7 +26,7 @@ namespace hmr{
 			if(!is_connect())return;
 			RSGate.close();
 		}
-		bool is_connect()const{return RSGate.is_open();}
+		bool is_connect(){return RSGate.is_open();}
 	private:
 		hmLib::signals::unique_connections SignalConnections;
 		hmLib::inquiries::unique_connections InquiryConnections;

@@ -2,9 +2,9 @@
 #define HMR_DXBUI_INC 100
 #
 #include"hmLibVer.hpp"
-#include<hmLib_v3_05/inquiries.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/exceptions.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/exceptions.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
@@ -94,7 +94,7 @@ namespace hmr{
 				case invalid:
 					return pClrSet->InvalidBut;
 				default:
-					hmLib_throw(hmLib::exceptions::invalid_request,"Invalid status.");
+					hmLib_throw(hmLib::exceptions::memory_exception,"Invalid status.");
 				}
 			case strobj:
 				switch(Sta_){
@@ -107,10 +107,10 @@ namespace hmr{
 				case invalid:
 					return pClrSet->InvalidStr;
 				default:
-					hmLib_throw(hmLib::exceptions::invalid_request,"Invalid status.");
+					hmLib_throw(hmLib::exceptions::invalid_initialvalue,"Invalid status.");
 				}
 			default:
-				hmLib_throw(hmLib::exceptions::invalid_request,"Invalid object.");
+				hmLib_throw(hmLib::exceptions::invalid_initialvalue,"Invalid object.");
 			}
 		}
 		const dxRGB& getTimeStrClr(hmr::clock::time_point Time_)const{
@@ -122,7 +122,7 @@ namespace hmr{
 			case past:
 				return pClrSet->PastStr;
 			default:
-				hmLib_throw(hmLib::exceptions::invalid_request,"Invalid Time Category");
+				hmLib_throw(hmLib::exceptions::invalid_initialvalue,"Invalid Time Category");
 			}
 		}
 		time getTime(hmr::clock::time_point Time_)const{

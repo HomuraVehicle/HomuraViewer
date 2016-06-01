@@ -1,13 +1,6 @@
 /*===========hmrV2500.cpp===========
 
-=== hmrV2500_OntakeL ===
-v1_00/141029 hmIto
-	長期観測用機能を追加したバージョン
-
-=== hmrV2500===
-v1_05/130914
-	r
-		GPSのPower制御を追加
+hmrV2500 v1_05/130914
 	p
 		表示位置等修正
 	n
@@ -18,29 +11,26 @@ v1_05/130914
 		ファイル機能を一度外す
 		半二重通信への対応
 	ファイル機能を実装完了
-
-v1_04/130803
+hmrV2500 v1_04/130803
 	ファイル機能を実装開始
 
-v1_03/130713 
+hmrV2500 v1_03/130713 
 	実現できていること
 	　・基本的な機能の実装
 	　
-
-
 */
 
 #include"hmLibVer.hpp"
-#include<hmLib_v3_05/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
-#include<hmLib_v3_05/bufgate.hpp>
-#include<hmLib_v3_05/any_iterator.hpp>
-#include<hmLib_v2/dxColorSet.hpp>
+#include <hmLib_v3_06/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
+#include<hmLib_v3_06/bufgate.hpp>
+#include<hmLib_v3_06/any_iterator.hpp>
+#include <hmLib_v2/dxColorSet.hpp>
 #include"dxSignalBut.hpp"
 #include"iologgate.hpp"
 #include"predicate.hpp"
+#include"hmrBufGate.hpp"
 #include"hmrGateSwitcher.hpp"
 #include"hmrIO.hpp"
-#include"hmrBufGate.hpp"
 #include"hmrCom.hpp"
 #include"hmrComLog.hpp"
 #include"hmrDXCom_v2.hpp"
@@ -100,8 +90,11 @@ v1_03/130713
 #include "hmrDeviceManage.hpp"
 #include "hmrDxDeviceManageSUI.hpp"
 
+#include "hmrChrono.hpp"
+#include "hmrLoggerManage.hpp"
+#include "hmrDxLoggerManageSUI.hpp"
 
-#include"hmrDxComSUI.hpp"
+#include "hmrDxComSUI.hpp"
 #include "hmrDxBufGateSUI.hpp"
 #include "hmrDxGateSwitcherSUI.hpp"
 #include "hmrDxIOLogGateSUI.hpp"
@@ -110,13 +103,15 @@ v1_03/130713
 #include "hmrDxOperatorSUI.hpp"
 #include "hmrDxVMCSUI.hpp"
 #include "hmrDXFileSUI.hpp"
+#include "hmrDxChrono.hpp"
 #include"hmrDxBUIBoxSideDisp.hpp"
-
 
 #include "hmrDirectoryFile.hpp"
 #include "hmrGPSFile.hpp"
 #include "hmrSpriteFile.hpp"
 #include "hmrCSVFile.hpp"
+#include "hmrUniSensorFile.hpp"
+
 /*
 #include "hmrWholeFile.hpp"
 #include "hmrAcceleFile.hpp"
@@ -135,34 +130,28 @@ v1_03/130713
 
 //test 
 
-#include "Autolog/AutoLogger.hpp"
-#include "Autolog/ThermoAutoLoggerClient.hpp"
-#include "Autolog/BatteryAutoLoggerClient.hpp"
-#include "Autolog/CO2AutoLoggerClient.hpp"
-#include "Autolog/SpriteAutoLoggerClient.hpp"
-#include "DxAutolog.hpp"
-
 
 #include<hmLib_v2/hmLib.cpp>
 
 #define HMR_MAIN_INC_END
 
 #include"hmrConnectDx.hpp"
+#include"hmrConnectSUI.hpp"
+#include"hmrConnectMUI.hpp"
 #include"hmrConnectModule.hpp"
 #include"hmrConnectCore.hpp"
 #include"hmrConnectKeyboard.hpp"
 #include"hmrConnectPad.hpp"
 #include"hmrConnectFile.hpp"
-#include"hmrConnectAutolog.hpp"
 
-
-//#include<hmLib_v3_05/lab/virtual_com/virtual_comgate.hpp>
-//#include<hmLib_v3_05/lab/virtual_com/fdx_virtual_com.hpp>
+//#include<hmLib_v3_06/virtual_com/virtual_comgate.hpp>
+//#include<hmLib_v3_06/virtual_com/fdx_virtual_com.hpp>
 //#include"DummyPulg_v1.hpp"
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
 	//hmLib_dxモジュールを初期化
-	dx::ini("hmrV2500_OntakeL_v1_00", 960,720);
+	dx::ini("hmrV2500_v1_06a", 960,720);
+
 
 	try{
 		//hmLib::vcom::fdx_virtual_com VCom;
@@ -283,15 +272,21 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 //		hmr::connect_Pad(HumidMA,Pad1);
 //		Message.regist('h',&HumidMA);
 
+		hmr::cChrono Chrono;
+		Message.regist('$', &Chrono);
+
 		hmr::cDevMngMsgAgent DevMngMA;
 		Message.regist('D', &DevMngMA);
 
+		hmr::cLoggerMngMsgAgent LogMngMA;
+		Message.regist('L', &LogMngMA);
+
 		hmr::cDirectoryFile DirectoryFile;
-/*
 		//パケット単位でセンサーデータを保存
-		hmr::cCSVFileAgent PacketFileAgent("Packet");
-		PacketFileAgent.slot_write(Com.signal_finRecvPacket);
-		
+		//hmr::cCSVFileAgent PacketFileAgent("Packet");
+		//PacketFileAgent.slot_write(Com.signal_finRecvPacket);
+
+		/*
 		hmr::cCSVFileAgent::cCell<hmr::clock::time_point> TimePointCell("Time");
 		Com.contactLastRecvPacTime(TimePointCell.Inquiry);
 		PacketFileAgent.regist(TimePointCell);
@@ -308,36 +303,70 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		//センサーデータのみ保存
 //		hmr::cCSVFileAgent SenserFileAgent("Sensor");
 
+		/*
+		// log されていた温度データ保存
+		hmr::cCSVFileAgent LogThermoFileAgent("loggedThermoDat");
+		LogThermoFileAgent.slot_write(ThermoMA.signal_newLogData);
+		hmr::cCSVFileAgent::cCell<hmr::clock::time_point> logThermo_timeCell("time");
+		ThermoMA.contact_getlogTime(logThermo_timeCell.Inquiry);
+		LogThermoFileAgent.regist(logThermo_timeCell);
+		hmr::cCSVFileAgent::cCell<double> logThermo_dataCell("Thermo");
+		ThermoMA.contact_getLogTemperature(logThermo_dataCell.Inquiry);
+		LogThermoFileAgent.regist(logThermo_dataCell);
+		hmr::cCSVFileAgent::cCell<hmLib_uint16> logThermo_rawDataCell("rawThermo");
+		ThermoMA.contact_getLogRawTemperature(logThermo_rawDataCell.Inquiry);
+		LogThermoFileAgent.regist(logThermo_rawDataCell);
+
+		DirectoryFile.regist(&LogThermoFileAgent);
+
+		// 通常の温度データ保存
+		hmr::cCSVFileAgent ThermoFileAgent("ThermoDat");
+		ThermoFileAgent.slot_write(ThermoMA.signal_newLogData);
+		hmr::cCSVFileAgent::cCell<hmr::clock::time_point> thermo_timeCell("time");
+		ThermoMA.contact_getTime(thermo_timeCell.Inquiry);
+		ThermoFileAgent.regist(thermo_timeCell);
+		hmr::cCSVFileAgent::cCell<double> thermo_dataCell("Thermo");
+		ThermoMA.contact_getTemperature(thermo_dataCell.Inquiry);
+		ThermoFileAgent.regist(thermo_dataCell);
+		hmr::cCSVFileAgent::cCell<hmLib_uint16> thermo_rawDataCell("rawThermo");
+		ThermoMA.contact_getRawTemperature(thermo_rawDataCell.Inquiry);
+		ThermoFileAgent.regist(thermo_rawDataCell);
+
+		DirectoryFile.regist(&ThermoFileAgent);
+		*/
+
+		// log Thermo データを保存
+		hmr::cUniSensorFileAgent logThermoFileAgent("Thermo_log");
+		logThermoFileAgent.slot_log_writeData(ThermoMA.signal_newLogRawData);
+		DirectoryFile.regist(&logThermoFileAgent);
+		// Thermo データを保存
+		hmr::cUniSensorFileAgent ThermoFileAgent("Thermo_normal");
+		ThermoFileAgent.slot_log_writeData(ThermoMA.signal_newRawData);
+		DirectoryFile.regist(&ThermoFileAgent);
+
+		// log CO2
+		hmr::cUniSensorFileAgent logCO2FileAgent("CO2_log");
+		logCO2FileAgent.slot_log_writeData(CO2MA.signal_newLogData);
+		DirectoryFile.regist(&logCO2FileAgent);
+		// Thermo データを保存
+		hmr::cUniSensorFileAgent CO2FileAgent("CO2_normal");
+		CO2FileAgent.slot_log_writeData(CO2MA.signal_newData);
+		DirectoryFile.regist(&CO2FileAgent);
+
 		//GPGGAデータを保存
 		hmr::cGPSFileAgent GPSFileAgent;
 		hmr::connect(GPSFileAgent, GPSMA);
 		DirectoryFile.regist(&GPSFileAgent);
 
 		//カメラデータを保存
-		hmr::cSpriteFileAgent SpriteFileAgent;
-		hmr::connect(SpriteFileAgent, SpriteMA);
+		hmr::cSpriteFileAgent SpriteFileAgent("Sprite");
+		hmr::connect(SpriteFileAgent, SpriteMA,false);
 		DirectoryFile.regist(&SpriteFileAgent);
 
-
-		//自動観測モジュール
-		hmr::autolog::cAutoLogger AutoLogger;
-		hmr::autolog::connect(AutoLogger, DevMngMA, Com, Operator, GateSW);
-
-		hmr::autolog::cThermoAutoLoggerClient ThermoAutoLogger(3);
-		hmr::autolog::connect(ThermoAutoLogger, ThermoMA);
-		AutoLogger.regist(ThermoAutoLogger);
-
-		hmr::autolog::cBatteryAutoLoggerClient<3> BatteryAutoLogger(3);
-		hmr::autolog::connect(BatteryAutoLogger, BatteryMA);
-		AutoLogger.regist(BatteryAutoLogger);
-
-		hmr::autolog::cCO2AutoLoggerClient CO2AutoLogger(3);
-		hmr::autolog::connect(CO2AutoLogger, CO2MA);
-		AutoLogger.regist(CO2AutoLogger);
-
-		hmr::autolog::cSpriteAutoLoggerClient SpriteAutoLogger(1,6,18);
-		hmr::autolog::connect(SpriteAutoLogger, SpriteMA);
-		AutoLogger.regist(SpriteAutoLogger);
+		//カメラログデータを保存
+		hmr::cSpriteFileAgent SpriteLogFileAgent("SpriteLog");
+		hmr::connect(SpriteLogFileAgent, SpriteMA, true);
+		DirectoryFile.regist(&SpriteLogFileAgent);
 
 /*
 		// File 系列の宣言
@@ -376,9 +405,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmr::dxosBUIBoxSideDisplay SystemSideDisp;
 		SystemSideDisp.ClrSet.Background=CLR::DarkSoftBlue;
 
+		hmr::dxosChronoSUI ChronoSUI;
+		hmr::connect(ChronoSUI, Chrono);
+		SystemSideDisp.insert(&ChronoSUI);
+
 		hmr::dxosDevMngSUI DevMngSUI;
 		hmr::connect(DevMngSUI, DevMngMA);
 		SystemSideDisp.insert(&DevMngSUI);
+
+		hmr::dxosLoggerMngSUI LogMngSUI;
+		hmr::connect(LogMngSUI, LogMngMA);
+		SystemSideDisp.insert(&LogMngSUI);
 
 		hmr::dxosGateSwitcherSUI GateSwSUI;
 		hmr::connect(GateSwSUI, GateSW);
@@ -426,7 +463,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmr::connect(ControlMainDisp.Navigator,AcceleLogger,CompassDat,GyroLogger,GyroCompass);
 		hmr::connect(ControlMainDisp.Sprite,SpriteMA);
 		hmr::connect(ControlMainDisp.Infomation,GPSKashmir,BatteryMA);
-		hmr::connect(ControlMainDisp.Autolog, AutoLogger,ThermoAutoLogger,BatteryAutoLogger,CO2AutoLogger,SpriteAutoLogger);
+		hmr::connect(ControlMainDisp.GPSMap, GPSMA,CompassDat);
 		std::vector<hmr::datum::id_type> SwIDList;
 		SwIDList.push_back('a');
 		SwIDList.push_back('b');
@@ -554,6 +591,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Debug.slot_timeout(Operator.signal_inform_Received);
 		Debug.slot_nulldata(BatteryMA.signal_nulldata);
 */
+
 		while(!dx::work(30)){
 			Keyboard.work();
 			Pad1.work();
@@ -566,8 +604,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 //			DebugSignal(hmr::clock::now());
 
 			dx::draw(Pint(0,0),Display);
-
-
 
 			if(dx::getKey(KEY::ESC)<0)break;
 		}

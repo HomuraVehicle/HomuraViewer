@@ -10,8 +10,8 @@ hmrComLog v1_00/130410 hmIto
 #include<deque>
 #include<mutex>
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmrData.hpp"
 namespace hmr{
 	class cComLog{

@@ -48,8 +48,8 @@ hmrOperator:v1_00/130310 hmito
 	cFullRecvOneSendOperator‚ð’Ç‰Á
 
 */
-#include <hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/inquiries/inquiry.hpp>
+#include <hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries/inquiry.hpp>
 #include <boost/signals2.hpp>
 #include"hmrItfCom.hpp"
 #include"hmrItfMessage.hpp"

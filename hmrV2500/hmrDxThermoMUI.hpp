@@ -16,8 +16,8 @@ hmrDxThermoMsgAgentUI v1_00/130414 iwahori
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include<hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include<hmLib_v3_06/inquiries.hpp>
 #include"hmrData.hpp"
 #include"hmrDxBUI.hpp"
 #include"hmrDxTools.hpp"
@@ -33,8 +33,9 @@ namespace hmr{
 		//hmLib::inquiries::inquiry<clock::time_point> inquiry_getTime;
 
 		dxosBUIWaitableBoolBut IsDataModeMUIBut;
+		dxosBUIWaitableBoolBut IsLogModeMUIBut;
 	public:
-		dxosThermoMUI():dxosBUI("Thermo",30,30), IsDataModeMUIBut(this){}
+		dxosThermoMUI():dxosBUI("Thermo",30,30), IsDataModeMUIBut(this), IsLogModeMUIBut(this){}
 	public:
 		int normal_draw(dxO& dxo)override{
 			try{
@@ -46,6 +47,14 @@ namespace hmr{
 				}
 
 				dxo.draw(Pint(80,5),dxoBUITimeStr(this,Pint(70,20),(boost::format("%.1fÅé")%temperature).str(),time));
+
+				try{
+					IsLogModeMUIBut.set(Pint(70, 20), "Log");
+					dxo.draw(Pint(155, 5), IsLogModeMUIBut);
+				}
+				catch (const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), "Log", getClr(error, strobj)));
+				}
 
 			}catch(const hmLib::exceptions::exception& Excp){
 				dxo.draw(Pint(0,0),dxoButIO(getSize(),std::string("=ERR=")+Excp.what(),getClr(error,butobj),true,CLR::White,ALI::left));

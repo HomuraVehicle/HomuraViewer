@@ -1,10 +1,8 @@
 #ifndef HMR_GPS_INC
-#define HMR_GPS_INC 104
+#define HMR_GPS_INC 103
 #
 
 /*===========hmrGPS===========
-hmrGPS v1_04/141004 hmIto
-	Power制御機能を追加
 hmrGPS v1_03/130713 amby
 	GPSの切り替えコマンドの実装
 hmrGPS v1_02/130629 hmIto
@@ -17,8 +15,8 @@ hmrGPS v1_00/130427 iwahori
 
 #include "hmLibVer.hpp"
 #include<boost/signals2.hpp>
-#include<hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/inquiries.hpp>
+#include<hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
 #include "hmrItfMessage.hpp"
 #include "hmrFlagirl.hpp"
 #include "hmrGPSDataSet.hpp"
@@ -30,7 +28,6 @@ namespace hmr{
 	private:
 		flagirl DataModeFlagirl;
 		flagirl SwapStateFlagirl;
-		flagirl PowerFlagirl;
 		GPSDataSet GPSData;
 		unsigned char gpsCh;
 		static GPSDataSet toGPSDataSet(const clock::time_point& Time_,bool errFlag_,const std::string& data_){
@@ -104,14 +101,6 @@ namespace hmr{
 				if(gpsCh == 0x00){ SwapStateFlagirl.set_pic(false); // 更新する 
 				}else{SwapStateFlagirl.set_pic(true);}
 				return false;
-			}else if(static_cast<unsigned char>(Data_[0])==0x30){
-				if(Data_.size()!=1)return true;
-				PowerFlagirl.set_pic(true);
-				return false;
-			}else if(static_cast<unsigned char>(Data_[0])==0x31){
-				if(Data_.size()!=1)return true;
-				PowerFlagirl.set_pic(false);
-				return false;
 			}
 			return true;		
 		}
@@ -121,11 +110,8 @@ namespace hmr{
 				if(DataModeFlagirl.request())Str=static_cast<unsigned char>(0x10);
 				else Str=static_cast<unsigned char>(0x11);
 				return false;
-			}else if(PowerFlagirl.talk()){
-				if(PowerFlagirl.request())Str=static_cast<unsigned char>(0x30);
-				else Str=static_cast<unsigned char>(0x31);
-				return false;
-			}else if (SwapStateFlagirl.talk()){
+			}
+			else if (SwapStateFlagirl.talk()){
 				unsigned char char_;
 				if(SwapStateFlagirl.request()){ char_ = static_cast<unsigned char>(0x01);}
 				else{ char_ = static_cast<unsigned char>(0x00);}//
@@ -138,7 +124,6 @@ namespace hmr{
 		}
 		void setup_talk(void)override{
 			DataModeFlagirl.setup_talk();
-			PowerFlagirl.setup_talk();
 			SwapStateFlagirl.setup_talk();
 		}
 	private:
@@ -146,16 +131,12 @@ namespace hmr{
 		hmLib::inquiries::unique_connections InquiryConnections;
 
 		void setDataMode(bool Mode_){DataModeFlagirl.set_request(Mode_);}
-		void setPower(bool Mode_){PowerFlagirl.set_request(Mode_);}
 		void setSwapState(bool Mode_){SwapStateFlagirl.set_request(Mode_);}
 
 		GPSDataSet getGPSData()const{return GPSData;}
 
 		bool getPicDataMode(){return DataModeFlagirl.pic();}
 		bool getRequestDataMode(){return DataModeFlagirl.request();}
-
-		bool getPicPower(){return PowerFlagirl.pic();}
-		bool getRequestPower(){return PowerFlagirl.request();}
 
 		bool getPicSwapState(){return SwapStateFlagirl.pic();}
 		bool getRequestSwapState(){return SwapStateFlagirl.request();}
@@ -165,7 +146,6 @@ namespace hmr{
 		void contact_getGPSData(hmLib::inquiries::inquiry<GPSDataSet>& Inquiry_){
 			InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->GPSDataSet{return this->getGPSData();}));
 		}
-
 		void contact_getPicDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
 			InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return this->getPicDataMode();}));
 		}
@@ -177,19 +157,6 @@ namespace hmr{
 		}
 		void slot_setDataMode(boost::signals2::signal<void(void)>& Signal_){
 			SignalConnections(hmLib::signals::connect(Signal_,[&](void)->void{this->setDataMode(!DataModeFlagirl.request());}));	
-		}
-
-		void contact_getPicPower(hmLib::inquiries::inquiry<bool>& Inquiry_){
-			InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return this->getPicPower();}));
-		}
-		void contact_getRequestPower(hmLib::inquiries::inquiry<bool>& Inquiry_){
-			InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return this->getRequestPower();}));
-		}
-		void slot_setPower(boost::signals2::signal<void(bool)>& Signal_){
-			SignalConnections(hmLib::signals::connect(Signal_,[&](bool Flag)->void{this->setPower(Flag);}));	
-		}
-		void slot_setPower(boost::signals2::signal<void(void)>& Signal_){
-			SignalConnections(hmLib::signals::connect(Signal_,[&](void)->void{this->setPower(!PowerFlagirl.request());}));	
 		}
 
 		void contact_getPicSwapState(hmLib::inquiries::inquiry<bool>& Inquiry_){
@@ -212,10 +179,8 @@ namespace hmr{
 
 	public:
 		cGPSMsgAgent():
-			DataModeFlagirl(), SwapStateFlagirl(), PowerFlagirl(),
+			DataModeFlagirl(),SwapStateFlagirl(),
 			GPSData(), gpsCh(0){
-			PowerFlagirl.set_pic(true);
-			PowerFlagirl.set_request(true);
 		}
 	};
 }

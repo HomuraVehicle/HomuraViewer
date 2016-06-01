@@ -19,7 +19,7 @@ GPS ファイル関係のクラス
 #include <string>
 #include <fstream>
 #include <boost/signals2.hpp>
-#include <hmLib_v3_05/signals.hpp>
+#include <hmLib_v3_06/signals.hpp>
 #include "hmrItfFile.hpp"
 #include "hmrData.hpp"
 #include "hmrGPSDataSet.hpp"

@@ -3,9 +3,9 @@
 #
 #include <string>
 #include "hmLibVer.hpp"
-#include <hmLib_v3_05/hmRSgate.hpp>
-#include <hmLib_v3_05/dxArea.hpp>
-#include <hmLib_v3_05/gatestream.hpp>
+#include <hmLib_v3_06/hmRSgate.hpp>
+#include <hmLib_v3_06/dxArea.hpp>
+#include <hmLib_v3_06/gatestream.hpp>
 #include "foma_gate.hpp"
 #include "hmrFile.h"
 #include "hmrIO.h"

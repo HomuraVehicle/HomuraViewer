@@ -17,7 +17,7 @@ hmrWholeFile v1_00/130914 amby
 #include <fstream>
 #include <boost/signals2.hpp>
 #include <boost/filesystem.hpp>
-#include <hmLib_v3_05/signals.hpp>
+#include <hmLib_v3_06/signals.hpp>
 #include "hmrItfFile.hpp"
 #include "hmrData.hpp"
 

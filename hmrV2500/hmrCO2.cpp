@@ -59,29 +59,72 @@ bool hmr::cCO2MsgAgent::listen(datum::time_point Time_,bool Err_,const std::stri
 		return false;
 	}
 			
+	// change Log Mode
+	else if (static_cast<unsigned char>(Str_[0]) == 0xC0){
+		if (Str_.size() != 1)return true;
+		LogModeFlagirl.set_pic(true);
+		return false;
+	}
+	else if (static_cast<unsigned char>(Str_[0]) == 0xC1){
+		if (Str_.size() != 1)return true;
+		LogModeFlagirl.set_pic(false);
+		return false;
+	}
+	
+	// getting log data
+	if (static_cast<unsigned char>(Str_[0]) == 0xD0){
+		if (Str_.size() != 7)return true;
+		// dataéÊìæ
+		LogValue = static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(1)))
+			+ static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(2))) * 256;
+
+		// åªç›éûçèéÊìæ
+		hmLib_sint32 TimeSec = static_cast<hmLib_sint32>(
+			static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(3))) 
+			+ static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(4))) * 256
+			+ static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(5))) * 256 * 256
+			+ static_cast<hmLib_uint32>(static_cast<unsigned char>(Str_.at(6))) * 256 * 256 * 256
+		);
+		// time_point Ç…ïœä∑
+		LogTime = std::chrono::system_clock::from_time_t(TimeSec);
+
+		signal_newLogData(LogValue, LogTime);
+		//		Ref.insert(Datum(_time,_errFlag,static_cast<unsigned char>(Str_[2])*256+static_cast<unsigned char>(Str_[1])));
+		return false;
+	}
+
 	return true;
 }
 bool hmr::cCO2MsgAgent::talk(std::string& Str){
 	Str="";
 	if(DataModeFlagirl.talk()){
-		if(DataModeFlagirl.request())Str.push_back(static_cast<char>(0x10));
-		else Str.push_back(static_cast<char>(0x11));
+		if(DataModeFlagirl.request())Str.push_back(static_cast<unsigned char>(0x10));
+		else Str.push_back(static_cast<unsigned char>(0x11));
 		return false; 
 	}else if(SensorPWFlagirl.talk()){
-		if(SensorPWFlagirl.request())Str.push_back(static_cast<char>(0x20));
-		else Str.push_back(static_cast<char>(0x21));
+		if (SensorPWFlagirl.request())Str.push_back(static_cast<unsigned char>(0x20));
+		else Str.push_back(static_cast<unsigned char>(0x21));
 		return false;
 	}else if(PumpPWFlagirl.talk()){
-		if(PumpPWFlagirl.request())Str.push_back(static_cast<char>(0x30));
-		else Str.push_back(static_cast<char>(0x31));
+		if (PumpPWFlagirl.request())Str.push_back(static_cast<unsigned char>(0x30));
+		else Str.push_back(static_cast<unsigned char>(0x31));
 		return false;
 	}
+	else if (LogModeFlagirl.talk()){
+		if (LogModeFlagirl.request())Str.push_back(static_cast<unsigned char>(0xC0));
+		else Str.push_back(static_cast<unsigned char>(0xC1));
+		return false;
+	}
+
 	return true;	
 }
 void hmr::cCO2MsgAgent::setup_talk(){
 	DataModeFlagirl.setup_talk();
+	LogModeFlagirl.setup_talk();
+
 	SensorPWFlagirl.setup_talk();
 	PumpPWFlagirl.setup_talk();
+	LogModeFlagirl.setup_talk();
 }
 
 void hmr::cCO2MsgAgent::setDataMode(bool Mode_){DataModeFlagirl.set_request(Mode_);}
@@ -110,6 +153,11 @@ void hmr::cCO2MsgAgent::slot_setPumpPW(boost::signals2::signal<void(void)>& Sign
 	SignalConnections(hmLib::signals::connect(Signal_,[&](void)->void{this->setPumpPW(!PumpPWFlagirl.request());}));	
 }
 
+void hmr::cCO2MsgAgent::slot_setLogMode(boost::signals2::signal<void(bool)>& Signal_){
+	SignalConnections(hmLib::signals::connect(Signal_, [&](bool flag)->void{this->LogModeFlagirl.set_request(flag); }));
+}
+
+
 void hmr::cCO2MsgAgent::contact_getValue(hmLib::inquiries::inquiry<double>& Inquiry_){
 	InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->double{return this->getValue();}));
 }
@@ -126,6 +174,10 @@ void hmr::cCO2MsgAgent::contact_getPicPumpPW(hmLib::inquiries::inquiry<bool>& In
 void hmr::cCO2MsgAgent::contact_getPicSensorPW(hmLib::inquiries::inquiry<bool>& Inquiry_){
 	InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return this->SensorPWFlagirl.pic();}));
 }
+void hmr::cCO2MsgAgent::contact_getPicLogMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
+	InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->LogModeFlagirl.pic(); }));
+}
+
 void hmr::cCO2MsgAgent::contact_getRequestDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
 	InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return this->DataModeFlagirl.request();}));
 }
@@ -134,6 +186,9 @@ void hmr::cCO2MsgAgent::contact_getRequestPumpPW(hmLib::inquiries::inquiry<bool>
 }
 void hmr::cCO2MsgAgent::contact_getRequestSensorPW(hmLib::inquiries::inquiry<bool>& Inquiry_){
 	InquiryConnections(hmLib::inquiries::connect(Inquiry_,[&](void)->bool{return this->SensorPWFlagirl.request();}));
+}
+void hmr::cCO2MsgAgent::contact_getRequestLogMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
+	InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->LogModeFlagirl.request(); }));
 }
 
 #

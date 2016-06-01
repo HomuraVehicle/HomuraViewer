@@ -1,7 +1,7 @@
 #ifndef HMR_DXIO2_INC
 #define HMR_DXIO2_INC 103
 
-#include <hmLib_v3_05/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
+#include <hmLib_v3_06/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
 
 #include <iostream>
 #include <string>
@@ -14,9 +14,9 @@
 #include <hmLib_v2/dxObject.hpp>
 #include <hmLib_v2/dxArea.hpp>
 #include <hmLib_v2/dxColorSet.hpp>
-#include <hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/inquiries/inquiry.hpp>
-#include <hmLib_v3_05/inquiries/range_inquiry.hpp>
+#include <hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries/inquiry.hpp>
+#include <hmLib_v3_06/inquiries/range_inquiry.hpp>
 
 #include <hmLib_v2/hmBin_To_hmAsc.hpp>
 #include "dxSignalBut.hpp"

@@ -38,12 +38,12 @@ hmrGateHab:v1.00/130310 amby
 */
 
 #include <string>
-#include <hmLib_v3_05/gate.hpp>
-#include <hmLib_v3_05/comgate.hpp>
-#include <hmLib_v3_05/exceptions.hpp>
-#include <hmLib_v3_05/signals.hpp>
+#include <hmLib_v3_06/gate.hpp>
+#include <hmLib_v3_06/comgate.hpp>
+#include <hmLib_v3_06/exceptions.hpp>
+#include <hmLib_v3_06/signals.hpp>
 #include <boost/signals2.hpp>
-#include <hmLib_v3_05/inquiries/inquiry.hpp>
+#include <hmLib_v3_06/inquiries/inquiry.hpp>
 #include "fomagate.hpp"
 
 namespace hmr{
@@ -100,7 +100,7 @@ namespace hmr{
 		// port open
 		// Open Foma Gate
 		bool open(GateType GateType_){
-			hmLib_assert(!is_open(), hmLib::exceptions::invalid_status,"Other port is still open, we cannot open a port");
+			hmLib_assert(!is_open(), hmLib::exceptions::io_not_opened,"Other port is still open, we cannot open a port");
 
 			if(GateType_==FomaGateType){
 				SwitchedGate = FomaGateType;
@@ -151,7 +151,7 @@ namespace hmr{
 		}
 		// port close
 		bool close(){
-			hmLib_assert(is_open(), hmLib::exceptions::invalid_status, "A Port is not open, we cannot close the port");
+			hmLib_assert(is_open(), hmLib::exceptions::io_not_opened, "A Port is not open, we cannot close the port");
 
 			if(SwitchedGate == FomaGateType){
 				if(!fomaGate.close()){
@@ -173,43 +173,53 @@ namespace hmr{
 					return false;
 				}else return true;
 			}else{
-				hmLib_assert(false, hmLib::exceptions::invalid_status, "A kind of a gate is not determined");
+				hmLib_assert(false, hmLib::exceptions::memory_exception, "A kind of a gate is not determined");
 				return true;
 			}
 		}
 	public:
 		// 受信可能か？？
-		bool can_get() override{
+		bool can_getc() override{
 			if(!is_open())return false;
-			return pGate->can_get();
+			return pGate->can_getc();
 		}
-		// 受信可能データの有無
-		bool empty() override{
+		// 受信続いているかどうか
+		bool flowing() override{
 			if(pGate==nullptr)return true;
 //			hmLib_assert(pGate!=nullptr, hmLib::exceptions::nullptr_dereferemce,"You try to access a gate which is not defined");
-			return pGate->empty();
+			return pGate->flowing();
 		}
 		//複数byte受信　受信文字アドレスと、受信文字数が引数　実際の受信文字数が戻り値
-		size_type get(char* str_,const size_type& size_) override{
-			hmLib_assert(pGate!=nullptr, hmLib::exceptions::nullptr_dereferemce,"You try to access a gate which is not defined");
-			return pGate->get(str_, size_);
+		size_type gets(char* str_,const size_type& size_) override{
+			hmLib_assert(pGate!=nullptr, hmLib::exceptions::memory_exception,"You try to access a gate which is not defined");
+			return pGate->gets(str_, size_);
+		}
+		char getc()override{
+			hmLib_assert(pGate != nullptr, hmLib::exceptions::memory_exception, "You try to access a gate which is not defined");
+			return pGate->getc();
 		}
 
+
+
 		//送信可能状態かの確認
-		bool can_put() override{
+		bool can_putc() override{
 			if(!is_open())return false;
-			return pGate->can_put();
+			return pGate->can_putc();
 		}
-		//送信可能データの有無
-		bool full() override{
-			if(pGate==nullptr)return true;
+		//送信無理やりしてまう
+		void flush() override{
+			if(pGate==nullptr)return;
 //			hmLib_assert(pGate!=nullptr, hmLib::exceptions::nullptr_dereferemce,"You try to access a gate which is not defined");
-			return pGate->full();
+			return pGate->flush();
 		}
 		//複数byte送信　送信文字アドレスと、送信文字数が引数　実際の送信文字数が戻り値
-		size_type put(const char* str_,const size_type& size_) override{
-			hmLib_assert(pGate!=nullptr, hmLib::exceptions::nullptr_dereferemce,"You try to access a gate which is not defined");
-			return pGate->put(str_,size_);
+		size_type puts(const char* str_,const size_type& size_) override{
+			hmLib_assert(pGate!=nullptr, hmLib::exceptions::memory_exception,"You try to access a gate which is not defined");
+			return pGate->puts(str_,size_);
+		}
+		void putc(char c)override{ 
+			hmLib_assert(pGate != nullptr, hmLib::exceptions::memory_exception, "You try to access a gate which is not defined");
+			return pGate->putc(c); 
 		}
 
 
@@ -274,9 +284,6 @@ namespace hmr{
 			connections(sig_.connect([&](void)->void{this->close();}));
 		}
 
-		void slot_openFoma(boost::signals2::signal<void(void)> &sig_){
-			connections(sig_.connect([&](void)->void{this->open(FomaGateType);}));
-		}
 
 	// INquirely
 		// is open 
@@ -285,11 +292,11 @@ namespace hmr{
 		}
 		// can put
 		void contact_can_put(hmLib::inquiries::inquiry<bool>& Inq_){
-			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_put();});
+			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_putc();});
 		}
 		// can get
 		void contact_can_get(hmLib::inquiries::inquiry<bool>& Inq_){
-			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_get();});
+			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_getc();});
 		}
 
 

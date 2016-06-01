@@ -3,10 +3,10 @@
 #
 
 #include <iostream>
-#include <hmLib_v3_05/gate.hpp>
-#include <hmLib_v3_05/exceptions.hpp>
-#include <hmLib_v3_05/signals.hpp>
-#include <hmLib_v3_05/inquiries.hpp>
+#include <hmLib_v3_06/gate.hpp>
+#include <hmLib_v3_06/exceptions.hpp>
+#include <hmLib_v3_06/signals.hpp>
+#include <hmLib_v3_06/inquiries.hpp>
 #include <boost/signals2.hpp>
 #include <deque>
 #include <vector>
@@ -49,55 +49,49 @@ namespace hmr{
 
 			return false;
 		}
-		bool is_open()const{return pGate!=0;}
+		bool is_open()override{return pGate!=0;}
 		void operator()(void){
 			hmLib_assert(is_open(),hmLib::gate_not_opened_exception,"bufgate have not been opened yet.");
 			try{
-				if(!pGate->empty()){
-					while(!pGate->empty() && pGate->can_get()){
-						hmLib::gate::size_type size=1;
-						char tmp;
-						pGate->get(&tmp,size);
-						iBuf.push_back(tmp);
+				if(pGate->can_getc()){
+					while(pGate->can_getc()){
+						//hmLib::gate::size_type size=1;
+						iBuf.push_back(pGate->getc());
 					}
 				}
 				if(!oBuf.empty()){
-					while(!oBuf.empty() && pGate->can_put()){
+					while(!oBuf.empty() && pGate->can_putc()){
 						hmLib::gate::size_type size=1;
-						pGate->put(&oBuf.front(),size);
+						pGate->putc(oBuf.front());
 						oBuf.pop_front();
 					}
 				}
 			}catch(const hmLib::gate_not_opened_exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::invalid_status,"gate connected with bufgate is not opened.");
-			}catch(const std::exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::invalid_status,"bufgate fail to get/put work.");
+				hmLib_thrownext(Except_,hmLib::exceptions::io_not_opened,"gate connected with bufgate is not opened.");
 			}
 		}
 		void operator()(unsigned int GetMaxNum_,unsigned int PutMaxNum_){
 			hmLib_assert(is_open(),hmLib::gate_not_opened_exception,"bufgate have not been opened yet.");
 			try{
-				if(!pGate->empty()){
-					while(!pGate->empty() && pGate->can_get() && GetMaxNum_){
-						hmLib::gate::size_type size=1;
-						char tmp;
-						if(pGate->get(&tmp,size))break;
-						iBuf.push_back(tmp);
+				if(pGate->can_getc()){
+					while(pGate->can_getc() && GetMaxNum_){
+						//hmLib::gate::size_type size=1;
+						//char tmp;
+						//if(pGate->get(&tmp,size))break;
+						iBuf.push_back(pGate->getc());
 						--GetMaxNum_;
 					}
 				}
 				if(!oBuf.empty()){
-					while(!oBuf.empty() && pGate->can_put() && PutMaxNum_){
+					while(!oBuf.empty() && pGate->can_putc() && PutMaxNum_){
 						hmLib::gate::size_type size=1;
-						pGate->put(&oBuf.front(),size);
+						pGate->putc(oBuf.front());
 						oBuf.pop_front();
 						--PutMaxNum_;
 					}
 				}
 			}catch(const hmLib::gate_not_opened_exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::invalid_status,"gate connected with bufgate is not opened.");
-			}catch(const std::exception& Except_){
-				hmLib_thrownext(Except_,hmLib::exceptions::invalid_status,"bufgate fail to get/put work.");
+				hmLib_thrownext(Except_,hmLib::exceptions::io_not_opened,"gate connected with bufgate is not opened.");
 			}
 		}
 		unsigned int psize()const{return oBuf.size();}
@@ -105,18 +99,26 @@ namespace hmr{
 		void pclear(){oBuf.clear();}
 		void gclear(){iBuf.clear();}
 	public://itfGate
-		//受信待データ
-		virtual bool empty()override{return iBuf.empty();}
-		//受信可能
-		virtual bool can_get()override{
-			if(!is_open())return false;
-			return pGate->can_get();
+		//受信可能か
+		virtual bool can_getc()override{
+			return !iBuf.empty(); // && pGate->can_getc();
+		}
+		//受信継続中か？？
+		virtual bool flowing()override{
+			return pGate->flowing();
+		}
+		//単byte受信
+		virtual char getc()override{
+			char tmp;
+			tmp = iBuf.front();
+			iBuf.pop_front();
+			return tmp;
 		}
 		//複数byte受信
-		virtual size_type get(char* str_,const size_type& size_)override{	
+		virtual size_type gets(char* str_,const size_type& size_)override{	
 			size_type pos=0;
 			for(;pos<size_;++pos){
-				if(!can_get())break;
+				if(!can_getc())break;
 				*str_=iBuf.front();
 				iBuf.pop_front();
 				++str_;
@@ -124,22 +126,29 @@ namespace hmr{
 			return pos;
 		}
 		//送信待データ
-		virtual bool full()override{return false;}
+		virtual void flush()override{pGate->flush();}
 		//送信可能
-		virtual bool can_put()override{
+		virtual bool can_putc()override{
 			if(!is_open())return false;
-			return pGate->can_put();
+			//return pGate->can_putc();
+			return true;
 		}
 		//複数byte送信
-		virtual size_type put(const char* str_,const size_type& size_)override{
+		virtual size_type puts(const char* str_,const size_type& size_)override{
 			size_type pos=0;
 			for(;pos<size_;++pos){
-				if(!can_put())break;
+				if(!can_putc())break;
 				oBuf.push_back(*str_);
 				++str_;
 			}
 			return pos;
 		}
+		// 1byte 送信
+		virtual void putc(char c)override{
+			oBuf.push_back(c);
+			return;
+		}
+
 
 	private: 
 		// slot connections
@@ -165,10 +174,10 @@ namespace hmr{
 			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->is_open();});
 		}
 		void contact_can_put(hmLib::inquiries::inquiry<bool>& Inq_){
-			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_put();});
+			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_putc();});
 		}
 		void contact_can_get(hmLib::inquiries::inquiry<bool>& Inq_){
-			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_get();});
+			hmLib::inquiries::connect(Inq_,[&](void)->bool{return this->can_getc();});
 		}
 	};
 }
