@@ -434,5 +434,8 @@
     <ClInclude Include="..\hmrVLib\hmrVLib\File\TimeDirectoryFile.hpp">
       <Filter>hmrVLib\File</Filter>
     </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameDirectoryFile.hpp">
+      <Filter>hmrVLib\File</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

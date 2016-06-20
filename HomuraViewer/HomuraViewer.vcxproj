@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameDirectoryFile.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameFileAgent.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFileAgent.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\TimeDirectoryFile.hpp" />
