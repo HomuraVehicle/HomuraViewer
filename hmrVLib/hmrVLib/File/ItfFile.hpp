@@ -1,5 +1,5 @@
-#ifndef HMR_ITFFILE_INC
-#define HMR_ITFFILE_INC 100
+#ifndef HMRVLIB_ITFFILE_INC
+#define HMRVLIB_ITFFILE_INC 100
 #
 /*===hmrFile===
 ログファイルを管理するクラスインターフェース

@@ -1,5 +1,5 @@
-#ifndef HMR_DATA_INC
-#define HMR_DATA_INC 102
+#ifndef HMRVLIB_DATA_INC
+#define HMRVLIB_DATA_INC 102
 #
 #include<hmLib/config_vc.h>
 #include<sstream>
@@ -8,7 +8,7 @@
 #include<chrono>
 #include<vector>
 #include<boost/format.hpp>
-#include"hmrVMC1.h"
+#include<hmrVLib/VMC1.h>
 /*===hmrData===
 データ型の管理用ファイル
 
