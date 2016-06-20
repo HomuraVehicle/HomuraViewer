@@ -9,8 +9,8 @@
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include "hmrItfFile.hpp"
-#include"hmrData.hpp"
+#include <hmrVLib/File.hpp>
+#include <hmrVLib/Data.hpp>
 namespace hmr{
 	//CSVŒ`Ž®ƒNƒ‰ƒX
 	class cCSVFileAgent:public itfFileAgent{

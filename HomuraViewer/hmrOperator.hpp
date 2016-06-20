@@ -53,7 +53,7 @@ hmrOperator:v1_00/130310 hmito
 #include <boost/signals2.hpp>
 #include"hmrItfCom.hpp"
 #include"hmrItfMessage.hpp"
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 
 namespace hmr{
 	class cFullRecvOneSendOperator{

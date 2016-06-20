@@ -11,7 +11,7 @@ hmrCSVFileTool v0_00/131026 iwahori
 #include "hmrCSVFile.hpp"
 #include <boost/lexical_cast.hpp>
 #include <string>
-#include "hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 
 namespace hmr{
 	//signalされたデータを文字列にして一時保管するcontactクラス、上書き防止通知機能付き

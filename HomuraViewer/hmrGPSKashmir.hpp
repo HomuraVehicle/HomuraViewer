@@ -4,7 +4,7 @@
 #include<hmLib/comgate.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 #include"hmrGPSDataSet.hpp"
 namespace hmr{
 	class cGPSKashmir{

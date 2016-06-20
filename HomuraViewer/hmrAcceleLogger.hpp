@@ -9,7 +9,7 @@ Accele‚Ìƒf[ƒ^‚ğˆê’èŠÔ’~Ï‚µ‘±‚¯‚é
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include <hmLib/coordinates.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 namespace hmr{
 	class cAcceleLogger{
 		typedef hmLib::coordinates3D::polar polar;

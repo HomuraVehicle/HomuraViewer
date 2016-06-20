@@ -12,7 +12,7 @@ hmrComLog v1_00/130410 hmIto
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 namespace hmr{
 	class cComLog{
 		typedef std::deque<std::pair<bool,hmr::packet>> containor;

@@ -3,7 +3,7 @@
 #
 
 #include"hmLibVer.hpp"
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 #include<array>
 
 namespace hmr{

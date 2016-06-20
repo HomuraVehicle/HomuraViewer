@@ -69,9 +69,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmrVLib;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(LibraryPath)</LibraryPath>
-    <SourcePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(SourcePath)</SourcePath>
+    <SourcePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmrVLib;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(IncludePath)</IncludePath>
@@ -141,15 +141,20 @@
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cqueue.c" />
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstack.c" />
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstring.c" />
+    <ClCompile Include="..\hmrVLib\hmrVLib\VMC1.c" />
     <ClCompile Include="hmrCompassMA.cpp" />
     <ClCompile Include="hmrDxDeviceManageSUI.cpp" />
     <ClCompile Include="hmrDxIOSideDisp.cpp" />
     <ClCompile Include="hmrDxLoggerManageSUI.cpp" />
     <ClCompile Include="hmrSprite.cpp" />
-    <ClCompile Include="hmrVMC1.c" />
     <ClCompile Include="HomuraViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\DirectoryFile.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\ItfFile.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\VMC1.h" />
     <ClInclude Include="any_predicate.hpp" />
     <ClInclude Include="date.hpp" />
     <ClInclude Include="dxSignalBut.hpp" />

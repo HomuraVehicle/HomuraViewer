@@ -18,8 +18,8 @@ hmrUniSensorFile v1_00/140320 amby
 #include <fstream>
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
-#include "hmrItfFile.hpp"
-#include"hmrData.hpp"
+#include <hmrVLib/File.hpp>
+#include <hmrVLib/Data.hpp>
 
 
 namespace hmr{

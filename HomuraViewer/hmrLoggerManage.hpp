@@ -45,7 +45,7 @@ void set_logMode
 #include <hmLib/inquiries.hpp>
 #include <hmLib/type.h>
 #include "hmrItfMessage.hpp"
-#include "hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 #include "hmrFlagirl.hpp"
 
 namespace hmr{

@@ -108,9 +108,9 @@ hmrV2500 v1_03/130713
 #include "hmrDxVMCSUI.hpp"
 #include "hmrDXFileSUI.hpp"
 #include "hmrDxChrono.hpp"
-#include"hmrDxBUIBoxSideDisp.hpp"
+#include "hmrDxBUIBoxSideDisp.hpp"
 
-#include "hmrDirectoryFile.hpp"
+#include <hmrVLib/File.hpp>
 #include "hmrGPSFile.hpp"
 #include "hmrSpriteFile.hpp"
 #include "hmrCSVFile.hpp"

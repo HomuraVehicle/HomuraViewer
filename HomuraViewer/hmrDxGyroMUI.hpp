@@ -19,7 +19,7 @@ hmrDxGyroMUI v1_00/130519 iwahori
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include <hmLib/coordinates.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 #include"hmrDxBUI.hpp"
 namespace hmr{
 	//x240*yNONE

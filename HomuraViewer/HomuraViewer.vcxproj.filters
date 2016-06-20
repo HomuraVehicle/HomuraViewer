@@ -16,6 +16,12 @@
     <Filter Include="hmLib">
       <UniqueIdentifier>{a6084143-c692-46cc-882b-4793c8b4bb30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hmrVLib">
+      <UniqueIdentifier>{ca54955d-5dbb-4c0c-828b-7985efe4d03f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hmrVLib\File">
+      <UniqueIdentifier>{ad9cb7e9-4c02-4288-ba7d-09e6d9fffb41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hmrCompassMA.cpp">
@@ -36,9 +42,6 @@
     <ClCompile Include="HomuraViewer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="hmrVMC1.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstring.c">
       <Filter>hmLib</Filter>
     </ClCompile>
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstack.c">
       <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\hmrVLib\hmrVLib\VMC1.c">
+      <Filter>hmrVLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -436,6 +442,21 @@
     </ClInclude>
     <ClInclude Include="vmstatus.hpp">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File.hpp">
+      <Filter>hmrVLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\VMC1.h">
+      <Filter>hmrVLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\DirectoryFile.hpp">
+      <Filter>hmrVLib\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\ItfFile.hpp">
+      <Filter>hmrVLib\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp">
+      <Filter>hmrVLib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

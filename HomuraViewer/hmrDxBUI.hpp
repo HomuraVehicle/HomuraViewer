@@ -9,7 +9,7 @@
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
 #include"hmrDxTools.hpp"
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 namespace hmr{
 	struct color_set{
 		dxRGB Background;

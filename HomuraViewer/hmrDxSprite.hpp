@@ -10,7 +10,7 @@
 #include<hmLib_v2/dxColorSet.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 namespace hmr{
 	class dxosSprite:public dxReObject,public hmoBox{
 	private:

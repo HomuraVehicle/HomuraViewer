@@ -150,7 +150,7 @@ void connect(dxosFileSUI& fileSUI_, cWholeFileAgent& agt_) {
 }
 #endif
 
-#if defined(HMR_DXFILE_SUI_INC) && defined(HMR_DIRECTORYFILE_INC)
+#if defined(HMR_DXFILE_SUI_INC) && defined(HMRVLIB_DIRECTORYFILE_INC)
 void connect(dxosFileSUI& fileSUI_, cDirectoryFile& agt_) {
 	fileSUI_.slot_setIsActive(agt_.signal_isActivate);
 	agt_.slot_activate(fileSUI_.signal_require_activate);

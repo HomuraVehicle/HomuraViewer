@@ -4,7 +4,7 @@
 #include<boost/format.hpp>
 #include<string>
 #include"date.hpp"
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 #include"hmrItfFile.hpp"
 namespace hmr{
 	class cFile:public itfFile{

@@ -11,7 +11,7 @@ hmrGPS v1_01/130907 amby
 
 #include<boost/format.hpp>
 #include<hmLib/position.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 #include"date.hpp"
 
 namespace hmr{

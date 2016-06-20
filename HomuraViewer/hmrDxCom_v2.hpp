@@ -28,7 +28,7 @@ hmrDxCom v1_00/130410 hmIto
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 #include"iologgate.hpp"
 namespace hmr{
 	//データのid:先頭数文字を描画する、dxButIO型の描画クラス

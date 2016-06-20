@@ -9,7 +9,7 @@ Gyro‚Ìƒf[ƒ^‚ğˆê’èŠÔ’~Ï‚µ‘±‚¯‚é
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include <hmLib/coordinates.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 namespace hmr{
 	class cGyroLogger{
 		typedef hmLib::coordinates3D::angle angle;

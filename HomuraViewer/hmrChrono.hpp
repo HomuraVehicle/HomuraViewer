@@ -12,7 +12,7 @@ Chrono
 #include <hmLib/type.h>
 #include "hmrItfMessage.hpp"
 #include "vmstatus.hpp"
-#include "hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 
 namespace hmr{
 	//ChronoŠÖ˜A

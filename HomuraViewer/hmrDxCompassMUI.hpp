@@ -17,7 +17,7 @@ hmrDxCompassMUI v1_00/130511 hmIto
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include <hmLib/coordinates.hpp>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 #include"hmrDxBUI.hpp"
 #include"hmrCompassData.hpp"
 

@@ -2,7 +2,7 @@
 #define HMR_COMTIMELOGGER_INC
 #
 #include<deque>
-#include"hmrData.hpp"
+#include <hmrVLib/Data.hpp>
 namespace hmr{
 	class cComTimeLogger{
 	private:
