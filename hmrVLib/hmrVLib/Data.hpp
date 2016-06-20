@@ -66,13 +66,13 @@ namespace hmr{
 
 		std::stringstream sout;
 		if(msno_==0){
-			sout<<boost::format("%02d:%02d;%02d")%Date.Hour%Date.Min%Date.Sec;
+			sout<<boost::format("%02d:%02d:%02d")%Date.Hour%Date.Min%Date.Sec;
 		}else if(msno_==1){
-			sout<<boost::format("%02d:%02d;%02d.%01d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/100);
+			sout<<boost::format("%02d:%02d:%02d.%01d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/100);
 		}else if(msno_==2){
-			sout<<boost::format("%02d:%02d;%02d.%02d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/10);
+			sout<<boost::format("%02d:%02d:%02d.%02d")%Date.Hour%Date.Min%Date.Sec%(Date.mSec/10);
 		}else{
-			sout<<boost::format("%02d:%02d;%02d.%03d")%Date.Hour%Date.Min%Date.Sec%Date.mSec;
+			sout<<boost::format("%02d:%02d:%02d.%03d")%Date.Hour%Date.Min%Date.Sec%Date.mSec;
 		}
 		return sout.str();
 	}

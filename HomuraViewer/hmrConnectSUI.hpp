@@ -150,6 +150,14 @@ void connect(dxosFileSUI& fileSUI_, cTimeDirectoryFile& agt_) {
 }
 #endif
 
+#if defined(HMR_DXFILE_SUI_INC) && defined(HMRVLIB_CONSTNAMEDIRECTORYFILE_INC)
+void connect(dxosFileSUI& fileSUI_, cConstNameDirectoryFile& agt_){
+	fileSUI_.slot_setIsActive(agt_.signal_isActivate);
+	agt_.slot_activate(fileSUI_.signal_require_activate);
+	agt_.slot_inactivate(fileSUI_.signal_require_inactivate);
+}
+#endif
+
 #if defined(HMR_DXDEVICEMANAGESUI_INC) && defined(HMR_DEVICEMANAGE_INC)
 void connect(dxosDevMngSUI& devSUI_, cDevMngMsgAgent& agt_) {
 	agt_.slot_setNormalMode(devSUI_.signal_setNormalMode);

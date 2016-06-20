@@ -35,6 +35,9 @@ namespace hmr{
 	void connect(cGPSFileAgent& fAgent_, cGPSMsgAgent& mAgent_){
 		fAgent_.slot_log_writeData(mAgent_.signal_newdata);
 	}
+	void connect(cGPGGAFileAgent& fAgent_, cGPSMsgAgent& mAgent_){
+		fAgent_.slot_log_writeData(mAgent_.signal_newdata);
+	}
 #endif
 
 #if defined(HMR_GYROFILE_INC) && defined(HMR_GYRO_INC)

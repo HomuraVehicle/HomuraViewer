@@ -284,7 +284,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmr::cLoggerMngMsgAgent LogMngMA;
 		Message.regist('L', &LogMngMA);
 
-		hmr::cTimeDirectoryFile DirectoryFile;
 		//パケット単位でセンサーデータを保存
 		//hmr::cCSVFileAgent PacketFileAgent("Packet");
 		//PacketFileAgent.slot_write(Com.signal_finRecvPacket);
@@ -338,28 +337,36 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		DirectoryFile.regist(&ThermoFileAgent);
 		*/
 
+		//親ディレクトリ
+		hmr::cConstNameDirectoryFile DirectoryFile("Data");
+
 		// log Thermo データを保存
-		hmr::cUniSensorFileAgent<std::pair<double,std::uint16_t>> logThermoFileAgent("Thermo_log");
-		logThermoFileAgent.slot_log_writeData(ThermoMA.signal_newLogRawData);
-		DirectoryFile.regist(&logThermoFileAgent);
+//		hmr::cConstNameFileAgent<std::pair<double,std::uint16_t>> logThermoFileAgent("Thermo.tsv","\t");
+//		logThermoFileAgent.slot_log_writeData(ThermoMA.signal_newLogRawData);
+//		DirectoryFile.regist(&logThermoFileAgent);
 		// Thermo データを保存
-		hmr::cUniSensorFileAgent<std::pair<double, std::uint16_t>> ThermoFileAgent("Thermo_normal");
+		hmr::cConstNameFileAgent<std::pair<double, std::uint16_t>> ThermoFileAgent("Thermo.txt",'\t');
 		ThermoFileAgent.slot_log_writeData(ThermoMA.signal_newRawData);
 		DirectoryFile.regist(&ThermoFileAgent);
 
 		// log CO2
-		hmr::cUniSensorFileAgent<std::pair<double, std::uint16_t>> logCO2FileAgent("CO2_log");
-		logCO2FileAgent.slot_log_writeData(CO2MA.signal_newLogRawData);
-		DirectoryFile.regist(&logCO2FileAgent);
+//		hmr::cConstNameFileAgent<std::pair<double, std::uint16_t>> logCO2FileAgent("CO2_log");
+//		logCO2FileAgent.slot_log_writeData(CO2MA.signal_newLogRawData);
+//		DirectoryFile.regist(&logCO2FileAgent);
 		// CO2 データを保存
-		hmr::cUniSensorFileAgent<std::pair<double, std::uint16_t>> CO2FileAgent("CO2_normal");
+		hmr::cConstNameFileAgent<std::pair<double, std::uint16_t>> CO2FileAgent("CO2.txt", '\t');
 		CO2FileAgent.slot_log_writeData(CO2MA.signal_newRawData);
 		DirectoryFile.regist(&CO2FileAgent);
 
-		//GPGGAデータを保存
+		//GPSデータを保存
 		hmr::cGPSFileAgent GPSFileAgent;
 		hmr::connect(GPSFileAgent, GPSMA);
 		DirectoryFile.regist(&GPSFileAgent);
+
+		//GPGGAデータを保存
+		hmr::cGPGGAFileAgent GPGGAFileAgent;
+		hmr::connect(GPGGAFileAgent, GPSMA);
+		DirectoryFile.regist(&GPGGAFileAgent);
 
 		//カメラデータを保存
 		hmr::cSpriteFileAgent SpriteFileAgent("Sprite");
@@ -367,9 +374,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		DirectoryFile.regist(&SpriteFileAgent);
 
 		//カメラログデータを保存
-		hmr::cSpriteFileAgent SpriteLogFileAgent("SpriteLog");
-		hmr::connect(SpriteLogFileAgent, SpriteMA, true);
-		DirectoryFile.regist(&SpriteLogFileAgent);
+//		hmr::cSpriteFileAgent SpriteLogFileAgent("SpriteLog");
+//		hmr::connect(SpriteLogFileAgent, SpriteMA, true);
+//		DirectoryFile.regist(&SpriteLogFileAgent);
 
 /*
 		// File 系列の宣言

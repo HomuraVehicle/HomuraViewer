@@ -21,7 +21,7 @@ namespace hmr{
 		// log and write 関数
 		void log_writeData(clock::time_point time_, double data_){
 			if(is_active()){
-				ofs << hmr::time_to_hms(time_) << Separator << data_ << std::endl;
+				ofs << hmr::time_to_ymd(time_) << Separator << hmr::time_to_hms(time_) << Separator << data_ << std::endl;
 			}
 		}
 
@@ -67,19 +67,12 @@ namespace hmr{
 		std::string Name;
 		char Separator;
 	private:
-		template<unsigned int pos>
-		void write_tuple_item(const my_tuple& data_){
-			if(pos >= )return;
-			ofs << Separator << std::get<pos>(data_);
-			write_tuple_item<pos + 1>(data_);
-		}
-		template<>
-		void write_tuple_item<std::tuple_size<my_tuple>::value>(const my_tuple& data_){}
 		// log and write 関数
-		void log_writeData(clock::time_point time_, my_tuple data_){
+		void log_writeData(clock::time_point time_, T1 data1_, T2 data2_){
 			if(is_active()){
-				ofs << hmr::time_to_hms(time_);
-				write_tuple_item(data_, 0);
+				ofs << hmr::time_to_ymd(time_) << Separator << hmr::time_to_hms(time_);
+				ofs << Separator << data1_;
+				ofs << Separator << data2_;
 				ofs << std::endl;
 			}
 		}
@@ -95,10 +88,7 @@ namespace hmr{
 				//ファイルが存在しない場合
 				if(!fin.is_open()){
 					ofs.open(Path_ + Name);
-					ofs << "Time";
-					for(unsigned int Cnt = 0; Cnt < std::tuple_size<my_tuple>::value; ++Cnt){
-						ofs << Separator << "Data" << Cnt;
-					}
+					ofs << "Date" << Separator << "Time" << Separator << "Data1" << Separator << "Data2";
 					ofs << std::endl;
 				} else{
 					fin.close();
@@ -115,8 +105,8 @@ namespace hmr{
 
 		// Log 用の signal slot
 	public:
-		void slot_log_writeData(boost::signals2::signal<void(my_tuple, clock::time_point)>& Signal_){
-			SignalConnections(hmLib::signals::connect(Signal_, [&](my_tuple data_, clock::time_point time_)->void{this->log_writeData(time_, data_); }));
+		void slot_log_writeData(boost::signals2::signal<void(T1, T2, clock::time_point)>& Signal_){
+			SignalConnections(hmLib::signals::connect(Signal_, [&](T1 data1_, T2 data2_, clock::time_point time_)->void{this->log_writeData(time_, data1_, data2_); }));
 		}
 	};
 	template<typename T,typename... others>
@@ -139,7 +129,7 @@ namespace hmr{
 		// log and write 関数
 		void log_writeData(clock::time_point time_, my_tuple data_){
 			if(is_active()){
-				ofs << hmr::time_to_hms(time_);
+				ofs << hmr::time_to_ymd(time_) << Separator << hmr::time_to_hms(time_);
 				write_tuple_item(data_, 0);
 				ofs << std::endl;
 			}
@@ -157,7 +147,7 @@ namespace hmr{
 				//ファイルが存在しない場合
 				if(!fin.is_open()){
 					ofs.open(Path_ + Name);
-					ofs << "Time";
+					ofs << "Date"<<Separator<<"Time";
 					for(unsigned int Cnt = 0; Cnt < std::tuple_size<my_tuple>::value; ++Cnt){
 						ofs << Separator << "Data" <<Cnt;
 					}

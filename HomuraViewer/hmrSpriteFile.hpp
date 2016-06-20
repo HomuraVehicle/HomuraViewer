@@ -124,7 +124,10 @@ namespace hmr{
 			if(!is_active()){
 				activeFlag = true;
 				filePath = Path_ + Name + "\\";
-				boost::filesystem::create_directory(boost::filesystem::current_path()/(Path_ + Name));
+
+				if(!boost::filesystem::exists(boost::filesystem::current_path() / (Path_ + Name))){
+					boost::filesystem::create_directory(boost::filesystem::current_path() / (Path_ + Name));
+				}
 			}
 		}
 		void inactivate(){
@@ -141,7 +144,6 @@ namespace hmr{
 		}
 	
 	};
-
 
 }
 #endif
