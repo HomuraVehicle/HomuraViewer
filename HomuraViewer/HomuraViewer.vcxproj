@@ -74,9 +74,9 @@
     <SourcePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmrVLib;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmrVLib;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(LibraryPath)</LibraryPath>
-    <SourcePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;$(SourcePath)</SourcePath>
+    <SourcePath>C:\Users\hmIto\OneDrive\SkyStorage\hmLib\hmLib_v4_02;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmrVLib;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;$(IncludePath)</IncludePath>
