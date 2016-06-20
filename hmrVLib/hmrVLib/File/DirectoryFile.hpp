@@ -1,6 +1,6 @@
 
-#ifndef HMR_WHOLEFILE_INC
-#define HMR_WHOLEFILE_INC 100
+#ifndef HMRVLIB_DIRECTORYFILE_INC
+#define HMRVLIB_DIRECTORYFILE_INC 100
 #
 
 /*===hmrWholeFile===
@@ -10,7 +10,7 @@
 こいつはディレクトリという意味でまた、ファイルシステムを継承している
 
 hmrWholeFile v1_00/130914 amby
-	作成開始
+作成開始
 */
 
 #include <string>
@@ -19,18 +19,17 @@ hmrWholeFile v1_00/130914 amby
 #include <boost/filesystem.hpp>
 #include <hmLib/signals.hpp>
 #include "hmrItfFile.hpp"
-#include "hmrData.hpp"
+#include <Data.hpp"
 
 
 namespace hmr{
-	class cWholeFileAgent:public itfFile{
+	class cDirectoryFile :public itfFile{
 		//typedef std::pair<itfFileAgent*, std::string> FileAgentSet;
 		typedef std::vector<itfFileAgent*> FileAgentBuf;
 
 	private:
 		std::ofstream ofs;
 		hmLib::signals::unique_connections SignalConnections;
-
 
 		FileAgentBuf fAgents;
 		bool activateFlag;
@@ -39,7 +38,7 @@ namespace hmr{
 		// signal 系列の定義
 		boost::signals2::signal<void(bool)> signal_isActivate;
 
-		cWholeFileAgent(){
+		cDirectoryFile(){
 			activateFlag = false;
 		}
 
@@ -50,27 +49,26 @@ namespace hmr{
 
 		void activate(const std::string& Path_){
 			// 時間を取得
-			clock::time_point time_ =  clock::now(); 
+			clock::time_point time_ = clock::now();
 			hmr::date Date;
 			Date.from_time(time_);
 
 			// Passを指定してしまう
-			std::string str1 = Path_ +  (boost::format("%02d%02d%02d_%02d%02d%02d")%(Date.Year%100)%Date.Month%Date.Day%Date.Hour%Date.Min%Date.Sec).str();
+			std::string str1 = Path_ + (boost::format("%02d%02d%02d_%02d%02d%02d") % (Date.Year % 100) % Date.Month%Date.Day%Date.Hour%Date.Min%Date.Sec).str();
 
-			boost::filesystem::create_directory(boost::filesystem::current_path()/str1);
+			boost::filesystem::create_directory(boost::filesystem::current_path() / str1);
 			if(!is_active()){
 				for(auto itr = fAgents.begin(); itr != fAgents.end(); ++itr){
-					std::string str = str1  + "\\";
-					(*itr)->activate( str );
+					std::string str = str1 + "\\";
+					(*itr)->activate(str);
 				}
 
 				activateFlag = true;
 				signal_isActivate(true);
 			}
 		}
-		
-		bool is_active() const {return activateFlag;}
 
+		bool is_active() const{ return activateFlag; }
 		void inactivate(){
 			if(is_active()){
 				for(auto itr = fAgents.begin(); itr != fAgents.end(); ++itr){
@@ -80,24 +78,16 @@ namespace hmr{
 				signal_isActivate(false);
 			}
 		}
-	
-	// activate用, inactivate用 の signal slot
+
+		// activate用, inactivate用 の signal slot
 	public:
 		void slot_activate(boost::signals2::signal<void(const std::string&)>& Signal_){
-			SignalConnections(hmLib::signals::connect(Signal_,[&](const std::string& path_)->void{this->activate(path_);}));
+			SignalConnections(hmLib::signals::connect(Signal_, [&](const std::string& path_)->void{this->activate(path_); }));
 		}
 		void slot_inactivate(boost::signals2::signal<void()>& Signal_){
-			SignalConnections(hmLib::signals::connect(Signal_,[&]()->void{this->inactivate();}));
+			SignalConnections(hmLib::signals::connect(Signal_, [&]()->void{this->inactivate(); }));
 		}
 	};
 }
 #endif
-
-
-
-
-
-
-
-
 
