@@ -152,8 +152,11 @@
   <ItemGroup>
     <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFile.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFileTool.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\DirectoryFile.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\ItfFile.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFile.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\VMC1.h" />
     <ClInclude Include="any_predicate.hpp" />
     <ClInclude Include="date.hpp" />
@@ -188,12 +191,8 @@
     <ClInclude Include="hmrConnectMUI.hpp" />
     <ClInclude Include="hmrConnectPad.hpp" />
     <ClInclude Include="hmrConnectSUI.hpp" />
-    <ClInclude Include="hmrCSVFile.hpp" />
-    <ClInclude Include="hmrCSVFileTool.hpp" />
-    <ClInclude Include="hmrData.hpp" />
     <ClInclude Include="hmrDeviceManage.hpp" />
     <ClInclude Include="hmrDeviceManage2.hpp" />
-    <ClInclude Include="hmrDirectoryFile.hpp" />
     <ClInclude Include="hmrDxAcceleMUI.hpp" />
     <ClInclude Include="hmrDxBattery.hpp" />
     <ClInclude Include="hmrDxBatteryMUI.hpp" />
@@ -261,7 +260,6 @@
     <ClInclude Include="hmrInfraRedFile.hpp" />
     <ClInclude Include="hmrIO.hpp" />
     <ClInclude Include="hmrItfCom.hpp" />
-    <ClInclude Include="hmrItfFile.hpp" />
     <ClInclude Include="hmrItfMessage.hpp" />
     <ClInclude Include="hmrLoggerManage.hpp" />
     <ClInclude Include="hmrManipulator.hpp" />
@@ -274,10 +272,6 @@
     <ClInclude Include="hmrSpriteFile.hpp" />
     <ClInclude Include="hmrThermo.hpp" />
     <ClInclude Include="hmrThermoFile.hpp" />
-    <ClInclude Include="hmrTimeDirectoryFile.hpp" />
-    <ClInclude Include="hmrUniSensorFile.hpp" />
-    <ClInclude Include="hmrVMC1.h" />
-    <ClInclude Include="hmrWholeFile.hpp" />
     <ClInclude Include="iologgate.hpp" />
     <ClInclude Include="predicate.hpp" />
     <ClInclude Include="vmstatus.hpp" />

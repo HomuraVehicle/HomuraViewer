@@ -71,9 +71,6 @@
     <ClInclude Include="hmrADC.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrVMC1.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="any_predicate.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -167,22 +164,10 @@
     <ClInclude Include="hmrConnectSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrCSVFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrCSVFileTool.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrData.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDeviceManage.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDeviceManage2.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDirectoryFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxAcceleMUI.hpp">
@@ -386,9 +371,6 @@
     <ClInclude Include="hmrItfCom.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrItfFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrItfMessage.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -425,15 +407,6 @@
     <ClInclude Include="hmrThermoFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrTimeDirectoryFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrUniSensorFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrWholeFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="iologgate.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -457,6 +430,15 @@
     </ClInclude>
     <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp">
       <Filter>hmrVLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFile.hpp">
+      <Filter>hmrVLib\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFileTool.hpp">
+      <Filter>hmrVLib\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFile.hpp">
+      <Filter>hmrVLib\File</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
