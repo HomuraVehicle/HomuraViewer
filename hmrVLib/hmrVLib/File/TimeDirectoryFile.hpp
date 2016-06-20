@@ -1,6 +1,5 @@
-
-#ifndef HMRVLIB_DIRECTORYFILE_INC
-#define HMRVLIB_DIRECTORYFILE_INC 100
+#ifndef HMRVLIB_TIMEDIRECTORYFILE_INC
+#define HMRVLIB_TIMEDIRECTORYFILE_INC 100
 #
 
 /*===hmrWholeFile===
@@ -23,7 +22,7 @@ hmrWholeFile v1_00/130914 amby
 
 
 namespace hmr{
-	class cDirectoryFile :public itfFile{
+	class cTimeDirectoryFile :public itfFile{
 		//typedef std::pair<itfFileAgent*, std::string> FileAgentSet;
 		typedef std::vector<itfFileAgent*> FileAgentBuf;
 
@@ -38,7 +37,7 @@ namespace hmr{
 		// signal Œn—ñ‚Ì’è‹`
 		boost::signals2::signal<void(bool)> signal_isActivate;
 
-		cDirectoryFile(){
+		cTimeDirectoryFile(){
 			activateFlag = false;
 		}
 

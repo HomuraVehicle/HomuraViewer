@@ -284,7 +284,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmr::cLoggerMngMsgAgent LogMngMA;
 		Message.regist('L', &LogMngMA);
 
-		hmr::cDirectoryFile DirectoryFile;
+		hmr::cTimeDirectoryFile DirectoryFile;
 		//パケット単位でセンサーデータを保存
 		//hmr::cCSVFileAgent PacketFileAgent("Packet");
 		//PacketFileAgent.slot_write(Com.signal_finRecvPacket);

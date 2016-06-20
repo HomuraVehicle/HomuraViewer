@@ -152,10 +152,11 @@
   <ItemGroup>
     <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File.hpp" />
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFile.hpp" />
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\DirectoryFile.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameFileAgent.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFileAgent.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\TimeDirectoryFile.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\ItfFile.hpp" />
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFile.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFileAgent.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\VMC1.h" />
     <ClInclude Include="any_predicate.hpp" />
     <ClInclude Include="date.hpp" />
@@ -238,8 +239,6 @@
     <ClInclude Include="hmrDxThermoMUI.hpp" />
     <ClInclude Include="hmrDxTools.hpp" />
     <ClInclude Include="hmrDxVMCSUI.hpp" />
-    <ClInclude Include="hmrFile.hpp" />
-    <ClInclude Include="hmrFileAgent.hpp" />
     <ClInclude Include="hmrFlagirl.hpp" />
     <ClInclude Include="hmrGateConnector.hpp" />
     <ClInclude Include="hmrGateSwitcher.hpp" />

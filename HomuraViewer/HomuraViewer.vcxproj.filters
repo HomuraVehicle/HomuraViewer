@@ -308,12 +308,6 @@
     <ClInclude Include="hmrDxVMCSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrFileAgent.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrFlagirl.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -422,19 +416,22 @@
     <ClInclude Include="..\hmrVLib\hmrVLib\VMC1.h">
       <Filter>hmrVLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\DirectoryFile.hpp">
-      <Filter>hmrVLib\File</Filter>
-    </ClInclude>
     <ClInclude Include="..\hmrVLib\hmrVLib\File\ItfFile.hpp">
       <Filter>hmrVLib\File</Filter>
     </ClInclude>
     <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp">
       <Filter>hmrVLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFile.hpp">
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameFileAgent.hpp">
       <Filter>hmrVLib\File</Filter>
     </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFile.hpp">
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFileAgent.hpp">
+      <Filter>hmrVLib\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFileAgent.hpp">
+      <Filter>hmrVLib\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\File\TimeDirectoryFile.hpp">
       <Filter>hmrVLib\File</Filter>
     </ClInclude>
   </ItemGroup>

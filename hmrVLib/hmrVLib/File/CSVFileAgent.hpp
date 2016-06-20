@@ -1,5 +1,5 @@
-#ifndef HMRVLIB_CSVFILE_INC
-#define HMRVLIB_CSVFILE_INC 100
+#ifndef HMRVLIB_CSVFILEAGENT_INC
+#define HMRVLIB_CSVFILEAGENT_INC 100
 #
 #include <iostream>
 #include <string>
