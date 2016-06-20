@@ -48,9 +48,6 @@
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\coordinates.cpp">
       <Filter>hmLib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\debugstream.cpp">
-      <Filter>hmLib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cdeque.c">
       <Filter>hmLib</Filter>
     </ClCompile>

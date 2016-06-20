@@ -141,7 +141,6 @@
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cqueue.c" />
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstack.c" />
     <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstring.c" />
-    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\debugstream.cpp" />
     <ClCompile Include="hmrCompassMA.cpp" />
     <ClCompile Include="hmrDxDeviceManageSUI.cpp" />
     <ClCompile Include="hmrDxIOSideDisp.cpp" />
