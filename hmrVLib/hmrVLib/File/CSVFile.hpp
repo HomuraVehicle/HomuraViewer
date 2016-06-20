@@ -1,5 +1,5 @@
-#ifndef HMR_CSVFILE_INC
-#define HMR_CSVFILE_INC 100
+#ifndef HMRVLIB_CSVFILE_INC
+#define HMRVLIB_CSVFILE_INC 100
 #
 #include <iostream>
 #include <string>
@@ -9,8 +9,9 @@
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include <hmrVLib/File.hpp>
 #include <hmrVLib/Data.hpp>
+#include "ItfFile.hpp"
+
 namespace hmr{
 	//CSVŒ`Ž®ƒNƒ‰ƒX
 	class cCSVFileAgent:public itfFileAgent{

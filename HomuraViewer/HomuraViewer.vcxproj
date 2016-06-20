@@ -153,7 +153,6 @@
     <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFile.hpp" />
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFileTool.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\DirectoryFile.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\ItfFile.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFile.hpp" />

@@ -434,9 +434,6 @@
     <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFile.hpp">
       <Filter>hmrVLib\File</Filter>
     </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFileTool.hpp">
-      <Filter>hmrVLib\File</Filter>
-    </ClInclude>
     <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFile.hpp">
       <Filter>hmrVLib\File</Filter>
     </ClInclude>

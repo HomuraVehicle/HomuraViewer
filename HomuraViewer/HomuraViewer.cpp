@@ -113,8 +113,6 @@ hmrV2500 v1_03/130713
 #include <hmrVLib/File.hpp>
 #include "hmrGPSFile.hpp"
 #include "hmrSpriteFile.hpp"
-#include "hmrCSVFile.hpp"
-#include "hmrUniSensorFile.hpp"
 
 /*
 #include "hmrWholeFile.hpp"

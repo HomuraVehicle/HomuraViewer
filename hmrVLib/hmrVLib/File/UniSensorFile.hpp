@@ -1,6 +1,6 @@
 
-#ifndef HMR_UNISENSORFILE_INC
-#define HMR_UNISENSORFILE_INC 100
+#ifndef HMRVLIB_UNISENSORFILE_INC
+#define HMRVLIB_UNISENSORFILE_INC 100
 #
 
 /*===hmrThermoFile===
@@ -18,9 +18,8 @@ hmrUniSensorFile v1_00/140320 amby
 #include <fstream>
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
-#include <hmrVLib/File.hpp>
 #include <hmrVLib/Data.hpp>
-
+#include "ItfFile.hpp"
 
 namespace hmr{
 	template<typename T>

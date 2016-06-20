@@ -1,13 +1,13 @@
-#ifndef HMR_FILE_INC
-#define HMR_FILE_INC 100
+#ifndef HMRVLIB_TIMEFILE_INC
+#define HMRVLIB_TIMEFILE_INC 100
 #
 #include<boost/format.hpp>
 #include<string>
-#include"date.hpp"
+#include <hmrVLib/date.hpp>
 #include <hmrVLib/Data.hpp>
 #include"hmrItfFile.hpp"
 namespace hmr{
-	class cFile:public itfFile{
+	class cTimeFile:public itfFile{
 		bool Active;
 		std::string Path;
 		std::vector<itfFileAgent*> FileAgents;
