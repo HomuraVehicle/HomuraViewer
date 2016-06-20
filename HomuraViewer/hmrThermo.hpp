@@ -53,7 +53,7 @@ namespace hmr{
 
 					// signal ”­M
 					signal_newData(Temperature, Time);
-					signal_newRawData(Temperature, RawTemperature, logTime);
+					signal_newRawData(Temperature, RawTemperature, Time);
 					return false;
 				}else if(static_cast<unsigned char>(Data_[0])==0x10){
 					if(Data_.size()!=1)return true;
