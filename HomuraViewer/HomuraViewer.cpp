@@ -9,6 +9,8 @@ hmrV2500 v1_06/160601
 		合わせて、温度計の時間未更新バグを更新
 		出力ファイルもtsv形式に更新
 		Dateも出力するようにした
+	e
+		AcceleLoggerの角度が過敏に反応する問題を修正
 hmrV2500 v1_05/130914
 	p
 		表示位置等修正
@@ -157,7 +159,7 @@ hmrV2500 v1_03/130713
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
 	//hmLib_dxモジュールを初期化
-	dx::ini("hmrV2500_v1_06d", 960,720);
+	dx::ini("hmrV2500_v1_06e", 960,720);
 
 
 	try{

@@ -1,7 +1,9 @@
 #ifndef HMR_ACCELELOGGER_INC
-#define HMR_ACCELELOGGER_INC 100
+#define HMR_ACCELELOGGER_INC 101
 #
 /*===hmrAcceleLogger===
+v1_01
+	coordinatesの更新に伴い、coordinates::polarの割り算が角度を割ってくれなくなっていた問題を修正
 Acceleのデータを一定時間蓄積し続ける
 */
 #include<deque>
