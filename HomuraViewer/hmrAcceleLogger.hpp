@@ -64,7 +64,13 @@ namespace hmr{
 				polar meanPolar(0, 0, 0);
 				int datSize=std::min(20u,Log.size());
 				for(auto itr=Log.rbegin();itr!=Log.rbegin()+datSize;++itr)meanPolar+=itr->second;
-				return meanPolar/(double)datSize;
+
+				//meanPolar/datSize では、rだけが短くなる
+				//角度も割るためには、各要素への明示的な割り算が必要
+				meanPolar.phi /= datSize;
+				meanPolar.theta /= datSize;
+				meanPolar.r /= datSize;
+				return meanPolar;
 			}));
 		}
 	};

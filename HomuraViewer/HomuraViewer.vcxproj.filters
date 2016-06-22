@@ -437,5 +437,8 @@
     <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameDirectoryFile.hpp">
       <Filter>hmrVLib\File</Filter>
     </ClInclude>
+    <ClInclude Include="..\hmLib\hmLib\coordinates.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

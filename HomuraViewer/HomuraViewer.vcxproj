@@ -150,6 +150,7 @@
     <ClCompile Include="HomuraViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\hmLib\hmLib\coordinates.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameDirectoryFile.hpp" />
