@@ -437,9 +437,6 @@
     <ClInclude Include="..\hmLib\hmLib\coordinates.hpp">
       <Filter>hmLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\Sensor.hpp">
-      <Filter>hmrVLib</Filter>
-    </ClInclude>
     <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessageAgent.hpp">
       <Filter>hmrVLib\Message</Filter>
     </ClInclude>
@@ -451,6 +448,12 @@
     </ClInclude>
     <ClInclude Include="..\hmrVLib\hmrVLib\Message.hpp">
       <Filter>hmrVLib</Filter>
+    </ClInclude>
+    <ClInclude Include="UniSensor.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="modeflags.hpp">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -78,6 +78,8 @@ hmrV2500 v1_03/130713
 //include"hmrHumid.hpp"
 //#include"hmrDxHumidMUI.hpp"
 
+#include"UniSensor.hpp"
+
 #include"hmrH2S.hpp"
 #include"hmrDxH2SMUI.hpp"
 

@@ -163,7 +163,6 @@
     <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessage.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessageAgent.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\Message\Message.hpp" />
-    <ClInclude Include="..\hmrVLib\hmrVLib\Sensor.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\VMC1.h" />
     <ClInclude Include="any_predicate.hpp" />
     <ClInclude Include="date.hpp" />
@@ -276,7 +275,9 @@
     <ClInclude Include="hmrThermo.hpp" />
     <ClInclude Include="hmrThermoFile.hpp" />
     <ClInclude Include="iologgate.hpp" />
+    <ClInclude Include="modeflags.hpp" />
     <ClInclude Include="predicate.hpp" />
+    <ClInclude Include="UniSensor.hpp" />
     <ClInclude Include="vmstatus.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
