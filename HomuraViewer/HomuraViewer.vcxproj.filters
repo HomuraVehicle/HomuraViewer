@@ -22,6 +22,9 @@
     <Filter Include="hmrVLib\File">
       <UniqueIdentifier>{ad9cb7e9-4c02-4288-ba7d-09e6d9fffb41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hmrVLib\Message">
+      <UniqueIdentifier>{26f915af-7843-4ca1-a0a0-29d8c2787c36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hmrCompassMA.cpp">
@@ -365,16 +368,10 @@
     <ClInclude Include="hmrItfCom.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrItfMessage.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrLoggerManage.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrManipulator.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrMessage.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrMotor.hpp">
@@ -439,6 +436,21 @@
     </ClInclude>
     <ClInclude Include="..\hmLib\hmLib\coordinates.hpp">
       <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\Sensor.hpp">
+      <Filter>hmrVLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessageAgent.hpp">
+      <Filter>hmrVLib\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\Message\Message.hpp">
+      <Filter>hmrVLib\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessage.hpp">
+      <Filter>hmrVLib\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hmrVLib\hmrVLib\Message.hpp">
+      <Filter>hmrVLib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

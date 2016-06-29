@@ -62,7 +62,7 @@ hmrDeviceManage v1_00/130928 amby
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include "hmrItfMessage.hpp"
+#include <hmrVLib/Message/ItfMessageAgent.hpp>
 #include "hmrFlagirl.hpp"
 
 

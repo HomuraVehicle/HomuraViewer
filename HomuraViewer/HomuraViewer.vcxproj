@@ -159,6 +159,11 @@
     <ClInclude Include="..\hmrVLib\hmrVLib\File\TimeDirectoryFile.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\ItfFile.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFileAgent.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\Message.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessage.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessageAgent.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\Message\Message.hpp" />
+    <ClInclude Include="..\hmrVLib\hmrVLib\Sensor.hpp" />
     <ClInclude Include="..\hmrVLib\hmrVLib\VMC1.h" />
     <ClInclude Include="any_predicate.hpp" />
     <ClInclude Include="date.hpp" />
@@ -260,10 +265,8 @@
     <ClInclude Include="hmrInfraRedFile.hpp" />
     <ClInclude Include="hmrIO.hpp" />
     <ClInclude Include="hmrItfCom.hpp" />
-    <ClInclude Include="hmrItfMessage.hpp" />
     <ClInclude Include="hmrLoggerManage.hpp" />
     <ClInclude Include="hmrManipulator.hpp" />
-    <ClInclude Include="hmrMessage.hpp" />
     <ClInclude Include="hmrMotor.hpp" />
     <ClInclude Include="hmrOperator.hpp" />
     <ClInclude Include="hmrSensorsFile.hpp" />

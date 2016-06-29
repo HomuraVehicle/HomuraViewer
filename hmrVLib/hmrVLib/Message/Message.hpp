@@ -1,5 +1,5 @@
-#ifndef HMR_MESSAGE_INC
-#define HMR_MESSAGE_INC 100
+#ifndef HMRVLIB_MESSAGE_MESSAGE_INC
+#define HMRVLIB_MESSAGE_MESSAGE_INC 100
 #
 /*===hmrMessage===
 受信データをモジュールに引き渡すMessageの実装タイプ
@@ -12,7 +12,7 @@ hmrMessage:v1_00/130310
 #include<map>
 #include<utility>
 #include <hmrVLib/Data.hpp>
-#include"hmrItfMessage.hpp"
+#include"ItfMessage.hpp"
 namespace hmr{
 	class cRecvMessage:public itfRecvMessage{
 	private:

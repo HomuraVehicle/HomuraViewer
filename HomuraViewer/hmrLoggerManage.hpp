@@ -44,7 +44,7 @@ void set_logMode
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
 #include <hmLib/type.h>
-#include "hmrItfMessage.hpp"
+#include <hmrVLib/Message/ItfMessageAgent.hpp>
 #include <hmrVLib/Data.hpp>
 #include "hmrFlagirl.hpp"
 

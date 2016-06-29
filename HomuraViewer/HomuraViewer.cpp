@@ -33,8 +33,8 @@ hmrV2500 v1_03/130713
 
 #include"hmLibVer.hpp"
 #include <hmLib/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
-#include<hmLib/bufgate.hpp>
-#include<hmLib/any_iterator.hpp>
+#include <hmLib/bufgate.hpp>
+#include <hmLib/any_iterator.hpp>
 #include <hmLib_v2/dxColorSet.hpp>
 #include"dxSignalBut.hpp"
 #include"iologgate.hpp"
@@ -46,7 +46,9 @@ hmrV2500 v1_03/130713
 #include"hmrComLog.hpp"
 #include"hmrDXCom_v2.hpp"
 #include"hmrOperator.hpp"
-#include"hmrMessage.hpp"
+
+#include <hmrVLib/Message.hpp>
+
 #include"hmrDxKeyboard.hpp"
 #include"hmrDxPad.hpp"
 //#include"hmrDxIODisplay.hpp"

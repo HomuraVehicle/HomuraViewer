@@ -52,7 +52,7 @@ hmrOperator:v1_00/130310 hmito
 #include <hmLib/inquiries/inquiry.hpp>
 #include <boost/signals2.hpp>
 #include"hmrItfCom.hpp"
-#include"hmrItfMessage.hpp"
+#include <hmrVLib/Message/ItfMessage.hpp>
 #include <hmrVLib/Data.hpp>
 
 namespace hmr{
