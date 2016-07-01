@@ -277,8 +277,15 @@
     <ClInclude Include="iologgate.hpp" />
     <ClInclude Include="modeflags.hpp" />
     <ClInclude Include="predicate.hpp" />
+    <ClInclude Include="Resource.hpp" />
     <ClInclude Include="UniSensor.hpp" />
     <ClInclude Include="vmstatus.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

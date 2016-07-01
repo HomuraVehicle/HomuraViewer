@@ -142,6 +142,7 @@ hmrV2500 v1_03/130713
 */
 
 //test 
+#include "Resource.hpp"
 
 
 #include<hmLib_v2/hmLib.cpp>
@@ -162,6 +163,8 @@ hmrV2500 v1_03/130713
 //#include"DummyPulg_v1.hpp"
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
+	SetWindowIconID(ID_ICON);
+
 	//hmLib_dxƒ‚ƒWƒ…[ƒ‹‚ğ‰Šú‰»
 	dx::ini("hmrV2500_v1_06e", 960,720);
 

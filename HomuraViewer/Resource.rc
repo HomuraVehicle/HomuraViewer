@@ -1,1 +1,2 @@
-1 ICON "icon.ico"
+#include "Resource.hpp"
+ID_ICON ICON "icon.ico"
