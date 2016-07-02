@@ -168,6 +168,10 @@
     <ClInclude Include="date.hpp" />
     <ClInclude Include="dxSignalBut.hpp" />
     <ClInclude Include="fomagate.hpp" />
+    <ClInclude Include="FullADC.hpp" />
+    <ClInclude Include="FullADC\Data.hpp" />
+    <ClInclude Include="FullADC\DxMUI.hpp" />
+    <ClInclude Include="FullADC\MessageAgent.hpp" />
     <ClInclude Include="hmLibVer.hpp" />
     <ClInclude Include="hmLib_config.h" />
     <ClInclude Include="hmrAccele.hpp" />
@@ -282,7 +286,7 @@
     <ClInclude Include="vmstatus.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon.ico" />
+    <Image Include="icon2.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />

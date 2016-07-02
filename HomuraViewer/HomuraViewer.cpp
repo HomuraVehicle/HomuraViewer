@@ -102,6 +102,9 @@ hmrV2500 v1_03/130713
 #include"hmrGyroCompass.hpp"
 #include"hmrDxGyroMUI.hpp"
 
+
+#include "FullADC.hpp"
+
 #include "hmrDeviceManage.hpp"
 #include "hmrDxDeviceManageSUI.hpp"
 
@@ -124,6 +127,7 @@ hmrV2500 v1_03/130713
 #include <hmrVLib/File.hpp>
 #include "hmrGPSFile.hpp"
 #include "hmrSpriteFile.hpp"
+
 
 /*
 #include "hmrWholeFile.hpp"

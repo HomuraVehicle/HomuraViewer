@@ -25,6 +25,12 @@
     <Filter Include="hmrVLib\Message">
       <UniqueIdentifier>{26f915af-7843-4ca1-a0a0-29d8c2787c36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer">
+      <UniqueIdentifier>{099dff50-5da1-4c2d-9632-5e11dcedc687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HomuraViewer\FullADC">
+      <UniqueIdentifier>{b746e03b-37eb-4437-a545-78a328211df5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hmrCompassMA.cpp">
@@ -458,9 +464,21 @@
     <ClInclude Include="Resource.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="FullADC.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\Data.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\MessageAgent.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\DxMUI.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon.ico">
+    <Image Include="icon2.ico">
       <Filter>リソース ファイル</Filter>
     </Image>
   </ItemGroup>

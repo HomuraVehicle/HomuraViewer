@@ -24,7 +24,7 @@ namespace hmr{
 			return hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->Req; });
 		}
 		boost::signals2::connection slot_setReq(boost::signals2::signal<void(bool)>& Signal_){
-			return hmLib::signals::connect(Signal_, [&](bool Flag)->void{Req - Flag; });
+			return hmLib::signals::connect(Signal_, [&](bool Flag)->void{Req = Flag; });
 		}
 	};
 }
