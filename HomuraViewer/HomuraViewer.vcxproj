@@ -171,7 +171,8 @@
     <ClInclude Include="FullADC.hpp" />
     <ClInclude Include="FullADC\Data.hpp" />
     <ClInclude Include="FullADC\DxMUI.hpp" />
-    <ClInclude Include="FullADC\MessageAgent.hpp" />
+    <ClInclude Include="FullADC\FileAgent.hpp" />
+    <ClInclude Include="FullADC\FullADCMessageAgent.hpp" />
     <ClInclude Include="hmLibVer.hpp" />
     <ClInclude Include="hmLib_config.h" />
     <ClInclude Include="hmrAccele.hpp" />

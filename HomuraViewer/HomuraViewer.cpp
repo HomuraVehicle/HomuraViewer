@@ -11,6 +11,8 @@ hmrV2500 v1_06/160601
 		Dateも出力するようにした
 	e
 		AcceleLoggerの角度が過敏に反応する問題を修正
+	f
+		FullADC機能を実装
 hmrV2500 v1_05/130914
 	p
 		表示位置等修正
@@ -170,7 +172,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	SetWindowIconID(ID_ICON);
 
 	//hmLib_dxモジュールを初期化
-	dx::ini("hmrV2500_v1_06e", 960,720);
+	dx::ini("hmrV2500_v1_06f", 960,720);
 
 
 	try{
@@ -354,6 +356,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		DirectoryFile.regist(&ThermoFileAgent);
 		*/
 
+		//FULL ADC
+		hmr::viewer::cFullADC FullADC;
+		Message.regist('f', &FullADC.MsgAgent);
+
+
 		//親ディレクトリ
 		hmr::cConstNameDirectoryFile DirectoryFile("Data");
 
@@ -389,6 +396,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmr::cSpriteFileAgent SpriteFileAgent("Sprite");
 		hmr::connect(SpriteFileAgent, SpriteMA,false);
 		DirectoryFile.regist(&SpriteFileAgent);
+
+		//ADC Full
+		DirectoryFile.regist(&FullADC.FileAgent);
 
 		//カメラログデータを保存
 //		hmr::cSpriteFileAgent SpriteLogFileAgent("SpriteLog");
@@ -561,6 +571,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 //		hmr::dxosHumidMUI HumidMUI;
 //		hmr::connect(HumidMUI,HumidMA);
 //		MUISideDisp.insert(&HumidMUI);
+
+		hmr::viewer::cFullADC::dxosMUI FullADCMUI;
+		FullADC.connect(FullADCMUI);
+		MUISideDisp.insert(&FullADCMUI);
+		ControlMainDisp.Infomation.slot_logData(FullADC.MsgAgent.signal_newData);
 
 		hmr::dxosDisplay Display(Pint(720,720),Pint(240,720));
 		Display.registMain(&IOMainDisp);

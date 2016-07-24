@@ -1,5 +1,5 @@
-#ifndef HMR_FULLADC_MESSAGEAGENT_INC
-#define HMR_FULLADC_MESSAGEAGENT_INC 100
+#ifndef HMR_VIEWER_FULLADC_FULLADCMESSAGEAGENT_INC
+#define HMR_VIEWER_FULLADC_FULLADCMESSAGEAGENT_INC 100
 #
 #include "hmLibVer.hpp"
 #include <boost/signals2.hpp>
@@ -9,12 +9,14 @@
 #include "../hmrFlagirl.hpp"
 #include <hmrVLib/Message.hpp>
 #include <hmrVLib/Data.hpp>
+#include "Data.hpp"
+
 namespace hmr{
-	namespace fulladc{
+	namespace viewer{
 		template<unsigned int adc_size_>
-		class cMsgAgent :public itfMessageAgent{
-			constexpr unsigned int adc_size = adc_size_;
-			using this_data_t = data_t<adc_size>;
+		class cFullADCMsgAgent :public itfMessageAgent{
+			constexpr static unsigned int adc_size = adc_size_;
+			using this_data_t = fulladc::data_t<adc_size>;
 		private:
 			this_data_t Data;
 
@@ -32,13 +34,13 @@ namespace hmr{
 					if(Data_.size() != 1 + adc_size * 2)return true;
 
 					//データを記録
-					Time = Time_;
+					Data.Time = Time_;
 					for(unsigned int ch = 0; ch < adc_size; ++ch){
-						Data[ch] = (static_cast<std::uint16_t>(Data_.at(1)) & 0x00ff) + (static_cast<std::uint16_t>(Data_.at(2)) << 8);
+						Data.Data[ch] = (static_cast<std::uint16_t>(Data_.at(1)) & 0x00ff) + (static_cast<std::uint16_t>(Data_.at(2)) << 8);
 					}
 
 					// signal 発信
-					signal_newData(Data, Time);
+					signal_newData(Data);
 
 					return false;
 				} else if(static_cast<unsigned char>(Data_[0]) == 0x10){
@@ -123,10 +125,7 @@ namespace hmr{
 			hmLib::signals::unique_connections SignalConnections;
 			hmLib::inquiries::unique_connections InquiryConnections;
 		public:
-			boost::signals2::signal<void(double data, clock::time_point time)> signal_newData;
-			boost::signals2::signal<void(double data, clock::time_point time)> signal_newLogData;
-			boost::signals2::signal<void(double data, std::uint16_t, clock::time_point time)> signal_newRawData;
-			boost::signals2::signal<void(double data, std::uint16_t, clock::time_point time)> signal_newLogRawData;
+			boost::signals2::signal<void(this_data_t)> signal_newData;
 
 			void contact_getData(hmLib::inquiries::inquiry<this_data_t>& Inquiry_){
 				InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->this_data_t{return this->Data; }));
@@ -135,7 +134,7 @@ namespace hmr{
 			void contact_getPicDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
 				InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->DataModeFlagirl.pic(); }));
 			}
-			void contact_getRequestDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
+			void contact_getReqDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
 				InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->DataModeFlagirl.request(); }));
 			}
 			void slot_setDataMode(boost::signals2::signal<void(bool)>& Signal_){
@@ -186,4 +185,3 @@ namespace hmr{
 }
 #
 #endif
-#pragma once
