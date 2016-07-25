@@ -36,7 +36,7 @@ hmrGateHab:v1.00/130310 amby
 	変数初期化の位置をもう少し考えたほうがよい、責任がしっかりしてない
 
 */
-
+#include <fstream>
 #include <string>
 #include <hmLib/gate.hpp>
 #include <hmLib/comgate.hpp>
@@ -66,7 +66,12 @@ namespace hmr{
 			int Baudrate;
 			cComSetting():PortNo(0),Baudrate(9600){}
 		};
-
+		void readFomaSetting(std::string FilePath){
+			std::ifstream fin(FilePath);
+			fin >> FomaSetting.PortNo;
+			fin >> FomaSetting.Baudrate;
+			fin >> FomaSetting.PhoneNo;
+		}
 	private:
 		// 選択されたGate のポインタ
 		hmLib::gate* pGate;

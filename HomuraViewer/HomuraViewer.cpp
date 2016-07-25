@@ -209,8 +209,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		//GateSwitcherÇêÈåæ
 		hmr::cGateSwitcher GateSW;
-		GateSW.FomaSetting.Baudrate = 38400;
-		GateSW.FomaSetting.PhoneNo = "08024766917";
+		GateSW.readFomaSetting("hmr\\phone_config.txt");
 
 //		IO.open(&ioLogGate);
 //		IO.open(&Bufgate);
@@ -633,6 +632,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Debug.slot_timeout(Operator.signal_inform_Received);
 		Debug.slot_nulldata(BatteryMA.signal_nulldata);
 */
+		printfDx("%d:%d\n", GateSW.FomaSetting.Baudrate, GateSW.FomaSetting.PortNo);
+		printfDx("#:%d:%s\n", GateSW.FomaSetting.PhoneNo.size(), GateSW.FomaSetting.PhoneNo.c_str());
 
 		while(!dx::work(30)){
 			Keyboard.work();
