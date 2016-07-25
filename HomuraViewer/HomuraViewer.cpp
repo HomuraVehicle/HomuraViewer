@@ -13,6 +13,8 @@ hmrV2500 v1_06/160601
 		AcceleLoggerの角度が過敏に反応する問題を修正
 	f
 		FullADC機能を実装
+	g
+		Add foma settingh function
 hmrV2500 v1_05/130914
 	p
 		表示位置等修正
@@ -172,7 +174,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	SetWindowIconID(ID_ICON);
 
 	//hmLib_dxモジュールを初期化
-	dx::ini("hmrV2500_v1_06f", 960,720);
+	dx::ini("hmrV2500_v1_06g", 960,720);
 
 
 	try{
