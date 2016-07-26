@@ -13,74 +13,87 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="hmLib">
-      <UniqueIdentifier>{a6084143-c692-46cc-882b-4793c8b4bb30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hmrVLib">
-      <UniqueIdentifier>{ca54955d-5dbb-4c0c-828b-7985efe4d03f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hmrVLib\File">
-      <UniqueIdentifier>{ad9cb7e9-4c02-4288-ba7d-09e6d9fffb41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hmrVLib\Message">
-      <UniqueIdentifier>{26f915af-7843-4ca1-a0a0-29d8c2787c36}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HomuraViewer">
-      <UniqueIdentifier>{099dff50-5da1-4c2d-9632-5e11dcedc687}</UniqueIdentifier>
+      <UniqueIdentifier>{70d24fb9-687e-46b9-b57b-7193cb96bf02}</UniqueIdentifier>
     </Filter>
     <Filter Include="HomuraViewer\FullADC">
-      <UniqueIdentifier>{b746e03b-37eb-4437-a545-78a328211df5}</UniqueIdentifier>
+      <UniqueIdentifier>{d510791f-221d-4220-b683-d28a57851483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HomuraViewer\Battery">
+      <UniqueIdentifier>{d520a4a6-d9b6-454e-b44b-97771747441b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HomuraViewer\File">
+      <UniqueIdentifier>{b6a44d61-7495-48a2-b30b-cafe562e8c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HomuraViewer\Message">
+      <UniqueIdentifier>{36b0113f-6e29-4a82-b38b-d85099f35329}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="hmrCompassMA.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="hmrDxDeviceManageSUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="hmrDxIOSideDisp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="hmrDxLoggerManageSUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="hmrSprite.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="HomuraViewer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstring.c">
-      <Filter>hmLib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\comgate.cpp">
-      <Filter>hmLib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\coordinates.cpp">
-      <Filter>hmLib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cdeque.c">
-      <Filter>hmLib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cqueue.c">
-      <Filter>hmLib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OneDrive\SkyStorage\hmLib\hmLib_v4_02\hmLib\cstack.c">
-      <Filter>hmLib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\hmrVLib\hmrVLib\VMC1.c">
-      <Filter>hmrVLib</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="hmLib_config.h">
+    <ClInclude Include="FullADC\FileAgent.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\FullADCMessageAgent.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\Data.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\DxMUI.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\FileAgent.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\MessageAgent.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\DataSet.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="File\ItfFile.hpp">
+      <Filter>HomuraViewer\File</Filter>
+    </ClInclude>
+    <ClInclude Include="File\TimeDirectoryFile.hpp">
+      <Filter>HomuraViewer\File</Filter>
+    </ClInclude>
+    <ClInclude Include="File\TimeFile.hpp">
+      <Filter>HomuraViewer\File</Filter>
+    </ClInclude>
+    <ClInclude Include="File\UniSensorFileAgent.hpp">
+      <Filter>HomuraViewer\File</Filter>
+    </ClInclude>
+    <ClInclude Include="File\ConstNameDirectoryFile.hpp">
+      <Filter>HomuraViewer\File</Filter>
+    </ClInclude>
+    <ClInclude Include="File\ConstNameFileAgent.hpp">
+      <Filter>HomuraViewer\File</Filter>
+    </ClInclude>
+    <ClInclude Include="File\CSVFileAgent.hpp">
+      <Filter>HomuraViewer\File</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\ItfMessageAgent.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\Message.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\ItfMessage.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrADC.h">
+    <ClInclude Include="UniSensor.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="vmstatus.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="any_predicate.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="date.hpp">
@@ -90,6 +103,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="fomagate.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="hmLib_config.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmLibVer.hpp">
@@ -104,13 +120,7 @@
     <ClInclude Include="hmrAcceleLogger.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrBattery.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrBatteryDataSet.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrBatteryFile.hpp">
+    <ClInclude Include="hmrADC.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrBufGate.hpp">
@@ -407,87 +417,65 @@
     <ClInclude Include="iologgate.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="predicate.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="vmstatus.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File.hpp">
-      <Filter>hmrVLib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\VMC1.h">
-      <Filter>hmrVLib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\ItfFile.hpp">
-      <Filter>hmrVLib\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\Data.hpp">
-      <Filter>hmrVLib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameFileAgent.hpp">
-      <Filter>hmrVLib\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\CSVFileAgent.hpp">
-      <Filter>hmrVLib\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\UniSensorFileAgent.hpp">
-      <Filter>hmrVLib\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\TimeDirectoryFile.hpp">
-      <Filter>hmrVLib\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\File\ConstNameDirectoryFile.hpp">
-      <Filter>hmrVLib\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmLib\hmLib\coordinates.hpp">
-      <Filter>hmLib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessageAgent.hpp">
-      <Filter>hmrVLib\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\Message\Message.hpp">
-      <Filter>hmrVLib\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\Message\ItfMessage.hpp">
-      <Filter>hmrVLib\Message</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hmrVLib\hmrVLib\Message.hpp">
-      <Filter>hmrVLib</Filter>
-    </ClInclude>
-    <ClInclude Include="UniSensor.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="modeflags.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.hpp">
+    <ClInclude Include="packet_data.hpp">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="predicate.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="File.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="chrono.hpp">
+      <Filter>HomuraViewer</Filter>
     </ClInclude>
     <ClInclude Include="FullADC.hpp">
       <Filter>HomuraViewer</Filter>
     </ClInclude>
-    <ClInclude Include="FullADC\Data.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
+    <ClInclude Include="Message.hpp">
+      <Filter>HomuraViewer</Filter>
     </ClInclude>
-    <ClInclude Include="FullADC\DxMUI.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
+    <ClInclude Include="VMC1.h">
+      <Filter>HomuraViewer</Filter>
     </ClInclude>
-    <ClInclude Include="FullADC\FullADCMessageAgent.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC\FileAgent.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="icon2.ico">
-      <Filter>リソース ファイル</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="hmrCompassMA.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="hmrDxDeviceManageSUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="hmrDxIOSideDisp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="hmrDxLoggerManageSUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="hmrSprite.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="HomuraViewer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="VMC1.c">
+      <Filter>HomuraViewer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource.aps" />
   </ItemGroup>
 </Project>

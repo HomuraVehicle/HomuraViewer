@@ -1,6 +1,5 @@
-
-#ifndef HMR_BATTERYFILE_INC
-#define HMR_BATTERYFILE_INC 100
+#ifndef HMR_BATTERY_FILEAGENT_INC
+#define HMR_BATTERY_FILEAGENT_INC 100
 #
 
 /*===hmrBatteryFile===

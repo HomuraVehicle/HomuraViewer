@@ -4,3 +4,9 @@
 [submodule "hmLib_v2/hmLib_v2"]
 	path = hmLib_v2/hmLib_v2
 	url = https://github.com/hmito/hmLib_v2.git
+[submodule "homuraLib_v2/homuraLib_v2"]
+	path = homuraLib_v2/homuraLib_v2
+	url = https://github.com/HomuraVehicle/homuraLib_v2.git
+[submodule "XCBase/XCBase"]
+	path = XCBase/XCBase
+	url = https://github.com/HomuraVehicle/XCBase.git
