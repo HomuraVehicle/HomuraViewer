@@ -5,7 +5,9 @@
 #include"hmrDxLoggerManageSUI.hpp"
 
 namespace hmr{
-	const hmLib_uint16 dxosLoggerMngSUI::LogData_BufSize[HMR_LOGGERSUI_BUFFERSIZE_SIZE] = { 50, 100, 250, 500, 1000, 5000, 10000, 20000, 40000, 60000 };
+	namespace viewer{
+		const hmLib_uint16 dxosLoggerMngSUI::LogData_BufSize[HMR_LOGGERSUI_BUFFERSIZE_SIZE] = {50, 100, 250, 500, 1000, 5000, 10000, 20000, 40000, 60000};
+	}
 }
 
 #

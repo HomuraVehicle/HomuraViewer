@@ -8,25 +8,27 @@
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
 namespace hmr{
-	struct modeflags{
-	private:
-		bool Pic;
-		bool Req;
-	public:
-		operator bool()const{ return Pic != Req; }
-		bool get_req()const{ return Req; }
-		void set_pic(bool Pic_){ Pic = Pic_; }
-	public:
-		hmLib::inquiries::connection contact_getPic(hmLib::inquiries::inquiry<bool>& Inquiry_){
-			return hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->Pic; });
-		}
-		hmLib::inquiries::connection contact_getReq(hmLib::inquiries::inquiry<bool>& Inquiry_){
-			return hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->Req; });
-		}
-		boost::signals2::connection slot_setReq(boost::signals2::signal<void(bool)>& Signal_){
-			return hmLib::signals::connect(Signal_, [&](bool Flag)->void{Req = Flag; });
-		}
-	};
+	namespace viewer{
+		struct modeflags{
+		private:
+			bool Pic;
+			bool Req;
+		public:
+			operator bool()const{ return Pic != Req; }
+			bool get_req()const{ return Req; }
+			void set_pic(bool Pic_){ Pic = Pic_; }
+		public:
+			hmLib::inquiries::connection contact_getPic(hmLib::inquiries::inquiry<bool>& Inquiry_){
+				return hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->Pic; });
+			}
+			hmLib::inquiries::connection contact_getReq(hmLib::inquiries::inquiry<bool>& Inquiry_){
+				return hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->Req; });
+			}
+			boost::signals2::connection slot_setReq(boost::signals2::signal<void(bool)>& Signal_){
+				return hmLib::signals::connect(Signal_, [&](bool Flag)->void{Req = Flag; });
+			}
+		};
+	}
 }
 #
 #endif

@@ -22,46 +22,47 @@ dxosControlMainDisplay
 #include"hmrDxGPSMap.hpp" 
 
 namespace hmr{
-	class dxosControlMainDisplay:public dxReObject,public hmoBox{
-	public:
-		dxosNavigator<hmr::cGyroLogger::iterator> Navigator;
-		dxosSprite Sprite;
-		dxosInformation Infomation;
-		dxosGPSMap GPSMap;
+	namespace viewer{
+		class dxosControlMainDisplay :public dxReObject, public hmoBox{
+		public:
+			dxosNavigator<cGyroLogger::iterator> Navigator;
+			dxosSprite Sprite;
+			dxosInformation Infomation;
+			dxosGPSMap GPSMap;
 
-	private:
-		class fnControlMain:public dxFn{
 		private:
-			dxosControlMainDisplay& My;
+			class fnControlMain :public dxFn{
+			private:
+				dxosControlMainDisplay& My;
+			public:
+				fnControlMain(dxosControlMainDisplay& My_) :My(My_){}
+			public:
+				int fndraw(dxO& dxo)override{
+					dxo.draw(Pint(0, 360), My.Infomation);
+					dxo.draw(Pint(240, 0), My.Sprite);
+					dxo.draw(Pint(0, 0), My.Navigator);
+					dxo.draw(Pint(240, 360), My.GPSMap);
+					return 0;
+				}
+			};
+			dxNormFrame Frame;
 		public:
-			fnControlMain(dxosControlMainDisplay& My_):My(My_){}
-		public:
-			int fndraw(dxO& dxo)override{
-				dxo.draw(Pint(0,360),My.Infomation);
-				dxo.draw(Pint(240,0),My.Sprite);
-				dxo.draw(Pint(0,0),My.Navigator);
-				dxo.draw(Pint(240, 360), My.GPSMap);
+			dxosControlMainDisplay()
+				:hmoBox(Pint(720, 720))
+				, Sprite(Pint(480, 360))
+				, Navigator()
+				, Infomation(Pint(240, 360))
+				, GPSMap(Pint(480, 360)){
+				Navigator.ini();
+			}
+			int redraw(dxO& dxo)override{
+				fnControlMain Fn(*this);
+				Frame.set(Fn, Pint(720, 720), CLR::DarkSoftRed);
+				dxo.draw(Pint(0, 0), Frame);
 				return 0;
 			}
 		};
-		dxNormFrame Frame;
-	public:
-		dxosControlMainDisplay()
-			:hmoBox(Pint(720,720))
-			,Sprite(Pint(480,360))
-			,Navigator()
-			,Infomation(Pint(240,360))
-			,GPSMap(Pint(480,360))
-		{
-			Navigator.ini();
-		}
-		int redraw(dxO& dxo)override{
-			fnControlMain Fn(*this);
-			Frame.set(Fn,Pint(720,720),CLR::DarkSoftRed);
-			dxo.draw(Pint(0,0),Frame);
-			return 0;
-		}
-	};
+	}
 }
 #
 #endif

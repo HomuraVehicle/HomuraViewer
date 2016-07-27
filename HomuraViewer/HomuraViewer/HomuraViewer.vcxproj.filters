@@ -57,9 +57,6 @@
     <ClInclude Include="Battery\MessageAgent.hpp">
       <Filter>HomuraViewer\Battery</Filter>
     </ClInclude>
-    <ClInclude Include="Battery\DataSet.hpp">
-      <Filter>HomuraViewer\Battery</Filter>
-    </ClInclude>
     <ClInclude Include="File\ItfFile.hpp">
       <Filter>HomuraViewer\File</Filter>
     </ClInclude>
@@ -102,15 +99,6 @@
     <ClInclude Include="any_predicate.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Data.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="date.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="dxSignalBut.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="fomagate.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -151,9 +139,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrCompass.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrCompass_131111backup.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrCompassData.hpp">
@@ -300,9 +285,6 @@
     <ClInclude Include="hmrDxLoggerManageSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDXMessage.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxMotorMUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -427,9 +409,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="modeflags.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="packet_data.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="predicate.hpp">
@@ -560,6 +539,12 @@
     </ClInclude>
     <ClInclude Include="..\..\hmLib\hmLib\comgate\winRS\ifline.h">
       <Filter>hmLib\comgate\winRS</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\Data.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\PacketData.hpp">
+      <Filter>HomuraViewer\Message</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

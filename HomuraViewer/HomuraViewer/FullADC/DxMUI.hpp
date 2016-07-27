@@ -12,7 +12,7 @@
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include<HomuraViewer/Data.hpp>
+#include<HomuraViewer/chrono.hpp>
 #include"../hmrDxBUI.hpp"
 #include"../hmrDxTools.hpp"
 #include"Data.hpp"

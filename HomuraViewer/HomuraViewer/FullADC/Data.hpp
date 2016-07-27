@@ -3,7 +3,7 @@
 #
 #include<array>
 #include<cstdint>
-#include<HomuraViewer/Data.hpp>
+#include<HomuraViewer/chrono.hpp>
 namespace hmr{
 	namespace viewer{
 		namespace fulladc{

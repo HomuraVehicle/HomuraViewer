@@ -2,27 +2,29 @@
 #define HMR_COMTIMELOGGER_INC
 #
 #include<deque>
-#include <HomuraViewer/Data.hpp>
+#include<HomuraViewer/chrono.hpp>
+#include<HomuraViewer/Message/PacketData.hpp>
 namespace hmr{
 	class cComTimeLogger{
+		using packet = message::packet;
 	private:
 		typedef std::deque<clock::time_point> deque;
 	private:
-		hmr::clock::duration RecvInterval;
-		hmr::clock::duration SendInterval;
-		hmr::clock::time_point RecvTime;
-		hmr::clock::time_point SendTime;
+		clock::duration RecvInterval;
+		clock::duration SendInterval;
+		clock::time_point RecvTime;
+		clock::time_point SendTime;
 	private:
-		void recv(hmr::clock::time_point Time_){
+		void recv(clock::time_point Time_){
 			RecvInterval=Time_-RecvTime;
 			RecvTime=Time_;
 		}
-		void send(hmr::clock::time_point Time_){
+		void send(clock::time_point Time_){
 			SendInterval=Time_-SendTime;
 			SendTime=Time_;
 		}
 	public:
-		hmr::clock::duration recvTime
+		clock::duration recvTime
 	public:
 		void slot_pushInLogBuf(boost::signals2::signal<void(const packet&)>& Signal_){
 			SignalConnections(hmLib::signals::connect(Signal_,[&](const packet& Log)->void{this->push(true,Log);}));

@@ -218,7 +218,7 @@ bool hmr::cSpriteMsgAgent::talk(std::string& Str){
 	}
 }
 */
-bool hmr::cSpriteMsgAgent::listen(datum::time_point Time_,bool Err_,const std::string& Str_){
+bool hmr::viewer::cSpriteMsgAgent::listen(datum::time_point Time_,bool Err_,const std::string& Str_){
 	//カメラのステータス取得
 	unsigned char c=static_cast<unsigned char>(Str_[0]);
 
@@ -403,7 +403,7 @@ bool hmr::cSpriteMsgAgent::listen(datum::time_point Time_,bool Err_,const std::s
 
 	return true;
 }
-void hmr::cSpriteMsgAgent::setup_talk(void){
+void hmr::viewer::cSpriteMsgAgent::setup_talk(void){
 	AutoPowerResetFlagirl.setup_talk();
 	AutoLightFlagirl.setup_talk();
 	LightFlagirl.setup_talk();
@@ -412,11 +412,11 @@ void hmr::cSpriteMsgAgent::setup_talk(void){
 	InfoModeFlagirl.setup_talk();
 	LogModeFlagirl.setup_talk();
 }
-void hmr::cSpriteMsgAgent::setup_listen(void){
+void hmr::viewer::cSpriteMsgAgent::setup_listen(void){
 	ErrCode=0x00;
 	IsErr=false;
 }
-bool hmr::cSpriteMsgAgent::talk(std::string& Str){
+bool hmr::viewer::cSpriteMsgAgent::talk(std::string& Str){
 	Str="";
 	//PowerReset要求時
 	if(DoPowerReset){

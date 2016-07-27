@@ -6,7 +6,7 @@
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
 #include <HomuraViewer/File/ItfFile.hpp>
-#include <HomuraViewer/Data.hpp>
+#include <HomuraViewer/chrono.hpp>
 #include "Data.hpp"
 namespace hmr{
 	namespace viewer{
@@ -24,7 +24,7 @@ namespace hmr{
 				// log and write ä÷êî
 				void logData(this_data_t Data_){
 					if(is_active()){
-						ofs << hmr::time_to_ymd(Data_.Time);
+						ofs << time_to_ymd(Data_.Time);
 						for(unsigned int adc_ch = 0; adc_ch < adc_num; ++adc_ch){
 							ofs << Separator << Data_.Data[adc_ch];
 						}

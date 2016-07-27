@@ -4,7 +4,7 @@
 #include<hmLib/config_vc.h>
 #include"hmrCompassMA.hpp"
 
-const unsigned char hmr::cCompassMsgAgent::CorrectionMeasureNum=10;
+const unsigned char hmr::viewer::cCompassMsgAgent::CorrectionMeasureNum=10;
 
 #
 #endif

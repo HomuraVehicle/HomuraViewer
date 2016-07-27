@@ -11,7 +11,7 @@ hmrMessage:v1_00/130310
 #include<string>
 #include<map>
 #include<utility>
-#include <HomuraViewer/Data.hpp>
+#include <HomuraViewer/chrono.hpp>
 #include"Message/Message.hpp"
 #
 #endif

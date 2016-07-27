@@ -14,31 +14,37 @@ hmrItfMessage:v1_00/130310 hmIto
 #include<string>
 #include<map>
 #include<utility>
-#include <HomuraViewer/Data.hpp>
+#include <HomuraViewer/chrono.hpp>
+#include <HomuraViewer/Message/PacketData.hpp>
 #include "ItfMessageAgent.hpp"
 namespace hmr{
-	class itfRecvMessage{
-	public:
-		virtual void regist(datum::id_type ID_,itfRecvMessageAgent* pAgent_)=0;
-		virtual void setup_listen()=0;
-		virtual bool listen(const datum& Dat_)=0;
-	};
-	class itfSendMessage{
-	public:
-		virtual void regist(datum::id_type ID_,itfSendMessageAgent* pAgent_)=0;
-		virtual void setup_talk()=0;
-		virtual bool talk(datum& Dat_)=0;
-	};
-	class itfMessage
-		:public itfRecvMessage
-		,public itfSendMessage{
-	public:
-		virtual void regist(datum::id_type ID_,itfMessageAgent* pAgent_){
-			//static_castを使わずにクラス指定でアクセスすると、リンクエラー
-			static_cast<itfRecvMessage*>(this)->regist(ID_,pAgent_);
-			static_cast<itfSendMessage*>(this)->regist(ID_,pAgent_);
-		}
-	};
+	namespace viewer{
+		class itfRecvMessage{
+			using datum = message::datum;
+		public:
+			virtual void regist(datum::id_type ID_, itfRecvMessageAgent* pAgent_) = 0;
+			virtual void setup_listen() = 0;
+			virtual bool listen(const datum& Dat_) = 0;
+		};
+		class itfSendMessage{
+			using datum = message::datum;
+		public:
+			virtual void regist(datum::id_type ID_, itfSendMessageAgent* pAgent_) = 0;
+			virtual void setup_talk() = 0;
+			virtual bool talk(datum& Dat_) = 0;
+		};
+		class itfMessage
+			:public itfRecvMessage
+			, public itfSendMessage{
+			using datum = message::datum;
+		public:
+			virtual void regist(datum::id_type ID_, itfMessageAgent* pAgent_){
+				//static_castを使わずにクラス指定でアクセスすると、リンクエラー
+				static_cast<itfRecvMessage*>(this)->regist(ID_, pAgent_);
+				static_cast<itfSendMessage*>(this)->regist(ID_, pAgent_);
+			}
+		};
+	}
 }
 #
 #endif

@@ -27,156 +27,156 @@ hmrDxIODisplay:v1_00/130602 amby
 ============================= */
 
 namespace hmr{
-	// Sub Page
-	class dxosIOSubPage:public dxReObject,public hmoBox{
-	private:
-		dxRGB Clr;
+	namespace viewer{
 
-	public:
-		// Gait switcher 
-		hmr::dxosGateSwitcher DxosGateSwitcher;
+		// Sub Page
+		class dxosIOSubPage :public dxReObject, public hmoBox{
+		private:
+			dxRGB Clr;
 
-		// 描画のための要素を定義
-		hmr::dxosStartControl DxSendStartButt;
-		hmr::dxosBufControl DxReadBufCtr;
-		hmr::dxosBufControl DxSendBufCtr;
-		hmr::dxosTimeIntervalControl DxSendIntervalCtr;
-		hmr::dxosTimeOutControl DxSendTimeOutCtr;
-		hmr::dxosSyncControl DxSyncCheckBox; 
-		hmr::dxosSelectDuplex DxSelectDuplex;
+		public:
+			// Gait switcher 
+			hmr::dxosGateSwitcher DxosGateSwitcher;
 
-	public:
-		// constructor
-		dxosIOSubPage(Pint Size_, const dxColor& Clr_)
-			:hmoBox(Size_)
-			,Clr(Clr_)
-			,DxosGateSwitcher(CLR::SoftOrenge)
-			,DxSendStartButt(Pint(220, 40), Clr, "Send Start")
-			,DxReadBufCtr(Pint(200, 30), Clr, "Read Buf Clear")
-			,DxSendBufCtr(Pint(200, 30), Clr, "Send Buf Clear")
-			,DxSendIntervalCtr(Pint(200, 30), Clr, "Interval")
-			,DxSendTimeOutCtr(Pint(200, 30), Clr, "TimeOut")
-			,DxSyncCheckBox(Pint(200, 20),Clr)
-			,DxSelectDuplex(Pint(220, 20),Clr)
-		{}
+			// 描画のための要素を定義
+			hmr::dxosStartControl DxSendStartButt;
+			hmr::dxosBufControl DxReadBufCtr;
+			hmr::dxosBufControl DxSendBufCtr;
+			hmr::dxosTimeIntervalControl DxSendIntervalCtr;
+			hmr::dxosTimeOutControl DxSendTimeOutCtr;
+			hmr::dxosSyncControl DxSyncCheckBox;
+			hmr::dxosSelectDuplex DxSelectDuplex;
 
-	protected:
-		virtual int redraw(dxO& dxo){			
-			dxo.draw(Pint(0, 0), DxosGateSwitcher);
-			
-			dxo.draw(Pint(10, 300), DxSendStartButt);
-			dxo.draw(Pint(10, 350), DxSelectDuplex);
+		public:
+			// constructor
+			dxosIOSubPage(Pint Size_, const dxColor& Clr_)
+				:hmoBox(Size_)
+				, Clr(Clr_)
+				, DxosGateSwitcher(CLR::SoftOrenge)
+				, DxSendStartButt(Pint(220, 40), Clr, "Send Start")
+				, DxReadBufCtr(Pint(200, 30), Clr, "Read Buf Clear")
+				, DxSendBufCtr(Pint(200, 30), Clr, "Send Buf Clear")
+				, DxSendIntervalCtr(Pint(200, 30), Clr, "Interval")
+				, DxSendTimeOutCtr(Pint(200, 30), Clr, "TimeOut")
+				, DxSyncCheckBox(Pint(200, 20), Clr)
+				, DxSelectDuplex(Pint(220, 20), Clr){}
 
-			dxo.draw(Pint(30, 420), DxSendIntervalCtr);
-			dxo.draw(Pint(30, 380), DxSendTimeOutCtr);
-			dxo.draw(Pint(30, 455), DxSyncCheckBox);
+		protected:
+			virtual int redraw(dxO& dxo){
+				dxo.draw(Pint(0, 0), DxosGateSwitcher);
+
+				dxo.draw(Pint(10, 300), DxSendStartButt);
+				dxo.draw(Pint(10, 350), DxSelectDuplex);
+
+				dxo.draw(Pint(30, 420), DxSendIntervalCtr);
+				dxo.draw(Pint(30, 380), DxSendTimeOutCtr);
+				dxo.draw(Pint(30, 455), DxSyncCheckBox);
 
 
-			dxo.draw(Pint(30, 500), DxSendBufCtr);
-			dxo.draw(Pint(30, 540), DxReadBufCtr);	
+				dxo.draw(Pint(30, 500), DxSendBufCtr);
+				dxo.draw(Pint(30, 540), DxReadBufCtr);
 
-			
-			
 
-			
 
-			return 0;
-		}
-	};
 
-	// Main Page
-	template <typename iterator>
-	class dxosIOMainPage:public dxReObject,public hmoBox{
-	private:
-		dxRGB Clr;
 
-	public:
-		// 描画のための要素を定義
-		// IO View　クラスの定義
-		hmr::dxosIO<iterator> DxIO;
-		// IO send box クラスの定義
-		hmr::dxosIOSendBox DxSendBox;
-		// IO setFlag クラスの定義
-		hmr::dxosSelectIOPaint DxSelectIOPaint;
 
-	public:
-		// constructor
-		//  このコンストラクタは、必ず　dx::ini()　の後に呼ぶこと！！
-		dxosIOMainPage(Pint Size_, const dxColor& Clr_)
-			:hmoBox(Size_)
-			,Clr(Clr_)
-			,DxIO(Pint(720, 690), Clr)
-			,DxSendBox(Pint(640, 30), Clr)
-			,DxSelectIOPaint(Pint(80, 30))
-		{
-			// initialize
+				return 0;
+			}
+		};
+
+		// Main Page
+		template <typename iterator>
+		class dxosIOMainPage :public dxReObject, public hmoBox{
+		private:
+			dxRGB Clr;
+
+		public:
+			// 描画のための要素を定義
+			// IO View　クラスの定義
+			hmr::dxosIO<iterator> DxIO;
+			// IO send box クラスの定義
+			hmr::dxosIOSendBox DxSendBox;
+			// IO setFlag クラスの定義
+			hmr::dxosSelectIOPaint DxSelectIOPaint;
+
+		public:
+			// constructor
+			//  このコンストラクタは、必ず　dx::ini()　の後に呼ぶこと！！
+			dxosIOMainPage(Pint Size_, const dxColor& Clr_)
+				:hmoBox(Size_)
+				, Clr(Clr_)
+				, DxIO(Pint(720, 690), Clr)
+				, DxSendBox(Pint(640, 30), Clr)
+				, DxSelectIOPaint(Pint(80, 30)){
+				// initialize
+				//  必ず dx::ini() の後に初期化をしてやる
+				DxSendBox.ini();
+			}
+
+			/*
+			// initialize 関数　
 			//  必ず dx::ini() の後に初期化をしてやる
-			DxSendBox.ini();
-		}
+			void initialize(){
+				DxSendBox.ini();
+			}
+			*/
 
-		/*
-		// initialize 関数　
-		//  必ず dx::ini() の後に初期化をしてやる
-		void initialize(){
-			DxSendBox.ini();
-		}
-		*/
+		protected:
+			virtual int redraw(dxO& dxo){
+				dxo.draw(Pint(80, 0), DxSendBox);
+				dxo.draw(Pint(0, 30), DxIO);
+				dxo.draw(Pint(0, 0), DxSelectIOPaint);
+				return 0;
+			}
+		};
 
-	protected:
-		virtual int redraw(dxO& dxo){			
-			dxo.draw(Pint(80, 0), DxSendBox);
-			dxo.draw(Pint(0, 30), DxIO);
-			dxo.draw(Pint(0, 0), DxSelectIOPaint);
-			return 0;
-		}
-	};
+		// Main Page
+		template <typename iterator>
+		class dxosIOMainPage2 :public dxReObject, public hmoBox{
+		private:
+			dxRGB Clr;
 
-	// Main Page
-	template <typename iterator>
-	class dxosIOMainPage2:public dxReObject,public hmoBox{
-	private:
-		dxRGB Clr;
+		public:
+			// 描画のための要素を定義
+			// IO View　クラスの定義
+			hmr::dxosIO2<iterator> DxIO;
+			// IO send box クラスの定義
+			hmr::dxosIOSendBox DxSendBox;
+			// IO setFlag クラスの定義
+			hmr::dxosSelectIOPaint DxSelectIOPaint;
 
-	public:
-		// 描画のための要素を定義
-		// IO View　クラスの定義
-		hmr::dxosIO2<iterator> DxIO;
-		// IO send box クラスの定義
-		hmr::dxosIOSendBox DxSendBox;
-		// IO setFlag クラスの定義
-		hmr::dxosSelectIOPaint DxSelectIOPaint;
+		public:
+			// constructor
+			//  このコンストラクタは、必ず　dx::ini()　の後に呼ぶこと！！
+			dxosIOMainPage2(Pint Size_, const dxColor& Clr_)
+				:hmoBox(Size_)
+				, Clr(Clr_)
+				, DxIO(Pint(720, 690), Clr)
+				, DxSendBox(Pint(640, 30), Clr)
+				, DxSelectIOPaint(Pint(80, 30)){
+				// initialize
+				//  必ず dx::ini() の後に初期化をしてやる
+				DxSendBox.ini();
+			}
 
-	public:
-		// constructor
-		//  このコンストラクタは、必ず　dx::ini()　の後に呼ぶこと！！
-		dxosIOMainPage2(Pint Size_, const dxColor& Clr_)
-			:hmoBox(Size_)
-			,Clr(Clr_)
-			,DxIO(Pint(720, 690), Clr)
-			,DxSendBox(Pint(640, 30), Clr)
-			,DxSelectIOPaint(Pint(80, 30))
-		{
-			// initialize
+			/*
+			// initialize 関数　
 			//  必ず dx::ini() の後に初期化をしてやる
-			DxSendBox.ini();
-		}
+			void initialize(){
+				DxSendBox.ini();
+			}
+			*/
 
-		/*
-		// initialize 関数　
-		//  必ず dx::ini() の後に初期化をしてやる
-		void initialize(){
-			DxSendBox.ini();
-		}
-		*/
-
-	protected:
-		virtual int redraw(dxO& dxo){			
-			dxo.draw(Pint(80, 0), DxSendBox);
-			dxo.draw(Pint(0, 30), DxIO);
-			dxo.draw(Pint(0, 0), DxSelectIOPaint);
-			return 0;
-		}
-	};
+		protected:
+			virtual int redraw(dxO& dxo){
+				dxo.draw(Pint(80, 0), DxSendBox);
+				dxo.draw(Pint(0, 30), DxIO);
+				dxo.draw(Pint(0, 0), DxSelectIOPaint);
+				return 0;
+			}
+		};
+	}
 }
 #
 #endif

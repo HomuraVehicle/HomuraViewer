@@ -11,25 +11,29 @@ hmrItfMessage:v1_00/130310 hmIto
 	itfRecvMessageAgent,itfSendMessageAgent,itfMessageAgent‚ð’Ç‰Á
 	itfRecvMessage,itfSendMessage,itfMessage‚ð’Ç‰Á
 */
-#include<string>
-#include<map>
-#include<utility>
-#include <HomuraViewer/Data.hpp>
+#include <string>
+#include <map>
+#include <utility>
+#include <HomuraViewer/chrono.hpp>
+#include "PacketData.hpp"
 namespace hmr{
-	class itfRecvMessageAgent{
-	public:
-		virtual void setup_listen(){}
-		virtual bool listen(datum::time_point Time_, bool Err_,const std::string& Str_)=0;
-	};
-	class itfSendMessageAgent{
-	public:
-		virtual void setup_talk(){}
-		virtual bool talk(std::string& Str_)=0;
-	};
-	class itfMessageAgent
-		:public itfRecvMessageAgent
-		,public itfSendMessageAgent{
-	};
+	namespace viewer{
+		class itfRecvMessageAgent{
+			using datum = message::datum;
+		public:
+			virtual void setup_listen(){}
+			virtual bool listen(datum::time_point Time_, bool Err_, const std::string& Str_) = 0;
+		};
+		class itfSendMessageAgent{
+		public:
+			virtual void setup_talk(){}
+			virtual bool talk(std::string& Str_) = 0;
+		};
+		class itfMessageAgent
+			:public itfRecvMessageAgent
+			, public itfSendMessageAgent{
+		};
+	}
 }
 #
 #endif

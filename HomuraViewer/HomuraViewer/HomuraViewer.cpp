@@ -42,7 +42,6 @@ hmrV2500 v1_03/130713
 #include <hmLib/bufgate.hpp>
 #include <hmLib/any_iterator.hpp>
 #include <hmLib_v2/dxColorSet.hpp>
-#include"dxSignalBut.hpp"
 #include"iologgate.hpp"
 #include"predicate.hpp"
 #include"hmrBufGate.hpp"
@@ -173,6 +172,8 @@ hmrV2500 v1_03/130713
 //#include"DummyPulg_v1.hpp"
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
+	namespace hmrv = hmr::viewer;
+
 	SetWindowIconID(ID_ICON);
 
 	//hmLib_dxモジュールを初期化
@@ -183,7 +184,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		//hmLib::vcom::fdx_virtual_com VCom;
 		//VCom.start(9600);
 
-		//hmr::dummy_plug_v1 DummyPlug;
+		//hmrv::dummy_plug_v1 DummyPlug;
 		//std::thread Thread(std::ref(DummyPlug));
 		//DummyPlug.VComGate.open(VCom);
 
@@ -191,28 +192,28 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		//vcomgate.open(VCom);
 
 		//制御系デバイス
-		hmr::cDxKeyboard Keyboard;
-		hmr::cDxPad1 Pad1;
+		hmrv::cDxKeyboard Keyboard;
+		hmrv::cDxPad1 Pad1;
 
 		//Com, Message, Operatorを宣言
-		hmr::cCom Com;
-		hmr::cCom::VMC1Creater<1> ComVMC(&Com);
-		hmr::cComLog ComLog;
-		hmr::connect(ComLog,Com);
+		hmrv::cCom Com;
+		hmrv::cCom::VMC1Creater<1> ComVMC(&Com);
+		hmrv::cComLog ComLog;
+		hmrv::connect(ComLog,Com);
 
 		//IO(VMC), ioLogGate, GateSWを宣言
 		//typedef std::pair<bool,system_clock_iologtype> io_iologtype;
-		hmr::cFHdxIO IO(ComVMC);
-		hmr::bufgate Bufgate;
+		hmrv::cFHdxIO IO(ComVMC);
+		hmrv::bufgate Bufgate;
 
 		//ioLogBufを宣言
 		iologgate<fdx_crlf_timeout_iologger<system_clock_iologtype>> ioLogGate;
 		typedef fdx_vector_iologbuf<system_clock_iologtype> iologbuf;
 		iologbuf ioLogBuf;
-		hmr::connect(ioLogBuf,ioLogGate);
+		hmrv::connect(ioLogBuf,ioLogGate);
 
 		//GateSwitcherを宣言
-		hmr::cGateSwitcher GateSW;
+		hmrv::cGateSwitcher GateSW;
 		GateSW.readFomaSetting("hmr\\phone_config.txt");
 
 //		IO.open(&ioLogGate);
@@ -227,132 +228,132 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Bufgate.open(GateSW);
 
 		//Message, Operator
-		hmr::cMessage Message;
-		hmr::cFHDxOperator Operator(&Message,&Com,true,std::chrono::milliseconds(250),std::chrono::seconds(1));
-		hmr::connect(Operator,IO,Com);
+		hmrv::cMessage Message;
+		hmrv::cFHDxOperator Operator(&Message,&Com,true,std::chrono::milliseconds(250),std::chrono::seconds(1));
+		hmrv::connect(Operator,IO,Com);
 
 		//各モジュール宣言		
-		hmr::cMotorMsgAgent MotorMA;
-		hmr::connect_Pad(MotorMA,Pad1);
+		hmrv::cMotorMsgAgent MotorMA;
+		hmrv::connect_Pad(MotorMA,Pad1);
 		Message.regist('m',&MotorMA);
 
-		hmr::cBatteryMsgAgent<3> BatteryMA;
+		hmrv::battery::cMsgAgent<3> BatteryMA;
 		Message.regist('b',&BatteryMA);
-		hmr::connect_Pad(BatteryMA,Pad1);
+		hmrv::connect_Pad(BatteryMA,Pad1);
 		
-//		hmr::connect_Keyboard(BatteryMA,Keyboard);	
+//		hmrv::connect_Keyboard(BatteryMA,Keyboard);	
 
-		hmr::cAcceleMsgAgent AcceleMA;
+		hmrv::cAcceleMsgAgent AcceleMA;
 		Message.regist('a',&AcceleMA);
-		hmr::connect_Pad(AcceleMA,Pad1);
-		hmr::cAcceleLogger AcceleLogger;
+		hmrv::connect_Pad(AcceleMA,Pad1);
+		hmrv::cAcceleLogger AcceleLogger;
 		AcceleLogger.slot_addLog(AcceleMA.signal_newData);
-//		hmr::connect_Keyboard(AcceleMA,Keyboard);
+//		hmrv::connect_Keyboard(AcceleMA,Keyboard);
 
-		hmr::cCompassMsgAgent CompassMA;
-		hmr::cCompass CompassDat;
+		hmrv::cCompassMsgAgent CompassMA;
+		hmrv::cCompass CompassDat;
 		Message.regist('c',&CompassMA);
-		hmr::connect_Pad(CompassMA,Pad1);
-		hmr::connect(CompassDat, CompassMA);
+		hmrv::connect_Pad(CompassMA,Pad1);
+		hmrv::connect(CompassDat, CompassMA);
 
-		hmr::cGyroMsgAgent GyroMA;
-		hmr::cGyroLogger GyroLogger;
-		hmr::connect_Pad(GyroMA,Pad1);
-		hmr::connect(GyroLogger,GyroMA);
+		hmrv::cGyroMsgAgent GyroMA;
+		hmrv::cGyroLogger GyroLogger;
+		hmrv::connect_Pad(GyroMA,Pad1);
+		hmrv::connect(GyroLogger,GyroMA);
 		Message.regist('G',&GyroMA);
-		hmr::cGyroCompass GyroCompass;
-		hmr::connect(GyroCompass,GyroMA);
+		hmrv::cGyroCompass GyroCompass;
+		hmrv::connect(GyroCompass,GyroMA);
 
-		hmr::cGPSMsgAgent GPSMA;
-		hmr::cGPSKashmir GPSKashmir;
-		hmr::connect_Pad(GPSMA,Pad1);
-		hmr::connect(GPSKashmir,GPSMA);
+		hmrv::cGPSMsgAgent GPSMA;
+		hmrv::cGPSKashmir GPSKashmir;
+		hmrv::connect_Pad(GPSMA,Pad1);
+		hmrv::connect(GPSKashmir,GPSMA);
 		Message.regist('g',&GPSMA);
 
-		hmr::cSpriteMsgAgent SpriteMA;
-		hmr::connect_Pad(SpriteMA,Pad1);
+		hmrv::cSpriteMsgAgent SpriteMA;
+		hmrv::connect_Pad(SpriteMA,Pad1);
 		Message.regist('j',&SpriteMA);
 
-		hmr::cThermoMsgAgent ThermoMA;
-		hmr::connect_Pad(ThermoMA,Pad1);
+		hmrv::cThermoMsgAgent ThermoMA;
+		hmrv::connect_Pad(ThermoMA,Pad1);
 		Message.regist('t',&ThermoMA);
 
-//		hmr::cSHT75MsgAgent SHT75MA;
-//		hmr::connect_Pad(SHT75MA,Pad1);
+//		hmrv::cSHT75MsgAgent SHT75MA;
+//		hmrv::connect_Pad(SHT75MA,Pad1);
 //		Message.regist('7',&SHT75MA);
 
-//		hmr::cInfraRedMsgAgent InfraRedMA;
-//		hmr::connect_Pad(InfraRedMA,Pad1);
+//		hmrv::cInfraRedMsgAgent InfraRedMA;
+//		hmrv::connect_Pad(InfraRedMA,Pad1);
 //		Message.regist('T',&InfraRedMA);
 
-		hmr::cCO2MsgAgent CO2MA;
-		hmr::connect_Pad(CO2MA,Pad1);
+		hmrv::cCO2MsgAgent CO2MA;
+		hmrv::connect_Pad(CO2MA,Pad1);
 		Message.regist('C',&CO2MA);
 
-//		hmr::cH2SMsgAgent H2SMA;
-//		hmr::connect_Pad(H2SMA,Pad1);
+//		hmrv::cH2SMsgAgent H2SMA;
+//		hmrv::connect_Pad(H2SMA,Pad1);
 //		Message.regist('S',&H2SMA);
 
-//		hmr::cHumidMsgAgent HumidMA;
-//		hmr::connect_Pad(HumidMA,Pad1);
+//		hmrv::cHumidMsgAgent HumidMA;
+//		hmrv::connect_Pad(HumidMA,Pad1);
 //		Message.regist('h',&HumidMA);
 
-		hmr::cChrono Chrono;
+		hmrv::cChrono Chrono;
 		Message.regist('$', &Chrono);
 
-		hmr::cDevMngMsgAgent DevMngMA;
+		hmrv::cDevMngMsgAgent DevMngMA;
 		Message.regist('D', &DevMngMA);
 
-		hmr::cLoggerMngMsgAgent LogMngMA;
+		hmrv::cLoggerMngMsgAgent LogMngMA;
 		Message.regist('L', &LogMngMA);
 
 		//パケット単位でセンサーデータを保存
-		//hmr::cCSVFileAgent PacketFileAgent("Packet");
+		//hmrv::cCSVFileAgent PacketFileAgent("Packet");
 		//PacketFileAgent.slot_write(Com.signal_finRecvPacket);
 
 		/*
-		hmr::cCSVFileAgent::cCell<hmr::clock::time_point> TimePointCell("Time");
+		hmrv::cCSVFileAgent::cCell<hmrv::clock::time_point> TimePointCell("Time");
 		Com.contactLastRecvPacTime(TimePointCell.Inquiry);
 		PacketFileAgent.regist(TimePointCell);
 
-		hmr::cCSVFileAgent::cCell<double> ThermoCell("Thermo");
+		hmrv::cCSVFileAgent::cCell<double> ThermoCell("Thermo");
 		ThermoMA.contact_getTemperature(ThermoCell.Inquiry);
 		PacketFileAgent.regist(ThermoCell);
 
-		hmr::cCSVFileAgent::cCell<double> CO2Cell("CO2");
+		hmrv::cCSVFileAgent::cCell<double> CO2Cell("CO2");
 		CO2MA.contact_getValue(CO2Cell.Inquiry);
 		PacketFileAgent.regist(CO2Cell);
 */
 
 		//センサーデータのみ保存
-//		hmr::cCSVFileAgent SenserFileAgent("Sensor");
+//		hmrv::cCSVFileAgent SenserFileAgent("Sensor");
 
 		/*
 		// log されていた温度データ保存
-		hmr::cCSVFileAgent LogThermoFileAgent("loggedThermoDat");
+		hmrv::cCSVFileAgent LogThermoFileAgent("loggedThermoDat");
 		LogThermoFileAgent.slot_write(ThermoMA.signal_newLogData);
-		hmr::cCSVFileAgent::cCell<hmr::clock::time_point> logThermo_timeCell("time");
+		hmrv::cCSVFileAgent::cCell<hmrv::clock::time_point> logThermo_timeCell("time");
 		ThermoMA.contact_getlogTime(logThermo_timeCell.Inquiry);
 		LogThermoFileAgent.regist(logThermo_timeCell);
-		hmr::cCSVFileAgent::cCell<double> logThermo_dataCell("Thermo");
+		hmrv::cCSVFileAgent::cCell<double> logThermo_dataCell("Thermo");
 		ThermoMA.contact_getLogTemperature(logThermo_dataCell.Inquiry);
 		LogThermoFileAgent.regist(logThermo_dataCell);
-		hmr::cCSVFileAgent::cCell<hmLib_uint16> logThermo_rawDataCell("rawThermo");
+		hmrv::cCSVFileAgent::cCell<hmLib_uint16> logThermo_rawDataCell("rawThermo");
 		ThermoMA.contact_getLogRawTemperature(logThermo_rawDataCell.Inquiry);
 		LogThermoFileAgent.regist(logThermo_rawDataCell);
 
 		DirectoryFile.regist(&LogThermoFileAgent);
 
 		// 通常の温度データ保存
-		hmr::cCSVFileAgent ThermoFileAgent("ThermoDat");
+		hmrv::cCSVFileAgent ThermoFileAgent("ThermoDat");
 		ThermoFileAgent.slot_write(ThermoMA.signal_newLogData);
-		hmr::cCSVFileAgent::cCell<hmr::clock::time_point> thermo_timeCell("time");
+		hmrv::cCSVFileAgent::cCell<hmrv::clock::time_point> thermo_timeCell("time");
 		ThermoMA.contact_getTime(thermo_timeCell.Inquiry);
 		ThermoFileAgent.regist(thermo_timeCell);
-		hmr::cCSVFileAgent::cCell<double> thermo_dataCell("Thermo");
+		hmrv::cCSVFileAgent::cCell<double> thermo_dataCell("Thermo");
 		ThermoMA.contact_getTemperature(thermo_dataCell.Inquiry);
 		ThermoFileAgent.regist(thermo_dataCell);
-		hmr::cCSVFileAgent::cCell<hmLib_uint16> thermo_rawDataCell("rawThermo");
+		hmrv::cCSVFileAgent::cCell<hmLib_uint16> thermo_rawDataCell("rawThermo");
 		ThermoMA.contact_getRawTemperature(thermo_rawDataCell.Inquiry);
 		ThermoFileAgent.regist(thermo_rawDataCell);
 
@@ -360,151 +361,151 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		*/
 
 		//FULL ADC
-		hmr::viewer::cFullADC FullADC;
+		hmrv::cFullADC FullADC;
 		Message.regist('f', &FullADC.MsgAgent);
 
 
 		//親ディレクトリ
-		hmr::cConstNameDirectoryFile DirectoryFile("Data");
+		hmrv::cConstNameDirectoryFile DirectoryFile("Data");
 
 		// log Thermo データを保存
-//		hmr::cConstNameFileAgent<std::pair<double,std::uint16_t>> logThermoFileAgent("Thermo.tsv","\t");
+//		hmrv::cConstNameFileAgent<std::pair<double,std::uint16_t>> logThermoFileAgent("Thermo.tsv","\t");
 //		logThermoFileAgent.slot_log_writeData(ThermoMA.signal_newLogRawData);
 //		DirectoryFile.regist(&logThermoFileAgent);
 		// Thermo データを保存
-		hmr::cConstNameFileAgent<std::pair<double, std::uint16_t>> ThermoFileAgent("Thermo.txt",'\t');
+		hmrv::cConstNameFileAgent<std::pair<double, std::uint16_t>> ThermoFileAgent("Thermo.txt",'\t');
 		ThermoFileAgent.slot_log_writeData(ThermoMA.signal_newRawData);
 		DirectoryFile.regist(&ThermoFileAgent);
 
 		// log CO2
-//		hmr::cConstNameFileAgent<std::pair<double, std::uint16_t>> logCO2FileAgent("CO2_log");
+//		hmrv::cConstNameFileAgent<std::pair<double, std::uint16_t>> logCO2FileAgent("CO2_log");
 //		logCO2FileAgent.slot_log_writeData(CO2MA.signal_newLogRawData);
 //		DirectoryFile.regist(&logCO2FileAgent);
 		// CO2 データを保存
-		hmr::cConstNameFileAgent<std::pair<double, std::uint16_t>> CO2FileAgent("CO2.txt", '\t');
+		hmrv::cConstNameFileAgent<std::pair<double, std::uint16_t>> CO2FileAgent("CO2.txt", '\t');
 		CO2FileAgent.slot_log_writeData(CO2MA.signal_newRawData);
 		DirectoryFile.regist(&CO2FileAgent);
 
 		//GPSデータを保存
-		hmr::cGPSFileAgent GPSFileAgent;
-		hmr::connect(GPSFileAgent, GPSMA);
+		hmrv::cGPSFileAgent GPSFileAgent;
+		hmrv::connect(GPSFileAgent, GPSMA);
 		DirectoryFile.regist(&GPSFileAgent);
 
 		//GPGGAデータを保存
-		hmr::cGPGGAFileAgent GPGGAFileAgent;
-		hmr::connect(GPGGAFileAgent, GPSMA);
+		hmrv::cGPGGAFileAgent GPGGAFileAgent;
+		hmrv::connect(GPGGAFileAgent, GPSMA);
 		DirectoryFile.regist(&GPGGAFileAgent);
 
 		//カメラデータを保存
-		hmr::cSpriteFileAgent SpriteFileAgent("Sprite");
-		hmr::connect(SpriteFileAgent, SpriteMA,false);
+		hmrv::cSpriteFileAgent SpriteFileAgent("Sprite");
+		hmrv::connect(SpriteFileAgent, SpriteMA,false);
 		DirectoryFile.regist(&SpriteFileAgent);
 
 		//ADC Full
 		DirectoryFile.regist(&FullADC.FileAgent);
 
 		//カメラログデータを保存
-//		hmr::cSpriteFileAgent SpriteLogFileAgent("SpriteLog");
-//		hmr::connect(SpriteLogFileAgent, SpriteMA, true);
+//		hmrv::cSpriteFileAgent SpriteLogFileAgent("SpriteLog");
+//		hmrv::connect(SpriteLogFileAgent, SpriteMA, true);
 //		DirectoryFile.regist(&SpriteLogFileAgent);
 
 /*
 		// File 系列の宣言
-		hmr::cWholeFileAgent WholeFA;
+		hmrv::cWholeFileAgent WholeFA;
 		
-		hmr::cAcceleFileAgent AcceleFA;
-		hmr::connect(AcceleFA,AcceleMA);
+		hmrv::cAcceleFileAgent AcceleFA;
+		hmrv::connect(AcceleFA,AcceleMA);
 		WholeFA.regist(&AcceleFA);
 
-		hmr::cBatteryFileAgent<3> BatteryFA;
-		hmr::connect(BatteryFA, BatteryMA);
+		hmrv::cBatteryFileAgent<3> BatteryFA;
+		hmrv::connect(BatteryFA, BatteryMA);
 		WholeFA.regist(&BatteryFA);
 
-		hmr::cCompassFileAgent CompassFA;
-		hmr::connect(CompassFA, CompassMA);
+		hmrv::cCompassFileAgent CompassFA;
+		hmrv::connect(CompassFA, CompassMA);
 		WholeFA.regist(&CompassFA);
 
-		hmr::cGPSFileAgent GPSFA;
-		hmr::connect(GPSFA, GPSMA);
+		hmrv::cGPSFileAgent GPSFA;
+		hmrv::connect(GPSFA, GPSMA);
 		WholeFA.regist(&GPSFA);
 		
-		hmr::cGyroFileAgent GyroFA;
-		hmr::connect(GyroFA, GyroMA);
+		hmrv::cGyroFileAgent GyroFA;
+		hmrv::connect(GyroFA, GyroMA);
 		WholeFA.regist(&GyroFA);
 		
-//		hmr::cSensorsFileAgent SensorFA;
-//		hmr::connect(SensorFA, CO2MA, H2SMA, HumidMA, InfraRedMA, ThermoMA);
+//		hmrv::cSensorsFileAgent SensorFA;
+//		hmrv::connect(SensorFA, CO2MA, H2SMA, HumidMA, InfraRedMA, ThermoMA);
 //		WholeFA.regist(&SensorFA);
 		
-		hmr::cSpriteFileAgent SpriteFA;
-		hmr::connect(SpriteFA, SpriteMA);
+		hmrv::cSpriteFileAgent SpriteFA;
+		hmrv::connect(SpriteFA, SpriteMA);
 		WholeFA.regist(&SpriteFA);
 		
 */
 		// SUI 系列
-		hmr::dxosBUIBoxSideDisplay SystemSideDisp;
+		hmrv::dxosBUIBoxSideDisplay SystemSideDisp;
 		SystemSideDisp.ClrSet.Background=CLR::DarkSoftBlue;
 
-		hmr::dxosChronoSUI ChronoSUI;
-		hmr::connect(ChronoSUI, Chrono);
+		hmrv::dxosChronoSUI ChronoSUI;
+		hmrv::connect(ChronoSUI, Chrono);
 		SystemSideDisp.insert(&ChronoSUI);
 
-		hmr::dxosDevMngSUI DevMngSUI;
-		hmr::connect(DevMngSUI, DevMngMA);
+		hmrv::dxosDevMngSUI DevMngSUI;
+		hmrv::connect(DevMngSUI, DevMngMA);
 		SystemSideDisp.insert(&DevMngSUI);
 
-		hmr::dxosLoggerMngSUI LogMngSUI;
-		hmr::connect(LogMngSUI, LogMngMA);
+		hmrv::dxosLoggerMngSUI LogMngSUI;
+		hmrv::connect(LogMngSUI, LogMngMA);
 		SystemSideDisp.insert(&LogMngSUI);
 
-		hmr::dxosGateSwitcherSUI GateSwSUI;
-		hmr::connect(GateSwSUI, GateSW);
+		hmrv::dxosGateSwitcherSUI GateSwSUI;
+		hmrv::connect(GateSwSUI, GateSW);
 		SystemSideDisp.insert(&GateSwSUI);
 
-		hmr::dxosBufGateSUI BufGateSUI;
-		hmr::connect(BufGateSUI, Bufgate);
+		hmrv::dxosBufGateSUI BufGateSUI;
+		hmrv::connect(BufGateSUI, Bufgate);
 		SystemSideDisp.insert(&BufGateSUI);
 
-		hmr::dxosIOLogGateSUI LogSUI;
-		hmr::connect(LogSUI, ioLogGate, ioLogBuf);
+		hmrv::dxosIOLogGateSUI LogSUI;
+		hmrv::connect(LogSUI, ioLogGate, ioLogBuf);
 		SystemSideDisp.insert(&LogSUI);
 
-		hmr::dxosIOSUI IOSUI;
-		hmr::connect(IOSUI, IO);
+		hmrv::dxosIOSUI IOSUI;
+		hmrv::connect(IOSUI, IO);
 		SystemSideDisp.insert(&IOSUI);
 
-		hmr::dxosVMCSUI VMCSUI;
-		hmr::connect(VMCSUI, IO);
+		hmrv::dxosVMCSUI VMCSUI;
+		hmrv::connect(VMCSUI, IO);
 		SystemSideDisp.insert(&VMCSUI);
 
 
-		hmr::dxosComSUI ComBUI;
-		hmr::connect(ComBUI,Com);
+		hmrv::dxosComSUI ComBUI;
+		hmrv::connect(ComBUI,Com);
 		SystemSideDisp.insert(&ComBUI);
 
-		hmr::dxosOperatorSUI OpSUI;
-		hmr::connect(OpSUI, Operator);
+		hmrv::dxosOperatorSUI OpSUI;
+		hmrv::connect(OpSUI, Operator);
 		SystemSideDisp.insert(&OpSUI);
 
-		hmr::dxosFileSUI FileSUI;
-		hmr::connect(FileSUI, DirectoryFile);
+		hmrv::dxosFileSUI FileSUI;
+		hmrv::connect(FileSUI, DirectoryFile);
 		SystemSideDisp.insert(&FileSUI);
 
 
 		// IO View Display の定義
-		hmr::dxosIO2<iologbuf::iterator> IOMainDisp(Pint(720,720), CLR::DarkDullGreen,CLR::SoftGreen,CLR::LightSoftOrenge,CLR::LightSoftSkyblue);
-		//hmr::dxosIOSubPage IOSideDisp(Pint(240,720), CLR::DarkDullGreen);
-		hmr::connect(IOMainDisp,IO,ioLogBuf,ioLogGate.Logger);
-		//hmr::connect(IOSideDisp, GateSW,Operator,Bufgate);
+		hmrv::dxosIO2<iologbuf::iterator> IOMainDisp(Pint(720,720), CLR::DarkDullGreen,CLR::SoftGreen,CLR::LightSoftOrenge,CLR::LightSoftSkyblue);
+		//hmrv::dxosIOSubPage IOSideDisp(Pint(240,720), CLR::DarkDullGreen);
+		hmrv::connect(IOMainDisp,IO,ioLogBuf,ioLogGate.Logger);
+		//hmrv::connect(IOSideDisp, GateSW,Operator,Bufgate);
 
 		//操縦用MainDisplaay
-		hmr::dxosControlMainDisplay ControlMainDisp;
-//		hmr::connect(ControlMainDisp.Navigator,AcceleMA,CompassDat,GyroLogger);
-		hmr::connect(ControlMainDisp.Navigator,AcceleLogger,CompassDat,GyroLogger,GyroCompass);
-		hmr::connect(ControlMainDisp.Sprite,SpriteMA);
-		hmr::connect(ControlMainDisp.Infomation,GPSKashmir,BatteryMA);
-		hmr::connect(ControlMainDisp.GPSMap, GPSMA,CompassDat);
-		std::vector<hmr::datum::id_type> SwIDList;
+		hmrv::dxosControlMainDisplay ControlMainDisp;
+//		hmrv::connect(ControlMainDisp.Navigator,AcceleMA,CompassDat,GyroLogger);
+		hmrv::connect(ControlMainDisp.Navigator,AcceleLogger,CompassDat,GyroLogger,GyroCompass);
+		hmrv::connect(ControlMainDisp.Sprite,SpriteMA);
+		hmrv::connect(ControlMainDisp.Infomation,GPSKashmir,BatteryMA);
+		hmrv::connect(ControlMainDisp.GPSMap, GPSMA,CompassDat);
+		std::vector<hmrv::message::datum::id_type> SwIDList;
 		SwIDList.push_back('a');
 		SwIDList.push_back('b');
 		SwIDList.push_back('c');
@@ -514,73 +515,73 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		SwIDList.push_back('j');
 		SwIDList.push_back('m');
 		SwIDList.push_back('t');
-		hmr::dxosPacketList_withView<hmr::cComLog::iterator> PacketMainDisp(Pint(720,720),30,360,SwIDList,CLR::DullOrenge);
-		hmr::connect(PacketMainDisp,Com,ComLog);
+		hmrv::dxosPacketList_withView<hmrv::cComLog::iterator> PacketMainDisp(Pint(720,720),30,360,SwIDList,CLR::DullOrenge);
+		hmrv::connect(PacketMainDisp,Com,ComLog);
 
 		//MUI用サイドバー宣言
 
-//		hmr::dxosBUI::DefaultClr.set(CLR::DarkSoftRed,CLR::SoftRed,CLR::LightSoftBlue,CLR::DeepSoftGreen,CLR::SoftRed,CLR::White,CLR::White,CLR::LightSoftRed,CLR::White,CLR::LightGray,CLR::Gray);
-		hmr::dxosBUIBoxSideDisplay MUISideDisp;
+//		hmrv::dxosBUI::DefaultClr.set(CLR::DarkSoftRed,CLR::SoftRed,CLR::LightSoftBlue,CLR::DeepSoftGreen,CLR::SoftRed,CLR::White,CLR::White,CLR::LightSoftRed,CLR::White,CLR::LightGray,CLR::Gray);
+		hmrv::dxosBUIBoxSideDisplay MUISideDisp;
 		MUISideDisp.ClrSet.Background=CLR::DarkSoftYellow;
 
-		hmr::dxosMotorMUI MotorMUI;
-		hmr::connect(MotorMUI,MotorMA);
+		hmrv::dxosMotorMUI MotorMUI;
+		hmrv::connect(MotorMUI,MotorMA);
 		MUISideDisp.insert(&MotorMUI);
 
-		hmr::dxosBatteryMUI<3> BatteryMUI;
-		hmr::connect(BatteryMUI,BatteryMA);
+		hmrv::dxosBatteryMUI<3> BatteryMUI;
+		hmrv::connect(BatteryMUI,BatteryMA);
 		MUISideDisp.insert(&BatteryMUI);
 
-		hmr::dxosAcceleMUI AcceleMUI;
-		hmr::connect(AcceleMUI,AcceleMA);
+		hmrv::dxosAcceleMUI AcceleMUI;
+		hmrv::connect(AcceleMUI,AcceleMA);
 		MUISideDisp.insert(&AcceleMUI);
 
-		hmr::dxosCompassMUI CompassMUI;
-		hmr::connect(CompassMUI,CompassMA);
+		hmrv::dxosCompassMUI CompassMUI;
+		hmrv::connect(CompassMUI,CompassMA);
 		MUISideDisp.insert(&CompassMUI);
 
-		hmr::dxosGyroMUI GyroMUI;
-		hmr::connect(GyroMUI,GyroMA);
+		hmrv::dxosGyroMUI GyroMUI;
+		hmrv::connect(GyroMUI,GyroMA);
 		MUISideDisp.insert(&GyroMUI);
 
-		hmr::dxosGPSMUI GPSMUI;
-		hmr::connect(GPSMUI,GPSMA);
+		hmrv::dxosGPSMUI GPSMUI;
+		hmrv::connect(GPSMUI,GPSMA);
 		MUISideDisp.insert(&GPSMUI);
 
-		hmr::dxosSpriteMUI SpriteMUI;
-		hmr::connect(SpriteMUI,SpriteMA);
+		hmrv::dxosSpriteMUI SpriteMUI;
+		hmrv::connect(SpriteMUI,SpriteMA);
 		MUISideDisp.insert(&SpriteMUI);
 
-		hmr::dxosThermoMUI ThermoMUI;
-		hmr::connect(ThermoMUI,ThermoMA);
+		hmrv::dxosThermoMUI ThermoMUI;
+		hmrv::connect(ThermoMUI,ThermoMA);
 		MUISideDisp.insert(&ThermoMUI);
 
-//		hmr::dxosSHT75MUI SHT75MUI;
-//		hmr::connect(SHT75MUI,SHT75MA);
+//		hmrv::dxosSHT75MUI SHT75MUI;
+//		hmrv::connect(SHT75MUI,SHT75MA);
 //		MUISideDisp.insert(&SHT75MUI);
 
-//		hmr::dxosInfraRedMUI InfraRedMUI;
-//		hmr::connect(InfraRedMUI,InfraRedMA);
+//		hmrv::dxosInfraRedMUI InfraRedMUI;
+//		hmrv::connect(InfraRedMUI,InfraRedMA);
 //		MUISideDisp.insert(&InfraRedMUI);
 
-		hmr::dxosCO2MUI CO2MUI;
-		hmr::connect(CO2MUI,CO2MA);
+		hmrv::dxosCO2MUI CO2MUI;
+		hmrv::connect(CO2MUI,CO2MA);
 		MUISideDisp.insert(&CO2MUI);
 
-//		hmr::dxosH2SMUI H2SMUI;
-//		hmr::connect(H2SMUI,H2SMA);
+//		hmrv::dxosH2SMUI H2SMUI;
+//		hmrv::connect(H2SMUI,H2SMA);
 //		MUISideDisp.insert(&H2SMUI);
 
-//		hmr::dxosHumidMUI HumidMUI;
-//		hmr::connect(HumidMUI,HumidMA);
+//		hmrv::dxosHumidMUI HumidMUI;
+//		hmrv::connect(HumidMUI,HumidMA);
 //		MUISideDisp.insert(&HumidMUI);
 
-		hmr::viewer::cFullADC::dxosMUI FullADCMUI;
+		hmrv::cFullADC::dxosMUI FullADCMUI;
 		FullADC.connect(FullADCMUI);
 		MUISideDisp.insert(&FullADCMUI);
 		ControlMainDisp.Infomation.slot_logData(FullADC.MsgAgent.signal_newData);
 
-		hmr::dxosDisplay Display(Pint(720,720),Pint(240,720));
+		hmrv::dxosDisplay Display(Pint(720,720),Pint(240,720));
 		Display.registMain(&IOMainDisp);
 		Display.registMain(&PacketMainDisp);
 		Display.registMain(&ControlMainDisp);
@@ -588,27 +589,27 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Display.registSide(&MUISideDisp);	
 		//Display.registSide(&IOSideDisp);
 	
-		Display.slot_setMainNo0(Keyboard.signal(hmLib::predicate_and(hmr::is_key_pushed(KEY::NUM1),hmLib::predicate_not(hmr::have_key_pushed(KEY::SHIFT)))));
-		Display.slot_setMainNo1(Keyboard.signal(hmLib::predicate_and(hmr::is_key_pushed(KEY::NUM2),hmLib::predicate_not(hmr::have_key_pushed(KEY::SHIFT)))));
-		Display.slot_setMainNo2(Keyboard.signal(hmLib::predicate_and(hmr::is_key_pushed(KEY::NUM3),hmLib::predicate_not(hmr::have_key_pushed(KEY::SHIFT)))));
-		Display.slot_setSideNo0(Keyboard.signal(hmLib::predicate_and(hmr::is_key_pushed(KEY::NUM1),hmr::have_key_pushed(KEY::SHIFT))));
-		Display.slot_setSideNo1(Keyboard.signal(hmLib::predicate_and(hmr::is_key_pushed(KEY::NUM2),hmr::have_key_pushed(KEY::SHIFT))));
-		Display.slot_setSideNo2(Keyboard.signal(hmLib::predicate_and(hmr::is_key_pushed(KEY::NUM3),hmr::have_key_pushed(KEY::SHIFT))));
+		Display.slot_setMainNo0(Keyboard.signal(hmLib::predicate_and(hmrv::is_key_pushed(KEY::NUM1),hmLib::predicate_not(hmrv::have_key_pushed(KEY::SHIFT)))));
+		Display.slot_setMainNo1(Keyboard.signal(hmLib::predicate_and(hmrv::is_key_pushed(KEY::NUM2),hmLib::predicate_not(hmrv::have_key_pushed(KEY::SHIFT)))));
+		Display.slot_setMainNo2(Keyboard.signal(hmLib::predicate_and(hmrv::is_key_pushed(KEY::NUM3),hmLib::predicate_not(hmrv::have_key_pushed(KEY::SHIFT)))));
+		Display.slot_setSideNo0(Keyboard.signal(hmLib::predicate_and(hmrv::is_key_pushed(KEY::NUM1),hmrv::have_key_pushed(KEY::SHIFT))));
+		Display.slot_setSideNo1(Keyboard.signal(hmLib::predicate_and(hmrv::is_key_pushed(KEY::NUM2),hmrv::have_key_pushed(KEY::SHIFT))));
+		Display.slot_setSideNo2(Keyboard.signal(hmLib::predicate_and(hmrv::is_key_pushed(KEY::NUM3),hmrv::have_key_pushed(KEY::SHIFT))));
 
-		Display.slot_plusMainNo(Pad1.signal(hmLib::predicate_and(hmr::is_pad1_cross_key_pulled(PAD::CROSS_KEY::RIGHT),hmLib::predicate_not(hmr::have_pad1_pushed(PAD::But7)))));
-		Display.slot_minusMainNo(Pad1.signal(hmLib::predicate_and(hmr::is_pad1_cross_key_pulled(PAD::CROSS_KEY::LEFT),hmLib::predicate_not(hmr::have_pad1_pushed(PAD::But7)))));
-		Display.slot_plusSideNo(Pad1.signal(hmLib::predicate_and(hmr::is_pad1_cross_key_pulled(PAD::CROSS_KEY::RIGHT),hmr::have_pad1_pushed(PAD::But7))));
-		Display.slot_minusSideNo(Pad1.signal(hmLib::predicate_and(hmr::is_pad1_cross_key_pulled(PAD::CROSS_KEY::LEFT),hmr::have_pad1_pushed(PAD::But7))));
+		Display.slot_plusMainNo(Pad1.signal(hmLib::predicate_and(hmrv::is_pad1_cross_key_pulled(PAD::CROSS_KEY::RIGHT),hmLib::predicate_not(hmrv::have_pad1_pushed(PAD::But7)))));
+		Display.slot_minusMainNo(Pad1.signal(hmLib::predicate_and(hmrv::is_pad1_cross_key_pulled(PAD::CROSS_KEY::LEFT),hmLib::predicate_not(hmrv::have_pad1_pushed(PAD::But7)))));
+		Display.slot_plusSideNo(Pad1.signal(hmLib::predicate_and(hmrv::is_pad1_cross_key_pulled(PAD::CROSS_KEY::RIGHT),hmrv::have_pad1_pushed(PAD::But7))));
+		Display.slot_minusSideNo(Pad1.signal(hmLib::predicate_and(hmrv::is_pad1_cross_key_pulled(PAD::CROSS_KEY::LEFT),hmrv::have_pad1_pushed(PAD::But7))));
 
 /*
 		struct cDebug{
 			bool IsTimeout;
-			hmr::clock::time_point Timeout;
+			hmrv::clock::time_point Timeout;
 			bool IsNullData;
-			hmr::clock::time_point NullData;
+			hmrv::clock::time_point NullData;
 			cDebug():IsTimeout(false),IsNullData(false){}
 			void operator()(void){
-				auto Time=hmr::clock::now();
+				auto Time=hmrv::clock::now();
 				if(Time-Timeout>std::chrono::seconds(3)){
 					if(!IsTimeout){
 						IsTimeout=true;
@@ -625,14 +626,14 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 					StopSoundFile();
 				}
 			}
-			void slot_timeout(boost::signals2::signal<void(hmr::clock::time_point)>& Signal_){
-				hmLib::signals::connect(Signal_,[&](hmr::clock::time_point Time_)->void{this->Timeout=Time_;});
+			void slot_timeout(boost::signals2::signal<void(hmrv::clock::time_point)>& Signal_){
+				hmLib::signals::connect(Signal_,[&](hmrv::clock::time_point Time_)->void{this->Timeout=Time_;});
 			}
-			void slot_nulldata(boost::signals2::signal<void(hmr::clock::time_point)>& Signal_){
-				hmLib::signals::connect(Signal_,[&](hmr::clock::time_point Time_)->void{this->NullData=Time_;});
+			void slot_nulldata(boost::signals2::signal<void(hmrv::clock::time_point)>& Signal_){
+				hmLib::signals::connect(Signal_,[&](hmrv::clock::time_point Time_)->void{this->NullData=Time_;});
 			}
 		}Debug;
-		boost::signals2::signal<void(hmr::clock::time_point)> DebugSignal;
+		boost::signals2::signal<void(hmrv::clock::time_point)> DebugSignal;
 		Debug.slot_timeout(Operator.signal_inform_Received);
 		Debug.slot_nulldata(BatteryMA.signal_nulldata);
 */
@@ -646,7 +647,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 			Operator();
 
 //			Debug();
-//			DebugSignal(hmr::clock::now());
+//			DebugSignal(hmrv::clock::now());
 
 			dx::draw(Pint(0,0),Display);
 

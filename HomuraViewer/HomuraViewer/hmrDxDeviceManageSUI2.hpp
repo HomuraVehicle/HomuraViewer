@@ -33,369 +33,393 @@ v1_00/130928 amby
 #define HMR_DEVMNGSUI_TIMEBUF_SIZE 10
 
 namespace hmr{
-	// ï`âÊÉNÉâÉX static
-	class dxosDevMngSUI2:public dxosBUI{
-		static const unsigned int TimeBuf[HMR_DEVMNGSUI_TIMEBUF_SIZE];	//éûä‘îzóÒ
-	private:
-		int RemLength;
-		int SleepLength;
-		int roamLength;
-		cDevMngMsgAgent::ClockMODE clockMode;
-		//bool useMP;
+	namespace viewer{
+		// ï`âÊÉNÉâÉX static
+		class dxosDevMngSUI2 :public dxosBUI{
+			static const unsigned int TimeBuf[HMR_DEVMNGSUI_TIMEBUF_SIZE];	//éûä‘îzóÒ
+		private:
+			int RemLength;
+			int SleepLength;
+			int roamLength;
+			cDevMngMsgAgent::ClockMODE clockMode;
+			//bool useMP;
 
-	public:
-		// signal ånóÒÇÃíËã`
-		boost::signals2::signal<void(bool, int, int)> signal_setSleepMode;
-		boost::signals2::signal<void(bool)> signal_exeSleepMode;
+		public:
+			// signal ånóÒÇÃíËã`
+			boost::signals2::signal<void(bool, int, int)> signal_setSleepMode;
+			boost::signals2::signal<void(bool)> signal_exeSleepMode;
 
-		boost::signals2::signal<void(bool, int)> signal_setRoamMode;
-		boost::signals2::signal<void(bool)> signal_exeRoamMode;
-		
-		//boost::signals2::signal<void(bool)> signal_setTurboMode;
-		boost::signals2::signal<void(bool)> signal_setNormalMode;
+			boost::signals2::signal<void(bool, int)> signal_setRoamMode;
+			boost::signals2::signal<void(bool)> signal_exeRoamMode;
 
-		boost::signals2::signal<void(bool)> signal_setKillMode;
-		boost::signals2::signal<void(bool)> signal_exeKillMode;
+			//boost::signals2::signal<void(bool)> signal_setTurboMode;
+			boost::signals2::signal<void(bool)> signal_setNormalMode;
 
-		boost::signals2::signal<void(bool)> signal_setGettingInfo;
-		boost::signals2::signal<void(bool, cDevMngMsgAgent::ClockMODE)> signal_setClockMode;
-		
+			boost::signals2::signal<void(bool)> signal_setKillMode;
+			boost::signals2::signal<void(bool)> signal_exeKillMode;
 
-		// inquire ånóÒÇÃíËã`
-		hmLib::inquiries::inquiry<bool> SendingSleepCommandInq;
-		hmLib::inquiries::inquiry<bool> IsReadySleepInq;
+			boost::signals2::signal<void(bool)> signal_setGettingInfo;
+			boost::signals2::signal<void(bool, cDevMngMsgAgent::ClockMODE)> signal_setClockMode;
 
-		hmLib::inquiries::inquiry<bool> SendingRoamCommandInq;
-		hmLib::inquiries::inquiry<bool> IsReadyRoamInq;
-		hmLib::inquiries::inquiry<bool> UseMPInq;
 
-		//hmLib::inquiries::inquiry<bool> SendingTurboCommandInq;
-		hmLib::inquiries::inquiry<bool> SendingNormalCommandInq;
+			// inquire ånóÒÇÃíËã`
+			hmLib::inquiries::inquiry<bool> SendingSleepCommandInq;
+			hmLib::inquiries::inquiry<bool> IsReadySleepInq;
 
-		hmLib::inquiries::inquiry<bool> SendingKillCommandInq;
-		hmLib::inquiries::inquiry<bool> IsReadyKillInq;
-		
-		hmLib::inquiries::inquiry<bool> SendingInfoCommandInq;
-		hmLib::inquiries::inquiry<bool> SendingClockCommandInq;
+			hmLib::inquiries::inquiry<bool> SendingRoamCommandInq;
+			hmLib::inquiries::inquiry<bool> IsReadyRoamInq;
+			hmLib::inquiries::inquiry<bool> UseMPInq;
 
-		hmLib::inquiries::inquiry<cDevMngMsgAgent::DevMODE> devMODEInq;
-		hmLib::inquiries::inquiry<cDevMngMsgAgent::ClockMODE> clockMODEInq;
+			//hmLib::inquiries::inquiry<bool> SendingTurboCommandInq;
+			hmLib::inquiries::inquiry<bool> SendingNormalCommandInq;
 
-		
-	public://virtual functions @dxosBUI;
-		int normal_draw(dxO& dxo)override{
-			// èÛë‘ï\é¶
-			try{
-				cDevMngMsgAgent::DevMODE deviceMode = devMODEInq();
-				if(deviceMode == cDevMngMsgAgent::DevMODE::NORMAL){
-					dxo.draw(Pint(70,5),dxoStrP(Pint(75,20),"NORMAL",getClr(normal,strobj)));
-				}else if(deviceMode == cDevMngMsgAgent::DevMODE::SLEEP){
-					dxo.draw(Pint(70,5),dxoStrP(Pint(75,20),"SLEEP",getClr(normal,strobj)));
-				}else if(deviceMode == cDevMngMsgAgent::DevMODE::ROAM){
-					dxo.draw(Pint(70,5),dxoStrP(Pint(75,20),"ROAM",getClr(normal,strobj)));
-				}else if(deviceMode == cDevMngMsgAgent::DevMODE::UNKNOWN){
-					dxo.draw(Pint(70,5),dxoStrP(Pint(75,20),"UNKNOWN",getClr(normal,strobj)));
+			hmLib::inquiries::inquiry<bool> SendingKillCommandInq;
+			hmLib::inquiries::inquiry<bool> IsReadyKillInq;
+
+			hmLib::inquiries::inquiry<bool> SendingInfoCommandInq;
+			hmLib::inquiries::inquiry<bool> SendingClockCommandInq;
+
+			hmLib::inquiries::inquiry<cDevMngMsgAgent::DevMODE> devMODEInq;
+			hmLib::inquiries::inquiry<cDevMngMsgAgent::ClockMODE> clockMODEInq;
+
+
+		public://virtual functions @dxosBUI;
+			int normal_draw(dxO& dxo)override{
+				// èÛë‘ï\é¶
+				try{
+					cDevMngMsgAgent::DevMODE deviceMode = devMODEInq();
+					if(deviceMode == cDevMngMsgAgent::DevMODE::NORMAL){
+						dxo.draw(Pint(70, 5), dxoStrP(Pint(75, 20), "NORMAL", getClr(normal, strobj)));
+					} else if(deviceMode == cDevMngMsgAgent::DevMODE::SLEEP){
+						dxo.draw(Pint(70, 5), dxoStrP(Pint(75, 20), "SLEEP", getClr(normal, strobj)));
+					} else if(deviceMode == cDevMngMsgAgent::DevMODE::ROAM){
+						dxo.draw(Pint(70, 5), dxoStrP(Pint(75, 20), "ROAM", getClr(normal, strobj)));
+					} else if(deviceMode == cDevMngMsgAgent::DevMODE::UNKNOWN){
+						dxo.draw(Pint(70, 5), dxoStrP(Pint(75, 20), "UNKNOWN", getClr(normal, strobj)));
+					}
 				}
-			}catch(const hmLib::inquiries::unconnected_exception&){				
-				dxo.draw(Pint(70, 5), dxoStr("Inquiry::deviceMode éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(70, 5), dxoStr(Excp.what()) );
-			}
-
-			try{
-				cDevMngMsgAgent::ClockMODE clockMode = clockMODEInq();
-				if(clockMode == cDevMngMsgAgent::ClockMODE::NORMALCLOCK){
-					dxo.draw(Pint(150,5),dxoStrP(Pint(75,20),"NORMAL",getClr(normal,strobj)));
-				}else if(clockMode == cDevMngMsgAgent::ClockMODE::LOWCLOCK){
-					dxo.draw(Pint(150,5),dxoStrP(Pint(75,20),"SLOW",getClr(normal,strobj)));
-				}else if(clockMode == cDevMngMsgAgent::ClockMODE::HIGHCLOCK){
-					dxo.draw(Pint(150,5),dxoStrP(Pint(75,20),"TURBO",getClr(normal,strobj)));
-				}else if(clockMode == cDevMngMsgAgent::ClockMODE::UNKNOWNCLOCK){
-					dxo.draw(Pint(150,5),dxoStrP(Pint(75,20),"UNKNOWN",getClr(normal,strobj)));
+				catch(const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(70, 5), dxoStr("Inquiry::deviceMode éÊìæé∏îs"));
 				}
-			}catch(const hmLib::inquiries::unconnected_exception&){				
-				dxo.draw(Pint(150, 5), dxoStr("Inquiry::clockMode éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(150, 5), dxoStr(Excp.what()) );
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(70, 5), dxoStr(Excp.what()));
+				}
+
+				try{
+					cDevMngMsgAgent::ClockMODE clockMode = clockMODEInq();
+					if(clockMode == cDevMngMsgAgent::ClockMODE::NORMALCLOCK){
+						dxo.draw(Pint(150, 5), dxoStrP(Pint(75, 20), "NORMAL", getClr(normal, strobj)));
+					} else if(clockMode == cDevMngMsgAgent::ClockMODE::LOWCLOCK){
+						dxo.draw(Pint(150, 5), dxoStrP(Pint(75, 20), "SLOW", getClr(normal, strobj)));
+					} else if(clockMode == cDevMngMsgAgent::ClockMODE::HIGHCLOCK){
+						dxo.draw(Pint(150, 5), dxoStrP(Pint(75, 20), "TURBO", getClr(normal, strobj)));
+					} else if(clockMode == cDevMngMsgAgent::ClockMODE::UNKNOWNCLOCK){
+						dxo.draw(Pint(150, 5), dxoStrP(Pint(75, 20), "UNKNOWN", getClr(normal, strobj)));
+					}
+				}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(150, 5), dxoStr("Inquiry::clockMode éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(150, 5), dxoStr(Excp.what()));
+				}
+
+
+				return 0;
 			}
+			int extend_draw(dxO& dxo)override{
+				// draw
+				normal_draw(dxo);
 
 
-			return 0;
-		}
-		int extend_draw(dxO& dxo)override{
-			// draw
-			normal_draw(dxo);
+				try{
+					bool IsSending;
+					bool IsPresentMode;
 
+					// Normal flag ÇÃï`âÊ
+					IsSending = SendingNormalCommandInq();
+					IsPresentMode = (deviceMode == cDevMngMsgAgent::DevMODE::NORMAL));
 
-			try{
-				bool IsSending;
-				bool IsPresentMode;
+					if(dxo.draw(Pint(5, 30), dxoButIO(Pint(40, 20), "Nml", getClr(IsSending ? active : normal, butobj), IsPresentMode) == 1){
+						signal_setNormalMode(!IsSending);
+					}
 
-				// Normal flag ÇÃï`âÊ
-				IsSending = SendingNormalCommandInq();
-				IsPresentMode=(deviceMode == cDevMngMsgAgent::DevMODE::NORMAL));
+					// KILL ÇÃï`âÊ
+					IsSending = SendingKillCommandInq();
+					IsPresentMode = (deviceMode == cDevMngMsgAgent::DevMODE::KILL));
 
-				if( dxo.draw(Pint(5, 30),dxoButIO(Pint(40,20), "Nml", getClr(IsSending? active:normal, butobj), IsPresentMode) == 1){
-					signal_setNormalMode(!IsSending);
+					if(dxo.draw(Pint(45, 30), dxoButIO(Pint(40, 20), "KILL", intClr, isSending)) == 1){
+						signal_setKillMode(!isSending);
+					}
+
+				}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(5, 30), dxoStr("Inquiry::sendingNormalCom éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(5, 30), dxoStr(Excp.what()));
 				}
 
 				// KILL ÇÃï`âÊ
-				IsSending = SendingKillCommandInq();
-				IsPresentMode=(deviceMode == cDevMngMsgAgent::DevMODE::KILL));
+				try{
+					bool isSending = SendingKillCommandInq();
+					bool isReadytoKill = IsReadyKillInq();
 
-				if( dxo.draw(Pint(45, 30),dxoButIO(Pint(40,20), "KILL", intClr, isSending)) == 1){
-					signal_setKillMode(!isSending);
+					if(!isReadytoKill){
+						dxRGB intClr;
+						if(isSending){
+							intClr = getClr(active, butobj);
+						} else{ intClr = getClr(normal, butobj); }
+
+					} else{
+						int ans = dxo.draw(Pint(125, 30), dxoButLRIO(Pint(105, 20), "Sure?? Y/N", getClr(normal, butobj), true));
+						if(ans == 1){
+							signal_exeKillMode(true);
+						} else if(ans == 10){
+							signal_exeKillMode(false);
+						}
+					}
+				}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(125, 30), dxoStr("Inquiry::sendingKILLCom éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(125, 30), dxoStr(Excp.what()));
 				}
 
-			}catch(const hmLib::inquiries::unconnected_exception&){				
-				dxo.draw(Pint(5, 30), dxoStr("Inquiry::sendingNormalCom éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(5, 30), dxoStr( Excp.what()) );
-			}
 
-			// KILL ÇÃï`âÊ
-			try{
-				bool isSending = SendingKillCommandInq();
-				bool isReadytoKill = IsReadyKillInq();
+				// ROAM ÇÃï`âÊ
+				try{
+					bool isSending = SendingRoamCommandInq();
+					bool isReadytoRoam = IsReadyRoamInq();
 
-				if(!isReadytoKill){
+					if(!isReadytoRoam){
+						dxRGB intClr;
+						if(isSending){
+							intClr = getClr(active, butobj);
+						} else{ intClr = getClr(normal, butobj); }
+
+						if(dxo.draw(Pint(5, 55), dxoButIO(Pint(70, 20), "ROAM", intClr, isSending)) == 1){
+							signal_setRoamMode(!isSending, roamLength);
+						}
+					} else{
+						int ans = dxo.draw(Pint(5, 55), dxoButIO(Pint(70, 20), "Sure??", getClr(normal, butobj), true));
+						if(ans == 1){
+							signal_exeRoamMode(true);
+						} else if(ans == 10){
+							signal_exeRoamMode(false);
+						}
+					}
+
+				}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(5, 55), dxoStr("Inquiry::Roam éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(5, 55), dxoStr(Excp.what()));
+				}
+
+				// ROAM éûä‘ånê›íË
+				try{
+					bool isSending = SendingRoamCommandInq();
+					bool isReadytoRoam = IsReadyRoamInq();
+					std::string str;
+					//if(useMP) str = "MP";
+					//else str = "RF";
+
+					// sleeptime ê›íË
+					if(!isReadytoRoam && !isSending){
+						int ans = dxo.draw(Pint(80, 55), dxoButLRIO(Pint(70, 20), hmstd::fStr("%d(s)", roamLength), getClr(normal, butobj), true));
+						if(ans == 1){
+							roamLength += 20;
+							if(roamLength >= 300) roamLength = 20;
+						} else if(ans == 10){
+							roamLength -= 20;
+							if(roamLength < 20) roamLength = 300;
+						}
+
+						/*
+						ans = dxo.draw(Pint(155,55), dxoButIO(Pint(70, 20), str, getClr(normal, butobj), true));
+						if(ans==1){
+							useMP = !useMP;
+						}
+						*/
+					} else{
+						dxo.draw(Pint(80, 55), dxoButLRIO(Pint(70, 20), hmstd::fStr("%d(s)", roamLength), getClr(normal, butobj), false));
+						//dxo.draw(Pint(155, 55), dxoButIO(Pint(70, 20), str, getClr(normal, butobj), false));
+					}
+				}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					// Inquire Ç…ÉAÉNÉZÉXÇ≈Ç´Ç»Ç©Ç¡ÇΩÅIÅIÅ@Ç≈Ç‡ÅAÇªÇÒÇ»ÇÃÉÅÉCÉìä÷êîÇ…ÇÕä÷åWÇ»Ç¢Ç©ÇÁÇ‡Ç›è¡Ç∑
+					dxo.draw(Pint(80, 55), dxoStr("Inquiry::isReady to roam éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(80, 55), dxoStr(Excp.what()));
+				}
+
+				// ROAM ÉÇÅ[ÉhÇÃï`âÊ
+				try{
+					bool useMP = UseMPInq();
+					std::string str;
+					if(useMP) str = "MP";
+					else str = "RF";
+					dxo.draw(Pint(155, 55), dxoStrP(Pint(70, 20), str, getClr(normal, strobj)));
+				}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					// Inquire Ç…ÉAÉNÉZÉXÇ≈Ç´Ç»Ç©Ç¡ÇΩÅIÅIÅ@Ç≈Ç‡ÅAÇªÇÒÇ»ÇÃÉÅÉCÉìä÷êîÇ…ÇÕä÷åWÇ»Ç¢Ç©ÇÁÇ‡Ç›è¡Ç∑
+					dxo.draw(Pint(155, 55), dxoStr("Inquiry::UseMP éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(155, 55), dxoStr(Excp.what()));
+				}
+
+				// SLEEP ÇÃï`âÊ
+				try{
+					bool isSending = SendingSleepCommandInq();
+					bool isReadytoSleep = IsReadySleepInq();
+
+					if(!isReadytoSleep){
+						dxRGB intClr;
+						if(isSending){
+							intClr = getClr(active, butobj);
+						} else{ intClr = getClr(normal, butobj); }
+
+						if(dxo.draw(Pint(5, 80), dxoButIO(Pint(70, 20), "SLEEP", intClr, isSending)) == 1){
+							signal_setSleepMode(!isSending, TimeBuf[SleepLength] - TimeBuf[RemLength], TimeBuf[RemLength]);
+						}
+					} else{
+						int ans = dxo.draw(Pint(5, 80), dxoButLRIO(Pint(70, 20), "Sure?? Y/N", getClr(normal, butobj), true));
+						if(ans == 1){
+							signal_exeSleepMode(true);
+						} else if(ans == 10){
+							signal_exeSleepMode(false);
+						}
+					}
+
+				}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(5, 80), dxoStr("Inquiry::SLEEP éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(5, 80), dxoStr(Excp.what()));
+				}
+
+				// SLEEP éûä‘ånê›íË
+				try{
+					bool isSending = SendingSleepCommandInq();
+					bool isReadytoSleep = IsReadySleepInq();
+
+					// sleeptime ê›íË
+					if(!isReadytoSleep && !isSending){
+						int ans;
+
+						ans = dxo.draw(Pint(80, 80), dxoButLRIO(Pint(70, 20), hmstd::fStr("I:%.1f", TimeBuf[SleepLength] / 60.), getClr(normal, butobj), true));
+						if(ans == 1){
+							++SleepLength;
+							SleepLength = std::min(SleepLength, HMR_DEVMNGSUI_TIMEBUF_SIZE - 1);
+						} else if(ans == 10){
+							--SleepLength;
+							SleepLength = std::max(SleepLength, 1);
+						}
+						RemLength = std::min(SleepLength - 1, RemLength);
+
+						ans = dxo.draw(Pint(155, 80), dxoButLRIO(Pint(70, 20), hmstd::fStr("R:%.1f", TimeBuf[RemLength] / 60.), getClr(normal, butobj), true));
+						if(ans == 1){
+							++RemLength;
+							RemLength = std::min(RemLength, HMR_DEVMNGSUI_TIMEBUF_SIZE - 3);
+						} else if(ans == 10){
+							--RemLength;
+							RemLength = std::max(RemLength, 0);
+						}
+
+					} else{
+						dxo.draw(Pint(80, 80), dxoButLRIO(Pint(70, 20), hmstd::fStr("S%f", TimeBuf[RemLength] / 60.), getClr(normal, butobj), false));
+						dxo.draw(Pint(155, 80), dxoButLRIO(Pint(70, 20), hmstd::fStr("W%f", TimeBuf[SleepLength] / 60.), getClr(normal, butobj), false));
+					}
+				}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					// Inquire Ç…ÉAÉNÉZÉXÇ≈Ç´Ç»Ç©Ç¡ÇΩÅIÅIÅ@Ç≈Ç‡ÅAÇªÇÒÇ»ÇÃÉÅÉCÉìä÷êîÇ…ÇÕä÷åWÇ»Ç¢Ç©ÇÁÇ‡Ç›è¡Ç∑
+					dxo.draw(Pint(80, 80), dxoStr("Inquiry::isReady to sleep éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(80, 80), dxoStr(Excp.what()));
+				}
+
+				// CLOCK ÇÃï`âÊ
+				try{
+					bool isSending = SendingClockCommandInq();
 					dxRGB intClr;
-					if(isSending){ intClr =  getClr(active, butobj);
-					}else{intClr =  getClr(normal, butobj);}
-
-				}else{
-					int ans = dxo.draw(Pint(125, 30),dxoButLRIO(Pint(105,20), "Sure?? Y/N", getClr(normal, butobj), true));
-					if( ans == 1){
-						signal_exeKillMode(true);
-					}else if(ans == 10){
-						signal_exeKillMode(false);
+					if(isSending){
+						intClr = getClr(active, butobj);
+					} else{ intClr = getClr(normal, butobj); }
+					if(dxo.draw(Pint(5, 105), dxoButIO(Pint(70, 20), "CLOCK", intClr, isSending)) == 1){
+						signal_setClockMode(!isSending, clockMode);
 					}
 				}
-			}catch(const hmLib::inquiries::unconnected_exception&){				
-				dxo.draw(Pint(125, 30), dxoStr("Inquiry::sendingKILLCom éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(125, 30), dxoStr( Excp.what()) );
-			}
-
-
-			// ROAM ÇÃï`âÊ
-			try{
-				bool isSending = SendingRoamCommandInq();
-				bool isReadytoRoam = IsReadyRoamInq();
-
-				if(!isReadytoRoam){
-					dxRGB intClr;
-					if(isSending){ intClr =  getClr(active, butobj);
-					}else{intClr =  getClr(normal, butobj);}
-					
-					if( dxo.draw(Pint(5, 55),dxoButIO(Pint(70,20), "ROAM", intClr, isSending)) == 1){
-						signal_setRoamMode(!isSending, roamLength);
-					}
-				}else{
-					int ans = dxo.draw(Pint(5, 55),dxoButIO(Pint(70,20), "Sure??", getClr(normal, butobj), true));
-					if( ans == 1){
-						signal_exeRoamMode(true);
-					}else if(ans == 10){
-						signal_exeRoamMode(false);
-					}
+				catch(const hmLib::inquiries::unconnected_exception&){
+					dxo.draw(Pint(5, 105), dxoStr("Inquiry::sendingClockCom éÊìæé∏îs"));
+				}
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(5, 105), dxoStr(Excp.what()));
 				}
 
-			}catch(const hmLib::inquiries::unconnected_exception&){				
-				dxo.draw(Pint(5, 55), dxoStr("Inquiry::Roam éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(5, 55), dxoStr( Excp.what()) );
-			}
+				// CLOCK ê›íË
+				try{
+					bool isSending = SendingClockCommandInq();
+					std::string str;
+					if(clockMode == cDevMngMsgAgent::ClockMODE::NORMALCLOCK)str = "NORMAL";
+					else if(clockMode == cDevMngMsgAgent::ClockMODE::HIGHCLOCK)str = "HIGH";
+					else if(clockMode == cDevMngMsgAgent::ClockMODE::LOWCLOCK)str = "LOW";
 
-			// ROAM éûä‘ånê›íË
-			try{
-				bool isSending = SendingRoamCommandInq();
-				bool isReadytoRoam = IsReadyRoamInq();
-				std::string str;
-				//if(useMP) str = "MP";
-				//else str = "RF";
+					//  ê›íË
+					if(!isSending){
 
-				// sleeptime ê›íË
-				if(!isReadytoRoam && !isSending){
-					int ans=dxo.draw(Pint(80, 55), dxoButLRIO(Pint(70, 20), hmstd::fStr("%d(s)", roamLength), getClr(normal, butobj), true));
-					if(ans==1){
-						roamLength += 20;
-						if(roamLength >= 300) roamLength = 20;
-					}
-					else if(ans==10){
-						roamLength -= 20;
-						if(roamLength < 20) roamLength = 300;
-					}
+						int ans = dxo.draw(Pint(80, 105), dxoButLRIO(Pint(70, 20), str, getClr(normal, butobj), true));
+						if(ans == 1){
+							//clockMode = (cDevMngMsgAgent::ClockMODE)(clockMode+1)%cDevMngMsgAgent::ClockMODE::UNKNOWNCLOCK;
+							if(clockMode == cDevMngMsgAgent::ClockMODE::NORMALCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::HIGHCLOCK;
+							else if(clockMode == cDevMngMsgAgent::ClockMODE::HIGHCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::LOWCLOCK;
+							else if(clockMode == cDevMngMsgAgent::ClockMODE::LOWCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::NORMALCLOCK;
+						} else if(ans == 10){
+							if(clockMode == cDevMngMsgAgent::ClockMODE::NORMALCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::LOWCLOCK;
+							else if(clockMode == cDevMngMsgAgent::ClockMODE::HIGHCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::NORMALCLOCK;
+							else if(clockMode == cDevMngMsgAgent::ClockMODE::LOWCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::HIGHCLOCK;
+						}
 
-					/*
-					ans = dxo.draw(Pint(155,55), dxoButIO(Pint(70, 20), str, getClr(normal, butobj), true));
-					if(ans==1){
-						useMP = !useMP;
-					}
-					*/
-				}else{
-					dxo.draw(Pint(80, 55), dxoButLRIO(Pint(70, 20), hmstd::fStr("%d(s)", roamLength), getClr(normal, butobj), false));
-					//dxo.draw(Pint(155, 55), dxoButIO(Pint(70, 20), str, getClr(normal, butobj), false));
-				}
-			}catch(const hmLib::inquiries::unconnected_exception& ){				
-				// Inquire Ç…ÉAÉNÉZÉXÇ≈Ç´Ç»Ç©Ç¡ÇΩÅIÅIÅ@Ç≈Ç‡ÅAÇªÇÒÇ»ÇÃÉÅÉCÉìä÷êîÇ…ÇÕä÷åWÇ»Ç¢Ç©ÇÁÇ‡Ç›è¡Ç∑
-				dxo.draw(Pint(80, 55), dxoStr("Inquiry::isReady to roam éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(80, 55), dxoStr( Excp.what()) );
-			}
-
-			// ROAM ÉÇÅ[ÉhÇÃï`âÊ
-			try{
-				bool useMP = UseMPInq();
-				std::string str;
-				if(useMP) str = "MP";
-				else str = "RF";
-				dxo.draw(Pint(155, 55), dxoStrP(Pint(70,20),str,getClr(normal,strobj)));
-			}catch(const hmLib::inquiries::unconnected_exception& ){				
-				// Inquire Ç…ÉAÉNÉZÉXÇ≈Ç´Ç»Ç©Ç¡ÇΩÅIÅIÅ@Ç≈Ç‡ÅAÇªÇÒÇ»ÇÃÉÅÉCÉìä÷êîÇ…ÇÕä÷åWÇ»Ç¢Ç©ÇÁÇ‡Ç›è¡Ç∑
-				dxo.draw(Pint(155, 55), dxoStr("Inquiry::UseMP éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(155, 55), dxoStr( Excp.what()) );
-			}
-
-			// SLEEP ÇÃï`âÊ
-			try{
-				bool isSending = SendingSleepCommandInq();
-				bool isReadytoSleep = IsReadySleepInq();
-
-				if(!isReadytoSleep){
-					dxRGB intClr;
-					if(isSending){ intClr =  getClr(active, butobj);
-					}else{intClr =  getClr(normal, butobj);}
-					
-					if( dxo.draw(Pint(5, 80),dxoButIO(Pint(70,20), "SLEEP", intClr, isSending)) == 1){
-						signal_setSleepMode(!isSending, TimeBuf[SleepLength]-TimeBuf[RemLength], TimeBuf[RemLength]);
-					}
-				}else{
-					int ans = dxo.draw(Pint(5, 80),dxoButLRIO(Pint(70,20), "Sure?? Y/N", getClr(normal, butobj), true));
-					if( ans == 1){
-						signal_exeSleepMode(true);
-					}else if(ans == 10){
-						signal_exeSleepMode(false);
+						/*
+						ans = dxo.draw(Pint(155,55), dxoButIO(Pint(70, 20), str, getClr(normal, butobj), true));
+						if(ans==1){
+							useMP = !useMP;
+						}
+						*/
+					} else{
+						dxo.draw(Pint(80, 105), dxoButLRIO(Pint(70, 20), str, getClr(normal, butobj), false));
+						//dxo.draw(Pint(155, 55), dxoButIO(Pint(70, 20), str, getClr(normal, butobj), false));
 					}
 				}
-
-			}catch(const hmLib::inquiries::unconnected_exception&){				
-				dxo.draw(Pint(5, 80), dxoStr("Inquiry::SLEEP éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(5, 80), dxoStr( Excp.what()) );
-			}
-
-			// SLEEP éûä‘ånê›íË
-			try{
-				bool isSending = SendingSleepCommandInq();
-				bool isReadytoSleep = IsReadySleepInq();
-
-				// sleeptime ê›íË
-				if(!isReadytoSleep && !isSending){
-					int ans;
-
-					ans = dxo.draw(Pint(80,80), dxoButLRIO(Pint(70, 20), hmstd::fStr("I:%.1f", TimeBuf[SleepLength]/60.), getClr(normal, butobj), true));
-					if(ans==1){
-						++SleepLength;
-						SleepLength=std::min(SleepLength,HMR_DEVMNGSUI_TIMEBUF_SIZE-1);
-					}
-					else if(ans==10){
-						--SleepLength;
-						SleepLength=std::max(SleepLength,1);
-					}
-					RemLength=std::min(SleepLength-1,RemLength);
-
-					ans=dxo.draw(Pint(155,80), dxoButLRIO(Pint(70, 20), hmstd::fStr("R:%.1f", TimeBuf[RemLength]/60.), getClr(normal, butobj), true));
-					if(ans==1){
-						++RemLength;
-						RemLength=std::min(RemLength,HMR_DEVMNGSUI_TIMEBUF_SIZE-3);
-					}
-					else if(ans==10){
-						--RemLength;
-						RemLength=std::max(RemLength,0);
-					}
-
-				}else{
-					dxo.draw(Pint(80,80), dxoButLRIO(Pint(70, 20), hmstd::fStr("S%f",  TimeBuf[RemLength]/60.), getClr(normal, butobj), false));
-					dxo.draw(Pint(155,80), dxoButLRIO(Pint(70, 20), hmstd::fStr("W%f", TimeBuf[SleepLength]/60.), getClr(normal, butobj), false));
+				catch(const hmLib::inquiries::unconnected_exception&){
+					// Inquire Ç…ÉAÉNÉZÉXÇ≈Ç´Ç»Ç©Ç¡ÇΩÅIÅIÅ@Ç≈Ç‡ÅAÇªÇÒÇ»ÇÃÉÅÉCÉìä÷êîÇ…ÇÕä÷åWÇ»Ç¢Ç©ÇÁÇ‡Ç›è¡Ç∑
+					dxo.draw(Pint(80, 105), dxoStr("Inquiry::sendingClockCom éÊìæé∏îs"));
 				}
-			}catch(const hmLib::inquiries::unconnected_exception& ){				
-				// Inquire Ç…ÉAÉNÉZÉXÇ≈Ç´Ç»Ç©Ç¡ÇΩÅIÅIÅ@Ç≈Ç‡ÅAÇªÇÒÇ»ÇÃÉÅÉCÉìä÷êîÇ…ÇÕä÷åWÇ»Ç¢Ç©ÇÁÇ‡Ç›è¡Ç∑
-				dxo.draw(Pint(80, 80), dxoStr("Inquiry::isReady to sleep éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(80, 80), dxoStr( Excp.what()) );
-			}
-
-			// CLOCK ÇÃï`âÊ
-			try{
-				bool isSending = SendingClockCommandInq();
-				dxRGB intClr;
-				if(isSending){ intClr =  getClr(active, butobj);
-				}else{intClr =  getClr(normal, butobj);}
-				if( dxo.draw(Pint(5, 105),dxoButIO(Pint(70,20), "CLOCK", intClr, isSending)) == 1){
-					signal_setClockMode(!isSending, clockMode);
+				catch(const hmLib::exceptions::exception& Excp){
+					dxo.draw(Pint(80, 105), dxoStr(Excp.what()));
 				}
-			}catch(const hmLib::inquiries::unconnected_exception&){				
-				dxo.draw(Pint(5, 105), dxoStr("Inquiry::sendingClockCom éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(5, 105), dxoStr( Excp.what()) );
+
+				return 0;
+
 			}
-
-			// CLOCK ê›íË
-			try{
-				bool isSending = SendingClockCommandInq();
-				std::string str;
-				if(clockMode == cDevMngMsgAgent::ClockMODE::NORMALCLOCK)str = "NORMAL";
-				else if(clockMode == cDevMngMsgAgent::ClockMODE::HIGHCLOCK)str = "HIGH";
-				else if(clockMode == cDevMngMsgAgent::ClockMODE::LOWCLOCK)str = "LOW";
-				
-				//  ê›íË
-				if(!isSending){
-
-					int ans=dxo.draw(Pint(80, 105), dxoButLRIO(Pint(70, 20), str, getClr(normal, butobj), true));
-					if(ans==1){
-						//clockMode = (cDevMngMsgAgent::ClockMODE)(clockMode+1)%cDevMngMsgAgent::ClockMODE::UNKNOWNCLOCK;
-						if(clockMode == cDevMngMsgAgent::ClockMODE::NORMALCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::HIGHCLOCK;
-						else if(clockMode == cDevMngMsgAgent::ClockMODE::HIGHCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::LOWCLOCK;
-						else if(clockMode == cDevMngMsgAgent::ClockMODE::LOWCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::NORMALCLOCK;
-					}
-					else if(ans==10){
-						if(clockMode == cDevMngMsgAgent::ClockMODE::NORMALCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::LOWCLOCK;
-						else if(clockMode == cDevMngMsgAgent::ClockMODE::HIGHCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::NORMALCLOCK;
-						else if(clockMode == cDevMngMsgAgent::ClockMODE::LOWCLOCK)clockMode = cDevMngMsgAgent::ClockMODE::HIGHCLOCK;
-					}
-
-					/*
-					ans = dxo.draw(Pint(155,55), dxoButIO(Pint(70, 20), str, getClr(normal, butobj), true));
-					if(ans==1){
-						useMP = !useMP;
-					}
-					*/
-				}else{
-					dxo.draw(Pint(80, 105), dxoButLRIO(Pint(70, 20), str, getClr(normal, butobj), false));
-					//dxo.draw(Pint(155, 55), dxoButIO(Pint(70, 20), str, getClr(normal, butobj), false));
-				}
-			}catch(const hmLib::inquiries::unconnected_exception& ){				
-				// Inquire Ç…ÉAÉNÉZÉXÇ≈Ç´Ç»Ç©Ç¡ÇΩÅIÅIÅ@Ç≈Ç‡ÅAÇªÇÒÇ»ÇÃÉÅÉCÉìä÷êîÇ…ÇÕä÷åWÇ»Ç¢Ç©ÇÁÇ‡Ç›è¡Ç∑
-				dxo.draw(Pint(80, 105), dxoStr("Inquiry::sendingClockCom éÊìæé∏îs") );
-			}catch(const hmLib::exceptions::exception& Excp){
-				dxo.draw(Pint(80, 105), dxoStr( Excp.what()) );
+			status getStatus()const override{ return normal; }
+		public:
+			// constructor
+			dxosDevMngSUI2(void) :dxosBUI("HMR Device", 30, 130){
+				RemLength = 0;
+				SleepLength = 1;
+				roamLength = 20;
+				//useMP = true;
+				clockMode = cDevMngMsgAgent::ClockMODE::NORMALCLOCK;
 			}
-			
-			return 0;
-
-		}
-		status getStatus()const override{return normal;}
-	public:
-		// constructor
-		dxosDevMngSUI2(void):dxosBUI("HMR Device", 30, 130){
-			RemLength =0;
-			SleepLength =1;
-			roamLength = 20;
-			//useMP = true;
-			clockMode =  cDevMngMsgAgent::ClockMODE::NORMALCLOCK;
-		}
-	};		
+		};
+	}
 }
 
 #
