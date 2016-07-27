@@ -8,7 +8,7 @@
 #include<chrono>
 #include<vector>
 #include<boost/format.hpp>
-#include<hmrVLib/VMC1.h>
+#include<HomuraViewer/VMC1.h>
 #include"chrono.hpp"
 /*===hmrData===
 データ型の管理用ファイル

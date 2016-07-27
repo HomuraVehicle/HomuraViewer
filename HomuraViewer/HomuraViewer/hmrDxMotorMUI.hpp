@@ -17,7 +17,7 @@ hmrDxMotorMUI v1_00/130519 iwahori
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Data.hpp>
 #include"hmrDxBUI.hpp"
 namespace hmr{
 	//x240*yNONE

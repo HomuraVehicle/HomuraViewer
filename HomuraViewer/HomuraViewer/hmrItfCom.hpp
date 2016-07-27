@@ -1,7 +1,7 @@
 #ifndef HMR_ITFCOM_INC
 #define HMR_ITFCOM_INC 100
 #
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Data.hpp>
 
 /*===hmrItfCom===
 hmrItfCom:v1_01/130324 hmIto

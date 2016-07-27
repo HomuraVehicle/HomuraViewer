@@ -3,7 +3,7 @@
 #
 
 #include "hmLibVer.hpp"
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Data.hpp>
 #include <array>
 
 namespace hmr{

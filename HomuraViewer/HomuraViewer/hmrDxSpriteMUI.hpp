@@ -9,7 +9,7 @@
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Data.hpp>
 #include"hmrDxTools.hpp"
 #include"hmrDxBUI.hpp"
 namespace hmr{

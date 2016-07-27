@@ -27,8 +27,8 @@ v1_00/130907 amby
 #include <boost/signals2.hpp>
 #include <boost/filesystem.hpp>
 #include <hmLib/signals.hpp>
-#include <hmrVLib/File.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/File.hpp>
+#include <HomuraViewer/Data.hpp>
 #include <hmLib/coordinates.hpp>
 
 namespace hmr{

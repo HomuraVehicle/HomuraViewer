@@ -20,8 +20,8 @@ GPS ファイル関係のクラス
 #include <fstream>
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
-#include <hmrVLib/File.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/File.hpp>
+#include <HomuraViewer/Data.hpp>
 #include "hmrGPSDataSet.hpp"
 
 namespace hmr{

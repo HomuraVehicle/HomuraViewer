@@ -52,8 +52,8 @@ hmrOperator:v1_00/130310 hmito
 #include <hmLib/inquiries/inquiry.hpp>
 #include <boost/signals2.hpp>
 #include"hmrItfCom.hpp"
-#include <hmrVLib/Message/ItfMessage.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Message/ItfMessage.hpp>
+#include <HomuraViewer/Data.hpp>
 
 namespace hmr{
 	class cFullRecvOneSendOperator{

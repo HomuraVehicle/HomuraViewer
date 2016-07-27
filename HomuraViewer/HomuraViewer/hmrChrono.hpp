@@ -10,9 +10,9 @@ Chrono
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
 #include <hmLib/type.h>
-#include <hmrVLib/Message/ItfMessageAgent.hpp>
+#include <HomuraViewer/Message/ItfMessageAgent.hpp>
 #include "vmstatus.hpp"
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Data.hpp>
 
 namespace hmr{
 	//ChronoŠÖ˜A

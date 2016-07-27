@@ -13,7 +13,7 @@ hmrHumid v1_00/130511 iwahori
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include <hmrVLib/Message/ItfMessageAgent.hpp>
+#include <HomuraViewer/Message/ItfMessageAgent.hpp>
 #include "hmrFlagirl.hpp"
 #include "hmrADC.h"
 

@@ -28,6 +28,15 @@
     <Filter Include="HomuraViewer\Message">
       <UniqueIdentifier>{36b0113f-6e29-4a82-b38b-d85099f35329}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hmLib">
+      <UniqueIdentifier>{dcb53f3c-0985-4dcf-a0db-bf99a1c9d739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hmLib\comgate">
+      <UniqueIdentifier>{11e27a91-e5f5-4c75-af56-387973ab0bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hmLib\comgate\winRS">
+      <UniqueIdentifier>{6ece7795-b59c-4048-9d7d-d485ae7bf740}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FullADC\FileAgent.hpp">
@@ -441,6 +450,117 @@
     <ClInclude Include="VMC1.h">
       <Filter>HomuraViewer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\cdeque.h">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\color.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\comgate.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\config_vc.h">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\coordinates.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\cqueue.h">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\cstack.h">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\cstring.h">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\csv_iterator.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\date.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\debugstream.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\exceptions.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\filterbuf.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\functional.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\gate.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\gps.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\inquiries.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\iocsv.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\lattices.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\mutex_proxy.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\position.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\random.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\rectangle.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\signals.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\stream_utility.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\streambuf_interface.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\table.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\type.h">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\typemanage.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\utility.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\version.h">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\algorithm.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\any_iterator.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\array_queue.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\bufgate.hpp">
+      <Filter>hmLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\comgate\winRS\winrs.h">
+      <Filter>hmLib\comgate\winRS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hmLib\hmLib\comgate\winRS\ifline.h">
+      <Filter>hmLib\comgate\winRS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -469,13 +589,31 @@
     <ClCompile Include="VMC1.c">
       <Filter>HomuraViewer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\hmLib\hmLib\cdeque.c">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\hmLib\hmLib\comgate.cpp">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\hmLib\hmLib\coordinates.cpp">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\hmLib\hmLib\cqueue.c">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\hmLib\hmLib\cstack.c">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\hmLib\hmLib\cstring.c">
+      <Filter>hmLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\hmLib\hmLib\debugstream.cpp">
+      <Filter>hmLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico">
       <Filter>リソース ファイル</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resource.aps" />
   </ItemGroup>
 </Project>

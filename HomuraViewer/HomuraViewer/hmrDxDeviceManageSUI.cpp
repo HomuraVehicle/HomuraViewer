@@ -1,6 +1,7 @@
 #ifndef HMR_DXDEVICEMANAGESUI_CPP_INC
 #define HMR_DXDEVICEMANAGESUI_CPP_INC 101
 #
+#include<hmLib/config_vc.h>
 #include"hmrDxDeviceManageSUI.hpp"
 
 namespace hmr{

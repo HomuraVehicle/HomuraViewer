@@ -18,7 +18,7 @@ hmrCompass v1_00/130511 iwahori
 #include<hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
 #include <hmLib/coordinates.hpp>
-#include <hmrVLib/Message/ItfMessageAgent.hpp>
+#include <HomuraViewer/Message/ItfMessageAgent.hpp>
 #include "hmrFlagirl.hpp"
 //#include <hmLib/coordinates.hpp>
 

@@ -47,8 +47,8 @@ hmrIO_v1_00/130223 amby
 #include <hmLib/exceptions.hpp>
 #include <hmLib/inquiries/inquiry.hpp>
 #include <hmLib/gate.hpp>
-#include <hmrVLib/Data.hpp>
-#include <hmrVLib/VMC1.h>
+#include <HomuraViewer/Data.hpp>
+#include <HomuraViewer/VMC1.h>
 
 namespace hmr{
 	// 全二重通信用IOクラス

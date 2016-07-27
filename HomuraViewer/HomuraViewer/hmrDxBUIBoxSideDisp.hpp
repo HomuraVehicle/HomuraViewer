@@ -9,7 +9,7 @@
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
 #include"hmrDxBUI.hpp"
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Data.hpp>
 namespace hmr{
 	//dxosMUIを登録すると、サイドバー(240*720)として表示してくれる。
 	class dxosBUIBoxSideDisplay:public dxReObject,public hmoBox{

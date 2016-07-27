@@ -5,8 +5,8 @@
 #include <string>
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
-#include <hmrVLib/File/ItfFile.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/File/ItfFile.hpp>
+#include <HomuraViewer/Data.hpp>
 #include "Data.hpp"
 namespace hmr{
 	namespace viewer{

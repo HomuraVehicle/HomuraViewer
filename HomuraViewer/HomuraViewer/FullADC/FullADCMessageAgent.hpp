@@ -5,10 +5,10 @@
 #include <boost/signals2.hpp>
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include <hmrVLib/Message/ItfMessageAgent.hpp>
+#include <HomuraViewer/Message/ItfMessageAgent.hpp>
 #include "../hmrFlagirl.hpp"
-#include <hmrVLib/Message.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Message.hpp>
+#include <HomuraViewer/Data.hpp>
 #include "Data.hpp"
 
 namespace hmr{

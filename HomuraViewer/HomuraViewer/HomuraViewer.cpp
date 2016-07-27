@@ -3,7 +3,7 @@ hmrV2500 v1_06/160601
 	a
 		Git移動後初めてコンパイルに成功
 	c
-		hmrVLib導入 Data, File, VMC1を移動
+		HomuraViewer導入 Data, File, VMC1を移動
 	d
 		ディレクトリ構造を変更　Dataディレクトリ直下にすべてのデータが出るように修正
 		合わせて、温度計の時間未更新バグを更新
@@ -15,6 +15,8 @@ hmrV2500 v1_06/160601
 		FullADC機能を実装
 	g
 		Add foma settingh function
+	h
+		新しいディレクトリ構成に移行
 hmrV2500 v1_05/130914
 	p
 		表示位置等修正
@@ -51,7 +53,7 @@ hmrV2500 v1_03/130713
 #include"hmrDXCom_v2.hpp"
 #include"hmrOperator.hpp"
 
-#include <hmrVLib/Message.hpp>
+#include <HomuraViewer/Message.hpp>
 
 #include"hmrDxKeyboard.hpp"
 #include"hmrDxPad.hpp"
@@ -76,7 +78,7 @@ hmrV2500 v1_03/130713
 #include"hmrDxGPSMap.hpp"
 #include"hmrGPSKashmir.hpp"
 
-#include"hmrBattery.hpp"
+#include"Battery/MessageAgent.hpp"
 #include"hmrDxBatteryMUI.hpp"
 
 //include"hmrHumid.hpp"
@@ -128,7 +130,7 @@ hmrV2500 v1_03/130713
 #include "hmrDxChrono.hpp"
 #include "hmrDxBUIBoxSideDisp.hpp"
 
-#include <hmrVLib/File.hpp>
+#include <HomuraViewer/File.hpp>
 #include "hmrGPSFile.hpp"
 #include "hmrSpriteFile.hpp"
 
@@ -634,8 +636,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Debug.slot_timeout(Operator.signal_inform_Received);
 		Debug.slot_nulldata(BatteryMA.signal_nulldata);
 */
-		printfDx("%d:%d\n", GateSW.FomaSetting.Baudrate, GateSW.FomaSetting.PortNo);
-		printfDx("#:%d:%s\n", GateSW.FomaSetting.PhoneNo.size(), GateSW.FomaSetting.PhoneNo.c_str());
 
 		while(!dx::work(30)){
 			Keyboard.work();

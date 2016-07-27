@@ -3,8 +3,8 @@
 #
 #include<boost/format.hpp>
 #include<string>
-#include <hmrVLib/date.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/date.hpp>
+#include <HomuraViewer/Data.hpp>
 #include"hmrItfFile.hpp"
 namespace hmr{
 	class cTimeFile:public itfFile{

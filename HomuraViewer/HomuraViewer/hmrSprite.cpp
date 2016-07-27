@@ -1,6 +1,7 @@
 #ifndef HMR_SPRITE_CPP_INC
 #define HMR_SPRITE_CPP_INC 102
 #
+#include<hmLib/config_vc.h>
 #ifndef HMR_SPRITE_INC
 #	include"hmrSprite.hpp"
 #endif

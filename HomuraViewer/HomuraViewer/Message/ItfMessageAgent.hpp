@@ -14,7 +14,7 @@ hmrItfMessage:v1_00/130310 hmIto
 #include<string>
 #include<map>
 #include<utility>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Data.hpp>
 namespace hmr{
 	class itfRecvMessageAgent{
 	public:

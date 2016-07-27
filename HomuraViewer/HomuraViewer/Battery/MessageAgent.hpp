@@ -12,14 +12,14 @@ hmrBattery v1_00/130427 iwahori
 */
 
 #include "hmLibVer.hpp"
-#include<array>
-#include<iterator>
-#include<boost/signals2.hpp>
-#include<hmLib/signals.hpp>
+#include <array>
+#include <iterator>
+#include <boost/signals2.hpp>
+#include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
-#include <hmrVLib/Message/ItfMessageAgent.hpp>
-#include "hmrFlagirl.hpp"
-#include "hmrADC.h"
+#include <HomuraViewer/Message/ItfMessageAgent.hpp>
+#include "../hmrFlagirl.hpp"
+#include "../hmrADC.h"
 //#include "hmrBatteryDataSet.hpp"
 //#include "hmr.h"
 

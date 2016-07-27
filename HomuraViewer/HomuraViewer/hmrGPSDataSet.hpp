@@ -11,8 +11,8 @@ hmrGPS v1_01/130907 amby
 
 #include<boost/format.hpp>
 #include<hmLib/position.hpp>
-#include <hmrVLib/Data.hpp>
-#include <hmrVLib/date.hpp>
+#include <HomuraViewer/Data.hpp>
+#include <HomuraViewer/date.hpp>
 
 namespace hmr{
 	class GPSDataSet{

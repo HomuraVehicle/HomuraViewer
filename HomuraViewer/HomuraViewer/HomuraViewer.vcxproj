@@ -68,12 +68,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\homuraLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\XCBase;C:\Users\hmIto\Documents\Projects\HomuraViewer\HomuraViewer;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -90,6 +94,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -110,6 +115,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\hmLib\hmLib\algorithm.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\any_iterator.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\array_queue.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\bufgate.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\cdeque.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\color.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\comgate.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\comgate\winRS\ifline.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\comgate\winRS\winrs.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\config_vc.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\coordinates.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\cqueue.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\cstack.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\cstring.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\csv_iterator.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\date.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\debugstream.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\exceptions.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\filterbuf.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\functional.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\gate.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\gps.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\inquiries.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\iocsv.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\lattices.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\mutex_proxy.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\position.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\random.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\rectangle.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\signals.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\streambuf_interface.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\stream_utility.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\table.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\type.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\typemanage.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\utility.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\version.h" />
     <ClInclude Include="any_predicate.hpp" />
     <ClInclude Include="Battery\DataSet.hpp" />
     <ClInclude Include="Battery\FileAgent.hpp" />
@@ -252,6 +294,13 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\hmLib\hmLib\cdeque.c" />
+    <ClCompile Include="..\..\hmLib\hmLib\comgate.cpp" />
+    <ClCompile Include="..\..\hmLib\hmLib\coordinates.cpp" />
+    <ClCompile Include="..\..\hmLib\hmLib\cqueue.c" />
+    <ClCompile Include="..\..\hmLib\hmLib\cstack.c" />
+    <ClCompile Include="..\..\hmLib\hmLib\cstring.c" />
+    <ClCompile Include="..\..\hmLib\hmLib\debugstream.cpp" />
     <ClCompile Include="hmrCompassMA.cpp" />
     <ClCompile Include="hmrDxDeviceManageSUI.cpp" />
     <ClCompile Include="hmrDxIOSideDisp.cpp" />
@@ -262,9 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resource.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

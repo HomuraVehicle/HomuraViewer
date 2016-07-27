@@ -1,6 +1,7 @@
 #ifndef HMR_DXLOGGERMANAGESUI_CPP_INC
 #define HMR_DXLOGGERMANAGESUI_CPP_INC 100
 #
+#include<hmLib/config_vc.h>
 #include"hmrDxLoggerManageSUI.hpp"
 
 namespace hmr{

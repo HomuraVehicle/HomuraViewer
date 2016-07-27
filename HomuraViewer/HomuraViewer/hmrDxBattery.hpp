@@ -6,7 +6,7 @@
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
-#include <hmrVLib/Data.hpp>
+#include <HomuraViewer/Data.hpp>
 
 namespace hmr{
 	class dxosBattery:public dxReObject,public hmoBox{
