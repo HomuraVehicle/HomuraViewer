@@ -6,8 +6,7 @@
 #include<hmLib_v2/dxArea.hpp>
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
-#include <HomuraViewer/chrono.hpp>
-
+#include<HomuraViewer/chrono.hpp>
 namespace hmr{
 	namespace viewer{
 		class dxosBattery :public dxReObject, public hmoBox{
@@ -18,7 +17,7 @@ namespace hmr{
 			clock::time_point Time;
 		public:
 			dxosBattery(Pint size_, double MinVoltage_, double MaxVoltage_)
-				:hmoBox(size_)
+				: hmoBox(size_)
 				, MinVoltage(MinVoltage_)
 				, MaxVoltage(MaxVoltage_)
 				, Voltage(0.){}
@@ -52,7 +51,7 @@ namespace hmr{
 		private:
 			hmLib::signals::unique_connections SignalConnections;
 		public:
-			void slot_newdata(boost::signals2::signal<void(clock::time_point, double)>& signal_){
+			void slot_newData(boost::signals2::signal<void(clock::time_point, double)>& signal_){
 				SignalConnections(hmLib::signals::connect(signal_, [&](clock::time_point time, double val)->void{this->Voltage = val; this->Time = time; }));
 			}
 		};
