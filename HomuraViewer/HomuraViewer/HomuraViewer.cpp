@@ -155,10 +155,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 
 	try{
-		//制御系デバイス
-		hmrv::cDxKeyboard Keyboard;
-		hmrv::cDxPad1 Pad1;
-
 		//Com, Message, Operatorを宣言
 		hmrv::cCom Com;
 		hmrv::cCom::VMC1Creater<1> ComVMC(&Com);
@@ -191,29 +187,25 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::connect(Operator,IO,Com);
 
 		//各モジュール宣言		
-		hmrv::cMotorMsgAgent MotorMA;
-		hmrv::connect_Pad(MotorMA,Pad1);
-		Message.regist('m',&MotorMA);
-
 		hmrv::cBattery Battery;
+		hmrv::cFullADC FullADC;
+
+		hmrv::cMotorMsgAgent MotorMA;
+		Message.regist('m',&MotorMA);
 		Message.regist('b',&(Battery.MsgAgent));
-		hmrv::connect_Pad(Battery.MsgAgent,Pad1);
 		
 		hmrv::cAcceleMsgAgent AcceleMA;
 		Message.regist('a',&AcceleMA);
-		hmrv::connect_Pad(AcceleMA,Pad1);
 		hmrv::cAcceleLogger AcceleLogger;
 		AcceleLogger.slot_addLog(AcceleMA.signal_newData);
 
 		hmrv::cCompassMsgAgent CompassMA;
 		hmrv::cCompass CompassDat;
 		Message.regist('c',&CompassMA);
-		hmrv::connect_Pad(CompassMA,Pad1);
 		hmrv::connect(CompassDat, CompassMA);
 
 		hmrv::cGyroMsgAgent GyroMA;
 		hmrv::cGyroLogger GyroLogger;
-		hmrv::connect_Pad(GyroMA,Pad1);
 		hmrv::connect(GyroLogger,GyroMA);
 		Message.regist('G',&GyroMA);
 		hmrv::cGyroCompass GyroCompass;
@@ -221,21 +213,29 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		hmrv::cGPSMsgAgent GPSMA;
 		hmrv::cGPSKashmir GPSKashmir;
-		hmrv::connect_Pad(GPSMA,Pad1);
 		hmrv::connect(GPSKashmir,GPSMA);
 		Message.regist('g',&GPSMA);
 
 		hmrv::cSpriteMsgAgent SpriteMA;
-		hmrv::connect_Pad(SpriteMA,Pad1);
+
 		Message.regist('j',&SpriteMA);
 
 		hmrv::cThermoMsgAgent ThermoMA;
-		hmrv::connect_Pad(ThermoMA,Pad1);
 		Message.regist('t',&ThermoMA);
 
 		hmrv::cCO2MsgAgent CO2MA;
-		hmrv::connect_Pad(CO2MA,Pad1);
 		Message.regist('C',&CO2MA);
+
+		hmrv::cChrono Chrono;
+		Message.regist('$', &Chrono);
+
+		hmrv::cDevMngMsgAgent DevMngMA;
+		Message.regist('D', &DevMngMA);
+
+		hmrv::cLoggerMngMsgAgent LogMngMA;
+		Message.regist('L', &LogMngMA);
+
+		Message.regist('f', &FullADC.MsgAgent);
 
 //		hmrv::cSHT75MsgAgent SHT75MA;
 //		hmrv::connect_Pad(SHT75MA,Pad1);
@@ -253,18 +253,21 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 //		hmrv::connect_Pad(HumidMA,Pad1);
 //		Message.regist('h',&HumidMA);
 
-		hmrv::cChrono Chrono;
-		Message.regist('$', &Chrono);
 
-		hmrv::cDevMngMsgAgent DevMngMA;
-		Message.regist('D', &DevMngMA);
 
-		hmrv::cLoggerMngMsgAgent LogMngMA;
-		Message.regist('L', &LogMngMA);
+		//制御系デバイス
+		hmrv::cDxKeyboard Keyboard;
+		hmrv::cDxPad1 Pad1;
 
-		//FULL ADC
-		hmrv::cFullADC FullADC;
-		Message.regist('f', &FullADC.MsgAgent);
+		hmrv::connect_Pad(MotorMA,Pad1);
+		hmrv::connect_Pad(Battery.MsgAgent,Pad1);
+		hmrv::connect_Pad(AcceleMA,Pad1);
+		hmrv::connect_Pad(CompassMA,Pad1);
+		hmrv::connect_Pad(GyroMA,Pad1);
+		hmrv::connect_Pad(GPSMA,Pad1);
+		hmrv::connect_Pad(SpriteMA,Pad1);
+		hmrv::connect_Pad(ThermoMA,Pad1);
+		hmrv::connect_Pad(CO2MA,Pad1);
 
 
 		//親ディレクトリ

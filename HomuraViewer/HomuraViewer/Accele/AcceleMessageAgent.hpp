@@ -1,4 +1,4 @@
-#ifndef HMR_ACCELE_INC
+#ifndef HMR_VIEWER_ACCELE_ACCELEMESSAGEAGENT_INC
 #define HMR_ACCELE_INC 101
 #
 /*==========hmrAccele============
@@ -7,13 +7,13 @@ hmrAccele v1_01/130602 iwahori
 hmrAccele v1_00/130511 iwahori
 	cAcceleMsAgent‚Ìsignal-slot,inquiry-contact‚Ö‚Ì‘Î‰žŠ®—¹
 */
-#include "hmLibVer.hpp"
+#include"hmLibVer.hpp"
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
-#include <hmLib/inquiries.hpp>
-#include <HomuraViewer/Message/ItfMessageAgent.hpp>
-#include "hmrFlagirl.hpp"
-#include <hmLib/coordinates.hpp>
+#include<hmLib/inquiries.hpp>
+#include<HomuraViewer/Message/ItfMessageAgent.hpp>
+#include<HomuraViewer/modeflags.hpp>
+#include<hmLib/coordinates.hpp>
 
 namespace hmr{
 	namespace viewer{
@@ -25,7 +25,7 @@ namespace hmr{
 			position CorrectionValue;
 			bool CorrectionFlag;
 			clock::time_point Time;
-			flagirl DataModeFlagirl;
+			modeflags DataMode;
 			position toData(const std::string& Str_){
 				double X, Y, Z;
 				if(Str_.size() != 7)return position();
@@ -35,7 +35,7 @@ namespace hmr{
 				return position(X - CorrectionValue.x, Y - CorrectionValue.y, Z - CorrectionValue.z);
 			}
 		public:
-			cAcceleMsgAgent() :AcceleData(), Time(), DataModeFlagirl(), CorrectionValue(), CorrectionFlag(false){}
+			cAcceleMsgAgent() :AcceleData(), Time(), DataMode(), CorrectionValue(), CorrectionFlag(false){}
 			bool listen(datum::time_point Time_, bool Err_, const std::string& Str_)override{
 				if(Str_.size() == 0)return true;
 
@@ -99,19 +99,6 @@ namespace hmr{
 			// signal 
 			boost::signals2::signal<void(clock::time_point time_, position pos_, polar por_)> signal_newData;
 
-			void slot_setDataMode(boost::signals2::signal<void(bool)>& Signal_){
-				SignalConnections(hmLib::signals::connect(Signal_, [&](bool Flag)->void{DataModeFlagirl.set_request(Flag); }));
-			}
-			void slot_setDataMode(boost::signals2::signal<void(void)>& Signal_){
-				SignalConnections(hmLib::signals::connect(Signal_, [&](void)->void{DataModeFlagirl.set_request(!DataModeFlagirl.request()); }));
-			}
-
-			void contact_getPicDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
-				InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->DataModeFlagirl.pic(); }));
-			}
-			void contact_getRequestDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
-				InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->DataModeFlagirl.request(); }));
-			}
 			void contact_getAccelePosition(hmLib::inquiries::inquiry<position>& Inquiry_){
 				InquiryConnections(hmLib::inquiries::connect(Inquiry_, AcceleData));
 			}
