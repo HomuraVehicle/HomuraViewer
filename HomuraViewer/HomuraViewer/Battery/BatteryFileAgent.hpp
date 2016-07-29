@@ -48,7 +48,8 @@ namespace hmr{
 					}
 				}
 				void log(this_data_t& Data){
-					date Date = date::from_time(Data.time());
+					date Date;
+					Date.from_time(Data.time());
 					ofs << Date.Year << "\t" << Date.Month << "\t" << Date.Day << "\t" << Date.Hour << "\t" << Date.Min << "\t" << Date.Sec;
 					for(auto& val : Data){
 						ofs << "\t" << val;

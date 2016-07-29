@@ -13,13 +13,16 @@ namespace hmr{
 			class data{
 			public:
 				using container = std::array<double, data_size_>;
-				using iterator = container::iterator;
+				using iterator = typename container::iterator;
 				static constexpr unsigned int data_size = data_size_;
 			private:
 				clock::time_point Time;
 				std::array<double, data_size> BatteryVoltage;
 			public:
-				data() = default;
+				data(){
+					Time = clock::now();
+					for(auto& val : BatteryVoltage)val = 0.0;
+				}
 				data(clock::time_point Time_, std::array<double, data_size> BatteryVoltage_)
 					: Time(Time_)
 					, BatteryVoltage(BatteryVoltage_){

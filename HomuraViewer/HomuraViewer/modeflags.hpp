@@ -14,6 +14,7 @@ namespace hmr{
 			bool Pic;
 			bool Req;
 		public:
+			modeflags():Pic(false),Req(false){}
 			operator bool()const{ return Pic != Req; }
 			bool get_req()const{ return Req; }
 			void set_pic(bool Pic_){ Pic = Pic_; }

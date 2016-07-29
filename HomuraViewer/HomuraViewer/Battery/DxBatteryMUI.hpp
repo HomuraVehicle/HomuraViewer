@@ -25,13 +25,13 @@ namespace hmr{
 		namespace battery{
 			//x240*yNONE
 			template<unsigned int BatteryNum_>
-			class dxosBatteryMUI :public dxosBUI{
+			class dxosMUI :public dxosBUI{
 				using this_data_t = data<BatteryNum_>;
 			public:
 				hmLib::inquiries::inquiry<this_data_t> inquiry_getData;
 				dxosBUIWaitableBoolBut IsDataModeMUIBut;
 			public:
-				dxosBatteryMUI() :dxosBUI("Battery", 30, 55 + 25 * ((BatteryNum_ - 1) / 3)), IsDataModeMUIBut(this){}
+				dxosMUI() :dxosBUI("Battery", 30, 55 + 25 * ((BatteryNum_ - 1) / 3)), IsDataModeMUIBut(this){}
 			public:
 				int normal_draw(dxO& dxo)override{
 					try{
@@ -44,16 +44,12 @@ namespace hmr{
 						}
 
 						try{
-							dxo.draw(Pint(80, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fV") % (inquiry_getBatteryData[0]())).str(), inquiry_getTime()));
+							auto Data = inquiry_getData();
+							dxo.draw(Pint(80, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fV") % (Data.at(0))).str(), Data.time()));
+							dxo.draw(Pint(155, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fV") % (Data.at(1))).str(), Data.time()));
 						}
 						catch(const hmLib::inquiries::unconnected_exception&){
 							dxo.draw(Pint(80, 5), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
-						}
-
-						try{
-							dxo.draw(Pint(155, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fV") % (inquiry_getBatteryData[1]())).str(), inquiry_getTime()));
-						}
-						catch(const hmLib::inquiries::unconnected_exception&){
 							dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
 						}
 					}
@@ -66,12 +62,15 @@ namespace hmr{
 				int extend_draw(dxO& dxo)override{
 					normal_draw(dxo);
 
-					for(unsigned Cnt = 2; Cnt < BatteryNum_; ++Cnt){
-						//Cnt0,1‚Í’ÊíŽž•\Ž¦A2ˆÈ~‚ðŠg’£Žž•\Ž¦‚É•ÏX
-						try{
-							dxo.draw(Pint(5 + 75 * ((Cnt - 2) % 3), 30 + 25 * ((Cnt - 2) / 3)), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fV") % (inquiry_getBatteryData[Cnt]())).str(), inquiry_getTime()));
+					//Cnt0,1‚Í’ÊíŽž•\Ž¦A2ˆÈ~‚ðŠg’£Žž•\Ž¦‚É•ÏX
+					try{
+						auto Data = inquiry_getData();
+						for(unsigned Cnt = 2; Cnt < BatteryNum_; ++Cnt){
+							dxo.draw(Pint(5 + 75 * ((Cnt - 2) % 3), 30 + 25 * ((Cnt - 2) / 3)), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fV") % (Data.at(Cnt))).str(), Data.time()));
 						}
-						catch(const hmLib::inquiries::unconnected_exception&){
+					}
+					catch(const hmLib::inquiries::unconnected_exception&){
+						for(unsigned Cnt = 2; Cnt < BatteryNum_; ++Cnt){
 							dxo.draw(Pint(5 + 75 * ((Cnt - 2) % 3), 30 + 25 * ((Cnt - 2) / 3)), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
 						}
 					}

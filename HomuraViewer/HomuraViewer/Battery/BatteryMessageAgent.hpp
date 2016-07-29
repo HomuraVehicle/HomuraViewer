@@ -19,8 +19,6 @@ hmrBattery v1_00/130427 iwahori
 #include <hmLib/inquiries.hpp>
 #include <HomuraViewer/Message/ItfMessageAgent.hpp>
 #include <HomuraViewer/modeflags.hpp>
-#include "../hmrFlagirl.hpp"
-#include "../hmrADC.h"
 #include "BatteryData.hpp"
 namespace hmr{
 	namespace viewer{
@@ -31,10 +29,11 @@ namespace hmr{
 			private:
 				static double toVoltage(unsigned char LowByte, unsigned char HighByte){
 					unsigned int tmp = static_cast<unsigned int>(LowByte + HighByte * 256);
-					return (static_cast<double>(tmp) / D_ADMaxValue)*10.7;
+					return (static_cast<double>(tmp) / 4096)*10.7;
 				}
+			private:
+				unsigned int TalkPos;
 			public:
-				unsigned int Pos;
 				modeflags DataMode;
 			public:
 				bool listen(datum::time_point Time_, bool Err_, const std::string& Str_)override{
@@ -55,7 +54,7 @@ namespace hmr{
 						if(Str_.size() != BatteryNum_ * 2 + 1) return true;
 
 						this_data_t Data;
-						Data.Time = Time_;
+						Data.time() = Time_;
 						unsigned char i = 0;
 						for(auto Itr = Data.begin(); Itr != Data.end(); ++Itr){
 							(*Itr) = toVoltage(static_cast<unsigned char>(Str_[2 * i + 1]), static_cast<unsigned char>(Str_[2 * i + 2]));
@@ -70,9 +69,9 @@ namespace hmr{
 				}
 				bool talk(std::string& Str)override{
 					Str = "";
-					switch(Pos){
+					switch(TalkPos){
 					case 0:
-						++Pos;
+						++TalkPos;
 						if(DataMode){
 							if(DataMode.get_req()) Str.push_back(static_cast<unsigned char>(0x10));
 							else Str.push_back(static_cast<unsigned char>(0x11));
@@ -83,7 +82,7 @@ namespace hmr{
 					}
 				}
 				void setup_talk(void)override{
-					Pos = 0;
+					TalkPos = 0;
 				}
 			public:
 				boost::signals2::signal<void(this_data_t)> signal_newData;

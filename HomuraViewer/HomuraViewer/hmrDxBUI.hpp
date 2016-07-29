@@ -9,6 +9,7 @@
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxArea.hpp>
 #include"hmrDxTools.hpp"
+#include<HomuraViewer/modeflags.hpp>
 #include <HomuraViewer/chrono.hpp>
 namespace hmr{
 	namespace viewer{
@@ -212,6 +213,12 @@ namespace hmr{
 				return 0;
 			}
 		};
+
+		inline void connect(modeflags& ModeFlags, dxosBUIWaitableBoolBut& But){
+			ModeFlags.slot_setReq(But.Signal);
+			ModeFlags.contact_getPic(But.Pic);
+			ModeFlags.contact_getReq(But.Req);
+		}
 	}
 }
 #

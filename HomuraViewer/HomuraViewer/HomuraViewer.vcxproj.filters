@@ -51,12 +51,6 @@
     <ClInclude Include="FullADC\DxMUI.hpp">
       <Filter>HomuraViewer\FullADC</Filter>
     </ClInclude>
-    <ClInclude Include="Battery\FileAgent.hpp">
-      <Filter>HomuraViewer\Battery</Filter>
-    </ClInclude>
-    <ClInclude Include="Battery\MessageAgent.hpp">
-      <Filter>HomuraViewer\Battery</Filter>
-    </ClInclude>
     <ClInclude Include="File\ItfFile.hpp">
       <Filter>HomuraViewer\File</Filter>
     </ClInclude>
@@ -184,12 +178,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxAcceleMUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxBattery.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxBatteryMUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxBufGateSUI.hpp">
@@ -408,9 +396,6 @@
     <ClInclude Include="iologgate.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="modeflags.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="predicate.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -540,11 +525,29 @@
     <ClInclude Include="..\..\hmLib\hmLib\comgate\winRS\ifline.h">
       <Filter>hmLib\comgate\winRS</Filter>
     </ClInclude>
-    <ClInclude Include="Battery\Data.hpp">
-      <Filter>HomuraViewer\Battery</Filter>
-    </ClInclude>
     <ClInclude Include="Message\PacketData.hpp">
       <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\DxBattery.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\BatteryData.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\DxBatteryMUI.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\BatteryMessageAgent.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\BatteryFileAgent.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="modeflags.hpp">
+      <Filter>HomuraViewer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

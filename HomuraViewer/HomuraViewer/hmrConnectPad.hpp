@@ -81,7 +81,9 @@ namespace hmr{
 	#if defined(HMR_BATTERY_INC)
 		template<unsigned int Num_>
 		void connect_Pad(battery::cMsgAgent<Num_>& Agent_, cDxPad1& Pad_){
-			Agent_.slot_setDataMode(Pad_.signal(is_pad1_pushed(SensorDataModeBut)));
+			static boost::signals2::signal<void(bool)> Signal;
+			Pad_.signal(is_pad1_pushed(SensorDataModeBut)).connect([&](){Signal(true); });
+			Agent_.DataMode.slot_setReq(Signal);
 		}
 	#endif
 

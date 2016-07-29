@@ -77,8 +77,7 @@ hmrV2500 v1_03/130713
 #include"hmrDxGPSMap.hpp"
 #include"hmrGPSKashmir.hpp"
 
-#include"Battery/MessageAgent.hpp"
-#include"hmrDxBatteryMUI.hpp"
+#include"Battery.hpp"
 
 //include"hmrHumid.hpp"
 //#include"hmrDxHumidMUI.hpp"
@@ -237,9 +236,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::connect_Pad(MotorMA,Pad1);
 		Message.regist('m',&MotorMA);
 
-		hmrv::battery::cMsgAgent<3> BatteryMA;
-		Message.regist('b',&BatteryMA);
-		hmrv::connect_Pad(BatteryMA,Pad1);
+		hmrv::cBattery Battery;
+		Message.regist('b',&(Battery.MsgAgent));
+		hmrv::connect_Pad(Battery.MsgAgent,Pad1);
 		
 //		hmrv::connect_Keyboard(BatteryMA,Keyboard);	
 
@@ -367,6 +366,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		//親ディレクトリ
 		hmrv::cConstNameDirectoryFile DirectoryFile("Data");
+		DirectoryFile.regist(&(Battery.FileAgent));
+		DirectoryFile.regist(&(FullADC.FileAgent));
 
 		// log Thermo データを保存
 //		hmrv::cConstNameFileAgent<std::pair<double,std::uint16_t>> logThermoFileAgent("Thermo.tsv","\t");
@@ -401,47 +402,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::connect(SpriteFileAgent, SpriteMA,false);
 		DirectoryFile.regist(&SpriteFileAgent);
 
-		//ADC Full
-		DirectoryFile.regist(&FullADC.FileAgent);
 
-		//カメラログデータを保存
-//		hmrv::cSpriteFileAgent SpriteLogFileAgent("SpriteLog");
-//		hmrv::connect(SpriteLogFileAgent, SpriteMA, true);
-//		DirectoryFile.regist(&SpriteLogFileAgent);
-
-/*
-		// File 系列の宣言
-		hmrv::cWholeFileAgent WholeFA;
-		
-		hmrv::cAcceleFileAgent AcceleFA;
-		hmrv::connect(AcceleFA,AcceleMA);
-		WholeFA.regist(&AcceleFA);
-
-		hmrv::cBatteryFileAgent<3> BatteryFA;
-		hmrv::connect(BatteryFA, BatteryMA);
-		WholeFA.regist(&BatteryFA);
-
-		hmrv::cCompassFileAgent CompassFA;
-		hmrv::connect(CompassFA, CompassMA);
-		WholeFA.regist(&CompassFA);
-
-		hmrv::cGPSFileAgent GPSFA;
-		hmrv::connect(GPSFA, GPSMA);
-		WholeFA.regist(&GPSFA);
-		
-		hmrv::cGyroFileAgent GyroFA;
-		hmrv::connect(GyroFA, GyroMA);
-		WholeFA.regist(&GyroFA);
-		
-//		hmrv::cSensorsFileAgent SensorFA;
-//		hmrv::connect(SensorFA, CO2MA, H2SMA, HumidMA, InfraRedMA, ThermoMA);
-//		WholeFA.regist(&SensorFA);
-		
-		hmrv::cSpriteFileAgent SpriteFA;
-		hmrv::connect(SpriteFA, SpriteMA);
-		WholeFA.regist(&SpriteFA);
-		
-*/
 		// SUI 系列
 		hmrv::dxosBUIBoxSideDisplay SystemSideDisp;
 		SystemSideDisp.ClrSet.Background=CLR::DarkSoftBlue;
@@ -503,7 +464,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 //		hmrv::connect(ControlMainDisp.Navigator,AcceleMA,CompassDat,GyroLogger);
 		hmrv::connect(ControlMainDisp.Navigator,AcceleLogger,CompassDat,GyroLogger,GyroCompass);
 		hmrv::connect(ControlMainDisp.Sprite,SpriteMA);
-		hmrv::connect(ControlMainDisp.Infomation,GPSKashmir,BatteryMA);
+		hmrv::connect(ControlMainDisp.Infomation,GPSKashmir,Battery);
 		hmrv::connect(ControlMainDisp.GPSMap, GPSMA,CompassDat);
 		std::vector<hmrv::message::datum::id_type> SwIDList;
 		SwIDList.push_back('a');
@@ -528,8 +489,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::connect(MotorMUI,MotorMA);
 		MUISideDisp.insert(&MotorMUI);
 
-		hmrv::dxosBatteryMUI<3> BatteryMUI;
-		hmrv::connect(BatteryMUI,BatteryMA);
+		hmrv::battery::dxosMUI<hmrv::cBattery::BatteryNum> BatteryMUI;
+		Battery.connect(BatteryMUI);
 		MUISideDisp.insert(&BatteryMUI);
 
 		hmrv::dxosAcceleMUI AcceleMUI;

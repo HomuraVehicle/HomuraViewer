@@ -145,13 +145,13 @@ namespace hmr{
 	#endif
 
 	#if defined(HMR_DXINFORMATIRON_INC) && defined(HMR_GPSKASHMIR_INC) && defined(HMR_BATTERY_INC)
-		void connect(dxosInformation& Information, cGPSKashmir& GPSKashmir, battery::cMsgAgent<3>& Battery){
+		void connect(dxosInformation& Information, cGPSKashmir& GPSKashmir, cBattery& Battery){
 			GPSKashmir.slot_connect(Information.GPSKashmirBut.signal_connect);
 			GPSKashmir.slot_disconnect(Information.GPSKashmirBut.signal_disconnect);
 			GPSKashmir.contact_is_connect(Information.GPSKashmirBut.inquiry_is_connect);
-			Information.Battery0.slot_newdata(Battery.signal_newdata[0]);
-			Information.Battery1.slot_newdata(Battery.signal_newdata[1]);
-			Information.Battery2.slot_newdata(Battery.signal_newdata[2]);
+			Information.Battery0.slot_newData(Battery.signal_newEachData[0]);
+			Information.Battery1.slot_newData(Battery.signal_newEachData[1]);
+			Information.Battery2.slot_newData(Battery.signal_newEachData[2]);
 		}
 	#endif
 

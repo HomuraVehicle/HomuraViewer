@@ -153,9 +153,12 @@
     <ClInclude Include="..\..\hmLib\hmLib\utility.hpp" />
     <ClInclude Include="..\..\hmLib\hmLib\version.h" />
     <ClInclude Include="any_predicate.hpp" />
-    <ClInclude Include="Battery\Data.hpp" />
-    <ClInclude Include="Battery\FileAgent.hpp" />
-    <ClInclude Include="Battery\MessageAgent.hpp" />
+    <ClInclude Include="Battery.hpp" />
+    <ClInclude Include="Battery\BatteryData.hpp" />
+    <ClInclude Include="Battery\BatteryFileAgent.hpp" />
+    <ClInclude Include="Battery\DxBattery.hpp" />
+    <ClInclude Include="Battery\DxBatteryMUI.hpp" />
+    <ClInclude Include="Battery\BatteryMessageAgent.hpp" />
     <ClInclude Include="chrono.hpp" />
     <ClInclude Include="File.hpp" />
     <ClInclude Include="File\ConstNameDirectoryFile.hpp" />
@@ -199,8 +202,6 @@
     <ClInclude Include="hmrDeviceManage.hpp" />
     <ClInclude Include="hmrDeviceManage2.hpp" />
     <ClInclude Include="hmrDxAcceleMUI.hpp" />
-    <ClInclude Include="hmrDxBattery.hpp" />
-    <ClInclude Include="hmrDxBatteryMUI.hpp" />
     <ClInclude Include="hmrDxBufGateSUI.hpp" />
     <ClInclude Include="hmrDxBUI.hpp" />
     <ClInclude Include="hmrDxBUIBoxSideDisp.hpp" />

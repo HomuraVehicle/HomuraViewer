@@ -221,20 +221,6 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(HMR_DXBATTERYMUI_INC) && defined(HMR_BATTERY_INC)
-		template<unsigned int Num_>
-		void connect(dxosBatteryMUI<Num_>& MUI_, battery::cMsgAgent<Num_>& Agent_){
-			for(unsigned int Cnt = 0; Cnt < Num_; ++Cnt){
-				Agent_.contact_getBatteryData(Cnt, MUI_.inquiry_getBatteryData[Cnt]);
-			}
-			Agent_.contact_getTime(MUI_.inquiry_getTime);
-
-			Agent_.contact_getPicDataMode(MUI_.IsDataModeMUIBut.Pic);
-			Agent_.contact_getRequestDataMode(MUI_.IsDataModeMUIBut.Req);
-			Agent_.slot_setDataMode(MUI_.IsDataModeMUIBut.Signal);
-		}
-	#endif
-
 	#if defined(HMR_DXMOTORMUI_INC) && defined(HMR_MOTOR_INC)
 		void connect(dxosMotorMUI& MUI_, cMotorMsgAgent& Agent_){
 			Agent_.slot_setStickL(MUI_.Signal_MotorStickL);
