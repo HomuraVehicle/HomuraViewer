@@ -49,6 +49,9 @@
     <Filter Include="HomuraViewer\GPS">
       <UniqueIdentifier>{cf8274ee-37d6-4c0d-9b11-47bc42715553}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer\DX">
+      <UniqueIdentifier>{8b97ad67-c504-4a90-a74a-673258d96156}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File\ItfFile.hpp">
@@ -294,16 +297,10 @@
     <ClInclude Include="hmrConnectFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrConnectKeyboard.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrConnectModule.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrConnectMUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrConnectPad.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrConnectSUI.hpp">
@@ -560,6 +557,18 @@
     </ClInclude>
     <ClInclude Include="GPS.hpp">
       <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Controler.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="DX\Pad.hpp">
+      <Filter>HomuraViewer\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="DX\PadStatus.hpp">
+      <Filter>HomuraViewer\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="DX\Keyboard.hpp">
+      <Filter>HomuraViewer\DX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

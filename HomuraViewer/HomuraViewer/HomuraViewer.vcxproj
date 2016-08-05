@@ -153,6 +153,10 @@
     <ClInclude Include="..\..\hmLib\hmLib\utility.hpp" />
     <ClInclude Include="..\..\hmLib\hmLib\version.h" />
     <ClInclude Include="Accele.hpp" />
+    <ClInclude Include="Controler.hpp" />
+    <ClInclude Include="DX\Keyboard.hpp" />
+    <ClInclude Include="DX\Pad.hpp" />
+    <ClInclude Include="DX\PadStatus.hpp" />
     <ClInclude Include="GPS.hpp" />
     <ClInclude Include="Gyro.hpp" />
     <ClInclude Include="Compass.hpp" />
@@ -208,10 +212,8 @@
     <ClInclude Include="hmrConnectCore.hpp" />
     <ClInclude Include="hmrConnectDx.hpp" />
     <ClInclude Include="hmrConnectFile.hpp" />
-    <ClInclude Include="hmrConnectKeyboard.hpp" />
     <ClInclude Include="hmrConnectModule.hpp" />
     <ClInclude Include="hmrConnectMUI.hpp" />
-    <ClInclude Include="hmrConnectPad.hpp" />
     <ClInclude Include="hmrConnectSUI.hpp" />
     <ClInclude Include="hmrDeviceManage.hpp" />
     <ClInclude Include="hmrDeviceManage2.hpp" />
