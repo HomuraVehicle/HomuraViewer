@@ -69,7 +69,7 @@ namespace hmr{
 						}
 
 						try{
-							auto Pol = cCompass::transPos_to_Polar(pos);
+							auto Pol = hmLib::coordinates3D::polar(pos);
 							dxo.draw(Pint(80, 5), dxoStrP(Pint(70, 20), (boost::format("Y:%.1f") % Pol.phi).str(), getTimeStrClr(time)));
 							dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), (boost::format("P:%.1f") % Pol.theta).str(), getTimeStrClr(time)));
 						}

@@ -146,6 +146,9 @@ namespace hmr{
 				void contact_getGPSCh(hmLib::inquiries::inquiry<unsigned char>& Inquiry_){
 					InquiryConnections(hmLib::inquiries::connect(Inquiry_, gpsCh));
 				}
+				void slot_swapGPSCh(boost::signals2::signal<void(void)>& Signal_){
+					Signal_.connect([&]{SwapState.set_req(!SwapState.get_req()); });
+				}
 			public:
 				cMsgAgent() :gpsCh(0){}
 			};

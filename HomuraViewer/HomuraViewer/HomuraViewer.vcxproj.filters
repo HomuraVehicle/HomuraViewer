@@ -49,7 +49,7 @@
     <Filter Include="HomuraViewer\GPS">
       <UniqueIdentifier>{cf8274ee-37d6-4c0d-9b11-47bc42715553}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HomuraViewer\DX">
+    <Filter Include="HomuraViewer\DxModule">
       <UniqueIdentifier>{8b97ad67-c504-4a90-a74a-673258d96156}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -558,17 +558,17 @@
     <ClInclude Include="GPS.hpp">
       <Filter>HomuraViewer</Filter>
     </ClInclude>
-    <ClInclude Include="Controler.hpp">
+    <ClInclude Include="Controller.hpp">
       <Filter>HomuraViewer</Filter>
     </ClInclude>
-    <ClInclude Include="DX\Pad.hpp">
-      <Filter>HomuraViewer\DX</Filter>
+    <ClInclude Include="DxModule\PadStatus.hpp">
+      <Filter>HomuraViewer\DxModule</Filter>
     </ClInclude>
-    <ClInclude Include="DX\PadStatus.hpp">
-      <Filter>HomuraViewer\DX</Filter>
+    <ClInclude Include="DxModule\Keyboard.hpp">
+      <Filter>HomuraViewer\DxModule</Filter>
     </ClInclude>
-    <ClInclude Include="DX\Keyboard.hpp">
-      <Filter>HomuraViewer\DX</Filter>
+    <ClInclude Include="DxModule\Pad.hpp">
+      <Filter>HomuraViewer\DxModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

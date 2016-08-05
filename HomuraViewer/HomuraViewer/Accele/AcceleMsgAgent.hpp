@@ -30,7 +30,7 @@ namespace hmr{
 			public:
 				modeflags DataMode;
 			private:
-				static position toData(const std::string& Str_){
+				position toData(const std::string& Str_){
 					double X, Y, Z;
 					if(Str_.size() != 7)return position();
 					X = static_cast<signed short>((static_cast<unsigned char>(Str_[1]) + 0x100 * static_cast<unsigned char>(Str_[2])));

@@ -121,19 +121,6 @@ namespace hmr{
 			public:
 				boost::signals2::signal<void(angle, double, clock::time_point)> signal_newData;
 
-				void slot_setDataMode(boost::signals2::signal<void(bool)>& Signal_){
-					SignalConnections(hmLib::signals::connect(Signal_, [&](bool Flag)->void{DataModeFlagirl.set_request(Flag); }));
-				}
-				void slot_setDataMode(boost::signals2::signal<void(void)>& Signal_){
-					SignalConnections(hmLib::signals::connect(Signal_, [&](void)->void{DataModeFlagirl.set_request(!DataModeFlagirl.request()); }));
-				}
-				void contact_getPicDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
-					InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->DataModeFlagirl.pic(); }));
-				}
-				void contact_getRequestDataMode(hmLib::inquiries::inquiry<bool>& Inquiry_){
-					InquiryConnections(hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->DataModeFlagirl.request(); }));
-				}
-
 				void contact_getGyroData(hmLib::inquiries::inquiry<angle>& Inquiry_){
 					InquiryConnections(hmLib::inquiries::connect(Inquiry_, GyroData));
 				}

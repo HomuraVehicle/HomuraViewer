@@ -4,18 +4,18 @@
 #include<chrono>
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxObject.hpp>
-#include"hmrDxGPSKashmir.hpp"
-#include"hmrDxPadStatus.hpp"
+#include"GPS/DxGPSKashmir.hpp"
+#include"DxModule/PadStatus.hpp"
 #include"battery/DxBattery.hpp"
-#include"fulladc/Data.hpp"
 #include"hmrDxBUI.hpp"
+#include"fulladc/FulLADCData.hpp"
 namespace hmr{
 	namespace viewer{
 		class dxosInformation :public dxReObject, public hmoBox{
 			using this_adc_data_t = viewer::fulladc::data_t<8>;
 		public:
-			dxosGPSKashmirBut GPSKashmirBut;
-			dxoPadStatusBut PadStatusBut;
+			gps::dxosGPSKashmirBut GPSKashmirBut;
+			dxmodule::dxoPadStatusBut PadStatusBut;
 			dxosBattery Battery0;
 			dxosBattery Battery1;
 			dxosBattery Battery2;

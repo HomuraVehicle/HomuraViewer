@@ -52,7 +52,7 @@ namespace PAD{
 
 namespace hmr{
 	namespace viewer{
-		namespace dx{
+		namespace dxmodule{
 			template<unsigned int DX_INPUT_PAD_CH>
 			class cPad{
 			private:

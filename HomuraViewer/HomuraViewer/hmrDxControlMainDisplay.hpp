@@ -16,19 +16,19 @@ dxosControlMainDisplay
 #include<hmLib_v2/dxObject.hpp>
 #include"hmrDxSprite.hpp"
 //#include"hmrDxGPSMap.hpp"
-#include"hmrGyroLogger.hpp"
+#include"Gyro/GyroLogger.hpp"
 #include"hmrDxNavigator.hpp"
 #include"hmrDxInfomation.hpp"
-#include"hmrDxGPSMap.hpp" 
+#include"GPS/DxGPSMap.hpp" 
 
 namespace hmr{
 	namespace viewer{
 		class dxosControlMainDisplay :public dxReObject, public hmoBox{
 		public:
-			dxosNavigator<cGyroLogger::iterator> Navigator;
+			dxosNavigator<gyro::cGyroLogger::iterator> Navigator;
 			dxosSprite Sprite;
 			dxosInformation Infomation;
-			dxosGPSMap GPSMap;
+			gps::dxosGPSMap GPSMap;
 
 		private:
 			class fnControlMain :public dxFn{

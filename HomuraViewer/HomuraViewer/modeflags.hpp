@@ -18,6 +18,7 @@ namespace hmr{
 			operator bool()const{ return Pic != Req; }
 			bool get_req()const{ return Req; }
 			void set_pic(bool Pic_){ Pic = Pic_; }
+			void set_req(bool Req_){ Req = Req_; }
 		public:
 			hmLib::inquiries::connection contact_getPic(hmLib::inquiries::inquiry<bool>& Inquiry_){
 				return hmLib::inquiries::connect(Inquiry_, [&](void)->bool{return this->Pic; });
@@ -27,6 +28,9 @@ namespace hmr{
 			}
 			boost::signals2::connection slot_setReq(boost::signals2::signal<void(bool)>& Signal_){
 				return hmLib::signals::connect(Signal_, [&](bool Flag)->void{Req = Flag; });
+			}
+			boost::signals2::connection slot_setReqSwap(boost::signals2::signal<void(void)>& Signal_){
+				return hmLib::signals::connect(Signal_, [&](void)->void{Req = !Req; });
 			}
 		};
 	}

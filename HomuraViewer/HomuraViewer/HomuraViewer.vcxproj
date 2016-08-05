@@ -153,10 +153,10 @@
     <ClInclude Include="..\..\hmLib\hmLib\utility.hpp" />
     <ClInclude Include="..\..\hmLib\hmLib\version.h" />
     <ClInclude Include="Accele.hpp" />
-    <ClInclude Include="Controler.hpp" />
-    <ClInclude Include="DX\Keyboard.hpp" />
-    <ClInclude Include="DX\Pad.hpp" />
-    <ClInclude Include="DX\PadStatus.hpp" />
+    <ClInclude Include="Controller.hpp" />
+    <ClInclude Include="DxModule\Keyboard.hpp" />
+    <ClInclude Include="DxModule\Pad.hpp" />
+    <ClInclude Include="DxModule\PadStatus.hpp" />
     <ClInclude Include="GPS.hpp" />
     <ClInclude Include="Gyro.hpp" />
     <ClInclude Include="Compass.hpp" />

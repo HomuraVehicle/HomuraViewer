@@ -121,21 +121,21 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(HMR_DXNAVIGATOR_INC) && defined(HMR_ACCELE_INC) && defined(HMR_COMPASS_DATA_INC) && defined(HMR_GYROLOGGER_INC)
-		void connect(dxosNavigator<cGyroLogger::iterator>& Navigator_, cAcceleMsgAgent& Accele_, cCompass& Compass_, cGyroLogger& GyroLogger_){
+	#if defined(HMR_DXNAVIGATOR_INC) && defined(HMR_VIEWER_ACCELE_INC) && defined(HMR_VIEWER_COMPASS_MAGNETICCOMPASS_INC) && defined(HMR_VIEWER_GYRO_GYROLOGGER_INC)
+		void connect(dxosNavigator<gyro::cGyroLogger::iterator>& Navigator_, accele::cMsgAgent& Accele_, compass::cMagneticCompass& Compass_, gyro::cGyroLogger& GyroLogger_){
 			Accele_.contact_getAccelePolar(Navigator_.inquiry_accele);
 			Compass_.contact_getPolar(Navigator_.inquiry_compass);
 			GyroLogger_.contact_getLogs(Navigator_.range_inquiry_gyro);
 		}
-		void connect(dxosNavigator<cGyroLogger::iterator>& Navigator_, cAcceleLogger& AcceleLogger_, cCompass& Compass_, cGyroLogger& GyroLogger_){
+		void connect(dxosNavigator<gyro::cGyroLogger::iterator>& Navigator_, accele::cLogger& AcceleLogger_, compass::cMagneticCompass& Compass_, gyro::cGyroLogger& GyroLogger_){
 			AcceleLogger_.contact_getAcceleMeanPolar(Navigator_.inquiry_accele);
 			Compass_.contact_getPolar(Navigator_.inquiry_compass);
 			GyroLogger_.contact_getLogs(Navigator_.range_inquiry_gyro);
 		}
 	#endif
 
-	#if defined(HMR_DXNAVIGATOR_INC) && defined(HMR_ACCELE_INC) && defined(HMR_COMPASS_DATA_INC) && defined(HMR_GYROLOGGER_INC) && defined(HMR_GYROCOMPASS_INC)
-		void connect(dxosNavigator<cGyroLogger::iterator>& Navigator_, cAcceleLogger& AcceleLogger_, cCompass& Compass_, cGyroLogger& GyroLogger_, cGyroCompass& GyroCompass_){
+	#if defined(HMR_DXNAVIGATOR_INC) && defined(HMR_VIEWER_ACCELE_INC) && defined(HMR_VIEWER_COMPASS_MAGNETICCOMPASS_INC) && defined(HMR_VIEWER_GYRO_GYROLOGGER_INC) && defined(HMR_VIEWER_GYRO_GYROCOMPASS_INC)
+		void connect(dxosNavigator<gyro::cGyroLogger::iterator>& Navigator_, accele::cLogger& AcceleLogger_, compass::cMagneticCompass& Compass_, gyro::cGyroLogger& GyroLogger_, gyro::cGyroCompass& GyroCompass_){
 			AcceleLogger_.contact_getAcceleMeanPolar(Navigator_.inquiry_accele);
 			Compass_.contact_getPolar(Navigator_.inquiry_compass);
 			GyroLogger_.contact_getLogs(Navigator_.range_inquiry_gyro);
@@ -144,8 +144,8 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(HMR_DXINFORMATIRON_INC) && defined(HMR_GPSKASHMIR_INC) && defined(HMR_BATTERY_INC)
-		void connect(dxosInformation& Information, cGPSKashmir& GPSKashmir, cBattery& Battery){
+	#if defined(HMR_DXINFORMATIRON_INC) && defined(HMR_VIEWER_GPS_GPSKASHMIR_INC) && defined(HMR_BATTERY_INC)
+		void connect(dxosInformation& Information, gps::cGPSKashmir& GPSKashmir, cBattery& Battery){
 			GPSKashmir.slot_connect(Information.GPSKashmirBut.signal_connect);
 			GPSKashmir.slot_disconnect(Information.GPSKashmirBut.signal_disconnect);
 			GPSKashmir.contact_is_connect(Information.GPSKashmirBut.inquiry_is_connect);
@@ -155,9 +155,9 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(HMR_DXGPSMAP_INC) && defined(HMR_GPS_INC) && defined(HMR_COMPASS_DATA_INC)
-		void connect(dxosGPSMap& GPSMap, cGPSMsgAgent& Agent, cCompass& Compass_){
-			GPSMap.slot_addNewData(Agent.signal_newdata);
+	#if defined(HMR_DXGPSMAP_INC) && defined(HMR_VIEWER_GPS_INC) && defined(HMR_VIEWER_COMPASS_MAGNETICCOMPASS_INC)
+		void connect(gps::dxosGPSMap& GPSMap, gps::cMsgAgent& Agent, compass::cMagneticCompass& Compass_){
+			GPSMap.slot_addNewData(Agent.signal_newData);
 			Compass_.contact_getYawAngle(GPSMap.inquiry_getMagneticAngle);
 		}
 	#endif
