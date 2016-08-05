@@ -4,7 +4,7 @@
 #include<HomuraViewer/chrono.hpp>
 #include"Battery/BatteryData.hpp"
 #include"Battery/BatteryFileAgent.hpp"
-#include"Battery/BatteryMessageAgent.hpp"
+#include"Battery/BatteryMsgAgent.hpp"
 #include"Battery/DxBatteryMUI.hpp"
 #include"Battery/DxBattery.hpp"
 namespace hmr{
@@ -32,7 +32,7 @@ namespace hmr{
 			}
 			void connect(battery::dxosMUI<BatteryNum>& MUI){
 				hmLib::inquiries::connect(MUI.inquiry_getData, CurrentData);
-				hmr::viewer::connect(MsgAgent.DataMode, MUI.IsDataModeMUIBut);
+				MUI.IsDataModeMUIBut.connect(MsgAgent.DataMode);
 			}
 		};
 	}
