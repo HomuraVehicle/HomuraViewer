@@ -54,8 +54,7 @@ hmrV2500 v1_03/130713
 
 #include"Message.hpp"
 
-#include"hmrDxKeyboard.hpp"
-#include"hmrDxPad.hpp"
+
 
 #include"hmrDxControlMainDisplay.hpp"
 #include"hmrDxDisplay.hpp"
@@ -72,12 +71,6 @@ hmrV2500 v1_03/130713
 #include"hmrCO2.hpp"
 #include"hmrDxCO2MUI.hpp"
 
-#include"GPS.hpp"
-
-#include"Battery.hpp"
-
-#include"UniSensor.hpp"
-
 #include"hmrH2S.hpp"
 #include"hmrDxH2SMUI.hpp"
 
@@ -90,6 +83,10 @@ hmrV2500 v1_03/130713
 #include "Accele.hpp"
 #include "Compass.hpp"
 #include "Gyro.hpp"
+
+#include"GPS.hpp"
+#include"Battery.hpp"
+#include"UniSensor.hpp"
 
 #include "FullADC.hpp"
 
@@ -128,7 +125,6 @@ hmrV2500 v1_03/130713
 #include"hmrConnectModule.hpp"
 #include"hmrConnectCore.hpp"
 #include"hmrConnectKeyboard.hpp"
-#include"hmrConnectPad.hpp"
 #include"hmrConnectFile.hpp"
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
@@ -228,15 +224,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 
 		//制御系デバイス
-		hmrv::cDxKeyboard Keyboard;
-		hmrv::cDxPad1 Pad1;
-
+		hmrv::cControler Controler;
 		hmrv::connect_Pad(MotorMA,Pad1);
 		hmrv::connect_Pad(Battery.MsgAgent,Pad1);
-		hmrv::connect_Pad(AcceleMA,Pad1);
-		hmrv::connect_Pad(CompassMA,Pad1);
-		hmrv::connect_Pad(GyroMA,Pad1);
-		hmrv::connect_Pad(GPSMA,Pad1);
+		hmrv::connect_Pad(Accele.MsgAgent,Pad1);
+		hmrv::connect_Pad(Compass.MsgAgent,Pad1);
+		hmrv::connect_Pad(Gyro.MsgAgent,Pad1);
+		hmrv::connect_Pad(GPS.MsgAgent,Pad1);
 		hmrv::connect_Pad(SpriteMA,Pad1);
 		hmrv::connect_Pad(ThermoMA,Pad1);
 		hmrv::connect_Pad(CO2MA,Pad1);
@@ -324,10 +318,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		//操縦用MainDisplaay
 		hmrv::dxosControlMainDisplay ControlMainDisp;
-		hmrv::connect(ControlMainDisp.Navigator,AcceleLogger,CompassDat,GyroLogger,GyroCompass);
+		hmrv::connect(ControlMainDisp.Navigator,Accele.Logger,Compass.Compass,Gyro.Logger,Gyro.Compass);
 		hmrv::connect(ControlMainDisp.Sprite,SpriteMA);
-		hmrv::connect(ControlMainDisp.Infomation,GPSKashmir,Battery);
-		hmrv::connect(ControlMainDisp.GPSMap, GPSMA,CompassDat);
+		hmrv::connect(ControlMainDisp.Infomation,GPS.GPSKashmir,Battery);
+		hmrv::connect(ControlMainDisp.GPSMap, GPS.MsgAgent, Compass.Compass);
 		std::vector<hmrv::message::datum::id_type> SwIDList;
 		SwIDList.push_back('a');
 		SwIDList.push_back('b');
