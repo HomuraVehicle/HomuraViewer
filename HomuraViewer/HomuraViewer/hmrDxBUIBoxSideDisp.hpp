@@ -48,7 +48,7 @@ namespace hmr{
 				}
 			};
 		public:
-			void insert(dxosBUI* pBUI_){
+			void regist(dxosBUI* pBUI_){
 				pBUI_->setClrSet(&ClrSet);
 				BUIPtrVec.push_back(pBUI_);
 			}

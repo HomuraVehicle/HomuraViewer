@@ -10,7 +10,7 @@
 #include<hmLib_v2/dxArea.hpp>
 #include"hmrDxTools.hpp"
 #include<HomuraViewer/modeflags.hpp>
-#include <HomuraViewer/chrono.hpp>
+#include<HomuraViewer/chrono.hpp>
 namespace hmr{
 	namespace viewer{
 		struct color_set{
@@ -212,13 +212,13 @@ namespace hmr{
 				}
 				return 0;
 			}
+		public:
+			void connect(modeflags& ModeFlags){
+				ModeFlags.slot_setReq(Signal);
+				ModeFlags.contact_getPic(Pic);
+				ModeFlags.contact_getReq(Req);
+			}
 		};
-
-		inline void connect(modeflags& ModeFlags, dxosBUIWaitableBoolBut& But){
-			ModeFlags.slot_setReq(But.Signal);
-			ModeFlags.contact_getPic(But.Pic);
-			ModeFlags.contact_getReq(But.Req);
-		}
 	}
 }
 #
