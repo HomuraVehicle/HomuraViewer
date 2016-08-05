@@ -19,122 +19,123 @@ hmrDxCompassMUI v1_00/130511 hmIto
 #include <hmLib/coordinates.hpp>
 #include <HomuraViewer/chrono.hpp>
 #include"hmrDxBUI.hpp"
-#include"hmrCompassData.hpp"
 
 namespace hmr{
 	namespace viewer{
-		//x240*yNONE
-		class dxosCompassMUI :public dxosBUI{
-			typedef hmLib::coordinates3D::position position;
-			typedef hmLib::coordinates3D::polar polar;
-			hmLib::signals::unique_connections SignalConnections;
+		namespace compass{
+			//x240*yNONE
+			class dxosMUI :public dxosBUI{
+				typedef hmLib::coordinates3D::position position;
+				typedef hmLib::coordinates3D::polar polar;
+				hmLib::signals::unique_connections SignalConnections;
 
-			position pos;
-			clock::time_point time;
+				position pos;
+				clock::time_point time;
 
-			void setCompassData_and_time(position pos_, clock::time_point time_){
-				pos = pos_;
-				time = time_;
-			}
-		public:
-			//hmLib::inquiries::inquiry<position> inquiry_getCompassPossition;
-			//hmLib::inquiries::inquiry<polar> inquiry_getCompassPolar;
-			//hmLib::inquiries::inquiry<clock::time_point> inquiry_getTime;
-			void slot_setCompassData_and_time(boost::signals2::signal<void(position, clock::time_point)>& Signal_){
-				SignalConnections(hmLib::signals::connect(Signal_, [&](position pos, clock::time_point t)->void{this->setCompassData_and_time(pos, t); }));
-			}
+				void setCompassData_and_time(position pos_, clock::time_point time_){
+					pos = pos_;
+					time = time_;
+				}
+			public:
+				//hmLib::inquiries::inquiry<position> inquiry_getCompassPossition;
+				//hmLib::inquiries::inquiry<polar> inquiry_getCompassPolar;
+				//hmLib::inquiries::inquiry<clock::time_point> inquiry_getTime;
+				void slot_setCompassData_and_time(boost::signals2::signal<void(position, clock::time_point)>& Signal_){
+					SignalConnections(hmLib::signals::connect(Signal_, [&](position pos, clock::time_point t)->void{this->setCompassData_and_time(pos, t); }));
+				}
 
-			dxosBUIWaitableBoolBut IsDataModeMUIBut;
+				dxosBUIWaitableBoolBut IsDataModeMUIBut;
 
-			//		dxosBUIWaitableBoolBut CorrectionModeBut;
-			//		dxosBUIWaitableBut CorrectionDataBut;
+				//		dxosBUIWaitableBoolBut CorrectionModeBut;
+				//		dxosBUIWaitableBut CorrectionDataBut;
 
-			hmLib::inquiries::inquiry<bool> inquiry_isCorrectionMode;
-			hmLib::inquiries::inquiry<unsigned int> inquiry_getCorrectionNum;
-			hmLib::inquiries::inquiry<position> inquiry_getCorrectionValue;
-			boost::signals2::signal<void(void)> signal_setCorrectionMode;
-			boost::signals2::signal<void(void)> signal_setCorrectionFromFile;
-			boost::signals2::signal<void(void)> signal_addCorrection;
-		public:
-			dxosCompassMUI() :dxosBUI("Compass", 30, 105), IsDataModeMUIBut(this){}
-		public:
-			int normal_draw(dxO& dxo)override{
-				try{
+				hmLib::inquiries::inquiry<bool> inquiry_isCorrectionMode;
+				hmLib::inquiries::inquiry<unsigned int> inquiry_getCorrectionNum;
+				hmLib::inquiries::inquiry<position> inquiry_getCorrectionValue;
+				boost::signals2::signal<void(void)> signal_setCorrectionMode;
+				boost::signals2::signal<void(void)> signal_setCorrectionFromFile;
+				boost::signals2::signal<void(void)> signal_addCorrection;
+			public:
+				dxosMUI() :dxosBUI("Compass", 30, 105), IsDataModeMUIBut(this){}
+			public:
+				int normal_draw(dxO& dxo)override{
 					try{
-						IsDataModeMUIBut.set(Pint(70, 20), "Data");
-						dxo.draw(Pint(5, 5), IsDataModeMUIBut);
+						try{
+							IsDataModeMUIBut.set(Pint(70, 20), "Data");
+							dxo.draw(Pint(5, 5), IsDataModeMUIBut);
+						}
+						catch(const hmLib::inquiries::unconnected_exception&){
+							dxo.draw(Pint(5, 5), dxoStrP(Pint(70, 20), "Data", getClr(error, strobj)));
+						}
+
+						try{
+							auto Pol = cCompass::transPos_to_Polar(pos);
+							dxo.draw(Pint(80, 5), dxoStrP(Pint(70, 20), (boost::format("Y:%.1f") % Pol.phi).str(), getTimeStrClr(time)));
+							dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), (boost::format("P:%.1f") % Pol.theta).str(), getTimeStrClr(time)));
+						}
+						catch(const hmLib::inquiries::unconnected_exception&){
+							dxo.draw(Pint(80, 5), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
+							dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
+						}
+					}
+					catch(const hmLib::exceptions::exception& Excp){
+						dxo.draw(Pint(0, 0), dxoButIO(getSize(), std::string("=ERR=") + Excp.what(), getClr(error, butobj), true, CLR::White, ALI::left));
+					}
+
+					return 0;
+				}
+				int extend_draw(dxO& dxo)override{
+					normal_draw(dxo);
+
+					try{
+						auto Value = pos;
+						dxo.draw(Pint(5, 30), dxoStrP(Pint(70, 20), (boost::format("X:%.1f") % Value.x).str(), getTimeStrClr(time)));
+						dxo.draw(Pint(80, 30), dxoStrP(Pint(70, 20), (boost::format("Y:%.1f") % Value.y).str(), getTimeStrClr(time)));
+						dxo.draw(Pint(155, 30), dxoStrP(Pint(70, 20), (boost::format("Z:%.1f") % Value.z).str(), getTimeStrClr(time)));
 					}
 					catch(const hmLib::inquiries::unconnected_exception&){
-						dxo.draw(Pint(5, 5), dxoStrP(Pint(70, 20), "Data", getClr(error, strobj)));
+						dxo.draw(Pint(5, 30), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
+						dxo.draw(Pint(80, 30), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
+						dxo.draw(Pint(155, 30), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
 					}
 
 					try{
-						auto Pol = cCompass::transPos_to_Polar(pos);
-						dxo.draw(Pint(80, 5), dxoStrP(Pint(70, 20), (boost::format("Y:%.1f") % Pol.phi).str(), getTimeStrClr(time)));
-						dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), (boost::format("P:%.1f") % Pol.theta).str(), getTimeStrClr(time)));
+						bool IsCorrection = inquiry_isCorrectionMode();
+						unsigned int CorrectionNum = inquiry_getCorrectionNum();
+						if(dxo.draw(Pint(5, 55), dxoButIO(Pint(70, 20), IsCorrection ? "補正終了" : "補正開始", getClr(IsCorrection ? active : normal, butobj), IsCorrection && (CorrectionNum % 2 == 0))) == 1){
+							signal_setCorrectionMode();
+						}
+						if(dxo.draw(Pint(80, 55), dxoBut(Pint(70, 20), (boost::format("補正:%d") % CorrectionNum).str(), getClr(IsCorrection ? normal : invalid, butobj)), IsCorrection) == -1){
+							signal_addCorrection();
+						}
+						if(dxo.draw(Pint(155, 55), dxoBut(Pint(70, 20), "文書補正", getClr((!IsCorrection) ? normal : invalid, butobj)), !IsCorrection) == -1){
+							signal_setCorrectionFromFile();
+						}
 					}
 					catch(const hmLib::inquiries::unconnected_exception&){
-						dxo.draw(Pint(80, 5), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
-						dxo.draw(Pint(155, 5), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
+						dxo.draw(Pint(5, 55), dxoStrP(Pint(225, 20), "NoCnct", getClr(error, strobj)));
 					}
-				}
-				catch(const hmLib::exceptions::exception& Excp){
-					dxo.draw(Pint(0, 0), dxoButIO(getSize(), std::string("=ERR=") + Excp.what(), getClr(error, butobj), true, CLR::White, ALI::left));
-				}
 
-				return 0;
-			}
-			int extend_draw(dxO& dxo)override{
-				normal_draw(dxo);
-
-				try{
-					auto Value = pos;
-					dxo.draw(Pint(5, 30), dxoStrP(Pint(70, 20), (boost::format("X:%.1f") % Value.x).str(), getTimeStrClr(time)));
-					dxo.draw(Pint(80, 30), dxoStrP(Pint(70, 20), (boost::format("Y:%.1f") % Value.y).str(), getTimeStrClr(time)));
-					dxo.draw(Pint(155, 30), dxoStrP(Pint(70, 20), (boost::format("Z:%.1f") % Value.z).str(), getTimeStrClr(time)));
-				}
-				catch(const hmLib::inquiries::unconnected_exception&){
-					dxo.draw(Pint(5, 30), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
-					dxo.draw(Pint(80, 30), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
-					dxo.draw(Pint(155, 30), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
-				}
-
-				try{
-					bool IsCorrection = inquiry_isCorrectionMode();
-					unsigned int CorrectionNum = inquiry_getCorrectionNum();
-					if(dxo.draw(Pint(5, 55), dxoButIO(Pint(70, 20), IsCorrection ? "補正終了" : "補正開始", getClr(IsCorrection ? active : normal, butobj), IsCorrection && (CorrectionNum % 2 == 0))) == 1){
-						signal_setCorrectionMode();
+					try{
+						auto Value = inquiry_getCorrectionValue();
+						dxo.draw(Pint(5, 80), dxoStrP(Pint(70, 20), (boost::format("補X:%.1f") % Value.x).str(), getTimeStrClr(time)));
+						dxo.draw(Pint(80, 80), dxoStrP(Pint(70, 20), (boost::format("補Y:%.1f") % Value.y).str(), getTimeStrClr(time)));
+						dxo.draw(Pint(155, 80), dxoStrP(Pint(70, 20), (boost::format("補Z:%.1f") % Value.z).str(), getTimeStrClr(time)));
 					}
-					if(dxo.draw(Pint(80, 55), dxoBut(Pint(70, 20), (boost::format("補正:%d") % CorrectionNum).str(), getClr(IsCorrection ? normal : invalid, butobj)), IsCorrection) == -1){
-						signal_addCorrection();
+					catch(const hmLib::inquiries::unconnected_exception&){
+						dxo.draw(Pint(5, 80), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
+						dxo.draw(Pint(80, 80), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
+						dxo.draw(Pint(155, 80), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
 					}
-					if(dxo.draw(Pint(155, 55), dxoBut(Pint(70, 20), "文書補正", getClr((!IsCorrection) ? normal : invalid, butobj)), !IsCorrection) == -1){
-						signal_setCorrectionFromFile();
-					}
-				}
-				catch(const hmLib::inquiries::unconnected_exception&){
-					dxo.draw(Pint(5, 55), dxoStrP(Pint(225, 20), "NoCnct", getClr(error, strobj)));
-				}
 
-				try{
-					auto Value = inquiry_getCorrectionValue();
-					dxo.draw(Pint(5, 80), dxoStrP(Pint(70, 20), (boost::format("補X:%.1f") % Value.x).str(), getTimeStrClr(time)));
-					dxo.draw(Pint(80, 80), dxoStrP(Pint(70, 20), (boost::format("補Y:%.1f") % Value.y).str(), getTimeStrClr(time)));
-					dxo.draw(Pint(155, 80), dxoStrP(Pint(70, 20), (boost::format("補Z:%.1f") % Value.z).str(), getTimeStrClr(time)));
+					return 0;
 				}
-				catch(const hmLib::inquiries::unconnected_exception&){
-					dxo.draw(Pint(5, 80), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
-					dxo.draw(Pint(80, 80), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
-					dxo.draw(Pint(155, 80), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
+				status getStatus()const override{
+					if(IsDataModeMUIBut.Pic.is_connect() && IsDataModeMUIBut.Pic())return normal;
+					else return invalid;
 				}
-
-				return 0;
-			}
-			status getStatus()const override{
-				if(IsDataModeMUIBut.Pic.is_connect() && IsDataModeMUIBut.Pic())return normal;
-				else return invalid;
-			}
-		};
+			};
+		}
 	}
 }
 #
