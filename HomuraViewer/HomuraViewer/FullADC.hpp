@@ -6,22 +6,22 @@ ADC全チャンネル取得用モジュール
 
 */
 
-#include"FullADC/Data.hpp"
-#include"FullADC/FullADCMessageAgent.hpp"
-#include"FullADC/DxMUI.hpp"
-#include"FullADC/FileAgent.hpp"
+#include"FullADC/FullADCData.hpp"
+#include"FullADC/FullADCMsgAgent.hpp"
+#include"FullADC/DxFullADCMUI.hpp"
+#include"FullADC/FullADCFileAgent.hpp"
 namespace hmr{
 	namespace viewer{
 		struct cFullADC{
 			using dxosMUI = fulladc::dxosMUI;
 		public:
-			cFullADCMsgAgent<8> MsgAgent;
+			fulladc::cMsgAgent<8> MsgAgent;
 			fulladc::cFileAgent<8> FileAgent;
 		public:
 			cFullADC():FileAgent("FullADC.txt",'\t'){
 				FileAgent.slot_logData(MsgAgent.signal_newData);
 			}
-			void connect(dxosMUI& MUI){
+			void connect(fulladc::dxosMUI& MUI){
 				MUI.slot_getData(MsgAgent.signal_newData);
 
 				MsgAgent.slot_setDataMode(MUI.IsDataModeMUIBut.Signal);

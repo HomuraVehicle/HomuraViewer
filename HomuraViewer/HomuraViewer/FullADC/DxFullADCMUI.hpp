@@ -15,7 +15,7 @@
 #include<HomuraViewer/chrono.hpp>
 #include"../hmrDxBUI.hpp"
 #include"../hmrDxTools.hpp"
-#include"Data.hpp"
+#include"FullADCData.hpp"
 namespace hmr{
 	namespace viewer{
 		namespace fulladc{

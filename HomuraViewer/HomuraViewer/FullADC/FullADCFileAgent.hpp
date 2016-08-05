@@ -7,7 +7,7 @@
 #include <hmLib/signals.hpp>
 #include <HomuraViewer/File/ItfFile.hpp>
 #include <HomuraViewer/chrono.hpp>
-#include "Data.hpp"
+#include "FullADCData.hpp"
 namespace hmr{
 	namespace viewer{
 		namespace fulladc{
