@@ -51,18 +51,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FullADC\FileAgent.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC\FullADCMessageAgent.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC\Data.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC\DxMUI.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
     <ClInclude Include="File\ItfFile.hpp">
       <Filter>HomuraViewer\File</Filter>
     </ClInclude>
@@ -216,17 +204,8 @@
     <ClInclude Include="Battery\DxBatteryMUI.hpp">
       <Filter>HomuraViewer\Battery</Filter>
     </ClInclude>
-    <ClInclude Include="Battery\BatteryMessageAgent.hpp">
-      <Filter>HomuraViewer\Battery</Filter>
-    </ClInclude>
     <ClInclude Include="Battery\BatteryFileAgent.hpp">
       <Filter>HomuraViewer\Battery</Filter>
-    </ClInclude>
-    <ClInclude Include="Accele\AcceleMessageAgent.hpp">
-      <Filter>HomuraViewer\Accele</Filter>
-    </ClInclude>
-    <ClInclude Include="Accele\AcceleFileAgent.hpp">
-      <Filter>HomuraViewer\Accele</Filter>
     </ClInclude>
     <ClInclude Include="Accele\AcceleLogger.hpp">
       <Filter>HomuraViewer\Accele</Filter>
@@ -234,28 +213,13 @@
     <ClInclude Include="Accele\DxAcceleMUI.hpp">
       <Filter>HomuraViewer\Accele</Filter>
     </ClInclude>
-    <ClInclude Include="Compass\CompassMessageAgent.hpp">
-      <Filter>HomuraViewer\Compass</Filter>
-    </ClInclude>
-    <ClInclude Include="Compass\CompassData.hpp">
-      <Filter>HomuraViewer\Compass</Filter>
-    </ClInclude>
-    <ClInclude Include="Compass\CompassFileAgent.hpp">
-      <Filter>HomuraViewer\Compass</Filter>
-    </ClInclude>
     <ClInclude Include="Compass\DxCompassMUI.hpp">
       <Filter>HomuraViewer\Compass</Filter>
     </ClInclude>
     <ClInclude Include="Gyro\DxGyroMUI.hpp">
       <Filter>HomuraViewer\Gyro</Filter>
     </ClInclude>
-    <ClInclude Include="Gyro\GyroMessageAgent.hpp">
-      <Filter>HomuraViewer\Gyro</Filter>
-    </ClInclude>
     <ClInclude Include="Gyro\GyroCompass.hpp">
-      <Filter>HomuraViewer\Gyro</Filter>
-    </ClInclude>
-    <ClInclude Include="Gyro\GyroFileAgent.hpp">
       <Filter>HomuraViewer\Gyro</Filter>
     </ClInclude>
     <ClInclude Include="Gyro\GyroLogger.hpp">
@@ -268,12 +232,6 @@
       <Filter>HomuraViewer\GPS</Filter>
     </ClInclude>
     <ClInclude Include="GPS\DxGPSMUI.hpp">
-      <Filter>HomuraViewer\GPS</Filter>
-    </ClInclude>
-    <ClInclude Include="GPS\GPSDataSet.hpp">
-      <Filter>HomuraViewer\GPS</Filter>
-    </ClInclude>
-    <ClInclude Include="GPS\GPSMessageAgent.hpp">
       <Filter>HomuraViewer\GPS</Filter>
     </ClInclude>
     <ClInclude Include="GPS\GPSFileAgent.hpp">
@@ -558,6 +516,51 @@
     <ClInclude Include="Resource.hpp">
       <Filter>HomuraViewer</Filter>
     </ClInclude>
+    <ClInclude Include="FullADC\DxFullADCMUI.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\FullADCFileAgent.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\FullADCData.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="Gyro\GyroMsgAgent.hpp">
+      <Filter>HomuraViewer\Gyro</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\FullADCMsgAgent.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\BatteryMsgAgent.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Accele\AcceleMsgAgent.hpp">
+      <Filter>HomuraViewer\Accele</Filter>
+    </ClInclude>
+    <ClInclude Include="Compass\CompassMsgAgent.hpp">
+      <Filter>HomuraViewer\Compass</Filter>
+    </ClInclude>
+    <ClInclude Include="Compass\MagneticCompass.hpp">
+      <Filter>HomuraViewer\Compass</Filter>
+    </ClInclude>
+    <ClInclude Include="Accele.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Gyro.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Compass.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="GPS\GPSMsgAgent.hpp">
+      <Filter>HomuraViewer\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="GPS\GPSData.hpp">
+      <Filter>HomuraViewer\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="GPS.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -598,10 +601,10 @@
     <ClCompile Include="hmrSprite.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="HomuraViewer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="VMC1.c">
+      <Filter>HomuraViewer</Filter>
+    </ClCompile>
+    <ClCompile Include="HomuraViewer.cpp">
       <Filter>HomuraViewer</Filter>
     </ClCompile>
   </ItemGroup>

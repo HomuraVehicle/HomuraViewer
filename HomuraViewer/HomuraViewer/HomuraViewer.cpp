@@ -72,10 +72,7 @@ hmrV2500 v1_03/130713
 #include"hmrCO2.hpp"
 #include"hmrDxCO2MUI.hpp"
 
-#include"hmrGPS.hpp"
-#include"hmrDxGPSMUI.hpp"
-#include"hmrDxGPSMap.hpp"
-#include"hmrGPSKashmir.hpp"
+#include"GPS.hpp"
 
 #include"Battery.hpp"
 
@@ -90,19 +87,9 @@ hmrV2500 v1_03/130713
 #include"hmrMotor.hpp"
 #include"hmrDxMotorMUI.hpp"
 
-#include"hmrCompass.hpp"
-#include"hmrCompassData.hpp"
-
-#include"hmrDxCompassMUI.hpp"
-
-#include"hmrAccele.hpp"
-#include"hmrAcceleLogger.hpp"
-#include"hmrDxAcceleMUI.hpp"
-
-#include"hmrGyro.hpp"
-#include"hmrGyroCompass.hpp"
-#include"hmrDxGyroMUI.hpp"
-
+#include "Accele.hpp"
+#include "Compass.hpp"
+#include "Gyro.hpp"
 
 #include "FullADC.hpp"
 
@@ -126,7 +113,6 @@ hmrV2500 v1_03/130713
 #include "hmrDxBUIBoxSideDisp.hpp"
 
 #include <HomuraViewer/File.hpp>
-#include "hmrGPSFile.hpp"
 #include "hmrSpriteFile.hpp"
 
 #include "Resource.hpp"
@@ -190,34 +176,20 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cBattery Battery;
 		hmrv::cFullADC FullADC;
 
+		hmrv::cAccele Accele;
+		hmrv::cCompass Compass;
+		hmrv::cGyro Gyro;
+		hmrv::cGPS GPS;
+
 		hmrv::cMotorMsgAgent MotorMA;
 		Message.regist('m',&MotorMA);
 		Message.regist('b',&(Battery.MsgAgent));
-		
-		hmrv::cAcceleMsgAgent AcceleMA;
-		Message.regist('a',&AcceleMA);
-		hmrv::cAcceleLogger AcceleLogger;
-		AcceleLogger.slot_addLog(AcceleMA.signal_newData);
-
-		hmrv::cCompassMsgAgent CompassMA;
-		hmrv::cCompass CompassDat;
-		Message.regist('c',&CompassMA);
-		hmrv::connect(CompassDat, CompassMA);
-
-		hmrv::cGyroMsgAgent GyroMA;
-		hmrv::cGyroLogger GyroLogger;
-		hmrv::connect(GyroLogger,GyroMA);
-		Message.regist('G',&GyroMA);
-		hmrv::cGyroCompass GyroCompass;
-		hmrv::connect(GyroCompass,GyroMA);
-
-		hmrv::cGPSMsgAgent GPSMA;
-		hmrv::cGPSKashmir GPSKashmir;
-		hmrv::connect(GPSKashmir,GPSMA);
-		Message.regist('g',&GPSMA);
+		Message.regist('a', &(Accele.MsgAgent));
+		Message.regist('c', &(Compass.MsgAgent));
+		Message.regist('G', &(Gyro.MsgAgent));
+		Message.regist('g', &(GPS.MsgAgent));
 
 		hmrv::cSpriteMsgAgent SpriteMA;
-
 		Message.regist('j',&SpriteMA);
 
 		hmrv::cThermoMsgAgent ThermoMA;
@@ -286,14 +258,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		DirectoryFile.regist(&CO2FileAgent);
 
 		//GPSデータを保存
-		hmrv::cGPSFileAgent GPSFileAgent;
-		hmrv::connect(GPSFileAgent, GPSMA);
-		DirectoryFile.regist(&GPSFileAgent);
+		DirectoryFile.regist(&(GPS.FileAgent));
 
 		//GPGGAデータを保存
-		hmrv::cGPGGAFileAgent GPGGAFileAgent;
-		hmrv::connect(GPGGAFileAgent, GPSMA);
-		DirectoryFile.regist(&GPGGAFileAgent);
+		DirectoryFile.regist(&(GPS.GPGGAFileAgent));
 
 		//カメラデータを保存
 		hmrv::cSpriteFileAgent SpriteFileAgent("Sprite");
@@ -306,48 +274,48 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		hmrv::dxosChronoSUI ChronoSUI;
 		hmrv::connect(ChronoSUI, Chrono);
-		SystemSideDisp.insert(&ChronoSUI);
+		SystemSideDisp.regist(&ChronoSUI);
 
 		hmrv::dxosDevMngSUI DevMngSUI;
 		hmrv::connect(DevMngSUI, DevMngMA);
-		SystemSideDisp.insert(&DevMngSUI);
+		SystemSideDisp.regist(&DevMngSUI);
 
 		hmrv::dxosLoggerMngSUI LogMngSUI;
 		hmrv::connect(LogMngSUI, LogMngMA);
-		SystemSideDisp.insert(&LogMngSUI);
+		SystemSideDisp.regist(&LogMngSUI);
 
 		hmrv::dxosGateSwitcherSUI GateSwSUI;
 		hmrv::connect(GateSwSUI, GateSW);
-		SystemSideDisp.insert(&GateSwSUI);
+		SystemSideDisp.regist(&GateSwSUI);
 
 		hmrv::dxosBufGateSUI BufGateSUI;
 		hmrv::connect(BufGateSUI, Bufgate);
-		SystemSideDisp.insert(&BufGateSUI);
+		SystemSideDisp.regist(&BufGateSUI);
 
 		hmrv::dxosIOLogGateSUI LogSUI;
 		hmrv::connect(LogSUI, ioLogGate, ioLogBuf);
-		SystemSideDisp.insert(&LogSUI);
+		SystemSideDisp.regist(&LogSUI);
 
 		hmrv::dxosIOSUI IOSUI;
 		hmrv::connect(IOSUI, IO);
-		SystemSideDisp.insert(&IOSUI);
+		SystemSideDisp.regist(&IOSUI);
 
 		hmrv::dxosVMCSUI VMCSUI;
 		hmrv::connect(VMCSUI, IO);
-		SystemSideDisp.insert(&VMCSUI);
+		SystemSideDisp.regist(&VMCSUI);
 
 
 		hmrv::dxosComSUI ComBUI;
 		hmrv::connect(ComBUI,Com);
-		SystemSideDisp.insert(&ComBUI);
+		SystemSideDisp.regist(&ComBUI);
 
 		hmrv::dxosOperatorSUI OpSUI;
 		hmrv::connect(OpSUI, Operator);
-		SystemSideDisp.insert(&OpSUI);
+		SystemSideDisp.regist(&OpSUI);
 
 		hmrv::dxosFileSUI FileSUI;
 		hmrv::connect(FileSUI, DirectoryFile);
-		SystemSideDisp.insert(&FileSUI);
+		SystemSideDisp.regist(&FileSUI);
 
 
 		// IO View Display の定義
@@ -379,39 +347,28 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		hmrv::dxosMotorMUI MotorMUI;
 		hmrv::connect(MotorMUI,MotorMA);
-		MUISideDisp.insert(&MotorMUI);
+		MUISideDisp.regist(&MotorMUI);
 
 		hmrv::battery::dxosMUI<hmrv::cBattery::BatteryNum> BatteryMUI;
 		Battery.connect(BatteryMUI);
-		MUISideDisp.insert(&BatteryMUI);
+		MUISideDisp.regist(&BatteryMUI);
 
-		hmrv::dxosAcceleMUI AcceleMUI;
-		hmrv::connect(AcceleMUI,AcceleMA);
-		MUISideDisp.insert(&AcceleMUI);
-
-		hmrv::dxosCompassMUI CompassMUI;
-		hmrv::connect(CompassMUI,CompassMA);
-		MUISideDisp.insert(&CompassMUI);
-
-		hmrv::dxosGyroMUI GyroMUI;
-		hmrv::connect(GyroMUI,GyroMA);
-		MUISideDisp.insert(&GyroMUI);
-
-		hmrv::dxosGPSMUI GPSMUI;
-		hmrv::connect(GPSMUI,GPSMA);
-		MUISideDisp.insert(&GPSMUI);
+		MUISideDisp.regist(&(Accele.MUI));
+		MUISideDisp.regist(&(Compass.MUI));
+		MUISideDisp.regist(&(Gyro.MUI));
+		MUISideDisp.regist(&(GPS.MUI));
 
 		hmrv::dxosSpriteMUI SpriteMUI;
 		hmrv::connect(SpriteMUI,SpriteMA);
-		MUISideDisp.insert(&SpriteMUI);
+		MUISideDisp.regist(&SpriteMUI);
 
 		hmrv::dxosThermoMUI ThermoMUI;
 		hmrv::connect(ThermoMUI,ThermoMA);
-		MUISideDisp.insert(&ThermoMUI);
+		MUISideDisp.regist(&ThermoMUI);
 
 		hmrv::dxosCO2MUI CO2MUI;
 		hmrv::connect(CO2MUI,CO2MA);
-		MUISideDisp.insert(&CO2MUI);
+		MUISideDisp.regist(&CO2MUI);
 
 //		hmrv::dxosSHT75MUI SHT75MUI;
 //		hmrv::connect(SHT75MUI,SHT75MA);
@@ -431,7 +388,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		hmrv::cFullADC::dxosMUI FullADCMUI;
 		FullADC.connect(FullADCMUI);
-		MUISideDisp.insert(&FullADCMUI);
+		MUISideDisp.regist(&FullADCMUI);
 		ControlMainDisp.Infomation.slot_logData(FullADC.MsgAgent.signal_newData);
 
 		hmrv::dxosDisplay Display(Pint(720,720),Pint(240,720));
