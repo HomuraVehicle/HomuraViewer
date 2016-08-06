@@ -15,6 +15,8 @@ hmrV2500 v1_06/160601
 		FullADC機能を実装
 	g
 		Add foma settingh function
+	h
+		SpriteMUIの未知Statusに対する例外発生バグを修正
 hmrV2500 v1_05/130914
 	p
 		表示位置等修正
@@ -174,7 +176,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	SetWindowIconID(ID_ICON);
 
 	//hmLib_dxモジュールを初期化
-	dx::ini("hmrV2500_v1_06g", 960,720);
+	dx::ini("hmrV2500_v1_06h", 960,720);
 
 
 	try{
@@ -634,9 +636,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Debug.slot_timeout(Operator.signal_inform_Received);
 		Debug.slot_nulldata(BatteryMA.signal_nulldata);
 */
-		printfDx("%d:%d\n", GateSW.FomaSetting.Baudrate, GateSW.FomaSetting.PortNo);
-		printfDx("#:%d:%s\n", GateSW.FomaSetting.PhoneNo.size(), GateSW.FomaSetting.PhoneNo.c_str());
-
 		while(!dx::work(30)){
 			Keyboard.work();
 			Pad1.work();
