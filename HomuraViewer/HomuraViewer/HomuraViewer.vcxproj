@@ -163,7 +163,6 @@
     <ClInclude Include="Accele\AcceleMsgAgent.hpp" />
     <ClInclude Include="Accele\AcceleLogger.hpp" />
     <ClInclude Include="Accele\DxAcceleMUI.hpp" />
-    <ClInclude Include="any_predicate.hpp" />
     <ClInclude Include="Battery.hpp" />
     <ClInclude Include="Battery\BatteryData.hpp" />
     <ClInclude Include="Battery\BatteryFileAgent.hpp" />
@@ -182,7 +181,6 @@
     <ClInclude Include="File\TimeDirectoryFile.hpp" />
     <ClInclude Include="File\TimeFile.hpp" />
     <ClInclude Include="File\UniSensorFileAgent.hpp" />
-    <ClInclude Include="fomagate.hpp" />
     <ClInclude Include="FullADC.hpp" />
     <ClInclude Include="FullADC\FullADCData.hpp" />
     <ClInclude Include="FullADC\DxFullADCMUI.hpp" />
@@ -199,8 +197,6 @@
     <ClInclude Include="Gyro\GyroMsgAgent.hpp" />
     <ClInclude Include="Gyro\GyroCompass.hpp" />
     <ClInclude Include="Gyro\GyroLogger.hpp" />
-    <ClInclude Include="hmLibVer.hpp" />
-    <ClInclude Include="hmLib_config.h" />
     <ClInclude Include="hmrADC.h" />
     <ClInclude Include="hmrBufGate.hpp" />
     <ClInclude Include="hmrChrono.hpp" />
@@ -241,16 +237,12 @@
     <ClInclude Include="hmrDxIOLogGateSUI.hpp" />
     <ClInclude Include="hmrDxIOSUI.hpp" />
     <ClInclude Include="hmrDxIO_v2.hpp" />
-    <ClInclude Include="hmrDxKeyboard.hpp" />
     <ClInclude Include="hmrDxLoggerManageSUI.hpp" />
     <ClInclude Include="hmrDxNavigator.hpp" />
     <ClInclude Include="hmrDxOperatorSUI.hpp" />
-    <ClInclude Include="hmrDxPad.hpp" />
-    <ClInclude Include="hmrDxPadStatus.hpp" />
     <ClInclude Include="hmrDxSHT75MUI.hpp" />
     <ClInclude Include="hmrDxSprite.hpp" />
     <ClInclude Include="hmrDxSpriteMUI.hpp" />
-    <ClInclude Include="hmrDxThermoMUI.hpp" />
     <ClInclude Include="hmrDxTools.hpp" />
     <ClInclude Include="hmrDxVMCSUI.hpp" />
     <ClInclude Include="hmrFlagirl.hpp" />
@@ -271,9 +263,7 @@
     <ClInclude Include="hmrSHT75.hpp" />
     <ClInclude Include="hmrSprite.hpp" />
     <ClInclude Include="hmrSpriteFile.hpp" />
-    <ClInclude Include="hmrThermo.hpp" />
     <ClInclude Include="hmrThermoFile.hpp" />
-    <ClInclude Include="iologgate.hpp" />
     <ClInclude Include="Message.hpp" />
     <ClInclude Include="Message\ItfMessage.hpp" />
     <ClInclude Include="Message\ItfMessageAgent.hpp" />
@@ -283,11 +273,12 @@
     <ClInclude Include="Motor.hpp" />
     <ClInclude Include="Motor\DxMotorMUI.hpp" />
     <ClInclude Include="Motor\MotorMsgAgent.hpp" />
-    <ClInclude Include="predicate.hpp" />
     <ClInclude Include="Resource.hpp" />
-    <ClInclude Include="UniSensor.hpp" />
+    <ClInclude Include="Thermo.hpp" />
+    <ClInclude Include="Thermo\DxThermoMUI.hpp" />
+    <ClInclude Include="Thermo\ThermoData.hpp" />
+    <ClInclude Include="Thermo\ThermoMsgAgent.hpp" />
     <ClInclude Include="VMC1.h" />
-    <ClInclude Include="vmstatus.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />

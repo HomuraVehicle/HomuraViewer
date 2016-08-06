@@ -55,6 +55,9 @@
     <Filter Include="HomuraViewer\Motor">
       <UniqueIdentifier>{c8624be9-56a4-46cf-9036-5623b1542775}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer\Thermo">
+      <UniqueIdentifier>{ceed80e8-b9c5-4a13-b3f6-95f38335daba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File\ItfFile.hpp">
@@ -246,25 +249,121 @@
     <ClInclude Include="GPS\GPSKashmir.hpp">
       <Filter>HomuraViewer\GPS</Filter>
     </ClInclude>
-    <ClInclude Include="predicate.hpp">
+    <ClInclude Include="chrono.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="File.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="VMC1.h">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="modeflags.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\DxFullADCMUI.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\FullADCFileAgent.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\FullADCData.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="Gyro\GyroMsgAgent.hpp">
+      <Filter>HomuraViewer\Gyro</Filter>
+    </ClInclude>
+    <ClInclude Include="FullADC\FullADCMsgAgent.hpp">
+      <Filter>HomuraViewer\FullADC</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery\BatteryMsgAgent.hpp">
+      <Filter>HomuraViewer\Battery</Filter>
+    </ClInclude>
+    <ClInclude Include="Accele\AcceleMsgAgent.hpp">
+      <Filter>HomuraViewer\Accele</Filter>
+    </ClInclude>
+    <ClInclude Include="Compass\CompassMsgAgent.hpp">
+      <Filter>HomuraViewer\Compass</Filter>
+    </ClInclude>
+    <ClInclude Include="Compass\MagneticCompass.hpp">
+      <Filter>HomuraViewer\Compass</Filter>
+    </ClInclude>
+    <ClInclude Include="Accele.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Gyro.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Compass.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="GPS\GPSMsgAgent.hpp">
+      <Filter>HomuraViewer\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="GPS\GPSData.hpp">
+      <Filter>HomuraViewer\GPS</Filter>
+    </ClInclude>
+    <ClInclude Include="GPS.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="DxModule\PadStatus.hpp">
+      <Filter>HomuraViewer\DxModule</Filter>
+    </ClInclude>
+    <ClInclude Include="DxModule\Keyboard.hpp">
+      <Filter>HomuraViewer\DxModule</Filter>
+    </ClInclude>
+    <ClInclude Include="DxModule\Pad.hpp">
+      <Filter>HomuraViewer\DxModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\DxMotorMUI.hpp">
+      <Filter>HomuraViewer\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\MotorMsgAgent.hpp">
+      <Filter>HomuraViewer\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Thermo\ThermoMsgAgent.hpp">
+      <Filter>HomuraViewer\Thermo</Filter>
+    </ClInclude>
+    <ClInclude Include="Thermo\DxThermoMUI.hpp">
+      <Filter>HomuraViewer\Thermo</Filter>
+    </ClInclude>
+    <ClInclude Include="Thermo.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="hmrOperator.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="UniSensor.hpp">
+    <ClInclude Include="hmrSensorsFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="vmstatus.hpp">
+    <ClInclude Include="hmrSHT75.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="any_predicate.hpp">
+    <ClInclude Include="hmrSprite.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="fomagate.hpp">
+    <ClInclude Include="hmrSpriteFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmLib_config.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmLibVer.hpp">
+    <ClInclude Include="hmrThermoFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrADC.h">
@@ -387,9 +486,6 @@
     <ClInclude Include="hmrDxIOSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxKeyboard.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxLoggerManageSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -399,12 +495,6 @@
     <ClInclude Include="hmrDxOperatorSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxPad.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxPadStatus.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxSHT75MUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -412,9 +502,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxSpriteMUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxThermoMUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxTools.hpp">
@@ -462,119 +549,8 @@
     <ClInclude Include="hmrManipulator.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrOperator.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrSensorsFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrSHT75.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrSprite.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrSpriteFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrThermo.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrThermoFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="iologgate.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="chrono.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="Battery.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="File.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="VMC1.h">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="modeflags.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="Message.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC\DxFullADCMUI.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC\FullADCFileAgent.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC\FullADCData.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-    <ClInclude Include="Gyro\GyroMsgAgent.hpp">
-      <Filter>HomuraViewer\Gyro</Filter>
-    </ClInclude>
-    <ClInclude Include="FullADC\FullADCMsgAgent.hpp">
-      <Filter>HomuraViewer\FullADC</Filter>
-    </ClInclude>
-    <ClInclude Include="Battery\BatteryMsgAgent.hpp">
-      <Filter>HomuraViewer\Battery</Filter>
-    </ClInclude>
-    <ClInclude Include="Accele\AcceleMsgAgent.hpp">
-      <Filter>HomuraViewer\Accele</Filter>
-    </ClInclude>
-    <ClInclude Include="Compass\CompassMsgAgent.hpp">
-      <Filter>HomuraViewer\Compass</Filter>
-    </ClInclude>
-    <ClInclude Include="Compass\MagneticCompass.hpp">
-      <Filter>HomuraViewer\Compass</Filter>
-    </ClInclude>
-    <ClInclude Include="Accele.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="Gyro.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="Compass.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="GPS\GPSMsgAgent.hpp">
-      <Filter>HomuraViewer\GPS</Filter>
-    </ClInclude>
-    <ClInclude Include="GPS\GPSData.hpp">
-      <Filter>HomuraViewer\GPS</Filter>
-    </ClInclude>
-    <ClInclude Include="GPS.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="DxModule\PadStatus.hpp">
-      <Filter>HomuraViewer\DxModule</Filter>
-    </ClInclude>
-    <ClInclude Include="DxModule\Keyboard.hpp">
-      <Filter>HomuraViewer\DxModule</Filter>
-    </ClInclude>
-    <ClInclude Include="DxModule\Pad.hpp">
-      <Filter>HomuraViewer\DxModule</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor\DxMotorMUI.hpp">
-      <Filter>HomuraViewer\Motor</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor\MotorMsgAgent.hpp">
-      <Filter>HomuraViewer\Motor</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor.hpp">
-      <Filter>HomuraViewer</Filter>
+    <ClInclude Include="Thermo\ThermoData.hpp">
+      <Filter>HomuraViewer\Thermo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ hmrDxMotorMUI v1_00/130519 iwahori
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include <HomuraViewer/chrono.hpp>
-#include"hmrDxBUI.hpp"
+
 namespace hmr{
 	namespace viewer{
 		namespace motor{
