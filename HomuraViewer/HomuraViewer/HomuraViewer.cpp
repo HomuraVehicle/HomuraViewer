@@ -331,16 +331,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 
 		MUISideDisp.regist(&(Motor.MUI));
-
-		hmrv::battery::dxosMUI<hmrv::cBattery::BatteryNum> BatteryMUI;
-		Battery.connect(BatteryMUI);
-		MUISideDisp.regist(&BatteryMUI);
-
+		MUISideDisp.regist(&(Battery.MUI));
 		MUISideDisp.regist(&(Accele.MUI));
 		MUISideDisp.regist(&(Compass.MUI));
 		MUISideDisp.regist(&(Gyro.MUI));
 		MUISideDisp.regist(&(GPS.MUI));
-
 		MUISideDisp.regist(&(Thermo.MUI));
 
 		hmrv::dxosSpriteMUI SpriteMUI;
@@ -348,6 +343,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		MUISideDisp.regist(&SpriteMUI);
 
 		MUISideDisp.regist(&(CO2.MUI));
+		MUISideDisp.regist(&(FullADC.MUI));
+
 
 //		hmrv::dxosSHT75MUI SHT75MUI;
 //		hmrv::connect(SHT75MUI,SHT75MA);
@@ -365,10 +362,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 //		hmrv::connect(HumidMUI,HumidMA);
 //		MUISideDisp.insert(&HumidMUI);
 
-		hmrv::cFullADC::dxosMUI FullADCMUI;
-		FullADC.connect(FullADCMUI);
-		MUISideDisp.regist(&FullADCMUI);
 		ControlMainDisp.Infomation.slot_logData(FullADC.MsgAgent.signal_newData);
+
 
 		hmrv::dxosDisplay Display(Pint(720,720),Pint(240,720));
 		Display.registMain(&IOMainDisp);

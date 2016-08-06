@@ -17,6 +17,7 @@ namespace hmr{
 		public:
 			battery::cMsgAgent<BatteryNum> MsgAgent;
 			battery::cFileAgent<BatteryNum> FileAgent;
+			battery::dxosMUI<BatteryNum> MUI;
 			boost::signals2::signal<void(clock::time_point, double)> signal_newEachData[BatteryNum];
 		public:
 			cBattery(){
@@ -29,8 +30,7 @@ namespace hmr{
 					}
 				);
 				FileAgent.slot_logData(MsgAgent.signal_newData);
-			}
-			void connect(battery::dxosMUI<BatteryNum>& MUI){
+
 				hmLib::inquiries::connect(MUI.inquiry_getData, CurrentData);
 				MUI.IsDataModeMUIBut.connect(MsgAgent.DataMode);
 			}

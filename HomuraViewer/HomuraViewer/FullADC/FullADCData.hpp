@@ -11,6 +11,10 @@ namespace hmr{
 			struct data_t{
 				clock::time_point Time;
 				std::array<std::uint16_t, adc_size> Data;
+			public:
+				data_t(){
+					for(auto& val : Data)val = 0;
+				}
 			};
 		}
 	}

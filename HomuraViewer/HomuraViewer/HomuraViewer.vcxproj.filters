@@ -61,6 +61,9 @@
     <Filter Include="HomuraViewer\CO2">
       <UniqueIdentifier>{863db507-703c-4508-a902-b64fd9dc9400}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer\Sprite">
+      <UniqueIdentifier>{ee730f65-76d1-4c68-a56d-1854ba6b55b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File\ItfFile.hpp">

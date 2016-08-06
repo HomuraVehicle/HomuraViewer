@@ -27,36 +27,18 @@ namespace hmr{
 				this_data Data;
 				hmLib::signals::unique_connections SignalConnections;
 			public:
-				dxosBUIWaitableBoolBut IsDataModeMUIBut;
-				dxosBUIWaitableBoolBut Ctr1MUIBut;
-				dxosBUIWaitableBoolBut Ctr2MUIBut;
-				dxosBUIWaitableBoolBut Ctr3MUIBut;
-				dxosBUIWaitableBoolBut Ctr4MUIBut;
+				dxosBUIWaitableBoolBut DataModeMUIBut;
 			public:
-				dxosMUI() :dxosBUI("ADC", 30, 105), IsDataModeMUIBut(this), Ctr1MUIBut(this), Ctr2MUIBut(this), Ctr3MUIBut(this), Ctr4MUIBut(this){}
+				dxosMUI() :dxosBUI("ADC", 30, 105), DataModeMUIBut(this){}
 			public://dxosBUI
 				int normal_draw(dxO& dxo)override{
 					try{
 						try{
-							IsDataModeMUIBut.set(Pint(70, 20), "Data");
-							dxo.draw(Pint(5, 5), IsDataModeMUIBut);
+							DataModeMUIBut.set(Pint(70, 20), "Data");
+							dxo.draw(Pint(5, 5), DataModeMUIBut);
 						}
 						catch(const hmLib::inquiries::unconnected_exception&){
 							dxo.draw(Pint(5, 5), dxoStrP(Pint(70, 20), "Data", getClr(error, strobj)));
-						}
-
-						try{
-							Ctr1MUIBut.set(Pint(30, 20), "1");
-							dxo.draw(Pint(80, 5), Ctr1MUIBut);
-							Ctr2MUIBut.set(Pint(30, 20), "2");
-							dxo.draw(Pint(115, 5), Ctr2MUIBut);
-							Ctr3MUIBut.set(Pint(30, 20), "3");
-							dxo.draw(Pint(150, 5), Ctr3MUIBut);
-							Ctr4MUIBut.set(Pint(30, 20), "4");
-							dxo.draw(Pint(185, 5), Ctr4MUIBut);
-						}
-						catch(const hmLib::inquiries::unconnected_exception&){
-							dxo.draw(Pint(80, 5), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
 						}
 					}
 					catch(const hmLib::exceptions::exception& Excp){
@@ -77,7 +59,7 @@ namespace hmr{
 					return normal_draw(dxo);
 				}
 				status getStatus()const override{
-					if(IsDataModeMUIBut.Pic.is_connect() && IsDataModeMUIBut.Pic()){
+					if(DataModeMUIBut.Pic.is_connect() && DataModeMUIBut.Pic()){
 						return normal;
 					} else{
 						return invalid;
