@@ -58,6 +58,9 @@
     <Filter Include="HomuraViewer\Thermo">
       <UniqueIdentifier>{ceed80e8-b9c5-4a13-b3f6-95f38335daba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer\CO2">
+      <UniqueIdentifier>{863db507-703c-4508-a902-b64fd9dc9400}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File\ItfFile.hpp">
@@ -363,9 +366,6 @@
     <ClInclude Include="hmrSpriteFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrThermoFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrADC.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -373,12 +373,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrChrono.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrCO2.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrCO2File.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrCom.hpp">
@@ -424,9 +418,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxChrono.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxCO2MUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDXCom.hpp">
@@ -551,6 +542,21 @@
     </ClInclude>
     <ClInclude Include="Thermo\ThermoData.hpp">
       <Filter>HomuraViewer\Thermo</Filter>
+    </ClInclude>
+    <ClInclude Include="CO2\CO2MsgAgent.hpp">
+      <Filter>HomuraViewer\CO2</Filter>
+    </ClInclude>
+    <ClInclude Include="CO2\DxCO2MUI.hpp">
+      <Filter>HomuraViewer\CO2</Filter>
+    </ClInclude>
+    <ClInclude Include="UniSensorData.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="CO2\CO2Data.hpp">
+      <Filter>HomuraViewer\CO2</Filter>
+    </ClInclude>
+    <ClInclude Include="CO2.hpp">
+      <Filter>HomuraViewer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

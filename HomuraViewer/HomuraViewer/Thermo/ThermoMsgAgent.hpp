@@ -40,10 +40,10 @@ namespace hmr{
 						data_t Data;
 
 						Data.Time = Time_;
-						Data.RawData = static_cast<hmLib_uint16>(Data_.at(1)) + static_cast<hmLib_uint16>(Data_.at(2)) * 256;
+						Data.RawValue = static_cast<hmLib_uint16>(Data_.at(1)) + static_cast<hmLib_uint16>(Data_.at(2)) * 256;
 
 						//データを温度に変換
-						Data.Temperature = toTemperature(Data.RawData);
+						Data.Value = toTemperature(Data.raw_value());
 
 						// signal 発信
 						signal_newData(Data);

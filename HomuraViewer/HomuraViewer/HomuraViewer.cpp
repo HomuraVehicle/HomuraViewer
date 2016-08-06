@@ -67,8 +67,7 @@ hmrV2500 v1_03/130713
 #include"hmrSprite.hpp"
 #include"hmrDxSpriteMUI.hpp"
 
-#include"hmrCO2.hpp"
-#include"hmrDxCO2MUI.hpp"
+#include"CO2.hpp"
 
 #include"hmrH2S.hpp"
 #include"hmrDxH2SMUI.hpp"
@@ -174,6 +173,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cGPS GPS;
 		hmrv::cMotor Motor;
 		hmrv::cThermo Thermo;
+		hmrv::cCO2 CO2;
 
 		Message.regist('b', &(Battery.MsgAgent));
 		Message.regist('f', &FullADC.MsgAgent);
@@ -182,13 +182,12 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Message.regist('G', &(Gyro.MsgAgent));
 		Message.regist('g', &(GPS.MsgAgent));
 		Message.regist('m', &(Motor.MsgAgent));
+
 		Message.regist('t', &(Thermo.MsgAgent));
+		Message.regist('C', &(CO2.MsgAgent));
 
 		hmrv::cSpriteMsgAgent SpriteMA;
 		Message.regist('j',&SpriteMA);
-
-		hmrv::cCO2MsgAgent CO2MA;
-		Message.regist('C',&CO2MA);
 
 		hmrv::cChrono Chrono;
 		Message.regist('$', &Chrono);
@@ -228,7 +227,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Controller.connect_Pad(GPS.MsgAgent);
 		Controller.connect_Pad(Thermo.MsgAgent);
 		Controller.connect_Pad(SpriteMA);
-		Controller.connect_Pad(CO2MA);
+		Controller.connect_Pad(CO2.MsgAgent);
 
 
 		//親ディレクトリ
@@ -240,9 +239,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		DirectoryFile.regist(&(Thermo.FileAgent));
 
 		// CO2 データを保存
-		hmrv::cConstNameFileAgent<std::pair<double, std::uint16_t>> CO2FileAgent("CO2.txt", '\t');
-		CO2FileAgent.slot_log_writeData(CO2MA.signal_newRawData);
-		DirectoryFile.regist(&CO2FileAgent);
+		DirectoryFile.regist(&(CO2.FileAgent));
 
 		//GPSデータを保存
 		DirectoryFile.regist(&(GPS.FileAgent));
@@ -350,9 +347,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::connect(SpriteMUI,SpriteMA);
 		MUISideDisp.regist(&SpriteMUI);
 
-		hmrv::dxosCO2MUI CO2MUI;
-		hmrv::connect(CO2MUI,CO2MA);
-		MUISideDisp.regist(&CO2MUI);
+		MUISideDisp.regist(&(CO2.MUI));
 
 //		hmrv::dxosSHT75MUI SHT75MUI;
 //		hmrv::connect(SHT75MUI,SHT75MA);

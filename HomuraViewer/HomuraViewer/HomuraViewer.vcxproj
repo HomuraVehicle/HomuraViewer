@@ -153,6 +153,10 @@
     <ClInclude Include="..\..\hmLib\hmLib\utility.hpp" />
     <ClInclude Include="..\..\hmLib\hmLib\version.h" />
     <ClInclude Include="Accele.hpp" />
+    <ClInclude Include="CO2.hpp" />
+    <ClInclude Include="CO2\CO2Data.hpp" />
+    <ClInclude Include="CO2\CO2MsgAgent.hpp" />
+    <ClInclude Include="CO2\DxCO2MUI.hpp" />
     <ClInclude Include="Controller.hpp" />
     <ClInclude Include="DxModule\Keyboard.hpp" />
     <ClInclude Include="DxModule\Pad.hpp" />
@@ -200,8 +204,6 @@
     <ClInclude Include="hmrADC.h" />
     <ClInclude Include="hmrBufGate.hpp" />
     <ClInclude Include="hmrChrono.hpp" />
-    <ClInclude Include="hmrCO2.hpp" />
-    <ClInclude Include="hmrCO2File.hpp" />
     <ClInclude Include="hmrCom.hpp" />
     <ClInclude Include="hmrComLog.hpp" />
     <ClInclude Include="hmrComTimeLogger.hpp" />
@@ -217,7 +219,6 @@
     <ClInclude Include="hmrDxBUI.hpp" />
     <ClInclude Include="hmrDxBUIBoxSideDisp.hpp" />
     <ClInclude Include="hmrDxChrono.hpp" />
-    <ClInclude Include="hmrDxCO2MUI.hpp" />
     <ClInclude Include="hmrDXCom.hpp" />
     <ClInclude Include="hmrDxComSUI.hpp" />
     <ClInclude Include="hmrDxCom_v2.hpp" />
@@ -263,7 +264,6 @@
     <ClInclude Include="hmrSHT75.hpp" />
     <ClInclude Include="hmrSprite.hpp" />
     <ClInclude Include="hmrSpriteFile.hpp" />
-    <ClInclude Include="hmrThermoFile.hpp" />
     <ClInclude Include="Message.hpp" />
     <ClInclude Include="Message\ItfMessage.hpp" />
     <ClInclude Include="Message\ItfMessageAgent.hpp" />
@@ -278,6 +278,7 @@
     <ClInclude Include="Thermo\DxThermoMUI.hpp" />
     <ClInclude Include="Thermo\ThermoData.hpp" />
     <ClInclude Include="Thermo\ThermoMsgAgent.hpp" />
+    <ClInclude Include="UniSensorData.hpp" />
     <ClInclude Include="VMC1.h" />
   </ItemGroup>
   <ItemGroup>

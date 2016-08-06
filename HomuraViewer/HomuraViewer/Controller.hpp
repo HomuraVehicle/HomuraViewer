@@ -30,10 +30,10 @@ namespace hmr{
 
 				Agent_.slot_setAutoTakePicture(Pad.signal(dxmodule::is_pad1_pushed(AutoTakePicModeBut)));
 			}
-			void connect_Pad(cCO2MsgAgent& Agent_){
-				Agent_.slot_setDataMode(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
-				Agent_.slot_setPumpPW(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
-				Agent_.slot_setSensorPW(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
+			void connect_Pad(co2::cMsgAgent& Agent_){
+				Agent_.DataMode.slot_setReqSwap(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
+				Agent_.PumpPW.slot_setReqSwap(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
+				Agent_.SensorPW.slot_setReqSwap(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
 			}
 			void connect_Pad(accele::cMsgAgent& Agent_){
 				Agent_.DataMode.slot_setReqSwap(Pad.signal(dxmodule::is_pad1_pushed(CockpitDataModeBut)));
@@ -94,10 +94,10 @@ namespace hmr{
 				Agent_.slot_setCommandReset(Keyboard.signal(dxmodule::is_key_pushed(KEY::C)));
 				Agent_.slot_setPowerReset(Keyboard.signal(dxmodule::is_key_pushed(KEY::P)));
 			}
-			void connect_Keyboard(cCO2MsgAgent& Agent_){
-				Agent_.slot_setDataMode(Keyboard.signal(dxmodule::is_key_pushed(KEY::C)));
-				Agent_.slot_setPumpPW(Keyboard.signal(dxmodule::is_key_pushed(KEY::C)));
-				Agent_.slot_setSensorPW(Keyboard.signal(dxmodule::is_key_pushed(KEY::C)));
+			void connect_Keyboard(co2::cMsgAgent& Agent_){
+				Agent_.DataMode.slot_setReqSwap(Keyboard.signal(dxmodule::is_key_pushed(KEY::C)));
+				Agent_.PumpPW.slot_setReqSwap(Keyboard.signal(dxmodule::is_key_pushed(KEY::C)));
+				Agent_.SensorPW.slot_setReqSwap(Keyboard.signal(dxmodule::is_key_pushed(KEY::C)));
 			}
 			void connect_Keyboard(accele::cMsgAgent& Agent_){
 				Agent_.DataMode.slot_setReqSwap(Keyboard.signal(dxmodule::is_key_pushed(KEY::A)));

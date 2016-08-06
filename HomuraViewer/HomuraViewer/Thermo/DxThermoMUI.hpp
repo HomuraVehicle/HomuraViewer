@@ -45,8 +45,8 @@ namespace hmr{
 						}
 
 						try{
-							dxo.draw(Pint(80, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fÅé") % Data.Temperature).str(), Data.Time));
-							dxo.draw(Pint(155, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("0x%04x") % Data.RawData).str(), Data.Time));
+							dxo.draw(Pint(80, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("%.1fÅé") % Data.value()).str(), Data.Time));
+							dxo.draw(Pint(155, 5), dxoBUITimeStr(this, Pint(70, 20), (boost::format("0x%04x") % Data.raw_value()).str(), Data.Time));
 						}
 						catch(const hmLib::inquiries::unconnected_exception&){
 							dxo.draw(Pint(80, 5), dxoStrP(Pint(70, 20), "NoCnct", getClr(error, strobj)));
