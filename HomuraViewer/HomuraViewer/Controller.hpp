@@ -22,8 +22,8 @@ namespace hmr{
 				Pad.work();
 			}
 		public:
-			void connect_Pad(cThermoMsgAgent& Agent_){
-				Agent_.slot_setDataMode(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
+			void connect_Pad(thermo::cMsgAgent& Agent_){
+				Agent_.DataMode.slot_setReqSwap(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
 			}
 			void connect_Pad(cSpriteMsgAgent& Agent_){
 				Agent_.slot_setTakePictureLarge(Pad.signal(dxmodule::is_pad1_pushed(LargeTakePicBut)));
@@ -86,8 +86,8 @@ namespace hmr{
 			}
 			#endif
 		public:
-			void connect_Keyboard(cThermoMsgAgent& Thermo_){
-				Thermo_.slot_setDataMode(Keyboard.signal(dxmodule::is_key_pushed(KEY::T)));
+			void connect_Keyboard(thermo::cMsgAgent& Thermo_){
+				Thermo_.DataMode.slot_setReqSwap(Keyboard.signal(dxmodule::is_key_pushed(KEY::T)));
 			}
 			void connect_Keyboard(cSpriteMsgAgent& Agent_){
 				Agent_.slot_setTakePicture(Keyboard.signal(dxmodule::is_key_pushed(KEY::S)));

@@ -59,8 +59,7 @@ hmrV2500 v1_03/130713
 #include"hmrDxControlMainDisplay.hpp"
 #include"hmrDxDisplay.hpp"
 
-#include"hmrThermo.hpp"
-#include"hmrDxThermoMUI.hpp"
+#include"Thermo.hpp"
 
 #include"hmrSHT75.hpp"
 #include"hmrDxSHT75MUI.hpp"
@@ -174,6 +173,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cGyro Gyro;
 		hmrv::cGPS GPS;
 		hmrv::cMotor Motor;
+		hmrv::cThermo Thermo;
 
 		Message.regist('b', &(Battery.MsgAgent));
 		Message.regist('f', &FullADC.MsgAgent);
@@ -182,13 +182,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Message.regist('G', &(Gyro.MsgAgent));
 		Message.regist('g', &(GPS.MsgAgent));
 		Message.regist('m', &(Motor.MsgAgent));
-
+		Message.regist('t', &(Thermo.MsgAgent));
 
 		hmrv::cSpriteMsgAgent SpriteMA;
 		Message.regist('j',&SpriteMA);
-
-		hmrv::cThermoMsgAgent ThermoMA;
-		Message.regist('t',&ThermoMA);
 
 		hmrv::cCO2MsgAgent CO2MA;
 		Message.regist('C',&CO2MA);
@@ -229,8 +226,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Controller.connect_Pad(Compass.MsgAgent);
 		Controller.connect_Pad(Gyro.MsgAgent);
 		Controller.connect_Pad(GPS.MsgAgent);
+		Controller.connect_Pad(Thermo.MsgAgent);
 		Controller.connect_Pad(SpriteMA);
-		Controller.connect_Pad(ThermoMA);
 		Controller.connect_Pad(CO2MA);
 
 
@@ -240,9 +237,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		DirectoryFile.regist(&(FullADC.FileAgent));
 
 		// Thermo データを保存
-		hmrv::cConstNameFileAgent<std::pair<double, std::uint16_t>> ThermoFileAgent("Thermo.txt",'\t');
-		ThermoFileAgent.slot_log_writeData(ThermoMA.signal_newRawData);
-		DirectoryFile.regist(&ThermoFileAgent);
+		DirectoryFile.regist(&(Thermo.FileAgent));
 
 		// CO2 データを保存
 		hmrv::cConstNameFileAgent<std::pair<double, std::uint16_t>> CO2FileAgent("CO2.txt", '\t');
@@ -349,13 +344,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		MUISideDisp.regist(&(Gyro.MUI));
 		MUISideDisp.regist(&(GPS.MUI));
 
+		MUISideDisp.regist(&(Thermo.MUI));
+
 		hmrv::dxosSpriteMUI SpriteMUI;
 		hmrv::connect(SpriteMUI,SpriteMA);
 		MUISideDisp.regist(&SpriteMUI);
-
-		hmrv::dxosThermoMUI ThermoMUI;
-		hmrv::connect(ThermoMUI,ThermoMA);
-		MUISideDisp.regist(&ThermoMUI);
 
 		hmrv::dxosCO2MUI CO2MUI;
 		hmrv::connect(CO2MUI,CO2MA);
