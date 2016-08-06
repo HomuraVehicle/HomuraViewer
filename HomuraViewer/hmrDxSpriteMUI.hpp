@@ -68,10 +68,10 @@ namespace hmr{
 					status Sta;
 					
 					if(Status==0x20||Status==0x30){
-						auto Range=inquiry_getDataPosSize();
+						auto Range = inquiry_getDataPosSize();
 
-						dxo.draw(Pint(80,5),dxoProgress(Pint(145,20),Range.first,Range.second,getClr(normal,butobj)));
-						dxo.draw(Pint(80,5),dxoStrP(Pint(145,20),(boost::format("%d/%d")%Range.first%Range.second).str(),CLR::White));
+						dxo.draw(Pint(80, 5), dxoProgress(Pint(145, 20), Range.first, Range.second, getClr(normal, butobj)));
+						dxo.draw(Pint(80, 5), dxoStrP(Pint(145, 20), (boost::format("%d/%d") % Range.first%Range.second).str(), CLR::White));
 					}else{
 
 						if(Status==0x00){
@@ -108,6 +108,8 @@ namespace hmr{
 								StatusStr+=":NoCnct";
 							}
 							Sta=error;
+						} else{
+							Sta = normal;
 						}
 						dxo.draw(Pint(80,5),dxoButIO(Pint(145,20),StatusStr,getClr(Sta,butobj),true));
 					}
