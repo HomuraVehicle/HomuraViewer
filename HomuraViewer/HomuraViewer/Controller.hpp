@@ -56,7 +56,7 @@ namespace hmr{
 				Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)).connect([&](){Signal(true); });
 				Agent_.DataMode.slot_setReq(Signal);
 			}
-			void connect_Pad(cMotorMsgAgent& Agent_){
+			void connect_Pad(motor::cMsgAgent& Agent_){
 				Agent_.slot_setStickL(Pad.signal_LStick);
 				Agent_.slot_setBrakeLON(Pad.signal(dxmodule::is_pad1_pushed(PAD::But11)));
 				Agent_.slot_setBrakeLOFF(Pad.signal(dxmodule::is_pad1_pulled(PAD::But11)));

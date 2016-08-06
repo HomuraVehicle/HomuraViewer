@@ -243,7 +243,6 @@
     <ClInclude Include="hmrDxIO_v2.hpp" />
     <ClInclude Include="hmrDxKeyboard.hpp" />
     <ClInclude Include="hmrDxLoggerManageSUI.hpp" />
-    <ClInclude Include="hmrDxMotorMUI.hpp" />
     <ClInclude Include="hmrDxNavigator.hpp" />
     <ClInclude Include="hmrDxOperatorSUI.hpp" />
     <ClInclude Include="hmrDxPad.hpp" />
@@ -267,7 +266,6 @@
     <ClInclude Include="hmrItfCom.hpp" />
     <ClInclude Include="hmrLoggerManage.hpp" />
     <ClInclude Include="hmrManipulator.hpp" />
-    <ClInclude Include="hmrMotor.hpp" />
     <ClInclude Include="hmrOperator.hpp" />
     <ClInclude Include="hmrSensorsFile.hpp" />
     <ClInclude Include="hmrSHT75.hpp" />
@@ -282,6 +280,9 @@
     <ClInclude Include="Message\Message.hpp" />
     <ClInclude Include="Message\PacketData.hpp" />
     <ClInclude Include="modeflags.hpp" />
+    <ClInclude Include="Motor.hpp" />
+    <ClInclude Include="Motor\DxMotorMUI.hpp" />
+    <ClInclude Include="Motor\MotorMsgAgent.hpp" />
     <ClInclude Include="predicate.hpp" />
     <ClInclude Include="Resource.hpp" />
     <ClInclude Include="UniSensor.hpp" />

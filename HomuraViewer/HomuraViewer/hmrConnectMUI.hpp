@@ -147,20 +147,6 @@ namespace hmr{
 			Agent_.slot_setDataMode(MUI_.IsDataModeMUIBut.Signal);
 		}
 	#endif
-
-	#if defined(HMR_DXMOTORMUI_INC) && defined(HMR_MOTOR_INC)
-		void connect(dxosMotorMUI& MUI_, cMotorMsgAgent& Agent_){
-			Agent_.slot_setStickL(MUI_.Signal_MotorStickL);
-			Agent_.contact_StickL(MUI_.inquiry_getMotorStickL);
-			Agent_.contact_BrakeL(MUI_.inquiry_getMotorBrakeL);
-			Agent_.slot_setStickR(MUI_.Signal_MotorStickR);
-			Agent_.contact_StickR(MUI_.inquiry_getMotorStickR);
-			Agent_.contact_BrakeR(MUI_.inquiry_getMotorBrakeR);
-
-			Agent_.slot_setBackMode(MUI_.Signal_BackMode);
-			Agent_.contact_BackMode(MUI_.inquiry_getBackMode);
-		}
-	#endif
 	}
 }
 #

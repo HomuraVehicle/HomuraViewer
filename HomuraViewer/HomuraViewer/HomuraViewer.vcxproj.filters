@@ -52,6 +52,9 @@
     <Filter Include="HomuraViewer\DxModule">
       <UniqueIdentifier>{8b97ad67-c504-4a90-a74a-673258d96156}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer\Motor">
+      <UniqueIdentifier>{c8624be9-56a4-46cf-9036-5623b1542775}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File\ItfFile.hpp">
@@ -390,9 +393,6 @@
     <ClInclude Include="hmrDxLoggerManageSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxMotorMUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxNavigator.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -460,9 +460,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrManipulator.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrMotor.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrOperator.hpp">
@@ -569,6 +566,15 @@
     </ClInclude>
     <ClInclude Include="DxModule\Pad.hpp">
       <Filter>HomuraViewer\DxModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\DxMotorMUI.hpp">
+      <Filter>HomuraViewer\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor\MotorMsgAgent.hpp">
+      <Filter>HomuraViewer\Motor</Filter>
+    </ClInclude>
+    <ClInclude Include="Motor.hpp">
+      <Filter>HomuraViewer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

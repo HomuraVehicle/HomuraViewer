@@ -77,12 +77,10 @@ hmrV2500 v1_03/130713
 #include"hmrInfraRed.hpp"
 #include"hmrDxInfraRedMUI.hpp"
 
-#include"hmrMotor.hpp"
-#include"hmrDxMotorMUI.hpp"
-
-#include "Accele.hpp"
-#include "Compass.hpp"
-#include "Gyro.hpp"
+#include"Motor.hpp"
+#include"Accele.hpp"
+#include"Compass.hpp"
+#include"Gyro.hpp"
 
 #include"GPS.hpp"
 #include"Battery.hpp"
@@ -116,7 +114,7 @@ hmrV2500 v1_03/130713
 
 
 #include<hmLib_v2/hmLib.cpp>
-
+#include"Controller.hpp"
 #define HMR_MAIN_INC_END
 
 #include"hmrConnectDx.hpp"
@@ -125,7 +123,7 @@ hmrV2500 v1_03/130713
 #include"hmrConnectModule.hpp"
 #include"hmrConnectCore.hpp"
 #include"hmrConnectFile.hpp"
-#include"Controller.hpp"
+
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
 	namespace hmrv = hmr::viewer;
@@ -171,19 +169,20 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		//各モジュール宣言		
 		hmrv::cBattery Battery;
 		hmrv::cFullADC FullADC;
-
 		hmrv::cAccele Accele;
 		hmrv::cCompass Compass;
 		hmrv::cGyro Gyro;
 		hmrv::cGPS GPS;
+		hmrv::cMotor Motor;
 
-		hmrv::cMotorMsgAgent MotorMA;
-		Message.regist('m',&MotorMA);
-		Message.regist('b',&(Battery.MsgAgent));
+		Message.regist('b', &(Battery.MsgAgent));
+		Message.regist('f', &FullADC.MsgAgent);
 		Message.regist('a', &(Accele.MsgAgent));
 		Message.regist('c', &(Compass.MsgAgent));
 		Message.regist('G', &(Gyro.MsgAgent));
 		Message.regist('g', &(GPS.MsgAgent));
+		Message.regist('m', &(Motor.MsgAgent));
+
 
 		hmrv::cSpriteMsgAgent SpriteMA;
 		Message.regist('j',&SpriteMA);
@@ -203,7 +202,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cLoggerMngMsgAgent LogMngMA;
 		Message.regist('L', &LogMngMA);
 
-		Message.regist('f', &FullADC.MsgAgent);
 
 //		hmrv::cSHT75MsgAgent SHT75MA;
 //		hmrv::connect_Pad(SHT75MA,Pad1);
@@ -225,7 +223,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		//制御系デバイス
 		hmrv::cController Controller;
-		Controller.connect_Pad(MotorMA);
+		Controller.connect_Pad(Motor.MsgAgent);
 		Controller.connect_Pad(Battery.MsgAgent);
 		Controller.connect_Pad(Accele.MsgAgent);
 		Controller.connect_Pad(Compass.MsgAgent);
@@ -339,9 +337,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::dxosBUIBoxSideDisplay MUISideDisp;
 		MUISideDisp.ClrSet.Background=CLR::DarkSoftYellow;
 
-		hmrv::dxosMotorMUI MotorMUI;
-		hmrv::connect(MotorMUI,MotorMA);
-		MUISideDisp.regist(&MotorMUI);
+
+		MUISideDisp.regist(&(Motor.MUI));
 
 		hmrv::battery::dxosMUI<hmrv::cBattery::BatteryNum> BatteryMUI;
 		Battery.connect(BatteryMUI);

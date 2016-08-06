@@ -3,6 +3,7 @@
 
 #include<boost/signals2.hpp>
 #include<hmLib/inquiries.hpp>
+#include<hmLib/position.hpp>
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxBasic.hpp>
 #include<hmLib_v2/dxPad.hpp>
@@ -145,7 +146,7 @@ namespace hmr{
 
 			class cDxPad1{
 				typedef boost::signals2::signal<void(void)> signal_t;
-				typedef boost::signals2::signal<void(Pint)> signal_stick_t;
+				typedef boost::signals2::signal<void(hmLib::pint)> signal_stick_t;
 			private:
 				std::map<hmLib::any_predicate, std::unique_ptr<signal_t>> SignalMap;
 				hmLib::inquiries::unique_connections InquiryConnections;
@@ -172,8 +173,10 @@ namespace hmr{
 						}
 						++Cnt;
 					}
-					signal_LStick(cPad<DX_INPUT_PAD1>::getLStick());
-					signal_RStick(cPad<DX_INPUT_PAD1>::getRStick());
+					Pint LPos = cPad<DX_INPUT_PAD1>::getLStick();
+					signal_LStick(hmLib::pint(LPos.x,LPos.y));
+					Pint RPos = cPad<DX_INPUT_PAD1>::getRStick();
+					signal_RStick(hmLib::pint(RPos.x, RPos.y));
 				}
 			};
 		}
