@@ -67,14 +67,9 @@ hmrV2500 v1_03/130713
 #include"GPS.hpp"
 #include"Battery.hpp"
 #include"UniSensor.hpp"
-
-#include "hmrDeviceManage.hpp"
-#include "hmrDxDeviceManageSUI.hpp"
-
-#include "hmrChrono.hpp"
+#include"DeviceManage.hpp"
 
 #include "hmrDXFileSUI.hpp"
-#include "hmrDxChrono.hpp"
 #include "hmrDxBUIBoxSideDisp.hpp"
 
 #include <HomuraViewer/File.hpp>
@@ -91,9 +86,6 @@ hmrV2500 v1_03/130713
 
 #include"hmrConnectDx.hpp"
 #include"hmrConnectSUI.hpp"
-#include"hmrConnectModule.hpp"
-#include"hmrConnectCore.hpp"
-#include"hmrConnectFile.hpp"
 
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
@@ -124,6 +116,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cThermo Thermo;
 		hmrv::cCO2 CO2;
 		hmrv::cCamera Camera;
+		hmrv::cDeviceManage DeviceManage;
 
 		Message.regist('b', Battery.MsgAgent);
 		Message.regist('f', FullADC.MsgAgent);
@@ -137,11 +130,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Message.regist('C', CO2.MsgAgent);
 		Message.regist('j',Camera.MsgAgent);
 
-		hmrv::cChrono Chrono;
-		Message.regist('$', Chrono);
-
-		hmrv::cDevMngMsgAgent DevMngMA;
-		Message.regist('D', DevMngMA);
+		Message.regist('D', DeviceManage.MsgAgent);
 
 		//制御系デバイス
 		hmrv::cController Controller;
@@ -184,16 +173,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::dxosBUIBoxSideDisplay SystemSideDisp;
 		SystemSideDisp.ClrSet.Background=CLR::DarkSoftBlue;
 
-		hmrv::dxosChronoSUI ChronoSUI;
-		hmrv::connect(ChronoSUI, Chrono);
-		SystemSideDisp.regist(&ChronoSUI);
-
-
-		hmrv::dxosDevMngSUI DevMngSUI;
-		hmrv::connect(DevMngSUI, DevMngMA);
-		SystemSideDisp.regist(&DevMngSUI);
-
-
+		SystemSideDisp.regist(&(DeviceManage.SUI));
 		SystemSideDisp.regist(&(IO.GateSwSUI));
 		SystemSideDisp.regist(&(IO.BufGateSUI));
 		SystemSideDisp.regist(&(IO.ioLogGateSUI));

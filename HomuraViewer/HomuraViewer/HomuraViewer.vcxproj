@@ -166,6 +166,9 @@
     <ClInclude Include="Controller\Keyboard.hpp" />
     <ClInclude Include="Controller\Pad.hpp" />
     <ClInclude Include="Controller\PadStatus.hpp" />
+    <ClInclude Include="DeviceManage.hpp" />
+    <ClInclude Include="DeviceManage\DeviceManageMsgAgent.hpp" />
+    <ClInclude Include="DeviceManage\DxDeviceManageSUI.hpp" />
     <ClInclude Include="GPS.hpp" />
     <ClInclude Include="Gyro.hpp" />
     <ClInclude Include="Compass.hpp" />
@@ -206,15 +209,11 @@
     <ClInclude Include="Gyro\GyroMsgAgent.hpp" />
     <ClInclude Include="Gyro\GyroCompass.hpp" />
     <ClInclude Include="Gyro\GyroLogger.hpp" />
-    <ClInclude Include="hmrChrono.hpp" />
     <ClInclude Include="hmrConnectDx.hpp" />
     <ClInclude Include="hmrConnectSUI.hpp" />
-    <ClInclude Include="hmrDeviceManage.hpp" />
     <ClInclude Include="hmrDxBUI.hpp" />
     <ClInclude Include="hmrDxBUIBoxSideDisp.hpp" />
-    <ClInclude Include="hmrDxChrono.hpp" />
     <ClInclude Include="hmrDxControlMainDisplay.hpp" />
-    <ClInclude Include="hmrDxDeviceManageSUI.hpp" />
     <ClInclude Include="hmrDxDisplay.hpp" />
     <ClInclude Include="hmrDxFileSUI.hpp" />
     <ClInclude Include="hmrDxInfomation.hpp" />
@@ -271,7 +270,6 @@
     <ClCompile Include="..\..\hmLib\hmLib\cstack.c" />
     <ClCompile Include="..\..\hmLib\hmLib\cstring.c" />
     <ClCompile Include="..\..\hmLib\hmLib\debugstream.cpp" />
-    <ClCompile Include="hmrDxDeviceManageSUI.cpp" />
     <ClCompile Include="HomuraViewer.cpp" />
     <ClCompile Include="VMC1.c" />
   </ItemGroup>

@@ -67,6 +67,9 @@
     <Filter Include="HomuraViewer\Controller">
       <UniqueIdentifier>{8b97ad67-c504-4a90-a74a-673258d96156}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer\DeciceManage">
+      <UniqueIdentifier>{f88a0b64-5b7e-4cfd-958a-c7cbf47b6d3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File\ItfFile.hpp">
@@ -423,16 +426,10 @@
     <ClInclude Include="hmrSensorsFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrChrono.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrConnectDx.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrConnectSUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDeviceManage.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxBUI.hpp">
@@ -441,13 +438,7 @@
     <ClInclude Include="hmrDxBUIBoxSideDisp.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxChrono.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxControlMainDisplay.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxDeviceManageSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxDisplay.hpp">
@@ -501,6 +492,15 @@
     <ClInclude Include="Message\DxMessageDriverSUI.hpp">
       <Filter>HomuraViewer\Message</Filter>
     </ClInclude>
+    <ClInclude Include="DeviceManage.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManage\DxDeviceManageSUI.hpp">
+      <Filter>HomuraViewer\DeciceManage</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManage\DeviceManageMsgAgent.hpp">
+      <Filter>HomuraViewer\DeciceManage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -534,9 +534,6 @@
     </ClCompile>
     <ClCompile Include="HomuraViewer.cpp">
       <Filter>HomuraViewer</Filter>
-    </ClCompile>
-    <ClCompile Include="hmrDxDeviceManageSUI.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
