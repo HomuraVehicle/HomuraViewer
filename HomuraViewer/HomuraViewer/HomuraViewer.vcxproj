@@ -233,10 +233,7 @@
     <ClInclude Include="hmrDxFileSUI.hpp" />
     <ClInclude Include="hmrDxGateSwitcher.hpp" />
     <ClInclude Include="hmrDxGateSwitcherSUI.hpp" />
-    <ClInclude Include="hmrDxH2SMUI.hpp" />
-    <ClInclude Include="hmrDxHumidMUI.hpp" />
     <ClInclude Include="hmrDxInfomation.hpp" />
-    <ClInclude Include="hmrDxInfraRedMUI.hpp" />
     <ClInclude Include="hmrDxIO.hpp" />
     <ClInclude Include="hmrDxIODisplay.hpp" />
     <ClInclude Include="hmrDxIOLogGateSUI.hpp" />
@@ -251,12 +248,6 @@
     <ClInclude Include="hmrFlagirl.hpp" />
     <ClInclude Include="hmrGateConnector.hpp" />
     <ClInclude Include="hmrGateSwitcher.hpp" />
-    <ClInclude Include="hmrH2S.hpp" />
-    <ClInclude Include="hmrH2SFile.hpp" />
-    <ClInclude Include="hmrHumid.hpp" />
-    <ClInclude Include="hmrHumidFile.hpp" />
-    <ClInclude Include="hmrInfraRed.hpp" />
-    <ClInclude Include="hmrInfraRedFile.hpp" />
     <ClInclude Include="hmrIO.hpp" />
     <ClInclude Include="hmrItfCom.hpp" />
     <ClInclude Include="hmrLoggerManage.hpp" />
@@ -294,7 +285,6 @@
     <ClCompile Include="..\..\hmLib\hmLib\debugstream.cpp" />
     <ClCompile Include="hmrDxDeviceManageSUI.cpp" />
     <ClCompile Include="hmrDxIOSideDisp.cpp" />
-    <ClCompile Include="hmrDxLoggerManageSUI.cpp" />
     <ClCompile Include="HomuraViewer.cpp" />
     <ClCompile Include="VMC1.c" />
   </ItemGroup>

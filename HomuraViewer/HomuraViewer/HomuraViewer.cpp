@@ -38,10 +38,11 @@ hmrV2500 v1_03/130713
 */
 
 #include"hmLibVer.hpp"
-#include <hmLib/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
-#include <hmLib/bufgate.hpp>
-#include <hmLib/any_iterator.hpp>
-#include <hmLib_v2/dxColorSet.hpp>
+#include<hmLib/config_vc.h> // std::min, std::max　は　windowsマクロでも定義されており、明示的に分離してやらないとだめ
+
+#include<hmLib/bufgate.hpp>
+#include<hmLib/any_iterator.hpp>
+#include<hmLib_v2/dxColorSet.hpp>
 #include"iologgate.hpp"
 #include"predicate.hpp"
 #include"hmrBufGate.hpp"
@@ -60,19 +61,9 @@ hmrV2500 v1_03/130713
 #include"hmrDxDisplay.hpp"
 
 #include"Thermo.hpp"
-
-#include"hmrSHT75.hpp"
-#include"hmrDxSHT75MUI.hpp"
-
 #include"Camera.hpp"
-
 #include"CO2.hpp"
-
-#include"hmrH2S.hpp"
-#include"hmrDxH2SMUI.hpp"
-
-#include"hmrInfraRed.hpp"
-#include"hmrDxInfraRedMUI.hpp"
+#include "FullADC.hpp"
 
 #include"Motor.hpp"
 #include"Accele.hpp"
@@ -83,14 +74,10 @@ hmrV2500 v1_03/130713
 #include"Battery.hpp"
 #include"UniSensor.hpp"
 
-#include "FullADC.hpp"
-
 #include "hmrDeviceManage.hpp"
 #include "hmrDxDeviceManageSUI.hpp"
 
 #include "hmrChrono.hpp"
-#include "hmrLoggerManage.hpp"
-#include "hmrDxLoggerManageSUI.hpp"
 
 #include "hmrDxComSUI.hpp"
 #include "hmrDxBufGateSUI.hpp"
@@ -131,36 +118,36 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 
 	try{
-		//Com, Message, Operatorを宣言
-		hmrv::cCom Com;
-		hmrv::cCom::VMC1Creater<1> ComVMC(&Com);
-		hmrv::cComLog ComLog;
-		hmrv::connect(ComLog,Com);
+		//GateSwitcherを宣言
+		hmrv::cGateSwitcher GateSW;
+		GateSW.readFomaSetting("hmr\\phone_config.txt");
 
-		hmrv::cFHdxIO IO(ComVMC);
 		hmrv::bufgate Bufgate;
+		Bufgate.open(GateSW);
 
 		//ioLogBufを宣言
 		iologgate<fdx_crlf_timeout_iologger<system_clock_iologtype>> ioLogGate;
 		typedef fdx_vector_iologbuf<system_clock_iologtype> iologbuf;
 		iologbuf ioLogBuf;
-		hmrv::connect(ioLogBuf,ioLogGate);
+		hmrv::connect(ioLogBuf, ioLogGate);
+		ioLogGate.open(Bufgate);
 
-		//GateSwitcherを宣言
-		hmrv::cGateSwitcher GateSW;
-		GateSW.readFomaSetting("hmr\\phone_config.txt");
+		//Com, Message, Operatorを宣言
+		hmrv::cCom Com;
+		hmrv::cComLog ComLog;
+		hmrv::connect(ComLog, Com);
 
+		hmrv::cCom::VMC1Creater<1> ComVMC(&Com);
+
+		hmrv::cFHdxIO IO(ComVMC);
 		IO.open(&ioLogGate);
-		iologgate<fdx_crlf_timeout_iologger<system_clock_iologtype>> ioLogGate2;
-
-		ioLogGate.open(ioLogGate2);
-		ioLogGate2.open(Bufgate);
-		Bufgate.open(GateSW);
 
 		//Message, Operator
 		hmrv::cMessage Message;
-		hmrv::cFHDxOperator Operator(&Message,&Com,true,std::chrono::milliseconds(250),std::chrono::seconds(1));
-		hmrv::connect(Operator,IO,Com);
+		hmrv::cFHDxOperator Operator(&Message, &Com, true, std::chrono::milliseconds(250), std::chrono::seconds(1));
+		hmrv::connect(Operator, IO, Com);
+
+
 
 		//各モジュール宣言		
 		hmrv::cBattery Battery;
@@ -175,7 +162,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cCamera Camera;
 
 		Message.regist('b', &(Battery.MsgAgent));
-		Message.regist('f', &FullADC.MsgAgent);
+		Message.regist('f', &(FullADC.MsgAgent));
 		Message.regist('a', &(Accele.MsgAgent));
 		Message.regist('c', &(Compass.MsgAgent));
 		Message.regist('G', &(Gyro.MsgAgent));
@@ -192,28 +179,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cDevMngMsgAgent DevMngMA;
 		Message.regist('D', &DevMngMA);
 
-		hmrv::cLoggerMngMsgAgent LogMngMA;
-		Message.regist('L', &LogMngMA);
-
-
-//		hmrv::cSHT75MsgAgent SHT75MA;
-//		hmrv::connect_Pad(SHT75MA,Pad1);
-//		Message.regist('7',&SHT75MA);
-
-//		hmrv::cInfraRedMsgAgent InfraRedMA;
-//		hmrv::connect_Pad(InfraRedMA,Pad1);
-//		Message.regist('T',&InfraRedMA);
-
-//		hmrv::cH2SMsgAgent H2SMA;
-//		hmrv::connect_Pad(H2SMA,Pad1);
-//		Message.regist('S',&H2SMA);
-
-//		hmrv::cHumidMsgAgent HumidMA;
-//		hmrv::connect_Pad(HumidMA,Pad1);
-//		Message.regist('h',&HumidMA);
-
-
-
 		//制御系デバイス
 		hmrv::cController Controller;
 		Controller.connect_Pad(Motor.MsgAgent);
@@ -226,10 +191,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Controller.connect_Pad(Camera.MsgAgent);
 		Controller.connect_Pad(CO2.MsgAgent);
 
-
 		//親ディレクトリ
 		hmrv::cConstNameDirectoryFile DirectoryFile("Data");
+
+		//Batteryデータ保存
 		DirectoryFile.regist(&(Battery.FileAgent));
+
+		//FullADCデータ保存
 		DirectoryFile.regist(&(FullADC.FileAgent));
 
 		// Thermo データを保存
@@ -259,10 +227,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::connect(DevMngSUI, DevMngMA);
 		SystemSideDisp.regist(&DevMngSUI);
 
-		hmrv::dxosLoggerMngSUI LogMngSUI;
-		hmrv::connect(LogMngSUI, LogMngMA);
-		SystemSideDisp.regist(&LogMngSUI);
-
 		hmrv::dxosGateSwitcherSUI GateSwSUI;
 		hmrv::connect(GateSwSUI, GateSW);
 		SystemSideDisp.regist(&GateSwSUI);
@@ -282,7 +246,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::dxosVMCSUI VMCSUI;
 		hmrv::connect(VMCSUI, IO);
 		SystemSideDisp.regist(&VMCSUI);
-
 
 		hmrv::dxosComSUI ComBUI;
 		hmrv::connect(ComBUI,Com);
@@ -335,7 +298,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		MUISideDisp.regist(&(GPS.MUI));
 		MUISideDisp.regist(&(Thermo.MUI));
 		MUISideDisp.regist(&(Camera.MUI));
-
 		MUISideDisp.regist(&(CO2.MUI));
 		MUISideDisp.regist(&(FullADC.MUI));
 
