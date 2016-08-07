@@ -36,56 +36,6 @@ namespace hmr{
 			SHT75_.slot_requestReset(SHT75MUI_.RequestRestMUIBut.Signal);
 		}
 	#endif
-	#if defined(HMR_DXSPRITEMUI_INC) && defined(HMR_SPRITE_INC)
-		void connect(dxosSpriteMUI& MUI_, cSpriteMsgAgent& Agent_){
-			Agent_.slot_setInfoMode(MUI_.InfoModeMUIHead.Signal);
-			Agent_.contact_getPicInfoMode(MUI_.InfoModeMUIHead.Pic);
-			Agent_.contact_getRequestInfoMode(MUI_.InfoModeMUIHead.Req);
-
-			Agent_.contact_getStatus(MUI_.inquiry_getStatus);
-			Agent_.contact_getIsErr(MUI_.inquiry_getIsErr);
-			Agent_.contact_getErrCode(MUI_.inquiry_getErrCode);
-			Agent_.contact_getStatusTime(MUI_.inquiry_getStatusTime);
-			Agent_.contact_getDataPosSize(MUI_.inquiry_getDataPosSize);
-			Agent_.contact_getDataTime(MUI_.inquiry_getDataTime);
-
-			Agent_.contact_getRequestAutoTakePicture(MUI_.AutoTakePictureMUIBut.Req);
-			Agent_.contact_getPicAutoTakePicture(MUI_.AutoTakePictureMUIBut.Pic);
-			Agent_.slot_setAutoTakePicture(MUI_.AutoTakePictureMUIBut.Signal);
-
-			Agent_.slot_setTakePicture(MUI_.TakePictureMUIBut.Signal);
-			Agent_.contact_getDoTakePictureFlag(MUI_.TakePictureMUIBut.Req);
-
-			Agent_.contact_getPictureSize(MUI_.inquiry_getPictureSize);
-			Agent_.slot_setPictureSize(MUI_.signal_setPictureSize);
-
-			Agent_.contact_getRequestAutoLight(MUI_.AutoLightMUIBut.Req);
-			Agent_.contact_getPicAutoLight(MUI_.AutoLightMUIBut.Pic);
-			Agent_.slot_setAutoLight(MUI_.AutoLightMUIBut.Signal);
-
-			Agent_.contact_getPicLight(MUI_.LightMUIBut.Pic);
-			Agent_.contact_getRequestLight(MUI_.LightMUIBut.Req);
-			Agent_.slot_setLight(MUI_.LightMUIBut.Signal);
-
-			Agent_.contact_getRequestAutoPowerReset(MUI_.AutoPowerResetMUIBut.Req);
-			Agent_.contact_getPicAutoPowerReset(MUI_.AutoPowerResetMUIBut.Pic);
-			Agent_.slot_setAutoPowerReset(MUI_.AutoPowerResetMUIBut.Signal);
-
-			Agent_.contact_getDoCommandResetFlag(MUI_.CommandResetMUIBut.Req);
-			Agent_.slot_setCommandReset(MUI_.CommandResetMUIBut.Signal);
-
-			Agent_.contact_getDoPowerResetFlag(MUI_.PowerResetMUIBut.Req);
-			Agent_.slot_setPowerReset(MUI_.PowerResetMUIBut.Signal);
-
-			Agent_.contact_getPicMiniPacketMode(MUI_.MiniPacketModeMUIBut.Pic);
-			Agent_.contact_getRequestMiniPacketMode(MUI_.MiniPacketModeMUIBut.Req);
-			Agent_.slot_setMiniPacketMode(MUI_.MiniPacketModeMUIBut.Signal);
-
-			Agent_.contact_getPicLogMode(MUI_.LogModeMUIBut.Pic);
-			Agent_.contact_getRequestLogMode(MUI_.LogModeMUIBut.Req);
-			Agent_.slot_setLogMode(MUI_.LogModeMUIBut.Signal);
-		}
-	#endif
 
 	#if defined(HMR_DXCO2MUI_INC) && defined(HMR_CO2_INC)
 		void connect(dxosCO2MUI& MUI_, cCO2MsgAgent& Agent_){

@@ -14,7 +14,7 @@ dxosControlMainDisplay
 */
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxObject.hpp>
-#include"hmrDxSprite.hpp"
+#include<HomuraViewer/Camera/DxCamera.hpp>
 //#include"hmrDxGPSMap.hpp"
 #include"Gyro/GyroLogger.hpp"
 #include"hmrDxNavigator.hpp"
@@ -26,7 +26,7 @@ namespace hmr{
 		class dxosControlMainDisplay :public dxReObject, public hmoBox{
 		public:
 			dxosNavigator<gyro::cGyroLogger::iterator> Navigator;
-			dxosSprite Sprite;
+			camera::dxosCamera Camera;
 			dxosInformation Infomation;
 			gps::dxosGPSMap GPSMap;
 
@@ -39,7 +39,7 @@ namespace hmr{
 			public:
 				int fndraw(dxO& dxo)override{
 					dxo.draw(Pint(0, 360), My.Infomation);
-					dxo.draw(Pint(240, 0), My.Sprite);
+					dxo.draw(Pint(240, 0), My.Camera);
 					dxo.draw(Pint(0, 0), My.Navigator);
 					dxo.draw(Pint(240, 360), My.GPSMap);
 					return 0;
@@ -48,8 +48,8 @@ namespace hmr{
 			dxNormFrame Frame;
 		public:
 			dxosControlMainDisplay()
-				:hmoBox(Pint(720, 720))
-				, Sprite(Pint(480, 360))
+				: hmoBox(Pint(720, 720))
+				, Camera(Pint(480, 360))
 				, Navigator()
 				, Infomation(Pint(240, 360))
 				, GPSMap(Pint(480, 360)){

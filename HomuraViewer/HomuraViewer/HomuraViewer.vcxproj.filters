@@ -61,7 +61,7 @@
     <Filter Include="HomuraViewer\CO2">
       <UniqueIdentifier>{863db507-703c-4508-a902-b64fd9dc9400}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HomuraViewer\Sprite">
+    <Filter Include="HomuraViewer\Camera">
       <UniqueIdentifier>{ee730f65-76d1-4c68-a56d-1854ba6b55b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -363,12 +363,6 @@
     <ClInclude Include="hmrSHT75.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrSprite.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrSpriteFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrADC.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -492,12 +486,6 @@
     <ClInclude Include="hmrDxSHT75MUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxSprite.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxSpriteMUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxTools.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -561,6 +549,21 @@
     <ClInclude Include="CO2.hpp">
       <Filter>HomuraViewer</Filter>
     </ClInclude>
+    <ClInclude Include="Camera\DxCamera.hpp">
+      <Filter>HomuraViewer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\DxCameraMUI.hpp">
+      <Filter>HomuraViewer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraMsgAgent.hpp">
+      <Filter>HomuraViewer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraFileAgent.hpp">
+      <Filter>HomuraViewer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -596,9 +599,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="hmrDxLoggerManageSUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="hmrSprite.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="VMC1.c">

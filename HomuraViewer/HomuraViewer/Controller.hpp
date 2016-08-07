@@ -25,10 +25,9 @@ namespace hmr{
 			void connect_Pad(thermo::cMsgAgent& Agent_){
 				Agent_.DataMode.slot_setReqSwap(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
 			}
-			void connect_Pad(cSpriteMsgAgent& Agent_){
+			void connect_Pad(camera::cMsgAgent& Agent_){
 				Agent_.slot_setTakePictureLarge(Pad.signal(dxmodule::is_pad1_pushed(LargeTakePicBut)));
-
-				Agent_.slot_setAutoTakePicture(Pad.signal(dxmodule::is_pad1_pushed(AutoTakePicModeBut)));
+				Agent_.AutoTakePic.slot_setReqSwap(Pad.signal(dxmodule::is_pad1_pushed(AutoTakePicModeBut)));
 			}
 			void connect_Pad(co2::cMsgAgent& Agent_){
 				Agent_.DataMode.slot_setReqSwap(Pad.signal(dxmodule::is_pad1_pushed(SensorDataModeBut)));
@@ -89,7 +88,7 @@ namespace hmr{
 			void connect_Keyboard(thermo::cMsgAgent& Thermo_){
 				Thermo_.DataMode.slot_setReqSwap(Keyboard.signal(dxmodule::is_key_pushed(KEY::T)));
 			}
-			void connect_Keyboard(cSpriteMsgAgent& Agent_){
+			void connect_Keyboard(camera::cMsgAgent& Agent_){
 				Agent_.slot_setTakePicture(Keyboard.signal(dxmodule::is_key_pushed(KEY::S)));
 				Agent_.slot_setCommandReset(Keyboard.signal(dxmodule::is_key_pushed(KEY::C)));
 				Agent_.slot_setPowerReset(Keyboard.signal(dxmodule::is_key_pushed(KEY::P)));

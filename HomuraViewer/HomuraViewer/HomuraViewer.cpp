@@ -64,8 +64,7 @@ hmrV2500 v1_03/130713
 #include"hmrSHT75.hpp"
 #include"hmrDxSHT75MUI.hpp"
 
-#include"hmrSprite.hpp"
-#include"hmrDxSpriteMUI.hpp"
+#include"Camera.hpp"
 
 #include"CO2.hpp"
 
@@ -106,7 +105,6 @@ hmrV2500 v1_03/130713
 #include "hmrDxBUIBoxSideDisp.hpp"
 
 #include <HomuraViewer/File.hpp>
-#include "hmrSpriteFile.hpp"
 
 #include "Resource.hpp"
 
@@ -174,6 +172,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cMotor Motor;
 		hmrv::cThermo Thermo;
 		hmrv::cCO2 CO2;
+		hmrv::cCamera Camera;
 
 		Message.regist('b', &(Battery.MsgAgent));
 		Message.regist('f', &FullADC.MsgAgent);
@@ -185,9 +184,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		Message.regist('t', &(Thermo.MsgAgent));
 		Message.regist('C', &(CO2.MsgAgent));
-
-		hmrv::cSpriteMsgAgent SpriteMA;
-		Message.regist('j',&SpriteMA);
+		Message.regist('j',&(Camera.MsgAgent));
 
 		hmrv::cChrono Chrono;
 		Message.regist('$', &Chrono);
@@ -226,7 +223,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Controller.connect_Pad(Gyro.MsgAgent);
 		Controller.connect_Pad(GPS.MsgAgent);
 		Controller.connect_Pad(Thermo.MsgAgent);
-		Controller.connect_Pad(SpriteMA);
+		Controller.connect_Pad(Camera.MsgAgent);
 		Controller.connect_Pad(CO2.MsgAgent);
 
 
@@ -248,9 +245,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		DirectoryFile.regist(&(GPS.GPGGAFileAgent));
 
 		//カメラデータを保存
-		hmrv::cSpriteFileAgent SpriteFileAgent("Sprite");
-		hmrv::connect(SpriteFileAgent, SpriteMA,false);
-		DirectoryFile.regist(&SpriteFileAgent);
+		DirectoryFile.regist(&(Camera.FileAgent));
 
 		// SUI 系列
 		hmrv::dxosBUIBoxSideDisplay SystemSideDisp;
@@ -309,7 +304,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		//操縦用MainDisplaay
 		hmrv::dxosControlMainDisplay ControlMainDisp;
 		hmrv::connect(ControlMainDisp.Navigator,Accele.Logger,Compass.Compass,Gyro.Logger,Gyro.Compass);
-		hmrv::connect(ControlMainDisp.Sprite,SpriteMA);
+		hmrv::connect(ControlMainDisp.Camera,Camera.MsgAgent);
 		hmrv::connect(ControlMainDisp.Infomation,GPS.GPSKashmir,Battery);
 		hmrv::connect(ControlMainDisp.GPSMap, GPS.MsgAgent, Compass.Compass);
 		std::vector<hmrv::message::datum::id_type> SwIDList;
@@ -337,10 +332,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		MUISideDisp.regist(&(Gyro.MUI));
 		MUISideDisp.regist(&(GPS.MUI));
 		MUISideDisp.regist(&(Thermo.MUI));
-
-		hmrv::dxosSpriteMUI SpriteMUI;
-		hmrv::connect(SpriteMUI,SpriteMA);
-		MUISideDisp.regist(&SpriteMUI);
+		MUISideDisp.regist(&(Camera.MUI));
 
 		MUISideDisp.regist(&(CO2.MUI));
 		MUISideDisp.regist(&(FullADC.MUI));

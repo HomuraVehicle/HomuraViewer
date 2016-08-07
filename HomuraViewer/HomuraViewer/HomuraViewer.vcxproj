@@ -153,6 +153,11 @@
     <ClInclude Include="..\..\hmLib\hmLib\utility.hpp" />
     <ClInclude Include="..\..\hmLib\hmLib\version.h" />
     <ClInclude Include="Accele.hpp" />
+    <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="Camera\DxCamera.hpp" />
+    <ClInclude Include="Camera\DxCameraMUI.hpp" />
+    <ClInclude Include="Camera\CameraMsgAgent.hpp" />
+    <ClInclude Include="Camera\CameraFileAgent.hpp" />
     <ClInclude Include="CO2.hpp" />
     <ClInclude Include="CO2\CO2Data.hpp" />
     <ClInclude Include="CO2\CO2MsgAgent.hpp" />
@@ -242,8 +247,6 @@
     <ClInclude Include="hmrDxNavigator.hpp" />
     <ClInclude Include="hmrDxOperatorSUI.hpp" />
     <ClInclude Include="hmrDxSHT75MUI.hpp" />
-    <ClInclude Include="hmrDxSprite.hpp" />
-    <ClInclude Include="hmrDxSpriteMUI.hpp" />
     <ClInclude Include="hmrDxTools.hpp" />
     <ClInclude Include="hmrDxVMCSUI.hpp" />
     <ClInclude Include="hmrFlagirl.hpp" />
@@ -262,8 +265,6 @@
     <ClInclude Include="hmrOperator.hpp" />
     <ClInclude Include="hmrSensorsFile.hpp" />
     <ClInclude Include="hmrSHT75.hpp" />
-    <ClInclude Include="hmrSprite.hpp" />
-    <ClInclude Include="hmrSpriteFile.hpp" />
     <ClInclude Include="Message.hpp" />
     <ClInclude Include="Message\ItfMessage.hpp" />
     <ClInclude Include="Message\ItfMessageAgent.hpp" />
@@ -295,7 +296,6 @@
     <ClCompile Include="hmrDxDeviceManageSUI.cpp" />
     <ClCompile Include="hmrDxIOSideDisp.cpp" />
     <ClCompile Include="hmrDxLoggerManageSUI.cpp" />
-    <ClCompile Include="hmrSprite.cpp" />
     <ClCompile Include="HomuraViewer.cpp" />
     <ClCompile Include="VMC1.c" />
   </ItemGroup>

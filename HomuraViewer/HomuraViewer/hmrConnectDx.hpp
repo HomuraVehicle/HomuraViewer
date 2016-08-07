@@ -115,9 +115,9 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(HMR_DXSPRITE_INC) && defined(HMR_SPRITE_INC)
-		void connect(dxosSprite& Sprite_, cSpriteMsgAgent& Agent_){
-			Sprite_.slot_setNewGraph(Agent_.signal_setPicture);
+	#if defined(HMR_VIEWER_CAMERA_DXCAMERA_INC) && defined(HMR_VIEWER_CAMERA_CAMERAMSGAGENT_INC)
+		void connect(camera::dxosCamera& Camera_, camera::cMsgAgent& Agent_){
+			Camera_.slot_setNewGraph(Agent_.signal_setPicture);
 		}
 	#endif
 
