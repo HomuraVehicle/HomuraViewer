@@ -1,5 +1,5 @@
-#ifndef HMRVLIB_MESSAGE_MESSAGE_INC
-#define HMRVLIB_MESSAGE_MESSAGE_INC 100
+#ifndef HMR_VIEWER_MESSAGE_MESSAGE_INC
+#define HMR_VIEWER_MESSAGE_MESSAGE_INC 100
 #
 /*===hmrMessage===
 受信データをモジュールに引き渡すMessageの実装タイプ
@@ -15,7 +15,7 @@ hmrMessage:v1_00/130310
 #include"ItfMessage.hpp"
 namespace hmr{
 	namespace viewer{
-		class cRecvMessage :public itfRecvMessage{
+		class cRecvMessageHost :public itfRecvMessageHost{
 			using datum = message::datum;
 		private:
 			std::map<datum::id_type, itfRecvMessageAgent*> Agents;
@@ -34,7 +34,7 @@ namespace hmr{
 				return itr->second->listen(Dat_.Time, Dat_.ErrFlag, Dat_.Str);
 			}
 		};
-		class cSendMessage :public itfSendMessage{
+		class cSendMessageHost :public itfSendMessageHost{
 			using datum = message::datum;
 		private:
 			std::map<datum::id_type, itfSendMessageAgent*> Agents;
@@ -63,35 +63,35 @@ namespace hmr{
 				return true;
 			}
 		};
-		class cMessage :public itfMessage{
+		class cMessageHost :public itfMessageHost{
 			using datum = message::datum;
 		private:
-			cRecvMessage RecvMessage;
-			cSendMessage SendMessage;
+			cRecvMessageHost RecvMessageHost;
+			cSendMessageHost SendMessageHost;
 		public://cRecvMessage
 			void regist(datum::id_type ID_, itfRecvMessageAgent* pRecvAgent_)override{
-				RecvMessage.regist(ID_, pRecvAgent_);
+				RecvMessageHost.regist(ID_, pRecvAgent_);
 			}
 			void setup_listen()override{
-				RecvMessage.setup_listen();
+				RecvMessageHost.setup_listen();
 			}
 			bool listen(const datum& Dat_)override{
-				return RecvMessage.listen(Dat_);
+				return RecvMessageHost.listen(Dat_);
 			}
 		public://cSendMessage
 			void regist(datum::id_type ID_, itfSendMessageAgent* pSendAgent_)override{
-				SendMessage.regist(ID_, pSendAgent_);
+				SendMessageHost.regist(ID_, pSendAgent_);
 			}
 			void setup_talk()override{
-				SendMessage.setup_talk();
+				SendMessageHost.setup_talk();
 			}
 			bool talk(datum& Dat_)override{
-				return SendMessage.talk(Dat_);
+				return SendMessageHost.talk(Dat_);
 			}
 		public:
 			void regist(datum::id_type ID_, itfMessageAgent* pAgent_){
-				RecvMessage.regist(ID_, pAgent_);
-				SendMessage.regist(ID_, pAgent_);
+				RecvMessageHost.regist(ID_, pAgent_);
+				SendMessageHost.regist(ID_, pAgent_);
 			}
 		};
 	}

@@ -1,5 +1,5 @@
-#ifndef HMRVLIB_VMC1_C_INC
-#define HMRVLIB_VMC1_C_INC 400
+#ifndef HMR_VIEWER_VMC1_C_INC
+#define HMR_VIEWER_VMC1_C_INC 400
 #
 #define HMLIB_NOLIB
 /*
@@ -8,7 +8,7 @@ vmc1_recvの仕様に要注意
 	最後までTrmnを受信した場合、そのまま終了=>Trmnはバッファには最後まで報告されない
 	一方、途中でTrmnではない事が分かった場合には、本来報告すべきだった文字=Trmn[0～Trmnカウンター]をバッファに報告する
 */
-#ifndef HMRVLIB_VMC1_INC
+#ifndef HMR_VIEWER_VMC1_INC
 #	include"VMC1.h"
 #endif
 

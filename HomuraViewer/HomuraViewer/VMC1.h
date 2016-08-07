@@ -1,5 +1,5 @@
-#ifndef HMRVLIB_VMC1_INC
-#define HMRVLIB_VMC1_INC 400
+#ifndef HMR_VIEWER_VMC1_INC
+#define HMR_VIEWER_VMC1_INC 400
 #
 /*===hmrVMC1===
 	ほむらの操縦者とMainPicをつなぐ主通信の通信フォーマットを規定するファイル

@@ -11,12 +11,6 @@
 */
 namespace hmr{
 	namespace viewer{
-	#if defined(HMR_COMLOG_INC) && defined(HMR_COM_INC)
-		void connect(cComLog& ComLog_, cCom& Com_){
-			ComLog_.slot_pushInLogBuf(Com_.signal_finRecvPacket);
-			ComLog_.slot_pushOutLogBuf(Com_.signal_finSendPacket);
-		}
-	#endif
 
 	#if defined(HMR_OPERATOR_INC) && defined(HMR_COM_INC) && defined(HMR_VIEWER_IO_IODRIVER_INC)
 		void connect(cFullRecvTimeSendOperator& ope_, io::cFHdxIODriver& io_, cCom& com_){

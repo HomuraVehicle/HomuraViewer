@@ -11,6 +11,8 @@
 #include"IO/DxIOLogGateSUI.hpp"
 #include"IO/DxIODriverSUI.hpp"
 #include"IO/DxVMCSUI.hpp"
+
+#include"Message.hpp"
 namespace hmr{
 	namespace viewer{
 		struct cIO{
@@ -32,11 +34,15 @@ namespace hmr{
 			io::dxosVMCSUI VMCSUI;
 		public:
 			template<typename VMC_creater>
-			cIO(VMC_creater Creater) :IODriver(Creater){
+			cIO(VMC_creater Creater, message::cFHDxMessageDriver& MessageDriver) :IODriver(Creater){
 				GateSW.readFomaSetting("hmr\\phone_config.txt");
 				BufGate.open(GateSW);
 				ioLogGate.open(BufGate);
+
+				//--- MessageDriver ---
 				IODriver.open(&ioLogGate);
+				IODriver.slot_VMC_force_end_recv(MessageDriver.signal_require_VMC_force_end_recv);
+				IODriver.slot_VMC_force_end_send(MessageDriver.signal_require_VMC_force_end_send);
 
 				ioLogBuf.slot_pushInLogBuf(ioLogGate.Logger.signal_resetInLog);
 				ioLogBuf.slot_pushOutLogBuf(ioLogGate.Logger.signal_resetOutLog);

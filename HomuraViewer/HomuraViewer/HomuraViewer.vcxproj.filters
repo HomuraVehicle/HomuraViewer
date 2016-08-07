@@ -49,9 +49,6 @@
     <Filter Include="HomuraViewer\GPS">
       <UniqueIdentifier>{cf8274ee-37d6-4c0d-9b11-47bc42715553}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HomuraViewer\DxModule">
-      <UniqueIdentifier>{8b97ad67-c504-4a90-a74a-673258d96156}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HomuraViewer\Motor">
       <UniqueIdentifier>{c8624be9-56a4-46cf-9036-5623b1542775}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,9 @@
     </Filter>
     <Filter Include="HomuraViewer\IO">
       <UniqueIdentifier>{65fd72c6-870d-44ef-922d-3c93fa3ebef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HomuraViewer\Controller">
+      <UniqueIdentifier>{8b97ad67-c504-4a90-a74a-673258d96156}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -330,15 +330,6 @@
     <ClInclude Include="Controller.hpp">
       <Filter>HomuraViewer</Filter>
     </ClInclude>
-    <ClInclude Include="DxModule\PadStatus.hpp">
-      <Filter>HomuraViewer\DxModule</Filter>
-    </ClInclude>
-    <ClInclude Include="DxModule\Keyboard.hpp">
-      <Filter>HomuraViewer\DxModule</Filter>
-    </ClInclude>
-    <ClInclude Include="DxModule\Pad.hpp">
-      <Filter>HomuraViewer\DxModule</Filter>
-    </ClInclude>
     <ClInclude Include="Motor\DxMotorMUI.hpp">
       <Filter>HomuraViewer\Motor</Filter>
     </ClInclude>
@@ -429,28 +420,10 @@
     <ClInclude Include="IO\DxIODriverSUI.hpp">
       <Filter>HomuraViewer\IO</Filter>
     </ClInclude>
-    <ClInclude Include="hmrItfCom.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrManipulator.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrOperator.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrSensorsFile.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrChrono.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrCom.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrComLog.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrComTimeLogger.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrConnectCore.hpp">
@@ -471,9 +444,6 @@
     <ClInclude Include="hmrDeviceManage.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDeviceManage2.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxBUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -483,22 +453,10 @@
     <ClInclude Include="hmrDxChrono.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDXCom.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxCom_v2.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxComSUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxControlMainDisplay.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxDeviceManageSUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxDeviceManageSUI2.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxDisplay.hpp">
@@ -516,14 +474,41 @@
     <ClInclude Include="hmrDxNavigator.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxOperatorSUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxTools.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrFlagirl.hpp">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\PadStatus.hpp">
+      <Filter>HomuraViewer\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\Keyboard.hpp">
+      <Filter>HomuraViewer\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\Pad.hpp">
+      <Filter>HomuraViewer\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\Com.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\ComLog.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\DxComSUI.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\ItfCom.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\MessageDriver.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\DxCom.hpp">
+      <Filter>HomuraViewer\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="Message\DxMessageDriverSUI.hpp">
+      <Filter>HomuraViewer\Message</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

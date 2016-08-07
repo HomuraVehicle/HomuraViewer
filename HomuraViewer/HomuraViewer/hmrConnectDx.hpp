@@ -12,8 +12,8 @@
 //#include"hmrPublicSignal.hpp"
 namespace hmr{
 	namespace viewer{
-	#if defined(HMR_DXCOM_INC) && defined(HMR_COM_INC) && defined(HMR_COMLOG_INC)
-		void connect(dxosPacketList_withView<cComLog::iterator>& DxCom_, cCom& Com_, cComLog& ComLog_){
+	#if defined(HMR_VIEWER_MESSAGE_DXCOM_INC) && defined(HMR_VIEWER_MESSAGE_COM_INC) && defined(HMR_VIEWER_MESSAGE_COMLOG_INC)
+		void connect(message::dxosPacketList_withView<message::cComLog::iterator>& DxCom_, message::cCom& Com_, message::cComLog& ComLog_){
 			Com_.contactRecvLog(DxCom_.inquiryNewInPacket);
 			Com_.contactSendLog(DxCom_.inquiryNewOutPacket);
 			ComLog_.contactLogBuf(DxCom_.inquiryPacketLog);

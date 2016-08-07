@@ -5,8 +5,8 @@
 #include"hmLibVer.hpp"
 #include<hmLib_v2/dxObject.hpp>
 #include"GPS/DxGPSKashmir.hpp"
-#include"DxModule/PadStatus.hpp"
-#include"battery/DxBattery.hpp"
+#include"Controller/PadStatus.hpp"
+#include"Battery/DxBattery.hpp"
 #include"hmrDxBUI.hpp"
 #include"fulladc/FulLADCData.hpp"
 namespace hmr{

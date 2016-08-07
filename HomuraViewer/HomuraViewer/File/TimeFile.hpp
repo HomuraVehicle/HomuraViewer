@@ -1,5 +1,5 @@
-#ifndef HMRVLIB_TIMEFILE_INC
-#define HMRVLIB_TIMEFILE_INC 100
+#ifndef HMR_VIEWER_TIMEFILE_INC
+#define HMR_VIEWER_TIMEFILE_INC 100
 #
 #include<boost/format.hpp>
 #include<string>

@@ -1,8 +1,8 @@
 #ifndef HMR_VIEWER_CONTROL_INC
 #define HMR_VIEWER_CONTROL_INC 100
 #
-#include"DxModule/Keyboard.hpp"
-#include"DxModule/Pad.hpp"
+#include"Controller/Keyboard.hpp"
+#include"Controller/Pad.hpp"
 
 namespace hmr{
 	namespace viewer{

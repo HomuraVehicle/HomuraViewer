@@ -97,53 +97,7 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(HMR_DXCOMSUI_INC) && defined(HMR_COM_INC)
-		void connect(dxosComSUI& ComSUI, cCom& Com){
-			Com.contactRecvBufSize(ComSUI.RecvBufSizeInq);
-			Com.contactSendBufSize(ComSUI.SendBufSizeInq);
-			Com.contactLastRecvPacTime(ComSUI.RecvTimeInq);
-			Com.contactLastSendPacTime(ComSUI.SendTimeInq);
-
-			Com.slot_clearRecvBuf(ComSUI.signal_require_clearRecvBuf);
-			Com.slot_clearSendBuf(ComSUI.signal_require_clearSendBuf);
-		}
-	#endif
-
-
-	#if defined(HMR_DXOPERATOR_SUI_INC) && defined(HMR_OPERATOR_INC)
-		void connect(dxosOperatorSUI& opSUI_, cFullRecvTimeSendOperator& op_){
-			op_.slot_setIsSendActiveFlag(opSUI_.signal_require_setStartFlag);
-			op_.slot_setIsFullDuplex(opSUI_.signal_require_isFullDuplex);
-			op_.slot_setSendInterval(opSUI_.signal_require_setTimeInterval);
-			op_.slot_setTimeOut(opSUI_.signal_require_setTimeOut);
-
-			op_.contact_IsSendActive(opSUI_.startFlagInq);
-			op_.contact_IsFullDuplex(opSUI_.isFullDuplexFlagInq);
-			op_.contact_Interval(opSUI_.timeIntervalInq);
-			op_.contact_TimeOut(opSUI_.timeOutInq);
-
-			opSUI_.slot_setIsReceivedFlag(op_.signal_inform_Received);
-			opSUI_.slot_setIsSendedFlag(op_.signal_inform_Sended);
-			opSUI_.slot_setIsTimeOutedFlag(op_.signal_inform_TimeOut);
-		}
-		void connect(dxosOperatorSUI& opSUI_, cFHDxOperator& op_){
-			op_.slot_setIsSendActiveFlag(opSUI_.signal_require_setStartFlag);
-			op_.slot_setIsFullDuplex(opSUI_.signal_require_isFullDuplex);
-			op_.slot_setInterval(opSUI_.signal_require_setTimeInterval);
-			op_.slot_setTimeOut(opSUI_.signal_require_setTimeOut);
-
-			op_.contactIsSendActive(opSUI_.startFlagInq);
-			op_.contactIsFullDuplex(opSUI_.isFullDuplexFlagInq);
-			op_.contactInterval(opSUI_.timeIntervalInq);
-			op_.contactTimeOut(opSUI_.timeOutInq);
-
-			opSUI_.slot_setIsReceivedFlag(op_.signal_informFinReceive);
-			opSUI_.slot_setIsSendedFlag(op_.signal_informFinSend);
-			opSUI_.slot_setIsTimeOutedFlag(op_.signal_informTimeOut);
-		}
-	#endif
-
-	#if defined(HMR_DXFILE_SUI_INC) && defined(HMRVLIB_TIMEDIRECTORYFILE_INC)
+	#if defined(HMR_DXFILE_SUI_INC) && defined(HMR_VIEWER_TIMEDIRECTORYFILE_INC)
 		void connect(dxosFileSUI& fileSUI_, cTimeDirectoryFile& agt_){
 			fileSUI_.slot_setIsActive(agt_.signal_isActivate);
 			agt_.slot_activate(fileSUI_.signal_require_activate);
@@ -151,7 +105,7 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(HMR_DXFILE_SUI_INC) && defined(HMRVLIB_CONSTNAMEDIRECTORYFILE_INC)
+	#if defined(HMR_DXFILE_SUI_INC) && defined(HMR_VIEWER_CONSTNAMEDIRECTORYFILE_INC)
 		void connect(dxosFileSUI& fileSUI_, cConstNameDirectoryFile& agt_){
 			fileSUI_.slot_setIsActive(agt_.signal_isActivate);
 			agt_.slot_activate(fileSUI_.signal_require_activate);

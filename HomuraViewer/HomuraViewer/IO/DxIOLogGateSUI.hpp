@@ -10,7 +10,7 @@
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries/inquiry.hpp>
 #include <boost/signals2.hpp>
-#include "hmrDxBUI.hpp"
+#include <HomuraViewer/hmrDxBUI.hpp>
 //#include "hmrBaseDX.hpp"
 
 //#define DEBUG_MODE 1

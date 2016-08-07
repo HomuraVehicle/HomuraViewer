@@ -1,5 +1,5 @@
-#ifndef HMRVLIB_MESSAGE_ITFMESSAGE_INC
-#define HMRVLIB_MESSAGE_ITFMESSAGE_INC 101
+#ifndef HMR_VIEWER_MESSAGE_ITFMESSAGE_INC
+#define HMR_VIEWER_MESSAGE_ITFMESSAGE_INC 101
 #
 /*===ItfMessage===
 受け取ったデータを各モジュールに伝えるMessageクラスのインターフェース
@@ -19,29 +19,29 @@ hmrItfMessage:v1_00/130310 hmIto
 #include "ItfMessageAgent.hpp"
 namespace hmr{
 	namespace viewer{
-		class itfRecvMessage{
+		class itfRecvMessageHost{
 			using datum = message::datum;
 		public:
 			virtual void regist(datum::id_type ID_, itfRecvMessageAgent* pAgent_) = 0;
 			virtual void setup_listen() = 0;
 			virtual bool listen(const datum& Dat_) = 0;
 		};
-		class itfSendMessage{
+		class itfSendMessageHost{
 			using datum = message::datum;
 		public:
 			virtual void regist(datum::id_type ID_, itfSendMessageAgent* pAgent_) = 0;
 			virtual void setup_talk() = 0;
 			virtual bool talk(datum& Dat_) = 0;
 		};
-		class itfMessage
-			:public itfRecvMessage
-			, public itfSendMessage{
+		class itfMessageHost
+			:public itfRecvMessageHost
+			, public itfSendMessageHost{
 			using datum = message::datum;
 		public:
 			virtual void regist(datum::id_type ID_, itfMessageAgent* pAgent_){
 				//static_castを使わずにクラス指定でアクセスすると、リンクエラー
-				static_cast<itfRecvMessage*>(this)->regist(ID_, pAgent_);
-				static_cast<itfSendMessage*>(this)->regist(ID_, pAgent_);
+				static_cast<itfRecvMessageHost*>(this)->regist(ID_, pAgent_);
+				static_cast<itfSendMessageHost*>(this)->regist(ID_, pAgent_);
 			}
 		};
 	}

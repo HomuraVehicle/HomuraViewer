@@ -45,10 +45,7 @@ hmrV2500 v1_03/130713
 #include<hmLib_v2/dxColorSet.hpp>
 #include"predicate.hpp"
 
-#include"hmrCom.hpp"
-#include"hmrComLog.hpp"
-#include"hmrDXCom_v2.hpp"
-#include"hmrOperator.hpp"
+#include"Message/DxCom.hpp"
 
 #include"IO.hpp"
 
@@ -75,9 +72,6 @@ hmrV2500 v1_03/130713
 #include "hmrDxDeviceManageSUI.hpp"
 
 #include "hmrChrono.hpp"
-
-#include "hmrDxComSUI.hpp"
-#include "hmrDxOperatorSUI.hpp"
 
 #include "hmrDXFileSUI.hpp"
 #include "hmrDxChrono.hpp"
@@ -111,23 +105,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	dx::ini("hmrV2500_v1_06g", 960,720);
 
 	try{
-		//Com, Message, Operatorを宣言
-		hmrv::cCom Com;
-		hmrv::cComLog ComLog;
-		hmrv::connect(ComLog, Com);
+		//Message
+		hmrv::cMessage Message;
 
-		hmrv::cCom::VMC1Creater<1> ComVMC(&Com);
 
 		//IO
 		//	PCからの出口を管理する　
-		hmrv::cIO IO(ComVMC);
-
-		//Message, Operator
-		hmrv::cMessage Message;
-		hmrv::cFHDxOperator Operator(&Message, &Com, true, std::chrono::milliseconds(250), std::chrono::seconds(1));
-		hmrv::connect(Operator, IO.IODriver, Com);
-
-
+		hmrv::cIO IO(Message.ComVMC,Message.MessageDriver);
 
 		//各モジュール宣言		
 		hmrv::cBattery Battery;
@@ -141,23 +125,23 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::cCO2 CO2;
 		hmrv::cCamera Camera;
 
-		Message.regist('b', &(Battery.MsgAgent));
-		Message.regist('f', &(FullADC.MsgAgent));
-		Message.regist('a', &(Accele.MsgAgent));
-		Message.regist('c', &(Compass.MsgAgent));
-		Message.regist('G', &(Gyro.MsgAgent));
-		Message.regist('g', &(GPS.MsgAgent));
-		Message.regist('m', &(Motor.MsgAgent));
+		Message.regist('b', Battery.MsgAgent);
+		Message.regist('f', FullADC.MsgAgent);
+		Message.regist('a', Accele.MsgAgent);
+		Message.regist('c', Compass.MsgAgent);
+		Message.regist('G', Gyro.MsgAgent);
+		Message.regist('g', GPS.MsgAgent);
+		Message.regist('m', Motor.MsgAgent);
 
-		Message.regist('t', &(Thermo.MsgAgent));
-		Message.regist('C', &(CO2.MsgAgent));
-		Message.regist('j',&(Camera.MsgAgent));
+		Message.regist('t', Thermo.MsgAgent);
+		Message.regist('C', CO2.MsgAgent);
+		Message.regist('j',Camera.MsgAgent);
 
 		hmrv::cChrono Chrono;
-		Message.regist('$', &Chrono);
+		Message.regist('$', Chrono);
 
 		hmrv::cDevMngMsgAgent DevMngMA;
-		Message.regist('D', &DevMngMA);
+		Message.regist('D', DevMngMA);
 
 		//制御系デバイス
 		hmrv::cController Controller;
@@ -217,15 +201,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		SystemSideDisp.regist(&(IO.VMCSUI));
 
 
-		hmrv::dxosComSUI ComBUI;
-		hmrv::connect(ComBUI,Com);
-		SystemSideDisp.regist(&ComBUI);
-
-
-		hmrv::dxosOperatorSUI OpSUI;
-		hmrv::connect(OpSUI, Operator);
-		SystemSideDisp.regist(&OpSUI);
-
 		hmrv::dxosFileSUI FileSUI;
 		hmrv::connect(FileSUI, DirectoryFile);
 		SystemSideDisp.regist(&FileSUI);
@@ -253,8 +228,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		SwIDList.push_back('m');
 		SwIDList.push_back('t');
 
-		hmrv::dxosPacketList_withView<hmrv::cComLog::iterator> PacketMainDisp(Pint(720,720),30,360,SwIDList,CLR::DullOrenge);
-		hmrv::connect(PacketMainDisp,Com,ComLog);
+		hmrv::message::dxosPacketList_withView<hmrv::message::cComLog::iterator> PacketMainDisp(Pint(720,720),30,360,SwIDList,CLR::DullOrenge);
+		hmrv::connect(PacketMainDisp,Message.Com, Message.ComLog);
 
 		//MUI用サイドバー宣言
 		hmrv::dxosBUIBoxSideDisplay MUISideDisp;
@@ -296,7 +271,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		while(!dx::work(30)){
 			Controller();
 			IO();
-			Operator();
+			Message();
 
 			dx::draw(Pint(0,0),Display);
 
