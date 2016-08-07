@@ -206,7 +206,6 @@
     <ClInclude Include="Gyro\GyroMsgAgent.hpp" />
     <ClInclude Include="Gyro\GyroCompass.hpp" />
     <ClInclude Include="Gyro\GyroLogger.hpp" />
-    <ClInclude Include="hmrADC.h" />
     <ClInclude Include="hmrBufGate.hpp" />
     <ClInclude Include="hmrChrono.hpp" />
     <ClInclude Include="hmrCom.hpp" />

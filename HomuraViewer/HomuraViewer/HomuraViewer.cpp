@@ -307,6 +307,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::connect(ControlMainDisp.Camera,Camera.MsgAgent);
 		hmrv::connect(ControlMainDisp.Infomation,GPS.GPSKashmir,Battery);
 		hmrv::connect(ControlMainDisp.GPSMap, GPS.MsgAgent, Compass.Compass);
+
 		std::vector<hmrv::message::datum::id_type> SwIDList;
 		SwIDList.push_back('a');
 		SwIDList.push_back('b');
@@ -317,6 +318,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		SwIDList.push_back('j');
 		SwIDList.push_back('m');
 		SwIDList.push_back('t');
+
 		hmrv::dxosPacketList_withView<hmrv::cComLog::iterator> PacketMainDisp(Pint(720,720),30,360,SwIDList,CLR::DullOrenge);
 		hmrv::connect(PacketMainDisp,Com,ComLog);
 
