@@ -69,10 +69,8 @@ hmrV2500 v1_03/130713
 #include"UniSensor.hpp"
 #include"DeviceManage.hpp"
 
-#include "hmrDXFileSUI.hpp"
+#include "File.hpp"
 #include "hmrDxBUIBoxSideDisp.hpp"
-
-#include <HomuraViewer/File.hpp>
 
 #include "Resource.hpp"
 
@@ -125,11 +123,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Message.regist('G', Gyro.MsgAgent);
 		Message.regist('g', GPS.MsgAgent);
 		Message.regist('m', Motor.MsgAgent);
-
 		Message.regist('t', Thermo.MsgAgent);
 		Message.regist('C', CO2.MsgAgent);
 		Message.regist('j',Camera.MsgAgent);
-
 		Message.regist('D', DeviceManage.MsgAgent);
 
 		//制御系デバイス
@@ -145,28 +141,28 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Controller.connect_Pad(CO2.MsgAgent);
 
 		//親ディレクトリ
-		hmrv::cConstNameDirectoryFile DirectoryFile("Data");
+		hmrv::cFile File;
 
 		//Batteryデータ保存
-		DirectoryFile.regist(&(Battery.FileAgent));
+		File.regist(Battery.FileAgent);
 
 		//FullADCデータ保存
-		DirectoryFile.regist(&(FullADC.FileAgent));
+		File.regist(FullADC.FileAgent);
 
 		// Thermo データを保存
-		DirectoryFile.regist(&(Thermo.FileAgent));
+		File.regist(Thermo.FileAgent);
 
 		// CO2 データを保存
-		DirectoryFile.regist(&(CO2.FileAgent));
+		File.regist(CO2.FileAgent);
 
 		//GPSデータを保存
-		DirectoryFile.regist(&(GPS.FileAgent));
+		File.regist(GPS.FileAgent);
 
 		//GPGGAデータを保存
-		DirectoryFile.regist(&(GPS.GPGGAFileAgent));
+		File.regist(GPS.GPGGAFileAgent);
 
 		//カメラデータを保存
-		DirectoryFile.regist(&(Camera.FileAgent));
+		File.regist(Camera.FileAgent);
 
 
 		// SUI 系列
@@ -179,12 +175,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		SystemSideDisp.regist(&(IO.ioLogGateSUI));
 		SystemSideDisp.regist(&(IO.IODriverSUI));
 		SystemSideDisp.regist(&(IO.VMCSUI));
-
-
-		hmrv::dxosFileSUI FileSUI;
-		hmrv::connect(FileSUI, DirectoryFile);
-		SystemSideDisp.regist(&FileSUI);
-
+		SystemSideDisp.regist(&(File.SUI));
 
 		// IO View Display の定義
 		hmrv::io::dxosIO2<hmrv::cIO::this_iologbuf::iterator> IOMainDisp(Pint(720,720), CLR::DarkDullGreen,CLR::SoftGreen,CLR::LightSoftOrenge,CLR::LightSoftSkyblue);

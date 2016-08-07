@@ -6,7 +6,6 @@
 #include <hmLib/signals.hpp>
 #include <hmLib/inquiries.hpp>
 #include <HomuraViewer/Message/ItfMessageAgent.hpp>
-#include "../hmrFlagirl.hpp"
 #include <HomuraViewer/Message.hpp>
 #include <HomuraViewer/chrono.hpp>
 #include <HomuraViewer/modeflags.hpp>

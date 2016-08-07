@@ -169,6 +169,7 @@
     <ClInclude Include="DeviceManage.hpp" />
     <ClInclude Include="DeviceManage\DeviceManageMsgAgent.hpp" />
     <ClInclude Include="DeviceManage\DxDeviceManageSUI.hpp" />
+    <ClInclude Include="File\DxFileSUI.hpp" />
     <ClInclude Include="GPS.hpp" />
     <ClInclude Include="Gyro.hpp" />
     <ClInclude Include="Compass.hpp" />
@@ -210,18 +211,14 @@
     <ClInclude Include="Gyro\GyroCompass.hpp" />
     <ClInclude Include="Gyro\GyroLogger.hpp" />
     <ClInclude Include="hmrConnectDx.hpp" />
-    <ClInclude Include="hmrConnectSUI.hpp" />
     <ClInclude Include="hmrDxBUI.hpp" />
     <ClInclude Include="hmrDxBUIBoxSideDisp.hpp" />
     <ClInclude Include="hmrDxControlMainDisplay.hpp" />
     <ClInclude Include="hmrDxDisplay.hpp" />
-    <ClInclude Include="hmrDxFileSUI.hpp" />
     <ClInclude Include="hmrDxInfomation.hpp" />
     <ClInclude Include="hmrDxIODisplay.hpp" />
     <ClInclude Include="hmrDxNavigator.hpp" />
     <ClInclude Include="hmrDxTools.hpp" />
-    <ClInclude Include="hmrFlagirl.hpp" />
-    <ClInclude Include="hmrSensorsFile.hpp" />
     <ClInclude Include="IO.hpp" />
     <ClInclude Include="IO\BufGate.hpp" />
     <ClInclude Include="IO\DxBufGateSUI.hpp" />

@@ -423,13 +423,7 @@
     <ClInclude Include="IO\DxIODriverSUI.hpp">
       <Filter>HomuraViewer\IO</Filter>
     </ClInclude>
-    <ClInclude Include="hmrSensorsFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrConnectDx.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrConnectSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxBUI.hpp">
@@ -444,9 +438,6 @@
     <ClInclude Include="hmrDxDisplay.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxFileSUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxInfomation.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -457,9 +448,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxTools.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrFlagirl.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Controller\PadStatus.hpp">
@@ -500,6 +488,9 @@
     </ClInclude>
     <ClInclude Include="DeviceManage\DeviceManageMsgAgent.hpp">
       <Filter>HomuraViewer\DeciceManage</Filter>
+    </ClInclude>
+    <ClInclude Include="File\DxFileSUI.hpp">
+      <Filter>HomuraViewer\File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
