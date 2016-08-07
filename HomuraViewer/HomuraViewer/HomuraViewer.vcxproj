@@ -207,10 +207,7 @@
     <ClInclude Include="Gyro\GyroCompass.hpp" />
     <ClInclude Include="Gyro\GyroLogger.hpp" />
     <ClInclude Include="hmrChrono.hpp" />
-    <ClInclude Include="hmrConnectCore.hpp" />
     <ClInclude Include="hmrConnectDx.hpp" />
-    <ClInclude Include="hmrConnectFile.hpp" />
-    <ClInclude Include="hmrConnectModule.hpp" />
     <ClInclude Include="hmrConnectSUI.hpp" />
     <ClInclude Include="hmrDeviceManage.hpp" />
     <ClInclude Include="hmrDxBUI.hpp" />
