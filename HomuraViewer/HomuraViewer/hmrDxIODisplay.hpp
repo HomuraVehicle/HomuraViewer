@@ -15,8 +15,8 @@
 #include <hmLib_v2/dxArea.hpp>
 #include <hmLib_v2/dxColorSet.hpp>
 
-#include "hmrDxGateSwitcher.hpp"
-#include "hmrDxIO.hpp"
+#include "IO/DxGateSwitcher.hpp"
+#include "IO/DxIO_v2.hpp"
 
 /* === hmrDxIODisplay.hpp ===   
 
@@ -28,7 +28,7 @@ hmrDxIODisplay:v1_00/130602 amby
 
 namespace hmr{
 	namespace viewer{
-
+/*
 		// Sub Page
 		class dxosIOSubPage :public dxReObject, public hmoBox{
 		private:
@@ -113,15 +113,6 @@ namespace hmr{
 				//  必ず dx::ini() の後に初期化をしてやる
 				DxSendBox.ini();
 			}
-
-			/*
-			// initialize 関数　
-			//  必ず dx::ini() の後に初期化をしてやる
-			void initialize(){
-				DxSendBox.ini();
-			}
-			*/
-
 		protected:
 			virtual int redraw(dxO& dxo){
 				dxo.draw(Pint(80, 0), DxSendBox);
@@ -130,7 +121,7 @@ namespace hmr{
 				return 0;
 			}
 		};
-
+	*/
 		// Main Page
 		template <typename iterator>
 		class dxosIOMainPage2 :public dxReObject, public hmoBox{
@@ -140,11 +131,11 @@ namespace hmr{
 		public:
 			// 描画のための要素を定義
 			// IO View　クラスの定義
-			hmr::dxosIO2<iterator> DxIO;
+			io::dxosIO2<iterator> DxIO;
 			// IO send box クラスの定義
-			hmr::dxosIOSendBox DxSendBox;
+			io::dxosIOSendBox2 DxSendBox;
 			// IO setFlag クラスの定義
-			hmr::dxosSelectIOPaint DxSelectIOPaint;
+			io::dxosSelectIOPaint DxSelectIOPaint;
 
 		public:
 			// constructor

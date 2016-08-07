@@ -43,19 +43,16 @@ hmrV2500 v1_03/130713
 #include<hmLib/bufgate.hpp>
 #include<hmLib/any_iterator.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
-#include"iologgate.hpp"
 #include"predicate.hpp"
-#include"hmrBufGate.hpp"
-#include"hmrGateSwitcher.hpp"
-#include"hmrIO.hpp"
+
 #include"hmrCom.hpp"
 #include"hmrComLog.hpp"
 #include"hmrDXCom_v2.hpp"
 #include"hmrOperator.hpp"
 
+#include"IO.hpp"
+
 #include"Message.hpp"
-
-
 
 #include"hmrDxControlMainDisplay.hpp"
 #include"hmrDxDisplay.hpp"
@@ -80,13 +77,8 @@ hmrV2500 v1_03/130713
 #include "hmrChrono.hpp"
 
 #include "hmrDxComSUI.hpp"
-#include "hmrDxBufGateSUI.hpp"
-#include "hmrDxGateSwitcherSUI.hpp"
-#include "hmrDxIOLogGateSUI.hpp"
-#include "hmrDxIOSUI.hpp"
-#include "hmrDxIO_v2.hpp"
 #include "hmrDxOperatorSUI.hpp"
-#include "hmrDxVMCSUI.hpp"
+
 #include "hmrDXFileSUI.hpp"
 #include "hmrDxChrono.hpp"
 #include "hmrDxBUIBoxSideDisp.hpp"
@@ -95,6 +87,9 @@ hmrV2500 v1_03/130713
 
 #include "Resource.hpp"
 
+#include "IO/DxIO_v2.hpp"
+#include "IO/DxGateSwitcher.hpp"
+//#include "hmrDxIODisplay.hpp"
 
 #include<hmLib_v2/hmLib.cpp>
 #include"Controller.hpp"
@@ -102,7 +97,6 @@ hmrV2500 v1_03/130713
 
 #include"hmrConnectDx.hpp"
 #include"hmrConnectSUI.hpp"
-#include"hmrConnectMUI.hpp"
 #include"hmrConnectModule.hpp"
 #include"hmrConnectCore.hpp"
 #include"hmrConnectFile.hpp"
@@ -116,22 +110,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	//hmLib_dxモジュールを初期化
 	dx::ini("hmrV2500_v1_06g", 960,720);
 
-
 	try{
-		//GateSwitcherを宣言
-		hmrv::cGateSwitcher GateSW;
-		GateSW.readFomaSetting("hmr\\phone_config.txt");
-
-		hmrv::bufgate Bufgate;
-		Bufgate.open(GateSW);
-
-		//ioLogBufを宣言
-		iologgate<fdx_crlf_timeout_iologger<system_clock_iologtype>> ioLogGate;
-		typedef fdx_vector_iologbuf<system_clock_iologtype> iologbuf;
-		iologbuf ioLogBuf;
-		hmrv::connect(ioLogBuf, ioLogGate);
-		ioLogGate.open(Bufgate);
-
 		//Com, Message, Operatorを宣言
 		hmrv::cCom Com;
 		hmrv::cComLog ComLog;
@@ -139,13 +118,14 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		hmrv::cCom::VMC1Creater<1> ComVMC(&Com);
 
-		hmrv::cFHdxIO IO(ComVMC);
-		IO.open(&ioLogGate);
+		//IO
+		//	PCからの出口を管理する　
+		hmrv::cIO IO(ComVMC);
 
 		//Message, Operator
 		hmrv::cMessage Message;
 		hmrv::cFHDxOperator Operator(&Message, &Com, true, std::chrono::milliseconds(250), std::chrono::seconds(1));
-		hmrv::connect(Operator, IO, Com);
+		hmrv::connect(Operator, IO.IODriver, Com);
 
 
 
@@ -215,6 +195,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		//カメラデータを保存
 		DirectoryFile.regist(&(Camera.FileAgent));
 
+
 		// SUI 系列
 		hmrv::dxosBUIBoxSideDisplay SystemSideDisp;
 		SystemSideDisp.ClrSet.Background=CLR::DarkSoftBlue;
@@ -223,33 +204,23 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::connect(ChronoSUI, Chrono);
 		SystemSideDisp.regist(&ChronoSUI);
 
+
 		hmrv::dxosDevMngSUI DevMngSUI;
 		hmrv::connect(DevMngSUI, DevMngMA);
 		SystemSideDisp.regist(&DevMngSUI);
 
-		hmrv::dxosGateSwitcherSUI GateSwSUI;
-		hmrv::connect(GateSwSUI, GateSW);
-		SystemSideDisp.regist(&GateSwSUI);
 
-		hmrv::dxosBufGateSUI BufGateSUI;
-		hmrv::connect(BufGateSUI, Bufgate);
-		SystemSideDisp.regist(&BufGateSUI);
+		SystemSideDisp.regist(&(IO.GateSwSUI));
+		SystemSideDisp.regist(&(IO.BufGateSUI));
+		SystemSideDisp.regist(&(IO.ioLogGateSUI));
+		SystemSideDisp.regist(&(IO.IODriverSUI));
+		SystemSideDisp.regist(&(IO.VMCSUI));
 
-		hmrv::dxosIOLogGateSUI LogSUI;
-		hmrv::connect(LogSUI, ioLogGate, ioLogBuf);
-		SystemSideDisp.regist(&LogSUI);
-
-		hmrv::dxosIOSUI IOSUI;
-		hmrv::connect(IOSUI, IO);
-		SystemSideDisp.regist(&IOSUI);
-
-		hmrv::dxosVMCSUI VMCSUI;
-		hmrv::connect(VMCSUI, IO);
-		SystemSideDisp.regist(&VMCSUI);
 
 		hmrv::dxosComSUI ComBUI;
 		hmrv::connect(ComBUI,Com);
 		SystemSideDisp.regist(&ComBUI);
+
 
 		hmrv::dxosOperatorSUI OpSUI;
 		hmrv::connect(OpSUI, Operator);
@@ -261,8 +232,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 
 		// IO View Display の定義
-		hmrv::dxosIO2<iologbuf::iterator> IOMainDisp(Pint(720,720), CLR::DarkDullGreen,CLR::SoftGreen,CLR::LightSoftOrenge,CLR::LightSoftSkyblue);
-		hmrv::connect(IOMainDisp,IO,ioLogBuf,ioLogGate.Logger);
+		hmrv::io::dxosIO2<hmrv::cIO::this_iologbuf::iterator> IOMainDisp(Pint(720,720), CLR::DarkDullGreen,CLR::SoftGreen,CLR::LightSoftOrenge,CLR::LightSoftSkyblue);
+		hmrv::connect(IOMainDisp,IO.IODriver,IO.ioLogBuf,IO.ioLogGate.Logger);
 
 		//操縦用MainDisplaay
 		hmrv::dxosControlMainDisplay ControlMainDisp;
@@ -289,7 +260,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		hmrv::dxosBUIBoxSideDisplay MUISideDisp;
 		MUISideDisp.ClrSet.Background=CLR::DarkSoftYellow;
 
-
 		MUISideDisp.regist(&(Motor.MUI));
 		MUISideDisp.regist(&(Battery.MUI));
 		MUISideDisp.regist(&(Accele.MUI));
@@ -300,23 +270,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		MUISideDisp.regist(&(Camera.MUI));
 		MUISideDisp.regist(&(CO2.MUI));
 		MUISideDisp.regist(&(FullADC.MUI));
-
-
-//		hmrv::dxosSHT75MUI SHT75MUI;
-//		hmrv::connect(SHT75MUI,SHT75MA);
-//		MUISideDisp.insert(&SHT75MUI);
-
-//		hmrv::dxosInfraRedMUI InfraRedMUI;
-//		hmrv::connect(InfraRedMUI,InfraRedMA);
-//		MUISideDisp.insert(&InfraRedMUI);
-
-//		hmrv::dxosH2SMUI H2SMUI;
-//		hmrv::connect(H2SMUI,H2SMA);
-//		MUISideDisp.insert(&H2SMUI);
-
-//		hmrv::dxosHumidMUI HumidMUI;
-//		hmrv::connect(HumidMUI,HumidMA);
-//		MUISideDisp.insert(&HumidMUI);
 
 		ControlMainDisp.Infomation.slot_logData(FullADC.MsgAgent.signal_newData);
 
@@ -342,9 +295,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 		while(!dx::work(30)){
 			Controller();
-
-			Bufgate();
-			IO.work();
+			IO();
 			Operator();
 
 			dx::draw(Pint(0,0),Display);

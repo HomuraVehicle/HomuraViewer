@@ -22,11 +22,11 @@ namespace hmr{
 
 		// DXIO に関するコネクトすべてをつかさどる関数
 		 // DxIOmain関連
-	#if defined(HMR_DXIODISPLAY_INC) && defined(HMRIO_INC) && defined(IOLOGGATE_INC)
-		typedef std::pair<bool, system_clock_iologtype> io_iologtype;
+	#if defined(HMR_DXIODISPLAY_INC) && defined(HMR_VIEWER_IO_IODRIVER_INC)
+		typedef std::pair<bool, io::system_clock_iologtype> io_iologtype;
 		typedef std::vector<io_iologtype> container;
 		typedef container::const_iterator contanerItr;
-		void connect(dxosIOMainPage<contanerItr>& IOmain_, cFHdxIO& cIO_, fdx_vector_iologbuf<system_clock_iologtype>& ioLog_){
+		void connect(dxosIOMainPage<contanerItr>& IOmain_, io::cFHdxIODriver& cIO_, io::fdx_vector_iologbuf <io::system_clock_iologtype > & ioLog_){
 			//自身の内部の接続
 			IOmain_.DxIO.slot_setInPaintMode(IOmain_.DxSelectIOPaint.signal_require_paintInput);
 			IOmain_.DxIO.slot_setOutPaintMode(IOmain_.DxSelectIOPaint.signal_require_paintOutput);
@@ -101,8 +101,11 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(HMR_DXIO2_INC) && defined(HMRIO_INC) && defined(IOLOGGATE_INC)
-		void connect(dxosIO2<fdx_vector_iologbuf<system_clock_iologtype>::iterator>& IOmain_, cFHdxIO& IO_, fdx_vector_iologbuf<system_clock_iologtype>& ioLogBuf_, fdx_crlf_timeout_iologger<system_clock_iologtype>& ioLogger_){
+	#if defined(HMR_DXIO2_INC) && defined(HMR_VIEWER_IO_INC)
+		void connect(io::dxosIO2<io::fdx_vector_iologbuf<io::system_clock_iologtype>::iterator>& IOmain_
+			, io::cFHdxIODriver& IO_
+			, io::fdx_vector_iologbuf<io::system_clock_iologtype>& ioLogBuf_
+			, io::fdx_crlf_timeout_iologger<io::system_clock_iologtype>& ioLogger_){
 			//DxIO & cIO
 			IO_.slot_send_direct(IOmain_.signal_poutString);
 

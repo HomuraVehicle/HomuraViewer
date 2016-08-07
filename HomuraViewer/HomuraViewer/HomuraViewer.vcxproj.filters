@@ -64,6 +64,9 @@
     <Filter Include="HomuraViewer\Camera">
       <UniqueIdentifier>{ee730f65-76d1-4c68-a56d-1854ba6b55b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer\IO">
+      <UniqueIdentifier>{65fd72c6-870d-44ef-922d-3c93fa3ebef5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File\ItfFile.hpp">
@@ -354,16 +357,88 @@
     <ClInclude Include="Thermo.hpp">
       <Filter>HomuraViewer</Filter>
     </ClInclude>
+    <ClInclude Include="Thermo\ThermoData.hpp">
+      <Filter>HomuraViewer\Thermo</Filter>
+    </ClInclude>
+    <ClInclude Include="CO2\CO2MsgAgent.hpp">
+      <Filter>HomuraViewer\CO2</Filter>
+    </ClInclude>
+    <ClInclude Include="CO2\DxCO2MUI.hpp">
+      <Filter>HomuraViewer\CO2</Filter>
+    </ClInclude>
+    <ClInclude Include="UniSensorData.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="CO2\CO2Data.hpp">
+      <Filter>HomuraViewer\CO2</Filter>
+    </ClInclude>
+    <ClInclude Include="CO2.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\DxCamera.hpp">
+      <Filter>HomuraViewer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\DxCameraMUI.hpp">
+      <Filter>HomuraViewer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraMsgAgent.hpp">
+      <Filter>HomuraViewer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CameraFileAgent.hpp">
+      <Filter>HomuraViewer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\IODriver.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\GateSwitcher.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\BufGate.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\IOLogGate.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DxBufGateSUI.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DxGateSwitcher.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DxGateSwitcherSUI.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DxIO_v2.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DxIOLogGateSUI.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\fomagate.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DxVMCSUI.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IO\DxIODriverSUI.hpp">
+      <Filter>HomuraViewer\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="hmrItfCom.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="hmrManipulator.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="hmrOperator.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrSensorsFile.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrSHT75.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrBufGate.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrChrono.hpp">
@@ -390,9 +465,6 @@
     <ClInclude Include="hmrConnectModule.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrConnectMUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrConnectSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -400,9 +472,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDeviceManage2.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxBufGateSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxBUI.hpp">
@@ -438,31 +507,10 @@
     <ClInclude Include="hmrDxFileSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxGateSwitcher.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxGateSwitcherSUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxInfomation.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxIO.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxIO_v2.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxIODisplay.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxIOLogGateSUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxIOSUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxLoggerManageSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrDxNavigator.hpp">
@@ -471,68 +519,11 @@
     <ClInclude Include="hmrDxOperatorSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="hmrDxSHT75MUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="hmrDxTools.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxVMCSUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="hmrFlagirl.hpp">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrGateConnector.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrGateSwitcher.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrIO.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrItfCom.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrLoggerManage.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrManipulator.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Thermo\ThermoData.hpp">
-      <Filter>HomuraViewer\Thermo</Filter>
-    </ClInclude>
-    <ClInclude Include="CO2\CO2MsgAgent.hpp">
-      <Filter>HomuraViewer\CO2</Filter>
-    </ClInclude>
-    <ClInclude Include="CO2\DxCO2MUI.hpp">
-      <Filter>HomuraViewer\CO2</Filter>
-    </ClInclude>
-    <ClInclude Include="UniSensorData.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="CO2\CO2Data.hpp">
-      <Filter>HomuraViewer\CO2</Filter>
-    </ClInclude>
-    <ClInclude Include="CO2.hpp">
-      <Filter>HomuraViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\DxCamera.hpp">
-      <Filter>HomuraViewer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\DxCameraMUI.hpp">
-      <Filter>HomuraViewer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\CameraMsgAgent.hpp">
-      <Filter>HomuraViewer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\CameraFileAgent.hpp">
-      <Filter>HomuraViewer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.hpp">
-      <Filter>HomuraViewer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -562,17 +553,14 @@
     <ClCompile Include="..\..\hmLib\hmLib\debugstream.cpp">
       <Filter>hmLib</Filter>
     </ClCompile>
-    <ClCompile Include="hmrDxDeviceManageSUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="hmrDxIOSideDisp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="VMC1.c">
       <Filter>HomuraViewer</Filter>
     </ClCompile>
     <ClCompile Include="HomuraViewer.cpp">
       <Filter>HomuraViewer</Filter>
+    </ClCompile>
+    <ClCompile Include="hmrDxDeviceManageSUI.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

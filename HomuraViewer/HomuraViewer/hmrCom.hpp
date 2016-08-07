@@ -33,6 +33,7 @@ hmrCom v1_00/130223 amby
 #include<hmLib/config_vc.h>
 #include<deque>
 #include<boost/signals2/signal.hpp>
+#include<hmLib/signals.hpp>
 #include<hmLib/inquiries/inquiry.hpp>
 #include<hmLib/inquiries/unique_connections.hpp>
 #include<hmLib/exceptions.hpp>

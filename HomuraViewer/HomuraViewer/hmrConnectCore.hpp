@@ -18,16 +18,8 @@ namespace hmr{
 		}
 	#endif
 
-	#if defined(IOLOGGATE_INC)
-		template<class iologtype>
-		void connect(fdx_vector_iologbuf<iologtype>& IOLogBuf_, iologgate<fdx_crlf_timeout_iologger<iologtype>>& IOLogGate_){
-			IOLogBuf_.slot_pushInLogBuf(IOLogGate_.Logger.signal_resetInLog);
-			IOLogBuf_.slot_pushOutLogBuf(IOLogGate_.Logger.signal_resetOutLog);
-		}
-	#endif
-
-	#if defined(HMR_OPERATOR_INC) && defined(HMR_COM_INC) && defined(HMRIO_INC)
-		void connect(cFullRecvTimeSendOperator& ope_, cFHdxIO& io_, cCom& com_){
+	#if defined(HMR_OPERATOR_INC) && defined(HMR_COM_INC) && defined(HMR_VIEWER_IO_IODRIVER_INC)
+		void connect(cFullRecvTimeSendOperator& ope_, io::cFHdxIODriver& io_, cCom& com_){
 			io_.slot_VMC_force_end_recv(ope_.signal_require_VMC_force_end_recv);
 			io_.slot_VMC_force_end_send(ope_.signal_require_VMC_force_end_send);
 			//com_.contactLastRecvDatTime(ope_.LastRecvDatTimeInq);
@@ -35,7 +27,7 @@ namespace hmr{
 			//com_.contactLastSendPacTime(ope_.LastSendPacTimeInq);
 			com_.contactIsFinishedRecv(ope_.IsFinishedRecvInq);
 		}
-		void connect(cFHDxOperator& ope_, cFHdxIO& io_, cCom& com_){
+		void connect(cFHDxOperator& ope_, io::cFHdxIODriver& io_, cCom& com_){
 			io_.slot_VMC_force_end_recv(ope_.signal_require_VMC_force_end_recv);
 			io_.slot_VMC_force_end_send(ope_.signal_require_VMC_force_end_send);
 			//com_.contactLastRecvDatTime(ope_.LastRecvDatTimeInq);

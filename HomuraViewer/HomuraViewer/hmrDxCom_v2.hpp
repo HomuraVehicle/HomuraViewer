@@ -30,7 +30,7 @@ hmrDxCom v1_00/130410 hmIto
 #include<hmLib_v2/dxColorSet.hpp>
 #include <HomuraViewer/chrono.hpp>
 #include <HomuraViewer/Message/PacketData.hpp>
-#include"iologgate.hpp"
+#include<HomuraViewer/IO/IOLogGate.hpp>
 namespace hmr{
 	namespace viewer{
 		//データのid:先頭数文字を描画する、dxButIO型の描画クラス
