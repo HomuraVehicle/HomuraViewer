@@ -16,8 +16,8 @@ hmrDxBatteryMUI v1_00/130519 iwahori
 #include<hmLib_v2/dxObject.hpp>
 #include<hmLib_v2/dxColorSet.hpp>
 #include<HomuraViewer/chrono.hpp>
-#include<HomuraViewer/hmrDxBUI.hpp>
-#include<HomuraViewer/hmrDxTools.hpp>
+#include<HomuraViewer/View/DxBUI.hpp>
+
 #include"BatteryData.hpp"
 
 namespace hmr{

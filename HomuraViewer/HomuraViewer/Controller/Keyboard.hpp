@@ -10,7 +10,7 @@
 #include<HomuraViewer/any_predicate.hpp>
 namespace hmr{
 	namespace viewer{
-		namespace dxmodule{
+		namespace controller{
 			class is_key_pushed{
 			private:
 				KEY::KEYNAME KeyName;

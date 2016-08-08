@@ -13,8 +13,8 @@
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include<HomuraViewer/chrono.hpp>
-#include"../hmrDxBUI.hpp"
-#include"../hmrDxTools.hpp"
+#include"../View/DxBUI.hpp"
+
 #include"FullADCData.hpp"
 namespace hmr{
 	namespace viewer{

@@ -10,8 +10,7 @@
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include<HomuraViewer/chrono.hpp>
-#include<HomuraViewer/hmrDxTools.hpp>
-#include<HomuraViewer/hmrDxBUI.hpp>
+#include<HomuraViewer/View/DxBUI.hpp>
 namespace hmr{
 	namespace viewer{
 		namespace camera{

@@ -18,7 +18,7 @@ hmrDxCompassMUI v1_00/130511 hmIto
 #include<hmLib/inquiries.hpp>
 #include <hmLib/coordinates.hpp>
 #include <HomuraViewer/chrono.hpp>
-#include"hmrDxBUI.hpp"
+#include<HomuraViewer/View/DxBUI.hpp>
 
 namespace hmr{
 	namespace viewer{

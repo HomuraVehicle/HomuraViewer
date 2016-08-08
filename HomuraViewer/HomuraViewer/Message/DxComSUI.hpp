@@ -4,7 +4,7 @@
 #include<boost/format.hpp>
 #include<hmLib/exceptions.hpp>
 #include<hmLib/inquiries.hpp>
-#include"hmrDxBUI.hpp"
+#include<HomuraViewer/View/DxBUI.hpp>
 namespace hmr{
 	namespace viewer{
 		namespace message{

@@ -9,7 +9,7 @@
 #include <hmLib_v2/dxArea.hpp>
 #include <hmLib/signals.hpp>
 #include <boost/signals2.hpp>
-#include <HomuraViewer/hmrDxBUI.hpp>
+#include <HomuraViewer/View/DxBUI.hpp>
 //#include "hmrBaseDX.hpp"
 
 //#define DEBUG_MODE 1

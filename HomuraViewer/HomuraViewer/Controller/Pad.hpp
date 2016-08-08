@@ -53,7 +53,7 @@ namespace PAD{
 
 namespace hmr{
 	namespace viewer{
-		namespace dxmodule{
+		namespace controller{
 			template<unsigned int DX_INPUT_PAD_CH>
 			class cPad{
 			private:

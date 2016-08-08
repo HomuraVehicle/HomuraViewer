@@ -18,8 +18,7 @@ hmrDxThermoMsgAgentUI v1_00/130414 iwahori
 #include<boost/signals2.hpp>
 #include<hmLib/signals.hpp>
 #include<HomuraViewer/chrono.hpp>
-#include"hmrDxBUI.hpp"
-#include"hmrDxTools.hpp"
+#include<HomuraViewer/View/DxBUI.hpp>
 #include<HomuraViewer/Thermo/ThermoData.hpp>
 namespace hmr{
 	namespace viewer{

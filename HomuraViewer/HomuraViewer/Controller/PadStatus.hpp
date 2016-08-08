@@ -7,7 +7,7 @@
 #include<hmLib_v2/dxColorSet.hpp>
 namespace hmr{
 	namespace viewer{
-		namespace dxmodule{
+		namespace controller{
 			class dxoPadStatusBut :public dxReObject, public hmoBox{
 			protected:
 				int redraw(dxO& dxo)override{

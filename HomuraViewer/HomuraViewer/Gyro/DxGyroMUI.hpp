@@ -20,7 +20,7 @@ hmrDxGyroMUI v1_00/130519 iwahori
 #include<hmLib/inquiries.hpp>
 #include <hmLib/coordinates.hpp>
 #include <HomuraViewer/chrono.hpp>
-#include <HomuraViewer/hmrDxBUI.hpp>
+#include <HomuraViewer/View/DxBUI.hpp>
 
 namespace hmr{
 	namespace viewer{

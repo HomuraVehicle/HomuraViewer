@@ -18,8 +18,8 @@ hmrDxGPSMsgAgentUI v1_00/130414 iwahori
 #include<hmLib/signals.hpp>
 #include<hmLib/inquiries.hpp>
 #include<HomuraViewer/chrono.hpp>
-#include<HomuraViewer/hmrDxBUI.hpp>
-#include<HomuraViewer/hmrDxTools.hpp>
+#include<HomuraViewer/View/DxBUI.hpp>
+
 #include"GPSData.hpp"
 namespace hmr{
 	namespace viewer{
