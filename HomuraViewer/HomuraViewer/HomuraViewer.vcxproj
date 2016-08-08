@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{770BC895-6983-4F99-B3BC-0E35D3402535}</ProjectGuid>
+    <RootNamespace>HomuraViewer</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\homuraLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\XCBase;C:\Users\hmIto\Documents\Projects\HomuraViewer\HomuraViewer;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\hmLib\hmLib\algorithm.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\any_iterator.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\array_queue.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\bufgate.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\cdeque.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\color.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\comgate.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\comgate\winRS\ifline.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\comgate\winRS\winrs.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\config_vc.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\coordinates.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\cqueue.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\cstack.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\cstring.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\csv_iterator.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\date.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\debugstream.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\exceptions.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\filterbuf.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\functional.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\gate.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\gps.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\inquiries.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\iocsv.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\lattices.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\mutex_proxy.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\position.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\random.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\rectangle.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\signals.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\streambuf_interface.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\stream_utility.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\table.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\type.h" />
+    <ClInclude Include="..\..\hmLib\hmLib\typemanage.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\utility.hpp" />
+    <ClInclude Include="..\..\hmLib\hmLib\version.h" />
+    <ClInclude Include="Accele.hpp" />
+    <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="Camera\DxCamera.hpp" />
+    <ClInclude Include="Camera\DxCameraMUI.hpp" />
+    <ClInclude Include="Camera\CameraMsgAgent.hpp" />
+    <ClInclude Include="Camera\CameraFileAgent.hpp" />
+    <ClInclude Include="CO2.hpp" />
+    <ClInclude Include="CO2\CO2Data.hpp" />
+    <ClInclude Include="CO2\CO2MsgAgent.hpp" />
+    <ClInclude Include="CO2\DxCO2MUI.hpp" />
+    <ClInclude Include="Controller.hpp" />
+    <ClInclude Include="Controller\Keyboard.hpp" />
+    <ClInclude Include="Controller\Pad.hpp" />
+    <ClInclude Include="Controller\PadStatus.hpp" />
+    <ClInclude Include="DeviceManage.hpp" />
+    <ClInclude Include="DeviceManage\DeviceManageMsgAgent.hpp" />
+    <ClInclude Include="DeviceManage\DxDeviceManageSUI.hpp" />
+    <ClInclude Include="File\DxFileSUI.hpp" />
+    <ClInclude Include="GPS.hpp" />
+    <ClInclude Include="Gyro.hpp" />
+    <ClInclude Include="Compass.hpp" />
+    <ClInclude Include="Accele\AcceleMsgAgent.hpp" />
+    <ClInclude Include="Accele\AcceleLogger.hpp" />
+    <ClInclude Include="Accele\DxAcceleMUI.hpp" />
+    <ClInclude Include="Battery.hpp" />
+    <ClInclude Include="Battery\BatteryData.hpp" />
+    <ClInclude Include="Battery\BatteryFileAgent.hpp" />
+    <ClInclude Include="Battery\DxBattery.hpp" />
+    <ClInclude Include="Battery\DxBatteryMUI.hpp" />
+    <ClInclude Include="Battery\BatteryMsgAgent.hpp" />
+    <ClInclude Include="chrono.hpp" />
+    <ClInclude Include="Compass\CompassMsgAgent.hpp" />
+    <ClInclude Include="Compass\MagneticCompass.hpp" />
+    <ClInclude Include="Compass\DxCompassMUI.hpp" />
+    <ClInclude Include="File.hpp" />
+    <ClInclude Include="File\ConstNameDirectoryFile.hpp" />
+    <ClInclude Include="File\ConstNameFileAgent.hpp" />
+    <ClInclude Include="File\CSVFileAgent.hpp" />
+    <ClInclude Include="File\ItfFile.hpp" />
+    <ClInclude Include="File\TimeDirectoryFile.hpp" />
+    <ClInclude Include="File\TimeFile.hpp" />
+    <ClInclude Include="File\UniSensorFileAgent.hpp" />
+    <ClInclude Include="FullADC.hpp" />
+    <ClInclude Include="FullADC\FullADCData.hpp" />
+    <ClInclude Include="FullADC\DxFullADCMUI.hpp" />
+    <ClInclude Include="FullADC\FullADCFileAgent.hpp" />
+    <ClInclude Include="FullADC\FullADCMsgAgent.hpp" />
+    <ClInclude Include="GPS\DxGPSKashmir.hpp" />
+    <ClInclude Include="GPS\DxGPSMap.hpp" />
+    <ClInclude Include="GPS\DxGPSMUI.hpp" />
+    <ClInclude Include="GPS\GPSMsgAgent.hpp" />
+    <ClInclude Include="GPS\GPSData.hpp" />
+    <ClInclude Include="GPS\GPSFileAgent.hpp" />
+    <ClInclude Include="GPS\GPSKashmir.hpp" />
+    <ClInclude Include="Gyro\DxGyroMUI.hpp" />
+    <ClInclude Include="Gyro\GyroMsgAgent.hpp" />
+    <ClInclude Include="Gyro\GyroCompass.hpp" />
+    <ClInclude Include="Gyro\GyroLogger.hpp" />
+    <ClInclude Include="IO.hpp" />
+    <ClInclude Include="IO\BufGate.hpp" />
+    <ClInclude Include="IO\DxBufGateSUI.hpp" />
+    <ClInclude Include="IO\DxGateSwitcher.hpp" />
+    <ClInclude Include="IO\DxGateSwitcherSUI.hpp" />
+    <ClInclude Include="IO\DxIOLogGateSUI.hpp" />
+    <ClInclude Include="IO\DxVMCSUI.hpp" />
+    <ClInclude Include="IO\fomagate.hpp" />
+    <ClInclude Include="IO\DxIODriverSUI.hpp" />
+    <ClInclude Include="IO\DxIO_v2.hpp" />
+    <ClInclude Include="IO\GateSwitcher.hpp" />
+    <ClInclude Include="IO\IODriver.hpp" />
+    <ClInclude Include="IO\IOLogGate.hpp" />
+    <ClInclude Include="Message.hpp" />
+    <ClInclude Include="Message\Com.hpp" />
+    <ClInclude Include="Message\ComLog.hpp" />
+    <ClInclude Include="Message\DxComSUI.hpp" />
+    <ClInclude Include="Message\DxCom.hpp" />
+    <ClInclude Include="Message\DxMessageDriverSUI.hpp" />
+    <ClInclude Include="Message\ItfCom.hpp" />
+    <ClInclude Include="Message\MessageDriver.hpp" />
+    <ClInclude Include="Message\ItfMessage.hpp" />
+    <ClInclude Include="Message\ItfMessageAgent.hpp" />
+    <ClInclude Include="Message\Message.hpp" />
+    <ClInclude Include="Message\PacketData.hpp" />
+    <ClInclude Include="modeflags.hpp" />
+    <ClInclude Include="Motor.hpp" />
+    <ClInclude Include="Motor\DxMotorMUI.hpp" />
+    <ClInclude Include="Motor\MotorMsgAgent.hpp" />
+    <ClInclude Include="Resource.hpp" />
+    <ClInclude Include="Thermo.hpp" />
+    <ClInclude Include="Thermo\DxThermoMUI.hpp" />
+    <ClInclude Include="Thermo\ThermoData.hpp" />
+    <ClInclude Include="Thermo\ThermoMsgAgent.hpp" />
+    <ClInclude Include="UniSensorData.hpp" />
+    <ClInclude Include="View.hpp" />
+    <ClInclude Include="View\DxBUI.hpp" />
+    <ClInclude Include="View\DxBUIBoxSideDisp.hpp" />
+    <ClInclude Include="View\ControlMainDisplay.hpp" />
+    <ClInclude Include="View\DxDisplay.hpp" />
+    <ClInclude Include="View\DxInfomation.hpp" />
+    <ClInclude Include="View\DxNavigator.hpp" />
+    <ClInclude Include="VMC1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\hmLib\hmLib\cdeque.c" />
+    <ClCompile Include="..\..\hmLib\hmLib\comgate.cpp" />
+    <ClCompile Include="..\..\hmLib\hmLib\coordinates.cpp" />
+    <ClCompile Include="..\..\hmLib\hmLib\cqueue.c" />
+    <ClCompile Include="..\..\hmLib\hmLib\cstack.c" />
+    <ClCompile Include="..\..\hmLib\hmLib\cstring.c" />
+    <ClCompile Include="..\..\hmLib\hmLib\debugstream.cpp" />
+    <ClCompile Include="HomuraViewer.cpp" />
+    <ClCompile Include="VMC1.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
