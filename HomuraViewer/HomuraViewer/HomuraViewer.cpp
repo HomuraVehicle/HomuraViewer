@@ -45,19 +45,19 @@ hmrV2500 v1_03/130713
 #include<hmLib_v2/dxColorSet.hpp>
 #include"predicate.hpp"
 
+
+
 #include"Message/DxCom.hpp"
+#include"IO/DxIO_v2.hpp"
+#include"IO/DxGateSwitcher.hpp"
 
 #include"IO.hpp"
-
 #include"Message.hpp"
-
-#include"hmrDxControlMainDisplay.hpp"
-#include"hmrDxDisplay.hpp"
 
 #include"Thermo.hpp"
 #include"Camera.hpp"
 #include"CO2.hpp"
-#include "FullADC.hpp"
+#include"FullADC.hpp"
 
 #include"Motor.hpp"
 #include"Accele.hpp"
@@ -67,24 +67,16 @@ hmrV2500 v1_03/130713
 #include"GPS.hpp"
 #include"Battery.hpp"
 #include"UniSensor.hpp"
+
 #include"DeviceManage.hpp"
+#include"File.hpp"
 
-#include "File.hpp"
-#include "hmrDxBUIBoxSideDisp.hpp"
+#include"View.hpp"
+#include"Controller.hpp"
 
-#include "Resource.hpp"
-
-#include "IO/DxIO_v2.hpp"
-#include "IO/DxGateSwitcher.hpp"
-//#include "hmrDxIODisplay.hpp"
+#include"Resource.hpp"
 
 #include<hmLib_v2/hmLib.cpp>
-#include"Controller.hpp"
-#define HMR_MAIN_INC_END
-
-#include"hmrConnectDx.hpp"
-#include"hmrConnectSUI.hpp"
-
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
 	namespace hmrv = hmr::viewer;
@@ -125,7 +117,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Message.regist('m', Motor.MsgAgent);
 		Message.regist('t', Thermo.MsgAgent);
 		Message.regist('C', CO2.MsgAgent);
-		Message.regist('j',Camera.MsgAgent);
+		Message.regist('j', Camera.MsgAgent);
 		Message.regist('D', DeviceManage.MsgAgent);
 
 		//制御系デバイス
@@ -164,87 +156,35 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		//カメラデータを保存
 		File.regist(Camera.FileAgent);
 
+		//画面表示モジュール
+		hmrv::cView View(IO,Message, FullADC, Accele,Compass,Gyro,Camera,GPS,Battery);
 
-		// SUI 系列
-		hmrv::dxosBUIBoxSideDisplay SystemSideDisp;
-		SystemSideDisp.ClrSet.Background=CLR::DarkSoftBlue;
+		View.registSUI(DeviceManage.SUI);
+		View.registSUI(IO.GateSwSUI);
+		View.registSUI(IO.BufGateSUI);
+		View.registSUI(IO.ioLogGateSUI);
+		View.registSUI(IO.IODriverSUI);
+		View.registSUI(IO.VMCSUI);
+		View.registSUI(File.SUI);
 
-		SystemSideDisp.regist(&(DeviceManage.SUI));
-		SystemSideDisp.regist(&(IO.GateSwSUI));
-		SystemSideDisp.regist(&(IO.BufGateSUI));
-		SystemSideDisp.regist(&(IO.ioLogGateSUI));
-		SystemSideDisp.regist(&(IO.IODriverSUI));
-		SystemSideDisp.regist(&(IO.VMCSUI));
-		SystemSideDisp.regist(&(File.SUI));
+		View.registMUI(Motor.MUI);
+		View.registMUI(Battery.MUI);
+		View.registMUI(Accele.MUI);
+		View.registMUI(Compass.MUI);
+		View.registMUI(Gyro.MUI);
+		View.registMUI(GPS.MUI);
+		View.registMUI(Thermo.MUI);
+		View.registMUI(Camera.MUI);
+		View.registMUI(CO2.MUI);
+		View.registMUI(FullADC.MUI);
 
-		// IO View Display の定義
-		hmrv::io::dxosIO2<hmrv::cIO::this_iologbuf::iterator> IOMainDisp(Pint(720,720), CLR::DarkDullGreen,CLR::SoftGreen,CLR::LightSoftOrenge,CLR::LightSoftSkyblue);
-		hmrv::connect(IOMainDisp,IO.IODriver,IO.ioLogBuf,IO.ioLogGate.Logger);
-
-		//操縦用MainDisplaay
-		hmrv::dxosControlMainDisplay ControlMainDisp;
-		hmrv::connect(ControlMainDisp.Navigator,Accele.Logger,Compass.Compass,Gyro.Logger,Gyro.Compass);
-		hmrv::connect(ControlMainDisp.Camera,Camera.MsgAgent);
-		hmrv::connect(ControlMainDisp.Infomation,GPS.GPSKashmir,Battery);
-		hmrv::connect(ControlMainDisp.GPSMap, GPS.MsgAgent, Compass.Compass);
-
-		std::vector<hmrv::message::datum::id_type> SwIDList;
-		SwIDList.push_back('a');
-		SwIDList.push_back('b');
-		SwIDList.push_back('c');
-		SwIDList.push_back('C');
-		SwIDList.push_back('g');
-		SwIDList.push_back('G');
-		SwIDList.push_back('j');
-		SwIDList.push_back('m');
-		SwIDList.push_back('t');
-
-		hmrv::message::dxosPacketList_withView<hmrv::message::cComLog::iterator> PacketMainDisp(Pint(720,720),30,360,SwIDList,CLR::DullOrenge);
-		hmrv::connect(PacketMainDisp,Message.Com, Message.ComLog);
-
-		//MUI用サイドバー宣言
-		hmrv::dxosBUIBoxSideDisplay MUISideDisp;
-		MUISideDisp.ClrSet.Background=CLR::DarkSoftYellow;
-
-		MUISideDisp.regist(&(Motor.MUI));
-		MUISideDisp.regist(&(Battery.MUI));
-		MUISideDisp.regist(&(Accele.MUI));
-		MUISideDisp.regist(&(Compass.MUI));
-		MUISideDisp.regist(&(Gyro.MUI));
-		MUISideDisp.regist(&(GPS.MUI));
-		MUISideDisp.regist(&(Thermo.MUI));
-		MUISideDisp.regist(&(Camera.MUI));
-		MUISideDisp.regist(&(CO2.MUI));
-		MUISideDisp.regist(&(FullADC.MUI));
-
-		ControlMainDisp.Infomation.slot_logData(FullADC.MsgAgent.signal_newData);
-
-
-		hmrv::dxosDisplay Display(Pint(720,720),Pint(240,720));
-		Display.registMain(&IOMainDisp);
-		Display.registMain(&PacketMainDisp);
-		Display.registMain(&ControlMainDisp);
-		Display.registSide(&SystemSideDisp);
-		Display.registSide(&MUISideDisp);	
-	
-		Display.slot_setMainNo0(Controller.Keyboard.signal(hmLib::predicate_and(hmrv::dxmodule::is_key_pushed(KEY::NUM1),hmLib::predicate_not(hmrv::dxmodule::have_key_pushed(KEY::SHIFT)))));
-		Display.slot_setMainNo1(Controller.Keyboard.signal(hmLib::predicate_and(hmrv::dxmodule::is_key_pushed(KEY::NUM2),hmLib::predicate_not(hmrv::dxmodule::have_key_pushed(KEY::SHIFT)))));
-		Display.slot_setMainNo2(Controller.Keyboard.signal(hmLib::predicate_and(hmrv::dxmodule::is_key_pushed(KEY::NUM3),hmLib::predicate_not(hmrv::dxmodule::have_key_pushed(KEY::SHIFT)))));
-		Display.slot_setSideNo0(Controller.Keyboard.signal(hmLib::predicate_and(hmrv::dxmodule::is_key_pushed(KEY::NUM1),hmrv::dxmodule::have_key_pushed(KEY::SHIFT))));
-		Display.slot_setSideNo1(Controller.Keyboard.signal(hmLib::predicate_and(hmrv::dxmodule::is_key_pushed(KEY::NUM2),hmrv::dxmodule::have_key_pushed(KEY::SHIFT))));
-		Display.slot_setSideNo2(Controller.Keyboard.signal(hmLib::predicate_and(hmrv::dxmodule::is_key_pushed(KEY::NUM3),hmrv::dxmodule::have_key_pushed(KEY::SHIFT))));
-
-		Display.slot_plusMainNo(Controller.Pad.signal(hmLib::predicate_and(hmrv::dxmodule::is_pad1_cross_key_pulled(PAD::CROSS_KEY::RIGHT),hmLib::predicate_not(hmrv::dxmodule::have_pad1_pushed(PAD::But7)))));
-		Display.slot_minusMainNo(Controller.Pad.signal(hmLib::predicate_and(hmrv::dxmodule::is_pad1_cross_key_pulled(PAD::CROSS_KEY::LEFT),hmLib::predicate_not(hmrv::dxmodule::have_pad1_pushed(PAD::But7)))));
-		Display.slot_plusSideNo(Controller.Pad.signal(hmLib::predicate_and(hmrv::dxmodule::is_pad1_cross_key_pulled(PAD::CROSS_KEY::RIGHT),hmrv::dxmodule::have_pad1_pushed(PAD::But7))));
-		Display.slot_minusSideNo(Controller.Pad.signal(hmLib::predicate_and(hmrv::dxmodule::is_pad1_cross_key_pulled(PAD::CROSS_KEY::LEFT),hmrv::dxmodule::have_pad1_pushed(PAD::But7))));
+		Controller.connect_Keyboard(View);
 
 		while(!dx::work(30)){
 			Controller();
 			IO();
 			Message();
-
-			dx::draw(Pint(0,0),Display);
+			View();
 
 			if(dx::getKey(KEY::ESC)<0)break;
 		}

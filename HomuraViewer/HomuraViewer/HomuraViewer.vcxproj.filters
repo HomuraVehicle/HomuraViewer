@@ -70,6 +70,9 @@
     <Filter Include="HomuraViewer\DeciceManage">
       <UniqueIdentifier>{f88a0b64-5b7e-4cfd-958a-c7cbf47b6d3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HomuraViewer\View">
+      <UniqueIdentifier>{c5051d07-3f90-41ba-a213-cc1358fbb9cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File\ItfFile.hpp">
@@ -423,33 +426,6 @@
     <ClInclude Include="IO\DxIODriverSUI.hpp">
       <Filter>HomuraViewer\IO</Filter>
     </ClInclude>
-    <ClInclude Include="hmrConnectDx.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxBUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxBUIBoxSideDisp.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxControlMainDisplay.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxDisplay.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxInfomation.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxIODisplay.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxNavigator.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="hmrDxTools.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Controller\PadStatus.hpp">
       <Filter>HomuraViewer\Controller</Filter>
     </ClInclude>
@@ -491,6 +467,27 @@
     </ClInclude>
     <ClInclude Include="File\DxFileSUI.hpp">
       <Filter>HomuraViewer\File</Filter>
+    </ClInclude>
+    <ClInclude Include="View.hpp">
+      <Filter>HomuraViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="View\DxDisplay.hpp">
+      <Filter>HomuraViewer\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\DxBUI.hpp">
+      <Filter>HomuraViewer\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\DxBUIBoxSideDisp.hpp">
+      <Filter>HomuraViewer\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\ControlMainDisplay.hpp">
+      <Filter>HomuraViewer\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\DxInfomation.hpp">
+      <Filter>HomuraViewer\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\DxNavigator.hpp">
+      <Filter>HomuraViewer\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

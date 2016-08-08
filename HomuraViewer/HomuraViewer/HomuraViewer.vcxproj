@@ -210,15 +210,6 @@
     <ClInclude Include="Gyro\GyroMsgAgent.hpp" />
     <ClInclude Include="Gyro\GyroCompass.hpp" />
     <ClInclude Include="Gyro\GyroLogger.hpp" />
-    <ClInclude Include="hmrConnectDx.hpp" />
-    <ClInclude Include="hmrDxBUI.hpp" />
-    <ClInclude Include="hmrDxBUIBoxSideDisp.hpp" />
-    <ClInclude Include="hmrDxControlMainDisplay.hpp" />
-    <ClInclude Include="hmrDxDisplay.hpp" />
-    <ClInclude Include="hmrDxInfomation.hpp" />
-    <ClInclude Include="hmrDxIODisplay.hpp" />
-    <ClInclude Include="hmrDxNavigator.hpp" />
-    <ClInclude Include="hmrDxTools.hpp" />
     <ClInclude Include="IO.hpp" />
     <ClInclude Include="IO\BufGate.hpp" />
     <ClInclude Include="IO\DxBufGateSUI.hpp" />
@@ -254,6 +245,13 @@
     <ClInclude Include="Thermo\ThermoData.hpp" />
     <ClInclude Include="Thermo\ThermoMsgAgent.hpp" />
     <ClInclude Include="UniSensorData.hpp" />
+    <ClInclude Include="View.hpp" />
+    <ClInclude Include="View\DxBUI.hpp" />
+    <ClInclude Include="View\DxBUIBoxSideDisp.hpp" />
+    <ClInclude Include="View\ControlMainDisplay.hpp" />
+    <ClInclude Include="View\DxDisplay.hpp" />
+    <ClInclude Include="View\DxInfomation.hpp" />
+    <ClInclude Include="View\DxNavigator.hpp" />
     <ClInclude Include="VMC1.h" />
   </ItemGroup>
   <ItemGroup>

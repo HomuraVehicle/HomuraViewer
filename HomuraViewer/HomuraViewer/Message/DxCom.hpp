@@ -372,7 +372,7 @@ namespace hmr{
 				seltype SelData;							//現在選択されているデータ
 				bool LinkNewPacket;							//NewPacketにリンクさせるかのフラグ					
 				std::vector<datum::id_type> IDList;			//表示の有無を制御するためのIDのリスト
-				const std::vector<datum::id_type> SwIDList;	//スイッチとして表示の有無を制御したいIDのリスト
+				std::vector<datum::id_type> SwIDList;	//スイッチとして表示の有無を制御したいIDのリスト
 				dxRGB Clr;									//背景カラー
 				int DatumCtrlSize;							//Datumコントロール画面のy方向サイズ
 				int DatumViewSize;							//Datum表示画面のy方向のサイズ
@@ -521,17 +521,21 @@ namespace hmr{
 
 					return 0;
 				}
-				dxosPacketList_withView(Pint Size_, int DatumCtrlSize_, int DatumViewSize_, const std::vector<datum::id_type>& SwIDList_, const dxRGB& Clr_)
+				dxosPacketList_withView(Pint Size_, int DatumCtrlSize_, int DatumViewSize_, const dxRGB& Clr_)
 					:hmoBox(Size_)
 					, SelData(0, 0)
 					, LinkNewPacket(false)
 					, DatumCtrlSize(DatumCtrlSize_)
 					, DatumViewSize(DatumViewSize_)
 					, Clr(Clr_)
-					, SwIDList(SwIDList_){
+					, SwIDList(){
 					PacketListFrame.resetMoveArea(ALI::all);
 					PacketListFrame.setMoveArea(ALI::bottom | ALI::left, Pint(0, 0));
 					PacketListFrame.viewpos.y = -Size_.y;
+				}
+				template<typename input_iterator>
+				void registSwIDList(input_iterator Beg, input_iterator End){
+					SwIDList.assign(Beg, End);
 				}
 			};
 		}
