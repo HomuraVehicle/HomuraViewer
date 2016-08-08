@@ -1,4 +1,8 @@
 /*===========hmrV2500.cpp===========
+HomuraViewer v1_07/160808
+	a
+		ほむらのディレクトリ構造を一新
+
 hmrV2500 v1_06/160601
 	a
 		Git移動後初めてコンパイルに成功
@@ -84,7 +88,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	SetWindowIconID(ID_ICON);
 
 	//hmLib_dxモジュールを初期化
-	dx::ini("hmrV2500_v1_06g", 960,720);
+	dx::ini("hmrV2500_v1_07a", 960,720);
 
 	try{
 		//Message
