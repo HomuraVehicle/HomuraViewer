@@ -56,7 +56,7 @@ namespace hmr{
 						this_data_t Data;
 						Data.time() = Time_;
 						unsigned char i = 0;
-						for(auto Itr = Data.begin(); Itr != Data.end(); ++Itr){
+						for(auto Itr = Data.begin(); Itr != Data.end(); ++Itr, ++i){
 							(*Itr) = toVoltage(static_cast<unsigned char>(Str_[2 * i + 1]), static_cast<unsigned char>(Str_[2 * i + 2]));
 						}
 

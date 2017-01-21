@@ -50,7 +50,7 @@ namespace hmr{
 				void log(this_data_t& Data){
 					date Date;
 					Date.from_time(Data.time());
-					ofs << Date.Year << "\t" << Date.Month << "\t" << Date.Day << "\t" << Date.Hour << "\t" << Date.Min << "\t" << Date.Sec;
+					ofs << Date.Year << "/" << Date.Month << "/" << Date.Day << "\t" << Date.Hour << ":" << Date.Min << ":" << Date.Sec;
 					for(auto& val : Data){
 						ofs << "\t" << val;
 					}

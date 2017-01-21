@@ -88,7 +88,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	SetWindowIconID(ID_ICON);
 
 	//hmLib_dxƒ‚ƒWƒ…[ƒ‹‚ğ‰Šú‰»
-	dx::ini("hmrV2500_v1_07b", 960,720);
+	dx::ini("hmrV2500_v1_07c", 960,720);
 
 	try{
 		//Message
