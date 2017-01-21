@@ -88,7 +88,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	SetWindowIconID(ID_ICON);
 
 	//hmLib_dxÉÇÉWÉÖÅ[ÉãÇèâä˙âª
-	dx::ini("hmrV2500_v1_07a", 960,720);
+	dx::ini("hmrV2500_v1_07b", 960,720);
 
 	try{
 		//Message
@@ -169,6 +169,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		View.registSUI(IO.ioLogGateSUI);
 		View.registSUI(IO.IODriverSUI);
 		View.registSUI(IO.VMCSUI);
+		View.registSUI(Message.ComSUI);
+		View.registSUI(Message.MessageDriverSUI);
 		View.registSUI(File.SUI);
 
 		View.registMUI(Motor.MUI);

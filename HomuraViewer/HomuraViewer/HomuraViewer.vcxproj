@@ -72,6 +72,10 @@
     <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\homuraLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\XCBase;C:\Users\hmIto\Documents\Projects\HomuraViewer\HomuraViewer;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\hmIto\OneDrive\SkyStorage\DxLib\DxLib_v3_16b;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib;C:\Users\hmIto\Documents\Projects\HomuraViewer\hmLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\homuraLib_v2;C:\Users\hmIto\Documents\Projects\HomuraViewer\XCBase;C:\Users\hmIto\Documents\Projects\HomuraViewer\HomuraViewer;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
