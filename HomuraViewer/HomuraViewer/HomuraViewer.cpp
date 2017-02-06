@@ -1,48 +1,48 @@
 /*===========hmrV2500.cpp===========
 HomuraViewer v1_07/160808
 	a
-		‚Ù‚Ş‚ç‚ÌƒfƒBƒŒƒNƒgƒŠ\‘¢‚ğˆêV
+		ã»ã‚€ã‚‰ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæ§‹é€ ã‚’ä¸€æ–°
 
 hmrV2500 v1_06/160601
 	a
-		GitˆÚ“®Œã‰‚ß‚ÄƒRƒ“ƒpƒCƒ‹‚É¬Œ÷
+		Gitç§»å‹•å¾Œåˆã‚ã¦ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã«æˆåŠŸ
 	c
-		HomuraViewer“±“ü Data, File, VMC1‚ğˆÚ“®
+		HomuraViewerå°å…¥ Data, File, VMC1ã‚’ç§»å‹•
 	d
-		ƒfƒBƒŒƒNƒgƒŠ\‘¢‚ğ•ÏX@DataƒfƒBƒŒƒNƒgƒŠ’¼‰º‚É‚·‚×‚Ä‚Ìƒf[ƒ^‚ªo‚é‚æ‚¤‚ÉC³
-		‡‚í‚¹‚ÄA‰·“xŒv‚ÌŠÔ–¢XVƒoƒO‚ğXV
-		o—Íƒtƒ@ƒCƒ‹‚àtsvŒ`®‚ÉXV
-		Date‚ào—Í‚·‚é‚æ‚¤‚É‚µ‚½
+		ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæ§‹é€ ã‚’å¤‰æ›´ã€€Dataãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªç›´ä¸‹ã«ã™ã¹ã¦ã®ãƒ‡ãƒ¼ã‚¿ãŒå‡ºã‚‹ã‚ˆã†ã«ä¿®æ­£
+		åˆã‚ã›ã¦ã€æ¸©åº¦è¨ˆã®æ™‚é–“æœªæ›´æ–°ãƒã‚°ã‚’æ›´æ–°
+		å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã‚‚tsvå½¢å¼ã«æ›´æ–°
+		Dateã‚‚å‡ºåŠ›ã™ã‚‹ã‚ˆã†ã«ã—ãŸ
 	e
-		AcceleLogger‚ÌŠp“x‚ª‰ß•q‚É”½‰‚·‚é–â‘è‚ğC³
+		AcceleLoggerã®è§’åº¦ãŒéæ•ã«åå¿œã™ã‚‹å•é¡Œã‚’ä¿®æ­£
 	f
-		FullADC‹@”\‚ğÀ‘•
+		FullADCæ©Ÿèƒ½ã‚’å®Ÿè£…
 	g
 		Add foma settingh function
 	h
-		V‚µ‚¢ƒfƒBƒŒƒNƒgƒŠ\¬‚ÉˆÚs
+		æ–°ã—ã„ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæ§‹æˆã«ç§»è¡Œ
 hmrV2500 v1_05/130914
 	p
-		•\¦ˆÊ’u“™C³
+		è¡¨ç¤ºä½ç½®ç­‰ä¿®æ­£
 	n
-		ƒRƒ“ƒpƒX‚É•¡”•â³‹@”\‚ğ’Ç‰Á
+		ã‚³ãƒ³ãƒ‘ã‚¹ã«è¤‡æ•°è£œæ­£æ©Ÿèƒ½ã‚’è¿½åŠ 
 	h
-		Operator‚ğƒfƒoƒbƒO
+		Operatorã‚’ãƒ‡ãƒãƒƒã‚°
 	g
-		ƒtƒ@ƒCƒ‹‹@”\‚ğˆê“xŠO‚·
-		”¼“ñd’ÊM‚Ö‚Ì‘Î‰
-	ƒtƒ@ƒCƒ‹‹@”\‚ğÀ‘•Š®—¹
+		ãƒ•ã‚¡ã‚¤ãƒ«æ©Ÿèƒ½ã‚’ä¸€åº¦å¤–ã™
+		åŠäºŒé‡é€šä¿¡ã¸ã®å¯¾å¿œ
+	ãƒ•ã‚¡ã‚¤ãƒ«æ©Ÿèƒ½ã‚’å®Ÿè£…å®Œäº†
 hmrV2500 v1_04/130803
-	ƒtƒ@ƒCƒ‹‹@”\‚ğÀ‘•ŠJn
+	ãƒ•ã‚¡ã‚¤ãƒ«æ©Ÿèƒ½ã‚’å®Ÿè£…é–‹å§‹
 
 hmrV2500 v1_03/130713 
-	ÀŒ»‚Å‚«‚Ä‚¢‚é‚±‚Æ
-	@EŠî–{“I‚È‹@”\‚ÌÀ‘•
-	@
+	å®Ÿç¾ã§ãã¦ã„ã‚‹ã“ã¨
+	ã€€ãƒ»åŸºæœ¬çš„ãªæ©Ÿèƒ½ã®å®Ÿè£…
+	ã€€
 */
 
 #include"hmLibVer.hpp"
-#include<hmLib/config_vc.h> // std::min, std::max@‚Í@windowsƒ}ƒNƒ‚Å‚à’è‹`‚³‚ê‚Ä‚¨‚èA–¾¦“I‚É•ª—£‚µ‚Ä‚â‚ç‚È‚¢‚Æ‚¾‚ß
+#include<hmLib/config_vc.h> // std::min, std::maxã€€ã¯ã€€windowsãƒã‚¯ãƒ­ã§ã‚‚å®šç¾©ã•ã‚Œã¦ãŠã‚Šã€æ˜ç¤ºçš„ã«åˆ†é›¢ã—ã¦ã‚„ã‚‰ãªã„ã¨ã ã‚
 
 #include<hmLib/bufgate.hpp>
 #include<hmLib/any_iterator.hpp>
@@ -87,8 +87,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 	SetWindowIconID(ID_ICON);
 
-	//hmLib_dxƒ‚ƒWƒ…[ƒ‹‚ğ‰Šú‰»
-	dx::ini("hmrV2500_v1_07c", 960,720);
+	//hmLib_dxãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‚’åˆæœŸåŒ–
+	dx::ini("hmrV2500_v1_07d", 960,720);
 
 	try{
 		//Message
@@ -96,10 +96,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 
 
 		//IO
-		//	PC‚©‚ç‚ÌoŒû‚ğŠÇ—‚·‚é@
+		//	PCã‹ã‚‰ã®å‡ºå£ã‚’ç®¡ç†ã™ã‚‹ã€€
 		hmrv::cIO IO(Message.ComVMC,Message.MessageDriver);
 
-		//Šeƒ‚ƒWƒ…[ƒ‹éŒ¾		
+		//å„ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«å®£è¨€		
 		hmrv::cBattery Battery;
 		hmrv::cFullADC FullADC;
 		hmrv::cAccele Accele;
@@ -124,7 +124,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Message.regist('j', Camera.MsgAgent);
 		Message.regist('D', DeviceManage.MsgAgent);
 
-		//§ŒäŒnƒfƒoƒCƒX
+		//åˆ¶å¾¡ç³»ãƒ‡ãƒã‚¤ã‚¹
 		hmrv::cController Controller;
 		Controller.connect_Pad(Motor.MsgAgent);
 		Controller.connect_Pad(Battery.MsgAgent);
@@ -136,31 +136,31 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 		Controller.connect_Pad(Camera.MsgAgent);
 		Controller.connect_Pad(CO2.MsgAgent);
 
-		//eƒfƒBƒŒƒNƒgƒŠ
+		//è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 		hmrv::cFile File;
 
-		//Batteryƒf[ƒ^•Û‘¶
+		//Batteryãƒ‡ãƒ¼ã‚¿ä¿å­˜
 		File.regist(Battery.FileAgent);
 
-		//FullADCƒf[ƒ^•Û‘¶
+		//FullADCãƒ‡ãƒ¼ã‚¿ä¿å­˜
 		File.regist(FullADC.FileAgent);
 
-		// Thermo ƒf[ƒ^‚ğ•Û‘¶
+		// Thermo ãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜
 		File.regist(Thermo.FileAgent);
 
-		// CO2 ƒf[ƒ^‚ğ•Û‘¶
+		// CO2 ãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜
 		File.regist(CO2.FileAgent);
 
-		//GPSƒf[ƒ^‚ğ•Û‘¶
+		//GPSãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜
 		File.regist(GPS.FileAgent);
 
-		//GPGGAƒf[ƒ^‚ğ•Û‘¶
+		//GPGGAãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜
 		File.regist(GPS.GPGGAFileAgent);
 
-		//ƒJƒƒ‰ƒf[ƒ^‚ğ•Û‘¶
+		//ã‚«ãƒ¡ãƒ©ãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜
 		File.regist(Camera.FileAgent);
 
-		//‰æ–Ê•\¦ƒ‚ƒWƒ…[ƒ‹
+		//ç”»é¢è¡¨ç¤ºãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
 		hmrv::cView View(IO,Message, FullADC, Accele,Compass,Gyro,Camera,GPS,Battery);
 
 		View.registSUI(DeviceManage.SUI);

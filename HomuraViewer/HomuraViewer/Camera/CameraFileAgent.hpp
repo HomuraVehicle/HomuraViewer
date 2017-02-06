@@ -4,21 +4,21 @@
 #
 
 /*===hmrSpriteFile===
- Sprite ƒtƒ@ƒCƒ‹ŠÖŒW‚ÌƒNƒ‰ƒX
-	@
-	 ‚PAŠejpegƒtƒ@ƒCƒ‹‚ğì‚éƒNƒ‰ƒX
-	 ‚QA‘S‘Ì‚ğ“Š‡‚·‚éƒNƒ‰ƒX
-	 @@‚P‚ÌƒNƒ‰ƒX‚ğqƒNƒ‰ƒX‚Æ‚µ‚Ä‚Á‚Ä‚»‚ê‚ğ§Œä‚·‚é
+ Sprite ãƒ•ã‚¡ã‚¤ãƒ«é–¢ä¿‚ã®ã‚¯ãƒ©ã‚¹
+	ã€€
+	 ï¼‘ã€å„jpegãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œã‚‹ã‚¯ãƒ©ã‚¹
+	 ï¼’ã€å…¨ä½“ã‚’çµ±æ‹¬ã™ã‚‹ã‚¯ãƒ©ã‚¹
+	 ã€€ã€€ï¼‘ã®ã‚¯ãƒ©ã‚¹ã‚’å­ã‚¯ãƒ©ã‚¹ã¨ã—ã¦æŒã£ã¦ãã‚Œã‚’åˆ¶å¾¡ã™ã‚‹
 
-	‚Ì“ñ’i\¬‚É‚·‚é
-	‚»‚ê‚¼‚ê‚Í@itfFileAgent ‚ÌŒ`®‚É]‚¤
+	ã®äºŒæ®µæ§‹æˆã«ã™ã‚‹
+	ãã‚Œãã‚Œã¯ã€€itfFileAgent ã®å½¢å¼ã«å¾“ã†
 
 
 ===hmrSpriteFile===
 v1_01/140320 hmIto
-	–¼‘O‚ğ•t‚¯‚ê‚é‚æ‚¤‚ÉC³
+	åå‰ã‚’ä»˜ã‘ã‚Œã‚‹ã‚ˆã†ã«ä¿®æ­£
 v1_00/130907 amby
-	ì¬ŠJn
+	ä½œæˆé–‹å§‹
 
 */
 
@@ -34,8 +34,8 @@ v1_00/130907 amby
 namespace hmr{
 	namespace viewer{
 		namespace camera{
-			// Jpegƒtƒ@ƒCƒ‹‚ğˆêŠ‡‚µ‚Ä•Û‘¶‚·‚é‚±‚Æ‚ÌÓ”CƒNƒ‰ƒX
-			//  activate ‚ÌÛ‚É‚Í PATH ‚ğw’è‚·‚é‚±‚Æ
+			// Jpegãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸€æ‹¬ã—ã¦ä¿å­˜ã™ã‚‹ã“ã¨ã®è²¬ä»»ã‚¯ãƒ©ã‚¹
+			//  activate ã®éš›ã«ã¯ PATH ã‚’æŒ‡å®šã™ã‚‹ã“ã¨
 			class cFileAgent :public itfFileAgent{
 			private:
 				bool activeFlag;
@@ -50,21 +50,21 @@ namespace hmr{
 				bool is_active()const{ return activeFlag; }
 
 			private:
-				// log ŠÖ”
+				// log é–¢æ•°
 				void log_writeData(clock::time_point time_, std::string data_){
-					// ŠJ‚¢‚Ä‚¢‚È‚¯‚ê‚ÎEEEE
+					// é–‹ã„ã¦ã„ãªã‘ã‚Œã°ãƒ»ãƒ»ãƒ»ãƒ»
 					if(!is_active()) return;
 
-					// ŠÔ‚ğæ“¾
+					// æ™‚é–“ã‚’å–å¾—
 					date Date;
 					Date.from_time(time_);
 					std::string str1 = (boost::format("%02d%02d%02d_%02d%02d%02d_%03d") % (Date.Year % 100) % Date.Month%Date.Day%Date.Hour%Date.Min%Date.Sec%Date.mSec).str();
 
-					// ‚±‚ÌŠÔ‚Åƒtƒ@ƒCƒ‹–¼‚ğİ’è
+					// ã“ã®æ™‚é–“ã§ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®š
 					std::string str = filePath + str1 + ".jpg";
 
-					// ƒf[ƒ^‚ğƒƒO
-					fout.open(str);
+					// ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ­ã‚°
+					fout.open(str, std::ios::out | std::ios::binary | std::ios::trunc);
 					fout << data_;
 					fout.close();
 				}
@@ -85,9 +85,9 @@ namespace hmr{
 					}
 				}
 
-				// Log —p‚Ì signal slot
+				// Log ç”¨ã® signal slot
 			public:
-				// Log‚Æ‚µ‚Ä‘‚«‚Ş‚Ìslot
+				// Logã¨ã—ã¦æ›¸ãè¾¼ã‚€æ™‚ã®slot
 				void slot_log_writeData(boost::signals2::signal<void(const std::string&, clock::time_point)>& Signal_){
 					SignalConnections(hmLib::signals::connect(Signal_, [&](const std::string& data_, clock::time_point time_)->void{this->log_writeData(time_, data_); }));
 				}
