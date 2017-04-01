@@ -88,7 +88,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
 	SetWindowIconID(ID_ICON);
 
 	//hmLib_dxモジュールを初期化
-	dx::ini("hmrV2500_v1_07d", 960,720);
+	dx::ini("HomuraViewer_v1_07e", 960,720);
 
 	try{
 		//Message
