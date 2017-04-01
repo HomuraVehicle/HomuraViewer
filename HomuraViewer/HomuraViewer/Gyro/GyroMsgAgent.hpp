@@ -31,7 +31,7 @@ namespace hmr{
 			public:
 				modeflags DataMode;
 			private:
-				void addData(const std::string& Str_){
+				void addData(clock::time_point Time_, const std::string& Str_){
 					angle Agl;
 					if(Str_.size() != 16){
 						GyroData = Agl;
@@ -45,6 +45,7 @@ namespace hmr{
 
 					dt = Num / 100.;
 					GyroData = Agl / 360 * 2 * hmLib::pi() - CorrectionValue*dt;
+					Time = Time_;
 					signal_newData(GyroData, dt, Time);
 				}
 			public:
@@ -62,8 +63,7 @@ namespace hmr{
 
 					if(static_cast<unsigned char>(Str_[0]) == 0x00){
 						if(Str_.size() != 16)return true;
-						Time = Time_;
-						addData(Str_);
+						addData(Time_, Str_);
 						if(CorrectionFlag){
 							TmpCorrectionValue += GyroData;
 							TmpCorrectionDt += dt;

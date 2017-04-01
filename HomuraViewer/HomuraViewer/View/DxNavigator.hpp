@@ -65,7 +65,7 @@ namespace hmr{
 						dxo.draw(Pint(120, 120), dxoRotGraph(GyroCompassGrp, 1.0, -Sign*GyroCompass().yaw, Pint(120, 120)));
 					}
 
-					if(Gyro.is_connect()){
+					if(Gyro.is_connect() && Gyro.begin() != Gyro.end()){
 						clock::time_point now = clock::now();
 						hmLib::coordinates3D::angle Angle(0, 0, 0);
 
@@ -73,18 +73,17 @@ namespace hmr{
 						auto itr = Gyro.begin();
 						for(; itr != Gyro.end(); ++itr){
 							std::chrono::seconds Sec = std::chrono::duration_cast<std::chrono::seconds>(now - itr->first);
-							if(Sec > std::chrono::seconds(5))break;
 							Angle &= (~itr->second);
+							if(Sec > std::chrono::seconds(10))break;
 						}
 
-						if(itr != Gyro.end()){
-							while(true){
+						if(itr != Gyro.begin()){
+							do {
+								--itr;
 								std::chrono::seconds Sec = std::chrono::duration_cast<std::chrono::seconds>(now - itr->first);
 								Angle &= itr->second;
 								dxo.draw(Pint(120, 120), dxoPLine(Pint(Sign*-80 * sin(Angle.yaw), Sign*-80 * cos(Angle.yaw)), Pint(Sign * 40 * sin(Angle.yaw), Sign * 40 * cos(Angle.yaw)), dxHSV(static_cast<int>(Sec.count()) * 30, 196, 196)), true, dxDMode(196));
-								if(itr == Gyro.begin())break;
-								--itr;
-							}
+							} while (itr != Gyro.begin());
 						}
 					}
 
