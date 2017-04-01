@@ -15,6 +15,7 @@ namespace hmr{
 			cCompass(){
 				//compass
 				Compass.slot_addCompassData(MsgAgent.signal_newData);
+				MUI.slot_setCompassData_and_time(MsgAgent.signal_newData);
 
 				MUI.IsDataModeMUIBut.connect(MsgAgent.DataMode);
 
