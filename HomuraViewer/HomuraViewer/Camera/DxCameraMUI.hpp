@@ -73,30 +73,66 @@ namespace hmr{
 								dxo.draw(Pint(80, 5), dxoProgress(Pint(145, 20), Range.first, Range.second, getClr(normal, butobj)));
 								dxo.draw(Pint(80, 5), dxoStrP(Pint(145, 20), (boost::format("%d/%d") % Range.first%Range.second).str(), CLR::White));
 							} else{
+								//from Sprite.hpp
+								//Status = return (0x80 * isPowerReset()) | (0x60 & (mode() << 5)) | (0x1f & id());
+								bool IsPowerReset = ((Status & 0x80) != 0);
+								unsigned char Mode = ((Status & 0x60) >> 5);
+								/* Mode from homuraLib/machine/module/Sprite/command_uart.hpp
+									コマンド送信状況　待機:0 送信:1 受信:2
+								*/
+								unsigned char ID = (Status & 0x1f);
+								/* ID from homuraLib/machine/module/Sprite/command.hpp
+									ResetCamera = 0x01,
+									TakePicture = 0x02,
+									GetDataSize = 0x03,
+									StopTakePicture = 0x04,
+									SavePower = 0x05,
+									StopSavePower = 0x06,
+									GetData = 0x07,
+									SetCompressRate = 0x08,
+									SetImageSize = 0x09,
+									SetBaudrate = 0x0A
+								*/
+								StatusStr = (boost::format("%02x:%c") % static_cast<unsigned int>(Status)%(Mode==1?'S':Mode==2?'R':Mode==0?' ':'?')).str();
 
-								if(Status == 0x00){
-									StatusStr = "待機";
-									Sta = normal;
-								} else if(Status == 0x10){
-									StatusStr = "Size変更";
-									Sta = active;
-								} else if(Status == 0x11){
-									StatusStr = "Size確定";
-									Sta = active;
-								} else if(Status == 0x12){
-									StatusStr = "撮影";
-									Sta = active;
-								} else if(Status == 0x13){
-									StatusStr = "Data取得";
-									Sta = active;
-								} else if(Status == 0x40){
-									StatusStr = "リセット";
-									Sta = active;
-								} else if(Status == 0xF0){
-									StatusStr = "再起動";
+								if (IsPowerReset) {
+									StatusStr += "再起動";
 									Sta = error;
-								} else if(Status == 0xFF){
-									StatusStr = "エラー";
+								} else if (Mode == 0x00) {
+									StatusStr += "待機";
+									Sta = normal;
+								} else if(ID == 0x01){
+									StatusStr += "リセット";
+									Sta = active;
+								} else if (ID == 0x02) {
+									StatusStr += "撮影中";
+									Sta = active;
+								} else if(ID == 0x03){
+									StatusStr += "写真情報";
+									Sta = active;
+								} else if(ID == 0x04){
+									StatusStr += "撮影終了";
+									Sta = active;
+								} else if(ID == 0x05){
+									StatusStr += "省電開始";
+									Sta = active;
+								} else if (ID == 0x06) {
+									StatusStr += "省電終了";
+									Sta = active;
+								} else if (ID == 0x07) {
+									StatusStr += "写真読込";
+									Sta = active;
+								} else if (ID == 0x08) {
+									StatusStr += "圧縮率";
+									Sta = active;
+								} else if (ID == 0x09) {
+									StatusStr += "画素数";
+									Sta = active;
+								} else if (ID == 0x0A) {
+									StatusStr += "Boudrate";
+									Sta = active;
+								} else if(ID == 0xFF){
+									StatusStr += "エラー";
 
 									try{
 										if(inquiry_getIsErr()){
@@ -108,6 +144,9 @@ namespace hmr{
 									catch(const hmLib::inquiries::unconnected_exception&){
 										StatusStr += ":NoCnct";
 									}
+									Sta = error;
+								} else {
+									StatusStr += (boost::format("?ID%02x") % static_cast<unsigned int>(ID)).str();
 									Sta = error;
 								}
 								dxo.draw(Pint(80, 5), dxoButIO(Pint(145, 20), StatusStr, getClr(Sta, butobj), true));
@@ -152,7 +191,9 @@ namespace hmr{
 
 					}
 					catch(const hmLib::exceptions::exception& Excp){
-						dxo.draw(Pint(0, 0), dxoButIO(getSize(), std::string("=ERR=") + Excp.what(), getClr(error, butobj), true, CLR::White, ALI::left));
+						if (dxo.draw(Pint(0, 0), dxoButIO(getSize(), std::string("=ERR=") + Excp.what(), getClr(error, butobj), true, CLR::White, ALI::left))==1) {
+							printfDx((std::string("=ERR=") + Excp.what() + "\n").c_str());
+						}
 					}
 
 					return 0;
